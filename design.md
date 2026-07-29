@@ -246,3 +246,137 @@ rounded-full: 9999px;
 - **`shadow-lg`**: 모달(Dialog), 다이얼로그 플로팅 윈도우
 - **`shadow-xl` / `shadow-2xl`**: 가짓수 많은 드로어(Sheet), 토스트 알림(Sonner)
 
+---
+
+## 4. shadcn/ui 컴포넌트 아키텍처 (Component Architecture)
+
+`shadcn/ui`는 전통적인 패키지 기반 UI 라이브러리와 달리 ** headless primitive(Radix UI)** 위에 **Tailwind CSS** 스타일링과 **CVA(Class Variance Authority)**를 결합하여 개발자가 코드의 완전한 통제권을 소유하는 패러다임을 제공합니다.
+
+### 4.1 CVA 패턴 & `cn()` 헬퍼 유틸리티
+
+모든 UI 컴포넌트는 `lib/utils.ts`에 정의된 `cn()` 유틸리티를 통해 클래스를 합성합니다. `clsx`는 조건부 클래스 결합을 처리하고, `tailwind-merge`는 Tailwind 클래스 간의 상충/충돌을 해결합니다.
+
+```typescript
+// lib/utils.ts
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+#### CVA (Class Variance Authority) 구현 규격
+
+```typescript
+// components/ui/button.tsx 예시
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 gap-2",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+```
+
+### 4.2 Polymorphism (다형성) & `asChild` Pattern
+
+Radix UI의 `Slot` 컴포넌트를 활용하여 DOM 계층 구조를 늘리지 않고 자식 요소(예: Next.js `<Link>`)에 원하는 버튼 스타일과 이벤트를 그대로 위임합니다.
+
+```tsx
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+// DOM에 불필요한 <button>을 추가하지 않고 <a> 태그에 Button 스타일을 직접 적용
+export function NavigationAction() {
+  return (
+    <Button asChild variant="outline" size="sm">
+      <Link href="/dashboard">대시보드로 이동</Link>
+    </Button>
+  );
+}
+```
+
+### 4.3 핵심 컴포넌트 30+ 분류 카탈로그 (Component Catalog)
+
+프로젝트에서 사용하는 핵심 `shadcn/ui` 컴포넌트 목록과 분류별 용도 명세입니다.
+
+```mermaid
+graph LR
+    Sub[shadcn/ui Catalog] --> Form[Form & Controls]
+    Sub --> Overlay[Overlays & Dialogs]
+    Sub --> Layout[Layout & Containers]
+    Sub --> Nav[Navigation & Menu]
+    Sub --> Data[Data Display & Feedback]
+```
+
+| 카테고리 | 컴포넌트 (Component) | 주요 역할 및 사용 시나리오 |
+| :--- | :--- | :--- |
+| **Form & Controls** | `Button` | 기본 액션 실행 버튼 (Primary, Destructive, Ghost, Link 등) |
+| | `Input` / `Textarea` | 단일 행 / 다중 행 텍스트 입력 폼 |
+| | `Select` / `Combobox` | 옵션 선택 드롭다운 및 검색 가능한 드롭다운 |
+| | `Checkbox` / `RadioGroup` | 다중 선택 체크박스 및 단일 선택 라디오 버튼 |
+| | `Switch` / `Slider` | 토글 스위치 및 연속적 수치 조절 슬라이더 |
+| | `Form` | React Hook Form + Zod 통합 라벨, 에러 메세지 자동 매핑 폼 컴포넌트 |
+| **Overlays & Dialogs** | `Dialog` | 모달 팝업 윈도우 (확인, 입력, 상세보기 등) |
+| | `Sheet` | 화면 측면 슬라이딩 드로어 (모바일 메뉴, 상세 필터 등) |
+| | `AlertDialog` | 파괴적 작업(삭제, 취소) 전 필수 확인 경고창 |
+| | `Popover` | 클릭 시 호출되는 컨텍스트 플로팅 오버레이 |
+| | `DropdownMenu` | 컨텍스트 메뉴, 프로필 드롭다운 메뉴 |
+| | `Tooltip` / `HoverCard` | 아이콘/링크 호버 시 나타나는 힌트 및 서머리 팝업 |
+| **Layout & Containers**| `Card` | 콘텐츠 모듈화를 위한 기본 카드 컨테이너 (`Header`, `Content`, `Footer`) |
+| | `Sidebar` | 모던 대시보드 반응형 사이드바 패널 시스템 |
+| | `Accordion` / `Collapsible` | 접이식 자주 묻는 질문(FAQ) 및 섹션 토글 |
+| | `Tabs` | 동일 영역 내 탭 전환 제어 |
+| | `ScrollArea` | 커스텀 크로스 브라우저 스크롤바 바인딩 |
+| | `Separator` | 영역 분리용 시각적 구분선 (Horizontal / Vertical) |
+| | `Resizable` | 사용자 분할 조절 가능한 레이아웃 패널 |
+| **Navigation** | `NavigationMenu` | 메인 헤더 복합 내비게이션 메뉴 (Submenu 지원) |
+| | `Breadcrumb` | 현재 페이지 경로 위치 추적 내비게이션 |
+| | `Pagination` | 데이터 리스트 페이지 번호 이동 컨트롤 |
+| | `Command` / `Kbd` | `Cmd+K` 단축키 대화상자 검색 팰릿 및 키보드 뱃지 |
+| **Data & Feedback** | `Table` | 데이터 테이블 레이아웃 (`Header`, `Row`, `Cell`) |
+| | `Avatar` | 사용자 프로필 이미지 및 이니셜 폴백 |
+| | `Badge` | 상태 표시 태그 (Success, Warning, Info 등) |
+| | `Skeleton` | 데이터 로딩 중 스켈레톤 플레이스홀더 애니메이션 |
+| | `Progress` | 진행률 프로그레스 바 |
+| | `Sonner` (Toast) | 화면 모서리 실시간 비동기 알림 토스트 메시지 |
+| | `Carousel` | 이미지 및 상품 카드 슬라이더 (Embla Carousel 기반) |
+| | `Chart` | Recharts 기반 대시보드 데이터 시각화 차트 컴포넌트 |
+
+### 4.4 접근성(a11y) & 웹 표준 가이드라인
+
+1. **WAI-ARIA 준수**: 모든 오버레이 컴포넌트(`Dialog`, `Sheet`, `Popover`)는 `aria-expanded`, `aria-haspopup`, `aria-describedby`를 자동으로 관리합니다.
+2. **Focus Trapping**: 모달 열림 시 포커스는 모달 내부로 갇히며, `ESC` 키로 모달을 닫고 이전 요소로 포커스가 복원됩니다.
+3. **Screen Reader 가이드 (`sr-only`)**: 아이콘 단독 버튼 사용 시 스크린 리더용 숨김 텍스트 필수 삽입.
+   ```tsx
+   <Button variant="ghost" size="icon">
+     <BellIcon className="size-4" />
+     <span className="sr-only">알림 확인하기</span>
+   </Button>
+   ```
+
+
