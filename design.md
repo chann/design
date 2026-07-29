@@ -562,5 +562,101 @@ export function ProfileForm() {
 - **Suspense & Loading**: React `Suspense`와 Next.js `loading.tsx`를 연동하여 skeleton 피드백 즉시 제공.
 - **Error Boundary**: React `error.tsx` 페이지를 연동하여 특정 컴포넌트 오류 발생 시 앱 전체가 다운되지 않고 개별 복구 UI(Retry Button) 제시.
 
+---
+
+## 7. 개발 표준 & 코딩 컨벤션 (Development Standards & Conventions)
+
+### 7.1 네이밍 컨벤션 (Naming Conventions)
+
+| 대상 | 컨벤션 | 예시 |
+| :--- | :--- | :--- |
+| **디렉토리 & 파일 명** | `kebab-case` | `user-profile-card.tsx`, `use-media-query.ts` |
+| **React 컴포넌트** | `PascalCase` | `UserProfileCard`, `NavigationMenu` |
+| **커스텀 훅** | `camelCase` (`use` 접두사) | `useDebounce`, `useSidebar` |
+| **유틸리티 함수** | `camelCase` | `formatCurrency`, `calculateTotal` |
+| **타입 & 인터페이스** | `PascalCase` | `UserProps`, `FormValues` |
+| **CSS 변수** | `kebab-case` (`--` 접두사) | `--background`, `--primary-foreground` |
+
+### 7.2 컴포넌트 작성 표준 패턴 (Component Pattern)
+
+모든 커스텀 컴포넌트는 **Ref Forwarding**, **TypeScript 타입 추론**, **`cn()` 클래스 병합**을 필수 탑재합니다.
+
+```tsx
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: "default" | "bordered";
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant = "default", ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "rounded-xl border bg-card text-card-foreground shadow-sm transition-all",
+          variant === "bordered" && "border-2 border-primary/20",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+Card.displayName = "Card";
+
+export { Card };
+```
+
+### 7.3 Git 커밋 컨벤션 (Git Commit Convention)
+
+[Conventional Commits](https://www.conventionalcommits.org/) 표준을 따르며, 작업 단위별로 명확하게 커밋을 분리합니다.
+
+- `feat`: 새로운 기능 추가
+- `fix`: 버그 수정
+- `docs`: 문서 수정 (`design.md` 등)
+- `style`: 코드 포맷팅, 세미콜론 누락 등 (비즈니스 로직 변경 없음)
+- `refactor`: 코드 리팩토링 (기능 변경 없는 구조 개선)
+- `test`: 테스트 코드 추가 및 수정
+- `chore`: 빌드 업무 수정, 패키지 매니저 설정 등
+
+---
+
+## 8. 프로젝트 셋업 및 품질 체크리스트 (Setup & Quality Checklist)
+
+### 8.1 CLI 초기화 및 의존성 설치 명령어 (CLI Guide)
+
+```bash
+# 1. Next.js 15+ App Router 프로젝트 생성
+npx create-next-app@latest my-app --typescript --tailwind --eslint --app --src-dir=false --import-alias="@/*"
+
+# 2. shadcn/ui CLI 초기화 (OKLCH/HSL 변수 및 Tailwind 셋업)
+npx shadcn@latest init
+
+# 3. 필수 핵심 UI 컴포넌트 일괄 추가
+npx shadcn@latest add button card dialog dropdown-menu form input label select sheet sidebar sonner table tabs tooltip
+
+# 4. 필수 의존성 패키지 설치
+npm install lucide-react next-themes zod react-hook-form @hookform/resolvers class-variance-authority clsx tailwind-merge
+```
+
+### 8.2 컴포넌트 품질 검수 체크리스트 (Quality Checklist)
+
+개발 완료 전 아래 7가지 항목을 검증합니다:
+
+- [ ] **Type Safety**: `any` 타입 사용 없이 모든 Props 및 데이터 구조에 선언적 인터페이스가 지정되었는가?
+- [ ] **Theme Switching**: Light Mode와 Dark Mode에서 글자 가독성(대비율 4.5:1 이상) 및 배경색 변환이 이상 없는가?
+- [ ] **Accessibility (a11y)**: 키보드 `Tab` / `Shift+Tab` 탐색 및 `Enter`/`Space`/`ESC` 인터랙션이 정상 작동하며 `sr-only` 텍스트가 존재하는가?
+- [ ] **Responsive Design**: Mobile (`<640px`), Tablet (`768px`), Desktop (`>=1024px`) 뷰포트에서 가로 스크롤(Overflow)이 발생하지 않는가?
+- [ ] **Zero Hardcoded Colors**: 하드코딩된 `#Hex` 색상 대신 `bg-primary`, `text-muted-foreground` 등 시맨틱 토큰이 사용되었는가?
+- [ ] **Form Validation**: 잘못된 입력 시 Zod 스키마 오류 메세지가 즉각 표출되고 포커스가 해당 필드로 이동하는가?
+- [ ] **Polymorphism Support**: 링크 버튼 등 필요한 컴포넌트에 `asChild` 패턴이 제대로 적용되었는가?
+
+---
+
+> 💡 **Maintainer Note**: 본 문서(`design.md`)는 프로젝트의 진행에 따라 지속적으로 업데이트되며, 팀원 및 AI 코딩 에이전트 간의 설계 불일치를 방지하는 기준 가이드북입니다.
+
+
 
 
