@@ -81,3 +81,168 @@ graph TD
 ├── types/                    # TypeScript 공통 타입 및 인터페이스
 └── public/                   # 정적 자원 (이미지, 폰트, 파비콘)
 ```
+
+---
+
+## 3. 디자인 토큰 & 테마 시스템 (Design Tokens & Theme System)
+
+`shadcn/ui`의 디자인 시스템은 **CSS 변수 기반의 시맨틱 토큰(Semantic Tokens)**을 채택하여 Light Mode와 Dark Mode 간의 전환을 매끄럽게 처리하고, 컴포넌트 레벨에서 하드코딩된 색상을 추상화합니다.
+
+### 3.1 OKLCH / HSL 색상 변수 명세 (Color Tokens)
+
+프로젝트에서는 최신 웹 표준인 **OKLCH** 또는 **HSL** 색상 공간을 사용하여 지각적으로 일관된 지각(Perceptual Uniformity) 및 매끄러운 그라데이션 변환을 구현합니다.
+
+```css
+/* app/globals.css 예시 명세 */
+@layer base {
+  :root {
+    --background: oklch(0.99 0 0);           /* #ffffff / pure light */
+    --foreground: oklch(0.14 0.005 285.8);   /* #09090b / deep zinc */
+
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.14 0.005 285.8);
+
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.14 0.005 285.8);
+
+    --primary: oklch(0.21 0.006 285.8);       /* Deep slate/zinc primary */
+    --primary-foreground: oklch(0.98 0 0);
+
+    --secondary: oklch(0.96 0.003 264.5);     /* Soft gray highlight */
+    --secondary-foreground: oklch(0.21 0.006 285.8);
+
+    --muted: oklch(0.96 0.003 264.5);
+    --muted-foreground: oklch(0.55 0.013 285.8);
+
+    --accent: oklch(0.96 0.003 264.5);
+    --accent-foreground: oklch(0.21 0.006 285.8);
+
+    --destructive: oklch(0.57 0.24 27.3);     /* Vibrant alert red */
+    --destructive-foreground: oklch(0.98 0 0);
+
+    --border: oklch(0.91 0.005 285.8);
+    --input: oklch(0.91 0.005 285.8);
+    --ring: oklch(0.70 0.015 285.8);
+
+    --chart-1: oklch(0.64 0.22 41.1);
+    --chart-2: oklch(0.60 0.11 184.7);
+    --chart-3: oklch(0.39 0.08 225.4);
+    --chart-4: oklch(0.82 0.18 84.4);
+    --chart-5: oklch(0.76 0.17 162.4);
+
+    --sidebar-background: oklch(0.98 0 0);
+    --sidebar-foreground: oklch(0.26 0.006 285.8);
+    --sidebar-primary: oklch(0.21 0.006 285.8);
+    --sidebar-primary-foreground: oklch(0.98 0 0);
+    --sidebar-accent: oklch(0.96 0.003 264.5);
+    --sidebar-accent-foreground: oklch(0.21 0.006 285.8);
+    --sidebar-border: oklch(0.91 0.005 285.8);
+    --sidebar-ring: oklch(0.70 0.015 285.8);
+
+    --radius: 0.625rem;                      /* 10px base border-radius */
+  }
+
+  .dark {
+    --background: oklch(0.14 0.005 285.8);   /* Dark background */
+    --foreground: oklch(0.98 0 0);
+
+    --card: oklch(0.18 0.006 285.8);
+    --card-foreground: oklch(0.98 0 0);
+
+    --popover: oklch(0.18 0.006 285.8);
+    --popover-foreground: oklch(0.98 0 0);
+
+    --primary: oklch(0.98 0 0);
+    --primary-foreground: oklch(0.21 0.006 285.8);
+
+    --secondary: oklch(0.26 0.006 285.8);
+    --secondary-foreground: oklch(0.98 0 0);
+
+    --muted: oklch(0.26 0.006 285.8);
+    --muted-foreground: oklch(0.70 0.015 285.8);
+
+    --accent: oklch(0.26 0.006 285.8);
+    --accent-foreground: oklch(0.98 0 0);
+
+    --destructive: oklch(0.39 0.14 22.7);
+    --destructive-foreground: oklch(0.98 0 0);
+
+    --border: oklch(0.26 0.006 285.8);
+    --input: oklch(0.26 0.006 285.8);
+    --ring: oklch(0.44 0.01 285.8);
+
+    --chart-1: oklch(0.48 0.24 264.3);
+    --chart-2: oklch(0.69 0.17 162.4);
+    --chart-3: oklch(0.76 0.18 70.08);
+    --chart-4: oklch(0.62 0.26 305.4);
+    --chart-5: oklch(0.64 0.25 16.43);
+
+    --sidebar-background: oklch(0.18 0.006 285.8);
+    --sidebar-foreground: oklch(0.98 0 0);
+    --sidebar-primary: oklch(0.48 0.24 264.3);
+    --sidebar-primary-foreground: oklch(0.98 0 0);
+    --sidebar-accent: oklch(0.26 0.006 285.8);
+    --sidebar-accent-foreground: oklch(0.98 0 0);
+    --sidebar-border: oklch(0.26 0.006 285.8);
+    --sidebar-ring: oklch(0.44 0.01 285.8);
+  }
+}
+```
+
+### 3.2 시맨틱 토큰 매핑 매트릭스 (Semantic Token Mapping)
+
+| 시맨틱 토큰 명 | 폰트/요소 용도 | Light Mode 느낌 | Dark Mode 느낌 |
+| :--- | :--- | :--- | :--- |
+| `bg-background` | 기본 뷰포트 / 문서 배경 | 순백색 / 클린 미색 | 은은한 딥 차콜/울트라 다크 |
+| `text-foreground` | 메인 텍스트, 헤더 | 검정에 가까운 차콜 (`#09090b`) | 밝은 소프트 화이트 (`#fafafa`) |
+| `bg-card` | 카드, 대화상자 컨테이너 | 순백색 패널 | 차콜 스틸 카드 |
+| `bg-popover` | 드롭다운, 툴팁, 콤보박스 플로팅 레이어 | 돋보이는 플로팅 레이어 | 오버레이 포커스 레이어 |
+| `bg-primary` | 핵심 버튼, 활성 탭, 강조 인디케이터 | 주 시선 집중 버튼 | 고대비 인디케이터 |
+| `bg-muted` | 비활성 배경, 호버 피드백 레이어 | 연한 회색 트랙 | 다크 그레이 호버 |
+| `text-muted-foreground` | 캡션, 보조 텍스트, 힌트 | 중간 톤 쿨 그레이 | 소프트 디밍 그레이 |
+| `border` | 카드의 테두리, 구분선 | 얇은 미세 아웃라인 | 딥 다크 엣지 아웃라인 |
+| `ring` | 키보드 포커스 링 인디케이터 | 선명한 파란/슬레이트 링 | 루미너스 링 |
+
+### 3.3 타이포그래피 시스템 (Typography Hierarchy)
+
+타이포그래피는 **Inter** 또는 **Outfit**과 같은 산세리프 폰트를 기본 세리프로 적용하며, 코드 영역은 **Fira Code** 또는 **JetBrains Mono**를 적용합니다.
+
+```tsx
+// typography 예시 매핑 가이드 (CVA 또는 Tailwind 클래스 사용)
+const typographyVariants = {
+  h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
+  h2: "scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0",
+  h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
+  h4: "scroll-m-20 text-xl font-semibold tracking-tight",
+  p: "leading-7 [&:not(:first-child)]:mt-6",
+  blockquote: "mt-6 border-l-2 pl-6 italic text-muted-foreground",
+  lead: "text-xl text-muted-foreground",
+  large: "text-lg font-semibold",
+  small: "text-sm font-medium leading-none",
+  muted: "text-sm text-muted-foreground",
+  code: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
+};
+```
+
+### 3.4 둥글기 (Border Radius Tokens)
+
+`--radius` 변수를 기준으로 비율 계산에 의해 컴포넌트 둥글기가 유기적으로 조절됩니다.
+
+```css
+/* Tailwind radius mapping */
+--radius: 0.625rem; /* lg: 10px */
+rounded-lg: var(--radius);                /* 10px */
+rounded-md: calc(var(--radius) - 2px);     /* 8px */
+rounded-sm: calc(var(--radius) - 4px);     /* 6px */
+rounded-full: 9999px;
+```
+
+### 3.5 그림자 & 깊이감 (Elevation & Shadows)
+
+다크 모드와 라이트 모드 모두에서 깊이감을 표현하기 위해 다층 레이어 그림자를 적용합니다.
+
+- **`shadow-sm`**: 일반 버튼, 뱃지, 입력 폼 포커스 시 미세 입체감
+- **`shadow-md`**: 드롭다운 메뉴, 콤보박스, 선택 상자
+- **`shadow-lg`**: 모달(Dialog), 다이얼로그 플로팅 윈도우
+- **`shadow-xl` / `shadow-2xl`**: 가짓수 많은 드로어(Sheet), 토스트 알림(Sonner)
+
