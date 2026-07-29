@@ -379,4 +379,188 @@ graph LR
    </Button>
    ```
 
+---
+
+## 5. 레이아웃 & 정보 설계 (Layout & Information Architecture)
+
+### 5.1 Root App Shell 구조
+
+애플리케이션은 **App Shell** 구조를 기반으로 전역 레이아웃을 구성하며, 반응형 사이드바 및 고정 헤더 영역을 통해 유연한 탐색 경험을 제공합니다.
+
+```mermaid
+graph TD
+    Root[Root Layout] --> AppShell[App Shell Container]
+    AppShell --> Header[Global Header / Navbar]
+    AppShell --> Body[Main Body Layout]
+    Body --> Sidebar[Responsive Sidebar]
+    Body --> Content[Main Viewport / Scroll Area]
+    AppShell --> Footer[Global Footer]
+    Root --> Toast[Sonner Toast Container]
+```
+
+#### 메인 레이아웃 코드 구조
+
+```tsx
+// app/(dashboard)/layout.tsx 예시
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/common/app-sidebar";
+import { ModeToggle } from "@/components/common/mode-toggle";
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider defaultOpen={true}>
+      <div className="flex min-h-screen w-full bg-background text-foreground">
+        <AppSidebar />
+        <div className="flex flex-1 flex-col overflow-hidden">
+          <header className="flex h-16 items-center justify-between border-b px-6 bg-card/80 backdrop-blur-md sticky top-0 z-30">
+            <div className="flex items-center gap-4">
+              <SidebarTrigger />
+              <h1 className="text-lg font-semibold tracking-tight">대시보드</h1>
+            </div>
+            <div className="flex items-center gap-3">
+              <ModeToggle />
+            </div>
+          </header>
+          <main className="flex-1 overflow-y-auto p-6 md:p-8">
+            <div className="mx-auto max-w-7xl space-y-6">
+              {children}
+            </div>
+          </main>
+        </div>
+      </div>
+    </SidebarProvider>
+  );
+}
+```
+
+### 5.2 반응형 레이아웃 전략 (Responsive Strategy)
+
+Tailwind CSS의 모바일 퍼스트 브레이크포인트를 준수하며, 데스크톱과 모바일 간의 컴포넌트 전환을 유연하게 처리합니다.
+
+| Breakpoint | 픽셀 범위 | UI 대응 전략 |
+| :--- | :--- | :--- |
+| **`sm`** | `>= 640px` | 폼 요소 2열 정렬, 모바일 드로어 간소화 |
+| **`md`** | `>= 768px` | 사이드바 고정 패널 전환 (`Sheet` 닫힘), 대시보드 카드 2열 배치 |
+| **`lg`** | `>= 1024px` | 그리드 3열 확장, 데이터 테이블 멀티 컬럼 표출 |
+| **`xl`** | `>= 1280px` | 대시보드 메인 뷰포트 맥스 너비 (`max-w-7xl`) 정렬 및 우측 패널 표출 |
+| **`2xl`** | `>= 1536px` | 와이드 스크린 4열 그리드 확장 |
+
+### 5.3 모션 & 마이크로 애니메이션 (Motion & Micro-interactions)
+
+- **Framer Motion 페이지 전환**: `AnimatePresence` 및 `motion.div`를 사용하여 페이지 간 슬라이드 / 페이드 효과 구현.
+- **Skeleton Loading**: 비동기 데이터 수신 전 Layout Shift(누적 레이아웃 이동) 방지를 위한 스켈레톤 플레이스홀더 제공.
+- **Hover & Active 효과**: 버튼 및 카드 호버 시 `hover:scale-[1.01] transition-transform duration-200 active:scale-[0.99]` 적용.
+
+---
+
+## 6. 상태 관리 & 데이터 흐름 (State Management & Data Flow)
+
+### 6.1 Server Components vs Client Components 경계선
+
+Next.js App Router의 성능 극대화를 위해 기본적으로 **Server Component**를 채택하고, 인터랙션이 발생하는 최외곽 지점에만 `"use client"`를 적용합니다.
+
+```mermaid
+graph TD
+    Page[Server Page: app/dashboard/page.tsx] --> Fetch[Direct DB / API Fetching]
+    Page --> Pass[Pass Data as Props]
+    Pass --> ClientComp[Client Component: components/features/user-table.tsx]
+    ClientComp --> Interactivity[State, Dialogs, Toast, Hooks]
+```
+
+- **Server Components**: 데이터 페칭, SEO 메타데이터, 보안에 민감한 API 토큰 처리, 대용량 라이브러리 실행.
+- **Client Components (`"use client"`)**: `useState`, `useEffect`, Event Handlers(`onClick`, `onChange`), Radix UI Primitives (포커스 링, 포털 등).
+
+### 6.2 폼 처리 & 검증 패턴 (React Hook Form + Zod + shadcn Form)
+
+`shadcn/ui`의 `<Form>` 컴포넌트는 `react-hook-form`과 `zod`를 완벽히 래핑하여 스키마 타입 안정성, 에러 메시지 자동 접근성 매핑을 구현합니다.
+
+```tsx
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+
+// 1. Zod 검증 스키마 정의
+const profileFormSchema = z.object({
+  username: z.string().min(2, { message: "사용자 이름은 최소 2자 이상이어야 합니다." }),
+  email: z.string().email({ message: "유효한 이메일 주소를 입력해 주세요." }),
+});
+
+type ProfileFormValues = z.infer<typeof profileFormSchema>;
+
+export function ProfileForm() {
+  // 2. useForm 훅 셋업
+  const form = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+    },
+  });
+
+  // 3. 제출 핸들러
+  function onSubmit(data: ProfileFormValues) {
+    toast.success("프로필이 성공적으로 업데이트되었습니다!", {
+      description: `이름: ${data.username}, 이메일: ${data.email}`,
+    });
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>사용자 이름</FormLabel>
+              <FormControl>
+                <Input placeholder="chann" {...field} />
+              </FormControl>
+              <FormDescription>공개 프로필에 표시될 사용자 이름입니다.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>이메일 계정</FormLabel>
+              <FormControl>
+                <Input placeholder="example@domain.com" type="email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">저장하기</Button>
+      </form>
+    </Form>
+  );
+}
+```
+
+### 6.3 비동기 UI & 피드백 시스템 (Async & Feedback)
+
+- **Toast (Sonner)**: CUD(생성, 수정, 삭제) 처리 완료 또는 API 오류 발생 시 모서리에 인터랙티브 알림 표시.
+- **Suspense & Loading**: React `Suspense`와 Next.js `loading.tsx`를 연동하여 skeleton 피드백 즉시 제공.
+- **Error Boundary**: React `error.tsx` 페이지를 연동하여 특정 컴포넌트 오류 발생 시 앱 전체가 다운되지 않고 개별 복구 UI(Retry Button) 제시.
+
+
 
