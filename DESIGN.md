@@ -31,6 +31,11 @@ The key words **MUST**, **SHOULD**, and **MAY** express requirement strength.
 6. [Component architecture](#6-component-architecture)
 7. [Interaction and motion](#7-interaction-and-motion)
 8. [Materials, elevation, and layering](#8-materials-elevation-and-layering)
+9. [Accessibility, localization, and responsible UX](#9-accessibility-localization-and-responsible-ux)
+10. [State, data, and feedback](#10-state-data-and-feedback)
+11. [Content and product patterns](#11-content-and-product-patterns)
+12. [Engineering and verification](#12-engineering-and-verification)
+13. [Setup, completion, and maintenance](#13-setup-completion-and-maintenance)
 
 ---
 
@@ -989,3 +994,560 @@ Material surfaces SHOULD materialize rather than merely fade:
 - Reduced motion replaces materialization with a short cross-fade.
 
 The surface MUST remain interruptible throughout entry and exit.
+
+---
+
+## 9. Accessibility, localization, and responsible UX
+
+### 9.1 Conformance target
+
+Products MUST meet WCAG 2.2 Level AA. Compliance is the floor; familiar,
+comfortable operation across input modes is the product standard.
+
+| Requirement | Acceptance evidence |
+| --- | --- |
+| Semantic structure | Landmarks, headings, lists, tables, buttons, and links match their meaning in the accessibility tree. |
+| Keyboard access | Every task can be completed without a pointer; focus order follows the visual and semantic order. |
+| Focus visibility | Focus is never removed, clipped, hidden by sticky UI, or represented by color alone. |
+| Text contrast | Normal text is at least 4.5:1; large text is at least 3:1. |
+| Non-text contrast | Control boundaries, states, and focus indicators reach at least 3:1 against adjacent colors. |
+| Text resizing | Content remains usable at 200% text size and core tasks reflow at 400% browser zoom. |
+| Pointer access | Targets meet WCAG minimum sizing and primary touch controls target 44 × 44 CSS px. |
+| Gesture alternatives | Dragging, swiping, path gestures, and device motion have a single-pointer or control-based alternative. |
+| Status announcements | Async success, errors, and progress are exposed programmatically without moving focus unnecessarily. |
+| Time and motion | Time limits are adjustable where possible; motion and auto-updating content can be paused or reduced. |
+
+Automated checks help find omissions but do not prove conformance. Keyboard,
+screen reader, zoom, contrast, motion, and real-device checks are required.
+
+### 9.2 Keyboard and focus
+
+- Use native interactive elements before ARIA roles.
+- `Tab` moves between controls; arrow keys operate composite widgets according to
+  their established pattern.
+- `Enter` activates links and buttons; `Space` activates buttons and toggles
+  without scrolling the page.
+- `Escape` dismisses the topmost dismissible layer.
+- Focus MUST return to the logical trigger after a dialog, menu, or popover
+  closes.
+- Route changes MUST place focus at the new page heading or main content when
+  browser-native focus behavior does not communicate the change.
+- Roving `tabindex` is reserved for composite widgets such as tabs, toolbars,
+  menus, and grids.
+- Positive `tabindex` values are prohibited.
+
+Use `:focus-visible` for the visual indicator, but never remove the browser
+outline without a replacement that remains visible in every theme.
+
+```css
+:where(a, button, input, select, textarea, [tabindex="0"]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+```
+
+### 9.3 Accessible names and status
+
+- Icon-only controls use `aria-label` or visible text exposed through `sr-only`.
+- The accessible name MUST contain the visible label.
+- Use `aria-describedby` for persistent help and error relationships.
+- Use `aria-invalid="true"` only after a value has been evaluated and found
+  invalid.
+- Use `aria-live="polite"` for non-urgent status and `role="alert"` sparingly for
+  urgent errors.
+- A busy region SHOULD expose `aria-busy="true"` while retaining its heading and
+  recognizable structure.
+- Do not move focus to a toast.
+
+ARIA does not repair incorrect semantics. A styled `<div>` is not a button.
+
+### 9.4 Visual and cognitive accessibility
+
+- Never communicate state through color alone; pair it with text, shape, or an
+  icon and accessible name.
+- Respect `prefers-reduced-motion`, `prefers-contrast`, and, when supported,
+  `prefers-reduced-transparency`.
+- Keep instructions adjacent to the control they describe.
+- Use plain, specific language and consistent control placement.
+- Avoid flashing content, unexpected autoplay, and countdown pressure.
+- Preserve user-entered values after validation or recoverable network errors.
+- Long tasks MUST expose progress or an honest indeterminate state.
+- Error messages state what happened, what remains safe, and what the user can do
+  next.
+
+### 9.5 Forms and authentication
+
+- Every field has a persistent visible label; placeholders are examples, not
+  labels.
+- Required fields are identified in text before input begins.
+- Validate locally when useful, and validate again at the trust boundary.
+- Show field errors beside the field and a summary at the top when multiple
+  errors block submission.
+- Focus the summary after a failed submit, with links to invalid fields.
+- Do not disable the submit button merely because a form is incomplete; allow
+  submission to reveal actionable validation unless a live constraint is
+  explicit and understandable.
+- Password managers and paste MUST work.
+- Authentication MUST NOT rely only on memory, transcription, or puzzle solving
+  when an accessible alternative can be provided.
+
+### 9.6 Localization and bidirectionality
+
+- All user-facing strings live outside component logic and support parameterized
+  messages.
+- Never concatenate translated sentence fragments.
+- Layouts MUST tolerate at least 30% text expansion and multi-line controls.
+- Dates, times, numbers, currencies, plural rules, and relative time use
+  locale-aware formatters.
+- Store timestamps in an unambiguous format and display the user's timezone.
+- Use logical properties and utilities (`margin-inline`, `start`, `end`) so RTL
+  does not require a parallel stylesheet.
+- Directional icons mirror only when their meaning is spatial. Media controls,
+  brand marks, clocks, and universal symbols do not mirror.
+- CJK copy MAY need additional line height and language-appropriate line breaking.
+- The document language and language changes MUST be declared.
+
+### 9.7 Privacy, safety, and irreversible actions
+
+- Request the least permission needed and explain its purpose before the browser
+  or operating system prompt.
+- Sensitive values MUST not appear in URLs, analytics, logs, or toast messages.
+- Destructive actions use specific copy: “Delete workspace,” not “Yes.”
+- Prefer immediate action plus undo for cheap, reversible changes.
+- Use confirmation for irreversible deletion, financial or legal commitment,
+  broad permission changes, or an action whose impact is difficult to preview.
+- Confirmation MUST name the object and consequence. High-risk confirmation MAY
+  require re-entry of a meaningful identifier.
+- Long-running destructive work MUST not claim success before the server confirms
+  completion.
+- AI-generated or uncertain output MUST be labeled when users could mistake it
+  for verified fact, and high-impact output needs an appropriate review step.
+
+---
+
+## 10. State, data, and feedback
+
+### 10.1 State ownership
+
+Choose the narrowest owner that matches the state's lifetime:
+
+| State | Owner | Examples |
+| --- | --- | --- |
+| Shareable navigation state | URL path and search params | Selected tab, filters, page, search query. |
+| Server-authoritative state | Server Component, server action, or API | User, project, permissions, persisted settings. |
+| Client server cache | TanStack Query when live client synchronization is needed | Infinite list, background refresh, optimistic mutation. |
+| Local interaction state | Component state or reducer | Open state, draft selection, temporary drag position. |
+| Shared ephemeral state | Context or Zustand after a real cross-tree need exists | Command palette, workspace inspector, temporary selection model. |
+| Form state | React Hook Form | Dirty fields, validation, submission state. |
+| Theme preference | `next-themes` plus system preference | Light, dark, system. |
+
+Do not duplicate the same source of truth across URL, store, and component state.
+Derive values during render when they can be computed from authoritative state.
+
+### 10.2 Async state model
+
+Every data surface defines these states:
+
+```text
+idle → pending → success
+             ↘ empty
+             ↘ recoverable error → retrying
+             ↘ terminal error
+
+success → refreshing
+success → stale/offline
+```
+
+The rendered state MUST distinguish:
+
+- **Initial pending:** no usable data exists yet.
+- **Refreshing:** usable data remains visible while a newer result is fetched.
+- **Empty:** the request succeeded and returned no content.
+- **Error:** the request failed; show scope, safe retained data, and a recovery
+  action.
+- **Offline or stale:** identify data freshness without erasing usable content.
+
+Never show an empty state for an error or a skeleton for an indefinite operation.
+
+### 10.3 Loading
+
+- Prefer server-rendered content and route-level streaming.
+- Skeletons match the final geometry and appear only when the shape is predictable.
+- Use a spinner for a compact indeterminate action, not an entire page.
+- After roughly one second, long operations SHOULD explain what is happening.
+- Determinate work exposes progress, and cancellable work exposes cancel.
+- Preserve prior data during background refresh and mark it as updating.
+- Loading controls retain their label or an equivalent accessible name.
+
+### 10.4 Empty and zero states
+
+An empty state explains:
+
+1. What belongs here.
+2. Why it is empty, when known.
+3. The most useful next action.
+
+Differentiate a first-use empty state, no search results, cleared filters, and a
+permission-limited state. “No results” SHOULD offer query correction or filter
+reset; it MUST NOT imply that no data exists globally.
+
+### 10.5 Errors and recovery
+
+Place errors at the scope where they can be acted on:
+
+- Field errors beside fields.
+- Section errors inside the failed section.
+- Route errors inside a route error boundary.
+- Global alerts only for cross-application failure.
+
+Error copy follows this structure:
+
+```text
+Outcome: “We couldn't save the profile.”
+Safety:  “Your changes are still here.”
+Action:  “Check your connection and try again.”
+```
+
+Retry MUST be safe. If the operation may already have committed, reconcile with
+the server before repeating it.
+
+### 10.6 Mutations, optimistic UI, and undo
+
+- Optimistic updates are appropriate only when success is likely, rollback is
+  deterministic, and the UI clearly distinguishes pending state.
+- Disable duplicate submission while one mutation is in flight.
+- Use idempotency keys for operations that can be retried after an uncertain
+  response.
+- On failure, restore the previous state and keep the user's input.
+- A toast undo MUST remain available long enough to use and MUST have a persistent
+  alternative for consequential changes.
+- Do not use optimism for irreversible deletion, money movement, or a state whose
+  rollback cannot be guaranteed.
+
+### 10.7 Feedback taxonomy
+
+| Kind | Meaning | Presentation |
+| --- | --- | --- |
+| **Status** | Work is ongoing or state changed. | Inline text, progress, badge, or polite live region. |
+| **Completion** | A meaningful operation succeeded. | Updated content first; toast only when the result is otherwise out of view. |
+| **Warning** | The action is possible but carries a consequence. | Inline callout near the decision, before commitment. |
+| **Error** | Work failed or input is invalid. | Persistent message at the actionable scope with recovery. |
+
+Feedback begins at the causal event. Visual, sound, and haptic feedback—when the
+platform supports it and the product truly benefits—MUST align in time and remain
+optional. Reserve multimodal feedback for meaningful commit, success, and error
+moments.
+
+---
+
+## 11. Content and product patterns
+
+### 11.1 Page hierarchy
+
+The first viewport SHOULD make the page's purpose, current state, and primary
+action obvious.
+
+- Use one primary action per task region.
+- Secondary actions are visually quieter; infrequent actions move into an
+  overflow menu.
+- Destructive actions do not sit adjacent to the primary action without clear
+  separation.
+- Group controls next to the content they affect.
+- Progressive disclosure reveals advanced settings without hiding the common
+  path.
+- Preserve a stable location for repeated actions across related screens.
+
+### 11.2 Voice and labels
+
+Product copy is concise, specific, and calm:
+
+- Use sentence case.
+- Start action labels with a concrete verb: “Create report,” “Save changes.”
+- Name navigation by destination: “Projects,” “Billing,” “Activity.”
+- Avoid “OK,” “Yes,” “No,” “Submit,” and “Continue” when the real outcome can be
+  named.
+- Avoid blame. Say “Enter a valid email address,” not “You entered an invalid
+  email.”
+- Do not claim “Done” until the authoritative operation has completed.
+
+### 11.3 Search and filters
+
+- Search fields use a visible or programmatic label and describe their scope.
+- Submit server-backed searches after a short, cancelable debounce or explicit
+  submission according to cost and user expectation.
+- The query and durable filters live in the URL.
+- Active filters are visible, individually removable, and resettable together.
+- Results communicate count or scope when useful.
+- Empty results preserve the query and provide a path to broaden it.
+- Keyboard focus stays in the search flow; result updates use a polite live
+  region without announcing every keystroke.
+
+### 11.4 Navigation and command interfaces
+
+- Global navigation contains stable destinations, not contextual actions.
+- Breadcrumbs communicate hierarchy and are supplementary to, not a replacement
+  for, a page title.
+- Tabs switch peer views inside one context; they do not imitate unrelated
+  navigation.
+- A command palette supplements visible navigation. It MUST not become the only
+  path to an action.
+- Keyboard shortcuts MUST be discoverable, remappable where collision is likely,
+  and disabled while typing unless they include a modifier.
+- Platform conventions take precedence: show `⌘` on macOS and `Ctrl` elsewhere
+  when the shortcut differs.
+
+### 11.5 Tables and dense data
+
+- Tables are for comparison across consistent columns, not general layout.
+- Headers remain associated with cells, including sorted state.
+- Row actions are keyboard-reachable and have names that include row context.
+- Bulk selection shows selected count and scopes “Select all” precisely.
+- Pagination preserves filters, sorting, and return position.
+- On narrow screens, hide only low-priority columns or switch to labeled cards;
+  do not remove essential data.
+- Numeric data aligns by decimal or end edge and uses tabular figures.
+
+### 11.6 Charts
+
+- Every chart has a title, a text summary, units, and an accessible data
+  alternative.
+- Color series maintain contrast and use shape, line style, direct labels, or
+  symbols as a second channel.
+- Do not encode unrelated series as misleading stacked areas or probability
+  bands.
+- Tooltips are keyboard and touch accessible; essential values remain available
+  without hover.
+- Axes start, scale, and truncation MUST not distort the intended comparison.
+- Motion MAY explain a data transition but MUST not be required to read it.
+
+### 11.7 Notifications
+
+- Use a toast for brief, non-blocking confirmation that is otherwise out of view.
+- Use inline status for validation, persistent errors, and information needed to
+  continue.
+- Toasts MUST pause on hover and focus, remain keyboard operable, and avoid
+  covering primary controls.
+- Multiple toasts queue or consolidate; they do not form an unreadable stack.
+- Notification history is required when loss of the message would matter.
+
+---
+
+## 12. Engineering and verification
+
+### 12.1 TypeScript and naming
+
+- TypeScript uses `strict: true`.
+- External data enters as `unknown` and is narrowed or parsed at the boundary.
+- Avoid `any`; a necessary escape hatch MUST be local, documented, and covered by
+  a boundary test.
+- Files use `kebab-case`; React components use `PascalCase`; hooks begin with
+  `use`; booleans read as states such as `isOpen` or `hasAccess`.
+- Event handlers describe the outcome: `handleSave`, not `handleClick`.
+- Prefer named exports for reusable components.
+- Import through the closest stable boundary; do not reach through another
+  feature's internals.
+
+### 12.2 Component delivery contract
+
+A new or materially changed component is complete only with:
+
+- Semantic markup and accessible name/description relationships.
+- Keyboard, pointer, touch, and focus behavior.
+- Default, hover, active, focus-visible, disabled, loading, empty, and error states
+  that apply.
+- Light, dark, reduced-motion, increased-contrast, and transparency-fallback
+  behavior.
+- Responsive and long-content behavior.
+- Focused unit or component tests for logic and interaction.
+- A browser-verifiable example or story for meaningful visual states.
+- Documentation of non-obvious constraints and destructive consequences.
+
+### 12.3 Test strategy
+
+| Layer | Proves | Typical tools |
+| --- | --- | --- |
+| Static | Types, lint, forbidden patterns, build graph. | TypeScript, ESLint, framework build. |
+| Unit | Pure functions, schema rules, projection and state reducers. | Vitest or Jest. |
+| Component | Semantics, variants, focus, keyboard, validation, state rendering. | Testing Library and user-event. |
+| Accessibility automation | Common name, role, relationship, and contrast issues. | axe-core or equivalent. |
+| Browser flow | Routing, persistence, overlays, responsive tasks, real network behavior. | Playwright. |
+| Visual | Theme, density, clipping, typography, motion endpoints. | Story snapshots plus human review. |
+| Device and assistive tech | Input feel, viewport behavior, screen reader output. | Real devices and platform assistive technology. |
+
+Tests SHOULD query by role and accessible name. Avoid selectors tied only to class
+names or internal component structure.
+
+### 12.4 Required browser and device matrix
+
+Before release, verify:
+
+- Current and previous major Chrome and Safari.
+- Current Firefox and Edge.
+- iOS Safari on a physical phone.
+- Android Chrome on a physical phone.
+- Keyboard-only use on desktop.
+- VoiceOver on macOS or iOS.
+- At least one additional screen reader/browser combination appropriate to the
+  audience.
+- Light, dark, increased contrast, and reduced motion.
+- 320 CSS px width, common tablet width, standard desktop, and a wide workspace.
+- 200% text size and 400% browser zoom for core flows.
+
+Emulation is useful during development but does not replace physical touch,
+viewport, keyboard, audio/haptic, or assistive-technology evidence.
+
+### 12.5 Interaction review
+
+For every gesture or spatial animation, record or inspect:
+
+1. Initial press feedback.
+2. Threshold crossing and direction lock.
+3. 1:1 tracking and preserved grab offset.
+4. Release with slow and fast velocities in both directions.
+5. Projected target selection.
+6. Interruption during entry, travel, settling, and exit.
+7. Boundary resistance.
+8. Reduced-motion equivalent.
+9. Keyboard and single-pointer alternative.
+10. Frame pacing on a representative lower-powered device.
+
+A video at normal speed proves overall feel; slow-motion or frame stepping proves
+continuity at the seams.
+
+### 12.6 Pull request evidence
+
+User-facing pull requests SHOULD include:
+
+- What outcome changed and why.
+- Screenshots for light, dark, mobile, and desktop states.
+- A short recording for meaningful interaction or motion.
+- Keyboard and accessibility evidence.
+- Commands run and their results.
+- Known limitations, follow-up work, or intentionally unsupported states.
+
+Generated snapshots are evidence only when their covered state is named.
+
+---
+
+## 13. Setup, completion, and maintenance
+
+### 13.1 Project setup
+
+The examples use pnpm; an equivalent package manager MAY be selected once per
+repository.
+
+```bash
+pnpm create next-app@latest my-app \
+  --ts \
+  --tailwind \
+  --eslint \
+  --app \
+  --import-alias "@/*"
+
+cd my-app
+pnpm dlx shadcn@latest init
+pnpm dlx shadcn@latest add \
+  accordion alert alert-dialog avatar badge breadcrumb button card checkbox \
+  command dialog dropdown-menu form input label popover radio-group select \
+  separator sheet sidebar skeleton slider sonner switch table tabs textarea \
+  tooltip
+
+pnpm add \
+  motion lucide-react next-themes zod react-hook-form @hookform/resolvers \
+  class-variance-authority clsx tailwind-merge
+```
+
+Add TanStack Query or Zustand only when the state ownership matrix demonstrates a
+need:
+
+```bash
+pnpm add @tanstack/react-query
+pnpm add zustand
+```
+
+Review every generated component and commit local modifications before running an
+overwrite or upgrade command.
+
+### 13.2 Required project scripts
+
+Each consuming application MUST expose equivalent commands:
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm test:e2e
+pnpm build
+```
+
+The exact tools MAY vary, but local and CI commands MUST be the same. CI MUST fail
+on type, lint, test, accessibility gate, or production build failure.
+
+### 13.3 Definition of ready
+
+Implementation starts when:
+
+- [ ] The user outcome and primary task are named.
+- [ ] Content hierarchy and route ownership are known.
+- [ ] Loading, empty, success, error, offline, and permission states are defined.
+- [ ] Destructive, financial, legal, privacy, and AI-related risks are identified.
+- [ ] Keyboard, touch, responsive, localization, and reduced-motion behavior are
+      described.
+- [ ] The authoritative data source and mutation reconciliation strategy are known.
+- [ ] Acceptance evidence can be produced in the relevant browser or device.
+
+### 13.4 Definition of done
+
+The work is complete only when:
+
+- [ ] The common path is obvious and advanced controls are progressively disclosed.
+- [ ] Semantic tokens replace hardcoded reusable colors, spacing, and motion.
+- [ ] Light and dark themes meet contrast requirements.
+- [ ] Keyboard order, focus visibility, focus restoration, and `Escape` behavior
+      are correct.
+- [ ] Screen reader names, roles, values, relationships, and status announcements
+      are verified.
+- [ ] Touch targets, drag alternatives, and pointer cancellation are verified.
+- [ ] Motion starts immediately, tracks continuously, hands off velocity, remains
+      interruptible, and has a reduced-motion equivalent.
+- [ ] Materials have solid fallbacks and remain legible with reduced transparency
+      or increased contrast.
+- [ ] No page-level horizontal overflow occurs from 320 CSS px upward.
+- [ ] Long localized content, 200% text, and 400% zoom preserve core tasks.
+- [ ] Loading, empty, error, stale, offline, optimistic, and rollback states behave
+      as specified.
+- [ ] Destructive actions expose their object, impact, and recovery or confirmation.
+- [ ] Static, unit, component, browser, accessibility, and production-build gates
+      pass for the affected scope.
+- [ ] Physical-device and assistive-technology evidence covers the changed
+      interaction.
+- [ ] Documentation, screenshots, and recordings match the delivered behavior.
+
+A checked box is a claim backed by named evidence, not a substitute for it.
+
+### 13.5 Maintenance
+
+Review this specification when:
+
+- A major React, Next.js, Tailwind CSS, shadcn/ui, Radix, or Motion release changes
+  the recommended implementation.
+- WCAG, browser support, or platform accessibility behavior changes.
+- A new input mode, device class, locale family, or product risk enters scope.
+- Repeated product exceptions indicate that a token or component contract is
+  missing.
+
+Changes to normative behavior update this English SSOT first. Translation updates
+state the SSOT version they represent; a translation MUST NOT silently present an
+older contract as current.
+
+### 13.6 Primary references
+
+- [Apple Human Interface Guidelines: Motion](https://developer.apple.com/design/human-interface-guidelines/motion)
+- [Apple Human Interface Guidelines: Materials](https://developer.apple.com/design/human-interface-guidelines/materials)
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- [React 19: `ref` as a prop](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop)
+- [Next.js: Server and Client Components](https://nextjs.org/docs/app/getting-started/server-and-client-components)
+- [Tailwind CSS: Theme variables](https://tailwindcss.com/docs/theme)
+- [shadcn/ui: Tailwind CSS 4 and React 19](https://ui.shadcn.com/docs/tailwind-v4)
+- [Motion for React](https://motion.dev/docs/react)
+- [Motion for React: Drag gestures](https://motion.dev/docs/react-drag)
