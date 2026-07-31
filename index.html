@@ -7,7 +7,7 @@
       name="description"
       content="Calm Precision is a practical DESIGN.md system for calm, direct, and trustworthy product interfaces."
     />
-    <meta name="theme-color" content="#F7F8FA" />
+    <meta name="theme-color" content="#101317" />
     <meta name="color-scheme" content="light dark" />
     <meta property="og:title" content="Calm Precision · DESIGN.md Gallery" />
     <meta
@@ -21,6 +21,27 @@
     />
     <title>Calm Precision · DESIGN.md Gallery</title>
     <link rel="icon" href="./assets/favicon.png" type="image/png" />
+    <link
+      rel="preload"
+      href="./assets/fonts/Geist-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./assets/fonts/GeistMono-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./assets/calm-precision-hero.webp"
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+    />
     <link rel="stylesheet" href="./styles.css" />
     <script>
       document.documentElement.classList.add("js");
@@ -28,12 +49,33 @@
         const theme = localStorage.getItem("calm-precision-theme");
         if (theme === "light" || theme === "dark") {
           document.documentElement.dataset.theme = theme;
+        } else if (theme !== "system") {
+          document.documentElement.dataset.theme = "dark";
+        }
+
+        if (localStorage.getItem("calm-precision-announcement") === "hidden") {
+          document.documentElement.classList.add("announcement-dismissed");
         }
       } catch {}
     </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <aside class="announcement" aria-label="Gallery announcement">
+      <a href="./DESIGN.md">
+        <span>Calm Precision</span>
+        <strong>Read the canonical DESIGN.md</strong>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <button
+        type="button"
+        data-announcement-dismiss
+        aria-label="Dismiss announcement"
+      >
+        Dismiss
+      </button>
+    </aside>
 
     <header class="site-header">
       <div class="header-inner">
@@ -49,55 +91,84 @@
           <a href="#principles">Rules</a>
         </nav>
 
-        <button class="theme-toggle" type="button" data-theme-toggle>
-          Theme: System
-        </button>
+        <div class="header-actions">
+          <button class="theme-toggle" type="button" data-theme-toggle>
+            Theme: Dark
+          </button>
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-label="Open navigation"
+            aria-controls="mobile-navigation"
+            aria-expanded="false"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
     </header>
 
+    <nav
+      class="mobile-navigation"
+      id="mobile-navigation"
+      aria-label="Mobile navigation"
+      aria-hidden="true"
+    >
+      <a href="#foundation" tabindex="-1"><span>01</span>Foundation</a>
+      <a href="#typography" tabindex="-1"><span>02</span>Typography</a>
+      <a href="#components" tabindex="-1"><span>03</span>Components</a>
+      <a href="#principles" tabindex="-1"><span>04</span>Rules</a>
+      <a href="./DESIGN.md" tabindex="-1"><span>↗</span>Source document</a>
+    </nav>
+
     <main id="main-content">
       <section class="hero shell" id="top" aria-labelledby="hero-title">
+        <figure class="hero-material" data-hero-material>
+          <div class="material-stage" aria-hidden="true">
+            <span class="material-strip material-strip-1"></span>
+            <span class="material-strip material-strip-2"></span>
+            <span class="material-strip material-strip-3"></span>
+            <span class="material-strip material-strip-4"></span>
+            <span class="material-strip material-strip-5"></span>
+            <span class="material-strip material-strip-6"></span>
+            <span class="material-strip material-strip-7"></span>
+            <span class="material-strip material-strip-8"></span>
+            <span class="material-strip material-strip-9"></span>
+          </div>
+          <figcaption class="sr-only">
+            Layered paper, glass, aluminum, and a single blue acrylic tab,
+            segmented into a precise material study.
+          </figcaption>
+        </figure>
+
         <div class="hero-copy">
-          <p class="hero-index reveal">DESIGN.md / alpha</p>
-          <h1 class="reveal" id="hero-title">
+          <p class="hero-index">DESIGN.md / A SYSTEM FOR CALM INTERFACES</p>
+          <h1 id="hero-title">
             <span class="hero-title-wide">
-              A design system<br />
-              with nothing to prove.
+              Calm enough to focus.<br />
+              Precise enough to trust.
             </span>
             <span class="hero-title-compact">
-              Quiet by design.<br />
-              Clear in use.
+              Calm to focus.<br />
+              Precise to trust.
             </span>
           </h1>
-          <p class="hero-lede reveal">
-            Calm, direct interfaces built from cool neutrals, one blue action,
-            and motion that explains itself.
+          <p class="hero-lede">
+            A practical interface system shaped by cool neutrals, one blue
+            action, and motion that always explains what changed.
           </p>
-          <div class="hero-actions reveal">
+          <div class="hero-actions">
             <a class="button button-primary" href="#foundation">
-              Explore tokens
+              <span>Explore the system</span>
+              <span class="button-orbit" aria-hidden="true">↘</span>
             </a>
-            <a class="button button-secondary" href="./DESIGN.md">
-              Read DESIGN.md
+            <a class="hero-source-link" href="./DESIGN.md">
+              Read the source <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
-
-        <figure class="hero-visual reveal">
-          <img
-            src="./assets/calm-precision-hero.webp"
-            width="1586"
-            height="992"
-            alt="Layered paper, glass, aluminum, and a single blue acrylic tab"
-            fetchpriority="high"
-          />
-          <div class="measure measure-x" aria-hidden="true">
-            <span>24</span>
-          </div>
-          <div class="measure measure-y" aria-hidden="true">
-            <span>14</span>
-          </div>
-        </figure>
       </section>
 
       <section class="system-counts shell reveal" aria-label="System summary">
