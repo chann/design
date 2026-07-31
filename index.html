@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Calm Precision is a practical DESIGN.md system for calm, direct, and trustworthy product interfaces."
+    />
+    <meta name="theme-color" content="#F7F8FA" />
+    <meta name="color-scheme" content="light dark" />
+    <meta property="og:title" content="Calm Precision · DESIGN.md Gallery" />
+    <meta
+      property="og:description"
+      content="Explore the tokens, components, states, and principles behind Calm Precision."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://chann.github.io/design/assets/calm-precision-hero.webp"
+    />
+    <title>Calm Precision · DESIGN.md Gallery</title>
+    <link rel="icon" href="./assets/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        const theme = localStorage.getItem("calm-precision-theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="Calm Precision home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Calm Precision</span>
+        </a>
+
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a href="#foundation">Foundation</a>
+          <a href="#typography">Type</a>
+          <a href="#components">Components</a>
+          <a href="#principles">Rules</a>
+        </nav>
+
+        <button class="theme-toggle" type="button" data-theme-toggle>
+          Theme: System
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="hero-index reveal">DESIGN.md / alpha</p>
+          <h1 class="reveal" id="hero-title">
+            <span class="hero-title-wide">
+              A design system<br />
+              with nothing to prove.
+            </span>
+            <span class="hero-title-compact">
+              Quiet by design.<br />
+              Clear in use.
+            </span>
+          </h1>
+          <p class="hero-lede reveal">
+            Calm, direct interfaces built from cool neutrals, one blue action,
+            and motion that explains itself.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="button button-primary" href="#foundation">
+              Explore tokens
+            </a>
+            <a class="button button-secondary" href="./DESIGN.md">
+              Read DESIGN.md
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero-visual reveal">
+          <img
+            src="./assets/calm-precision-hero.webp"
+            width="1586"
+            height="992"
+            alt="Layered paper, glass, aluminum, and a single blue acrylic tab"
+            fetchpriority="high"
+          />
+          <div class="measure measure-x" aria-hidden="true">
+            <span>24</span>
+          </div>
+          <div class="measure measure-y" aria-hidden="true">
+            <span>14</span>
+          </div>
+        </figure>
+      </section>
+
+      <section class="system-counts shell reveal" aria-label="System summary">
+        <dl>
+          <div>
+            <dt>Color roles</dt>
+            <dd>24</dd>
+          </div>
+          <div>
+            <dt>Type roles</dt>
+            <dd>11</dd>
+          </div>
+          <div>
+            <dt>Components</dt>
+            <dd>25</dd>
+          </div>
+          <div>
+            <dt>Languages</dt>
+            <dd>04</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section
+        class="section foundation shell"
+        id="foundation"
+        aria-labelledby="foundation-title"
+      >
+        <div class="section-heading reveal">
+          <p class="section-number">01 / Foundation</p>
+          <h2 id="foundation-title">Color has a job.</h2>
+          <p>
+            Blue marks action, focus, links, and selection. Neutral surfaces do
+            the rest, so every accent keeps its meaning.
+          </p>
+        </div>
+
+        <div
+          class="color-atlas reveal"
+          role="group"
+          aria-label="Core color tokens"
+        >
+          <button
+            class="swatch swatch-primary"
+            type="button"
+            data-copy="#0066CC"
+            aria-label="Copy primary color #0066CC"
+          >
+            <span class="swatch-name">Primary</span>
+            <span class="swatch-value">#0066CC</span>
+          </button>
+          <button
+            class="swatch swatch-canvas"
+            type="button"
+            data-copy="#F7F8FA"
+            aria-label="Copy canvas color #F7F8FA"
+          >
+            <span class="swatch-name">Canvas</span>
+            <span class="swatch-value">#F7F8FA</span>
+          </button>
+          <button
+            class="swatch swatch-ink"
+            type="button"
+            data-copy="#17181A"
+            aria-label="Copy ink color #17181A"
+          >
+            <span class="swatch-name">Ink</span>
+            <span class="swatch-value">#17181A</span>
+          </button>
+          <button
+            class="swatch swatch-soft"
+            type="button"
+            data-copy="#EEF1F5"
+            aria-label="Copy soft surface color #EEF1F5"
+          >
+            <span class="swatch-name">Surface soft</span>
+            <span class="swatch-value">#EEF1F5</span>
+          </button>
+          <button
+            class="swatch swatch-hairline"
+            type="button"
+            data-copy="#D7DCE2"
+            aria-label="Copy hairline color #D7DCE2"
+          >
+            <span class="swatch-name">Hairline</span>
+            <span class="swatch-value">#D7DCE2</span>
+          </button>
+        </div>
+        <p class="copy-status" data-copy-status aria-live="polite"></p>
+
+        <div
+          class="theme-study reveal"
+          role="group"
+          aria-label="Light and dark theme study"
+        >
+          <div class="theme-panel theme-panel-light">
+            <div class="theme-panel-header">
+              <span>Light</span>
+              <span>Canvas #F7F8FA</span>
+            </div>
+            <div class="mini-surface">
+              <span class="mini-label">Current plan</span>
+              <strong>Ready for review</strong>
+              <span class="mini-caption">Updated a moment ago</span>
+            </div>
+          </div>
+          <div class="theme-panel theme-panel-dark">
+            <div class="theme-panel-header">
+              <span>Dark</span>
+              <span>Canvas #101317</span>
+            </div>
+            <div class="mini-surface">
+              <span class="mini-label">Current plan</span>
+              <strong>Ready for review</strong>
+              <span class="mini-caption">Updated a moment ago</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section type-section shell"
+        id="typography"
+        aria-labelledby="type-title"
+      >
+        <div class="section-heading reveal">
+          <p class="section-number">02 / Typography</p>
+          <h2 id="type-title">Compact at scale. Open in use.</h2>
+          <p>
+            Large type makes one confident statement. Product copy stays
+            measured, familiar, and easy to scan.
+          </p>
+        </div>
+
+        <div class="type-specimen reveal">
+          <div class="type-display">
+            <span class="type-meta">Display / 64 / 700</span>
+            <p>Trust is visible.</p>
+          </div>
+          <ol class="type-scale">
+            <li>
+              <span class="type-token">headline-lg</span>
+              <strong class="sample-headline-lg">48</strong>
+              <span>1.08 / -0.03em</span>
+            </li>
+            <li>
+              <span class="type-token">headline-md</span>
+              <strong class="sample-headline-md">32</strong>
+              <span>1.15 / -0.022em</span>
+            </li>
+            <li>
+              <span class="type-token">title-lg</span>
+              <strong class="sample-title-lg">24</strong>
+              <span>1.25 / -0.015em</span>
+            </li>
+            <li>
+              <span class="type-token">body-md</span>
+              <strong class="sample-body-md">16</strong>
+              <span>1.55 / regular</span>
+            </li>
+            <li>
+              <span class="type-token">caption</span>
+              <strong class="sample-caption">12</strong>
+              <span>1.4 / 0.01em</span>
+            </li>
+          </ol>
+        </div>
+
+        <div
+          class="rhythm-strip reveal"
+          role="group"
+          aria-label="Spacing and shape tokens"
+        >
+          <div class="rhythm-copy">
+            <span>4px base unit</span>
+            <strong>Rhythm before decoration.</strong>
+          </div>
+          <div class="space-steps" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section components-section shell"
+        id="components"
+        aria-labelledby="components-title"
+      >
+        <div class="section-heading reveal">
+          <p class="section-number">03 / Components</p>
+          <h2 id="components-title">Designed for the whole cycle.</h2>
+          <p>
+            A component is incomplete until loading, empty, error, focus, and
+            recovery states feel intentional.
+          </p>
+        </div>
+
+        <div class="component-lab reveal">
+          <div class="lab-sidebar">
+            <p class="lab-title">State lab</p>
+            <div
+              class="state-tabs"
+              role="tablist"
+              aria-label="Component states"
+            >
+              <button
+                id="tab-default"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="panel-default"
+                tabindex="0"
+              >
+                Default
+              </button>
+              <button
+                id="tab-loading"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="panel-loading"
+                tabindex="-1"
+              >
+                Loading
+              </button>
+              <button
+                id="tab-empty"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="panel-empty"
+                tabindex="-1"
+              >
+                Empty
+              </button>
+              <button
+                id="tab-error"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="panel-error"
+                tabindex="-1"
+              >
+                Error
+              </button>
+            </div>
+            <p class="lab-note">
+              Keyboard: use arrow keys to move between states.
+            </p>
+          </div>
+
+          <div class="lab-stage">
+            <section
+              id="panel-default"
+              class="state-panel"
+              role="tabpanel"
+              aria-labelledby="tab-default"
+            >
+              <div class="stage-heading">
+                <div>
+                  <span class="stage-kicker">button + input + status</span>
+                  <h3>Project preferences</h3>
+                </div>
+                <span class="status status-success">Saved</span>
+              </div>
+              <div class="field">
+                <label for="project-name">Project name</label>
+                <input
+                  id="project-name"
+                  type="text"
+                  value="Calm Precision"
+                  autocomplete="off"
+                />
+                <span class="field-help"
+                  >Shown in shared design references.</span
+                >
+              </div>
+              <div class="button-row">
+                <button class="button button-primary" type="button">
+                  Save settings
+                </button>
+                <button class="button button-secondary" type="button">
+                  Export spec
+                </button>
+                <button class="text-button danger-action" type="button">
+                  Delete draft
+                </button>
+              </div>
+              <button class="preview-link" type="button" data-dialog-open>
+                Preview dialog behavior
+              </button>
+            </section>
+
+            <section
+              id="panel-loading"
+              class="state-panel"
+              role="tabpanel"
+              aria-labelledby="tab-loading"
+              hidden
+            >
+              <div
+                class="skeleton-stack"
+                role="status"
+                aria-label="Loading project settings"
+              >
+                <span class="skeleton skeleton-title"></span>
+                <span class="skeleton skeleton-copy"></span>
+                <span class="skeleton skeleton-field"></span>
+                <span class="skeleton skeleton-action"></span>
+              </div>
+              <p class="state-explanation">
+                Skeletons match final geometry and reserve the layout before
+                content arrives.
+              </p>
+            </section>
+
+            <section
+              id="panel-empty"
+              class="state-panel state-panel-centered"
+              role="tabpanel"
+              aria-labelledby="tab-empty"
+              hidden
+            >
+              <span class="empty-mark" aria-hidden="true"></span>
+              <h3>No components yet</h3>
+              <p>
+                Add one reusable pattern when two real product moments share
+                behavior.
+              </p>
+              <button class="button button-primary" type="button">
+                Add first component
+              </button>
+            </section>
+
+            <section
+              id="panel-error"
+              class="state-panel"
+              role="tabpanel"
+              aria-labelledby="tab-error"
+              hidden
+            >
+              <div class="stage-heading">
+                <div>
+                  <span class="stage-kicker">recoverable error</span>
+                  <h3>Check the token name</h3>
+                </div>
+                <span class="status status-error">Needs attention</span>
+              </div>
+              <div class="field field-error">
+                <label for="token-name">Token name</label>
+                <input
+                  id="token-name"
+                  type="text"
+                  value="primary blue"
+                  aria-invalid="true"
+                  aria-describedby="token-error"
+                />
+                <span id="token-error" class="field-error-message">
+                  Use a semantic name such as primary or info.
+                </span>
+              </div>
+              <button class="button button-primary" type="button">
+                Retry validation
+              </button>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section principles-section shell"
+        id="principles"
+        aria-labelledby="principles-title"
+      >
+        <div class="section-heading reveal">
+          <p class="section-number">04 / Principles</p>
+          <h2 id="principles-title">Cause stays connected to effect.</h2>
+          <p>
+            Feedback begins at the press, follows the action, and leaves a clear
+            recovery path.
+          </p>
+        </div>
+
+        <ol class="continuity reveal">
+          <li>
+            <span class="continuity-index">01</span>
+            <strong>Cause</strong>
+            <p>Input receives visible feedback within 100ms.</p>
+          </li>
+          <li>
+            <span class="continuity-index">02</span>
+            <strong>Direction</strong>
+            <p>Movement explains where content came from and where it went.</p>
+          </li>
+          <li>
+            <span class="continuity-index">03</span>
+            <strong>Recovery</strong>
+            <p>Errors retain work and pair the problem with the next action.</p>
+          </li>
+        </ol>
+
+        <div class="rule-ledger reveal">
+          <div>
+            <p class="rule-heading">Do</p>
+            <ul>
+              <li>Give each task region one obvious primary action.</li>
+              <li>Use semantic tokens instead of isolated raw values.</li>
+              <li>Preserve useful content during refresh and retry.</li>
+              <li>Verify narrow, dark, keyboard, and reduced-motion states.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="rule-heading">Do not</p>
+            <ul>
+              <li>Use blue as decoration or multiply primary actions.</li>
+              <li>Wrap every paragraph or metric in a floating card.</li>
+              <li>Hide essential actions behind hover alone.</li>
+              <li>Remove focus outlines without a stronger replacement.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="documents shell reveal" aria-labelledby="documents-title">
+        <div>
+          <p class="section-number">Canonical source</p>
+          <h2 id="documents-title">One contract. Four languages.</h2>
+        </div>
+        <nav class="locale-links" aria-label="Localized design documents">
+          <a href="./DESIGN.md" lang="en">English</a>
+          <a href="./DESIGN.ko.md" lang="ko">한국어</a>
+          <a href="./DESIGN.cn.md" lang="zh-Hans">简体中文</a>
+          <a href="./DESIGN.jp.md" lang="ja">日本語</a>
+        </nav>
+      </section>
+
+      <section
+        class="source-banner shell reveal"
+        aria-label="Source repository"
+      >
+        <p>Built directly from the normative YAML and guidance in DESIGN.md.</p>
+        <a
+          class="button button-secondary"
+          href="https://github.com/chann/design"
+        >
+          Open repository
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p>Calm Precision · <span data-year></span></p>
+        <p>Calm first. Direct second. Trust always.</p>
+      </div>
+    </footer>
+
+    <dialog class="spec-dialog" data-spec-dialog>
+      <form method="dialog">
+        <div class="dialog-heading">
+          <span class="stage-kicker">dialog / level 3</span>
+          <h2>Publish this specification?</h2>
+        </div>
+        <p>
+          The current token contract will become the reference for shared
+          interface work. You can publish a new version later.
+        </p>
+        <div class="dialog-actions">
+          <button class="button button-secondary" type="submit" value="cancel">
+            Cancel
+          </button>
+          <button class="button button-primary" type="submit" value="publish">
+            Publish spec
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
