@@ -11,6 +11,15 @@ inclusive defaults. It borrows the discipline of high-quality native
 interfaces while remaining distinctly web-native; it does not reproduce an
 Apple interface.
 
+## Gallery
+
+Explore the design system as a live, responsive reference:
+
+**[Open the Calm Precision gallery](https://chann.github.io/design/)**
+
+The gallery maps the normative tokens into light and dark themes, interactive
+component states, responsive specimens, and localized document links.
+
 ## Documentation
 
 - **English SSOT:** [DESIGN.md](./DESIGN.md)
@@ -30,7 +39,7 @@ Each document has two layers:
    component tokens.
 2. Markdown rationale in the canonical Stitch order:
    `Overview → Colors → Typography → Layout → Elevation & Depth → Shapes →
-   Components → Do's and Don'ts`.
+Components → Do's and Don'ts`.
 
 Project-specific sections follow the canonical core and cover responsive
 behavior, interaction and motion, accessibility, state and feedback,
