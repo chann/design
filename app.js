@@ -10,9 +10,9 @@ const themeLabels = {
 function getStoredTheme() {
   try {
     const stored = localStorage.getItem("calm-precision-theme");
-    return themeModes.includes(stored) ? stored : "dark";
+    return themeModes.includes(stored) ? stored : "light";
   } catch {
-    return "dark";
+    return "light";
   }
 }
 
@@ -119,9 +119,12 @@ const navigationLinks = [
     '.primary-nav a[href^="#"], .mobile-navigation a[href^="#"]',
   ),
 ];
-const navigationSections = navigationLinks
-  .map((link) => document.querySelector(link.getAttribute("href")))
-  .filter((section, index, sections) => sections.indexOf(section) === index);
+const navigationSections = [
+  document.querySelector("#top"),
+  ...navigationLinks.map((link) =>
+    document.querySelector(link.getAttribute("href")),
+  ),
+].filter((section, index, sections) => sections.indexOf(section) === index);
 
 function setCurrentSection(id) {
   navigationLinks.forEach((link) => {
