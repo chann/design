@@ -7,7 +7,7 @@
       name="description"
       content="Calm Precision is a practical DESIGN.md system for calm, direct, and trustworthy product interfaces."
     />
-    <meta name="theme-color" content="#101317" />
+    <meta name="theme-color" content="#0B0B0A" />
     <meta name="color-scheme" content="light dark" />
     <meta property="og:title" content="Calm Precision · DESIGN.md Gallery" />
     <meta
@@ -52,30 +52,11 @@
         } else if (theme !== "system") {
           document.documentElement.dataset.theme = "dark";
         }
-
-        if (localStorage.getItem("calm-precision-announcement") === "hidden") {
-          document.documentElement.classList.add("announcement-dismissed");
-        }
       } catch {}
     </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-
-    <aside class="announcement" aria-label="Gallery announcement">
-      <a href="./DESIGN.md">
-        <span>Calm Precision</span>
-        <strong>Read the canonical DESIGN.md</strong>
-        <span aria-hidden="true">↗</span>
-      </a>
-      <button
-        type="button"
-        data-announcement-dismiss
-        aria-label="Dismiss announcement"
-      >
-        Dismiss
-      </button>
-    </aside>
 
     <header class="site-header">
       <div class="header-inner">
@@ -92,6 +73,13 @@
         </nav>
 
         <div class="header-actions">
+          <a
+            class="header-repo"
+            href="https://github.com/chann/design"
+            aria-label="Open Calm Precision on GitHub"
+          >
+            GitHub
+          </a>
           <button class="theme-toggle" type="button" data-theme-toggle>
             Theme: Dark
           </button>
@@ -144,7 +132,7 @@
         </figure>
 
         <div class="hero-copy">
-          <p class="hero-index">DESIGN.md / A SYSTEM FOR CALM INTERFACES</p>
+          <p class="hero-product">Calm Precision</p>
           <h1 id="hero-title">
             <span class="hero-title-wide">
               Calm enough to focus.<br />
@@ -161,13 +149,13 @@
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#foundation">
-              <span>Explore the system</span>
-              <span class="button-orbit" aria-hidden="true">↘</span>
+              Explore the system
             </a>
             <a class="hero-source-link" href="./DESIGN.md">
               Read the source <span aria-hidden="true">↗</span>
             </a>
           </div>
+          <p class="hero-index">DESIGN.md · 24 color roles · 4 languages</p>
         </div>
       </section>
 
