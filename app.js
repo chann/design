@@ -206,8 +206,13 @@ const copyStatus = document.querySelector("[data-copy-status]");
 
 async function copyText(value) {
   if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(value);
-    return;
+    try {
+      await navigator.clipboard.writeText(value);
+      return;
+    } catch {
+      // Clipboard permissions can be denied in embedded or automated browsers.
+      // Continue to the selection-based fallback below.
+    }
   }
 
   const helper = document.createElement("textarea");
