@@ -27,6 +27,7 @@ const siteData = await readFile(
 const internalLinks = [...siteData.matchAll(/href:\s*"(\/[^"]+)"/g)].map(
   ([, href]) => href,
 );
+const { siteHref } = await import("../src/data/site.ts");
 
 for (const href of internalLinks) {
   assert(
@@ -34,6 +35,16 @@ for (const href of internalLinks) {
     `Navigation target is missing from routes.json: ${href}`,
   );
 }
+
+assert(
+  siteHref("/principles#natural", "/design/") === "/design/principles/#natural",
+  "Static paths must place the trailing slash before the fragment",
+);
+assert(
+  siteHref("/components/button?density=compact", "/design/") ===
+    "/design/components/button/?density=compact",
+  "Static paths must place the trailing slash before the query",
+);
 
 for (const route of routes) {
   const builtPage = route === "/" ? "index.html" : `.${route}/index.html`;

@@ -70,6 +70,13 @@ export default function App() {
       route === "/"
         ? "Comfort Design System"
         : `${label} · Comfort Design System`;
+    const hash = decodeURIComponent(window.location.hash.slice(1));
+    if (!hash) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(hash)?.scrollIntoView();
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [route]);
 
   if (route === "/") return <HomePage currentPath={route} />;

@@ -181,11 +181,15 @@ export const docsNavigation = [
   },
 ];
 
-export function siteHref(path: string) {
+export function siteHref(path: string, basePath = import.meta.env.BASE_URL) {
   if (/^(https?:|#)/.test(path)) return path;
-  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-  if (/\.[a-z]+$/i.test(path)) return `${base}${path}`;
-  return path === "/" ? `${base}/` : `${base}${path}/`;
+  const suffixIndex = path.search(/[?#]/);
+  const pathname = suffixIndex === -1 ? path : path.slice(0, suffixIndex);
+  const suffix = suffixIndex === -1 ? "" : path.slice(suffixIndex);
+  const base = basePath.replace(/\/$/, "");
+  if (/\.[a-z]+$/i.test(pathname)) return `${base}${pathname}${suffix}`;
+  const route = pathname === "/" ? `${base}/` : `${base}${pathname}/`;
+  return `${route}${suffix}`;
 }
 
 export function currentRoute() {
