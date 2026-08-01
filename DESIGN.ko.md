@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: Calm Precision
-description: A calm, direct, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+name: Comfort Design System
+description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
   primary: "#0066CC"
@@ -268,7 +268,7 @@ components:
 
 <!-- markdownlint-disable MD013 -->
 
-# Calm Precision 디자인 시스템
+# Comfort Design System
 
 > **상태:** 규범적 디자인 참조 문서 · **DESIGN.md 스키마:** `alpha`
 >
@@ -283,15 +283,15 @@ YAML front matter는 기계가 읽는 토큰 계약이고, 본문은 그 값을 
 
 ## Overview
 
-Calm Precision은 대시보드, 제작 도구, 설정, 커머스, 운영 워크플로처럼 집중이
+Comfort Design System은 대시보드, 제작 도구, 설정, 커머스, 운영 워크플로처럼 집중이
 필요한 제품 인터페이스를 위한 시스템입니다. 차가운 뉴트럴 표면, 절제된 단일
 블루 액션 컬러, 시스템 우선 타이포그래피, 명확한 컨테인먼트, 원인과 이동
 방향을 설명하는 모션이 핵심입니다.
 
-| 품질 | 사용자가 느껴야 하는 것 | 화면에서 확인되는 근거 |
-| --- | --- | --- |
-| **Calm** | “할 일에 집중할 수 있다.” | 하나의 명확한 주 액션, 절제된 색, 점진적 공개, 안정된 레이아웃 |
-| **Direct** | “인터페이스가 나를 따른다.” | 누르는 순간의 반응, 1:1 드래그, 중단·역전 가능한 모션 |
+| 품질            | 사용자가 느껴야 하는 것                    | 화면에서 확인되는 근거                                           |
+| --------------- | ------------------------------------------ | ---------------------------------------------------------------- |
+| **Comfort**     | “할 일에 집중할 수 있다.”                  | 하나의 명확한 주 액션, 절제된 색, 점진적 공개, 안정된 레이아웃   |
+| **Direct**      | “인터페이스가 나를 따른다.”                | 누르는 순간의 반응, 1:1 드래그, 중단·역전 가능한 모션            |
 | **Trustworthy** | “무슨 일이 일어났고 어떻게 복구할지 안다.” | 명시적 상태, 인라인 검증, 안전한 재시도, 실행 취소와 구체적 확인 |
 
 세 품질이 충돌하면 신뢰, 직접성, 시각적 차분함 순으로 지킵니다. 안전과
@@ -361,19 +361,19 @@ UI를 복제하지 않습니다.
 글꼴은 브랜드 이유, 라이선스 배포, metric-compatible fallback이 있을 때만
 도입합니다.
 
-| 토큰 | 크기 | 굵기 | 행간 | 자간 | 용도 |
-| --- | --- | --- | --- | --- | --- |
-| `{typography.display}` | 64px | 700 | 1.02 | -0.035em | 단일 hero 문장 |
-| `{typography.headline-lg}` | 48px | 700 | 1.08 | -0.03em | 페이지 제목 |
-| `{typography.headline-md}` | 32px | 680 | 1.15 | -0.022em | 주요 섹션 |
-| `{typography.title-lg}` | 24px | 650 | 1.25 | -0.015em | 패널·기능 제목 |
-| `{typography.title-md}` | 20px | 620 | 1.3 | -0.01em | 카드·대화상자 제목 |
-| `{typography.body-lg}` | 18px | 400 | 1.55 | 0 | 리드 문장 |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | 기본 본문과 컨트롤 |
-| `{typography.body-sm}` | 14px | 400 | 1.5 | 0.005em | 보조 UI 문구 |
-| `{typography.label}` | 14px | 600 | 1.3 | 0.005em | 버튼·탭·필드 라벨 |
-| `{typography.caption}` | 12px | 500 | 1.4 | 0.01em | 메타데이터·상태 |
-| `{typography.code}` | 14px | 400 | 1.55 | 0 | 코드·명령·기계 값 |
+| 토큰                       | 크기 | 굵기 | 행간 | 자간     | 용도               |
+| -------------------------- | ---- | ---- | ---- | -------- | ------------------ |
+| `{typography.display}`     | 64px | 700  | 1.02 | -0.035em | 단일 hero 문장     |
+| `{typography.headline-lg}` | 48px | 700  | 1.08 | -0.03em  | 페이지 제목        |
+| `{typography.headline-md}` | 32px | 680  | 1.15 | -0.022em | 주요 섹션          |
+| `{typography.title-lg}`    | 24px | 650  | 1.25 | -0.015em | 패널·기능 제목     |
+| `{typography.title-md}`    | 20px | 620  | 1.3  | -0.01em  | 카드·대화상자 제목 |
+| `{typography.body-lg}`     | 18px | 400  | 1.55 | 0        | 리드 문장          |
+| `{typography.body-md}`     | 16px | 400  | 1.55 | 0        | 기본 본문과 컨트롤 |
+| `{typography.body-sm}`     | 14px | 400  | 1.5  | 0.005em  | 보조 UI 문구       |
+| `{typography.label}`       | 14px | 600  | 1.3  | 0.005em  | 버튼·탭·필드 라벨  |
+| `{typography.caption}`     | 12px | 500  | 1.4  | 0.01em   | 메타데이터·상태    |
+| `{typography.code}`        | 14px | 400  | 1.55 | 0        | 코드·명령·기계 값  |
 
 - 각 route에는 설명적인 `h1`이 하나 있어야 하며 heading level을 외형 때문에
   고르지 않습니다.
@@ -414,12 +414,12 @@ badge, 장식 카드로 채우지 않습니다. 관련된 것은 가깝게, 관�
 
 ## Elevation & Depth
 
-| 레벨 | 처리 | 용도 |
-| --- | --- | --- |
-| **0 — Flat** | canvas 또는 surface, shadow 없음 | 페이지 콘텐츠, inset 영역 |
-| **1 — Contained** | surface 대비 + hairline | 카드, 그룹 컨트롤, sticky bar |
-| **2 — Floating** | raised surface + 짧고 부드러운 shadow | menu, popover, 비모달 panel |
-| **3 — Modal** | raised surface + 넓은 shadow + scrim | dialog, modal sheet |
+| 레벨              | 처리                                  | 용도                          |
+| ----------------- | ------------------------------------- | ----------------------------- |
+| **0 — Flat**      | canvas 또는 surface, shadow 없음      | 페이지 콘텐츠, inset 영역     |
+| **1 — Contained** | surface 대비 + hairline               | 카드, 그룹 컨트롤, sticky bar |
+| **2 — Floating**  | raised surface + 짧고 부드러운 shadow | menu, popover, 비모달 panel   |
+| **3 — Modal**     | raised surface + 넓은 shadow + scrim  | dialog, modal sheet           |
 
 ```css
 --shadow-1: 0 1px 2px rgb(16 24 40 / 6%), 0 4px 12px rgb(16 24 40 / 4%);
@@ -439,13 +439,13 @@ badge, 장식 카드로 채우지 않습니다. 관련된 것은 가깝게, 관�
 
 형태 언어는 부드럽지만 정밀합니다.
 
-| 토큰 | 값 | 용도 |
-| --- | --- | --- |
-| `{rounded.none}` | 0px | divider, full-bleed 영역, table seam |
-| `{rounded.sm}` | 6px | tag, 작은 control, code fragment |
-| `{rounded.md}` | 10px | button, input, menu item |
-| `{rounded.lg}` | 14px | card, grouped panel |
-| `{rounded.xl}` | 20px | dialog, sheet, 큰 floating surface |
+| 토큰             | 값     | 용도                                  |
+| ---------------- | ------ | ------------------------------------- |
+| `{rounded.none}` | 0px    | divider, full-bleed 영역, table seam  |
+| `{rounded.sm}`   | 6px    | tag, 작은 control, code fragment      |
+| `{rounded.md}`   | 10px   | button, input, menu item              |
+| `{rounded.lg}`   | 14px   | card, grouped panel                   |
+| `{rounded.xl}`   | 20px   | dialog, sheet, 큰 floating surface    |
 | `{rounded.full}` | 9999px | 원형 icon button, status pill, avatar |
 
 중첩 surface는 부모와 같거나 더 작은 radius를 씁니다. pill은 상태, 압축 필터,
@@ -546,14 +546,14 @@ inline에 둡니다. toast는 결과가 화면 밖에 있는 짧은 확인에만
 
 breakpoint는 기기 이름이 아니라 콘텐츠 압력을 뜻합니다.
 
-| 범위 | 주요 적응 |
-| --- | --- |
-| `< 40rem` | 1열, 16px gutter, 간결한 label, sheet형 보조 navigation |
-| `40–48rem` | label이 읽히는 경우 2열 field |
-| `48–64rem` | 지속 secondary navigation, 조밀한 toolbar |
-| `64–80rem` | 다열 content, 전체 table control, side panel |
-| `80–90rem` | reading line을 늘리지 않는 넓은 workspace |
-| `> 90rem` | 1440px 중앙 content 또는 의도적 full-width 작업면 |
+| 범위       | 주요 적응                                               |
+| ---------- | ------------------------------------------------------- |
+| `< 40rem`  | 1열, 16px gutter, 간결한 label, sheet형 보조 navigation |
+| `40–48rem` | label이 읽히는 경우 2열 field                           |
+| `48–64rem` | 지속 secondary navigation, 조밀한 toolbar               |
+| `64–80rem` | 다열 content, 전체 table control, side panel            |
+| `80–90rem` | reading line을 늘리지 않는 넓은 workspace               |
+| `> 90rem`  | 1440px 중앙 content 또는 의도적 full-width 작업면       |
 
 - 320 CSS px에서 시작하고 콘텐츠가 허용할 때만 복잡도를 늘립니다.
 - control은 최소 44×44px target과 충분한 인접 간격을 유지합니다.
@@ -647,13 +647,13 @@ interaction은 component에 둡니다. shared store는 실제 cross-tree lifetim
   disabled, loading, empty, error, light, dark, reduced-motion, contrast,
   long-content, localized state를 다룹니다.
 
-| 계층 | 필요한 증거 |
-| --- | --- |
-| Static | type, lint, token/reference validation, production build |
-| Component | role, name, keyboard, focus, variant, state rendering |
-| Browser | route, overlay, responsive layout, overflow, 실제 network state |
-| Visual | light/dark, 320px, tablet, desktop, wide, zoom, long content |
-| Device·AT | 실제 touch 동작과 대표 screen reader 출력 |
+| 계층      | 필요한 증거                                                     |
+| --------- | --------------------------------------------------------------- |
+| Static    | type, lint, token/reference validation, production build        |
+| Component | role, name, keyboard, focus, variant, state rendering           |
+| Browser   | route, overlay, responsive layout, overflow, 실제 network state |
+| Visual    | light/dark, 320px, tablet, desktop, wide, zoom, long content    |
+| Device·AT | 실제 touch 동작과 대표 screen reader 출력                       |
 
 snapshot은 어떤 상태를 다루는지 명시할 때만 증거가 됩니다. source와 unit test는
 확인하지 못한 browser, device, assistive-technology 동작의 대체 증거가 아닙니다.

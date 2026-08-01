@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: Calm Precision
-description: A calm, direct, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+name: Comfort Design System
+description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
   primary: "#0066CC"
@@ -268,7 +268,7 @@ components:
 
 <!-- markdownlint-disable MD013 -->
 
-# Calm Precision Design System
+# Comfort Design System
 
 > **Status:** Normative design reference · **DESIGN.md schema:** `alpha`
 >
@@ -283,17 +283,17 @@ The key words **MUST**, **SHOULD**, and **MAY** express requirement strength.
 
 ## Overview
 
-Calm Precision is a system for focused product interfaces: dashboards, creation
+Comfort Design System is a system for focused product interfaces: dashboards, creation
 tools, settings, commerce, and operational workflows. It combines cool neutral
 surfaces, one restrained blue action color, system-first typography, clear
 containment, and motion that explains where content came from and where it went.
 
 The intended experience has three qualities:
 
-| Quality | User perception | Visible evidence |
-| --- | --- | --- |
-| **Calm** | “I can focus on the task.” | One clear primary action, restrained color, progressive disclosure, stable layout. |
-| **Direct** | “The interface follows me.” | Feedback begins on press, drag tracks 1:1, motion is interruptible and reversible. |
+| Quality         | User perception                               | Visible evidence                                                                                           |
+| --------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Comfort**     | “I can focus on the task.”                    | One clear primary action, restrained color, progressive disclosure, stable layout.                         |
+| **Direct**      | “The interface follows me.”                   | Feedback begins on press, drag tracks 1:1, motion is interruptible and reversible.                         |
 | **Trustworthy** | “I understand what happened and can recover.” | Explicit state, inline validation, safe retry, undo where possible, specific confirmation where necessary. |
 
 When these qualities conflict, protect trust first, then directness, then visual
@@ -371,19 +371,19 @@ on Apple platforms the native system face may render through the fallback stack.
 A product MAY introduce a custom typeface only with a documented brand reason,
 licensed delivery, and metric-compatible fallback.
 
-| Token | Size | Weight | Line height | Tracking | Role |
-| --- | --- | --- | --- | --- | --- |
-| `{typography.display}` | 64px | 700 | 1.02 | -0.035em | Hero or singular product statement |
-| `{typography.headline-lg}` | 48px | 700 | 1.08 | -0.03em | Page title |
-| `{typography.headline-md}` | 32px | 680 | 1.15 | -0.022em | Major section |
-| `{typography.title-lg}` | 24px | 650 | 1.25 | -0.015em | Panel or feature title |
-| `{typography.title-md}` | 20px | 620 | 1.3 | -0.01em | Card or dialog title |
-| `{typography.body-lg}` | 18px | 400 | 1.55 | 0 | Lead copy |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | Default body and controls |
-| `{typography.body-sm}` | 14px | 400 | 1.5 | 0.005em | Secondary UI copy |
-| `{typography.label}` | 14px | 600 | 1.3 | 0.005em | Buttons, tabs, and field labels |
-| `{typography.caption}` | 12px | 500 | 1.4 | 0.01em | Metadata and compact status |
-| `{typography.code}` | 14px | 400 | 1.55 | 0 | Code, commands, and machine values |
+| Token                      | Size | Weight | Line height | Tracking | Role                               |
+| -------------------------- | ---- | ------ | ----------- | -------- | ---------------------------------- |
+| `{typography.display}`     | 64px | 700    | 1.02        | -0.035em | Hero or singular product statement |
+| `{typography.headline-lg}` | 48px | 700    | 1.08        | -0.03em  | Page title                         |
+| `{typography.headline-md}` | 32px | 680    | 1.15        | -0.022em | Major section                      |
+| `{typography.title-lg}`    | 24px | 650    | 1.25        | -0.015em | Panel or feature title             |
+| `{typography.title-md}`    | 20px | 620    | 1.3         | -0.01em  | Card or dialog title               |
+| `{typography.body-lg}`     | 18px | 400    | 1.55        | 0        | Lead copy                          |
+| `{typography.body-md}`     | 16px | 400    | 1.55        | 0        | Default body and controls          |
+| `{typography.body-sm}`     | 14px | 400    | 1.5         | 0.005em  | Secondary UI copy                  |
+| `{typography.label}`       | 14px | 600    | 1.3         | 0.005em  | Buttons, tabs, and field labels    |
+| `{typography.caption}`     | 12px | 500    | 1.4         | 0.01em   | Metadata and compact status        |
+| `{typography.code}`        | 14px | 400    | 1.55        | 0        | Code, commands, and machine values |
 
 Rules:
 
@@ -440,12 +440,12 @@ region MAY scroll horizontally when its boundary and affordance are explicit.
 
 Depth explains interaction and stacking:
 
-| Level | Treatment | Use |
-| --- | --- | --- |
-| **0 — Flat** | Canvas or surface, no shadow | Page content, inset regions |
-| **1 — Contained** | Surface contrast plus hairline | Cards, grouped controls, sticky bars |
-| **2 — Floating** | Raised surface plus soft short shadow | Menus, popovers, non-modal panels |
-| **3 — Modal** | Raised surface plus broader shadow and scrim | Dialogs and modal sheets |
+| Level             | Treatment                                    | Use                                  |
+| ----------------- | -------------------------------------------- | ------------------------------------ |
+| **0 — Flat**      | Canvas or surface, no shadow                 | Page content, inset regions          |
+| **1 — Contained** | Surface contrast plus hairline               | Cards, grouped controls, sticky bars |
+| **2 — Floating**  | Raised surface plus soft short shadow        | Menus, popovers, non-modal panels    |
+| **3 — Modal**     | Raised surface plus broader shadow and scrim | Dialogs and modal sheets             |
 
 Suggested implementation values:
 
@@ -468,13 +468,13 @@ Suggested implementation values:
 The shape language is softly engineered: compact controls feel precise, while
 larger containers have enough rounding to feel approachable.
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `{rounded.none}` | 0px | Dividers, full-bleed regions, table seams |
-| `{rounded.sm}` | 6px | Tags, small controls, code fragments |
-| `{rounded.md}` | 10px | Buttons, inputs, menu items |
-| `{rounded.lg}` | 14px | Cards and grouped panels |
-| `{rounded.xl}` | 20px | Dialogs, sheets, prominent floating surfaces |
+| Token            | Value  | Use                                          |
+| ---------------- | ------ | -------------------------------------------- |
+| `{rounded.none}` | 0px    | Dividers, full-bleed regions, table seams    |
+| `{rounded.sm}`   | 6px    | Tags, small controls, code fragments         |
+| `{rounded.md}`   | 10px   | Buttons, inputs, menu items                  |
+| `{rounded.lg}`   | 14px   | Cards and grouped panels                     |
+| `{rounded.xl}`   | 20px   | Dialogs, sheets, prominent floating surfaces |
 | `{rounded.full}` | 9999px | Circular icon buttons, status pills, avatars |
 
 Rules:
@@ -593,14 +593,14 @@ considered complete.
 
 Breakpoints represent content pressure rather than device brands:
 
-| Range | Typical adaptation |
-| --- | --- |
-| `< 40rem` | One column, 16px gutter, compact labels, sheet-based secondary navigation |
-| `40–48rem` | Two-column fields when labels remain readable |
-| `48–64rem` | Persistent secondary navigation and denser toolbars |
-| `64–80rem` | Multi-column content, full table controls, side panels |
-| `80–90rem` | Wider workspace without stretching reading lines |
-| `> 90rem` | Centered 1440px content or an intentionally full-width work surface |
+| Range      | Typical adaptation                                                        |
+| ---------- | ------------------------------------------------------------------------- |
+| `< 40rem`  | One column, 16px gutter, compact labels, sheet-based secondary navigation |
+| `40–48rem` | Two-column fields when labels remain readable                             |
+| `48–64rem` | Persistent secondary navigation and denser toolbars                       |
+| `64–80rem` | Multi-column content, full table controls, side panels                    |
+| `80–90rem` | Wider workspace without stretching reading lines                          |
+| `> 90rem`  | Centered 1440px content or an intentionally full-width work surface       |
 
 - Start at 320 CSS px and add complexity only when content allows it.
 - Controls maintain a minimum 44×44px target. Adjacent targets have enough
@@ -713,13 +713,13 @@ interaction, accessibility, and evidence contracts are not.
 
 Verification is proportional to the change:
 
-| Layer | Evidence |
-| --- | --- |
-| Static | Types, lint, token/reference validation, production build |
-| Component | Roles, names, keyboard, focus, variants, state rendering |
-| Browser | Routing, overlays, responsive layout, overflow, real network state |
-| Visual | Light/dark, 320px, tablet, desktop, wide, zoom, long content |
-| Device and assistive technology | Physical touch behavior and representative screen-reader output |
+| Layer                           | Evidence                                                           |
+| ------------------------------- | ------------------------------------------------------------------ |
+| Static                          | Types, lint, token/reference validation, production build          |
+| Component                       | Roles, names, keyboard, focus, variants, state rendering           |
+| Browser                         | Routing, overlays, responsive layout, overflow, real network state |
+| Visual                          | Light/dark, 320px, tablet, desktop, wide, zoom, long content       |
+| Device and assistive technology | Physical touch behavior and representative screen-reader output    |
 
 Generated snapshots count only when the state they cover is named. Source and unit
 tests do not substitute for unavailable browser, device, or assistive-technology

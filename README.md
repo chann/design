@@ -1,9 +1,9 @@
 <!-- markdownlint-disable MD013 -->
 
-# Calm Precision DESIGN.md
+# Comfort Design System
 
-This repository contains a Google Stitch-compatible `DESIGN.md` for calm,
-direct, and trustworthy product interfaces.
+This repository contains a Google Stitch-compatible `DESIGN.md` for
+comfortable, clear, and trustworthy product interfaces.
 
 The system combines cool neutral surfaces, one restrained blue action color,
 system-first typography, clear containment, spatially continuous motion, and
@@ -15,7 +15,7 @@ Apple interface.
 
 Explore the design system as a live, responsive reference:
 
-**[Open the Calm Precision gallery](https://chann.github.io/design/)**
+**[Open the Comfort Design System](https://chann.github.io/design/)**
 
 The gallery maps the normative tokens into light and dark themes, interactive
 component states, responsive specimens, and localized document links.

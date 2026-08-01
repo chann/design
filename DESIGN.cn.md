@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: Calm Precision
-description: A calm, direct, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+name: Comfort Design System
+description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
   primary: "#0066CC"
@@ -268,7 +268,7 @@ components:
 
 <!-- markdownlint-disable MD013 -->
 
-# Calm Precision 设计系统
+# Comfort Design System
 
 > **状态：**规范性设计参考 · **DESIGN.md schema：**`alpha`
 >
@@ -282,14 +282,14 @@ YAML front matter 是机器可读的 token 合同，正文说明如何应用这�
 
 ## Overview
 
-Calm Precision 面向需要高度专注的产品界面，例如 dashboard、创作工具、设置、
+Comfort Design System 面向需要高度专注的产品界面，例如 dashboard、创作工具、设置、
 电商与运营流程。它以冷静的中性色 surface、单一且克制的蓝色 action、系统优先
 排版、清晰的容器关系，以及能解释来源与去向的 motion 为核心。
 
-| 品质 | 用户应当感受到 | 可观察的产品证据 |
-| --- | --- | --- |
-| **Calm** | “我可以专注完成任务。” | 一个明确主操作、克制用色、渐进披露、稳定布局 |
-| **Direct** | “界面会跟随我的操作。” | 按下即反馈、1:1 拖动、可中断与反向的动画 |
+| 品质            | 用户应当感受到                       | 可观察的产品证据                             |
+| --------------- | ------------------------------------ | -------------------------------------------- |
+| **Comfort**     | “我可以专注完成任务。”               | 一个明确主操作、克制用色、渐进披露、稳定布局 |
+| **Direct**      | “界面会跟随我的操作。”               | 按下即反馈、1:1 拖动、可中断与反向的动画     |
 | **Trustworthy** | “我知道发生了什么，也知道如何恢复。” | 明确状态、行内校验、安全重试、撤销与具体确认 |
 
 发生冲突时，依次保护可信度、直接性与视觉平静。安全和可访问性永远高于装饰。
@@ -352,19 +352,19 @@ Calm Precision 面向需要高度专注的产品界面，例如 dashboard、创�
 fallback 使用系统字体。只有在具备品牌理由、合法授权分发方式与
 metric-compatible fallback 时才能引入自定义字体。
 
-| Token | 字号 | 字重 | 行高 | 字距 | 用途 |
-| --- | --- | --- | --- | --- | --- |
-| `{typography.display}` | 64px | 700 | 1.02 | -0.035em | 单一 hero 陈述 |
-| `{typography.headline-lg}` | 48px | 700 | 1.08 | -0.03em | 页面标题 |
-| `{typography.headline-md}` | 32px | 680 | 1.15 | -0.022em | 主要 section |
-| `{typography.title-lg}` | 24px | 650 | 1.25 | -0.015em | panel 或 feature 标题 |
-| `{typography.title-md}` | 20px | 620 | 1.3 | -0.01em | card 或 dialog 标题 |
-| `{typography.body-lg}` | 18px | 400 | 1.55 | 0 | 引导正文 |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | 默认正文与 control |
-| `{typography.body-sm}` | 14px | 400 | 1.5 | 0.005em | 次级 UI 文案 |
-| `{typography.label}` | 14px | 600 | 1.3 | 0.005em | button、tab、field label |
-| `{typography.caption}` | 12px | 500 | 1.4 | 0.01em | metadata 与紧凑状态 |
-| `{typography.code}` | 14px | 400 | 1.55 | 0 | code、command、机器值 |
+| Token                      | 字号 | 字重 | 行高 | 字距     | 用途                     |
+| -------------------------- | ---- | ---- | ---- | -------- | ------------------------ |
+| `{typography.display}`     | 64px | 700  | 1.02 | -0.035em | 单一 hero 陈述           |
+| `{typography.headline-lg}` | 48px | 700  | 1.08 | -0.03em  | 页面标题                 |
+| `{typography.headline-md}` | 32px | 680  | 1.15 | -0.022em | 主要 section             |
+| `{typography.title-lg}`    | 24px | 650  | 1.25 | -0.015em | panel 或 feature 标题    |
+| `{typography.title-md}`    | 20px | 620  | 1.3  | -0.01em  | card 或 dialog 标题      |
+| `{typography.body-lg}`     | 18px | 400  | 1.55 | 0        | 引导正文                 |
+| `{typography.body-md}`     | 16px | 400  | 1.55 | 0        | 默认正文与 control       |
+| `{typography.body-sm}`     | 14px | 400  | 1.5  | 0.005em  | 次级 UI 文案             |
+| `{typography.label}`       | 14px | 600  | 1.3  | 0.005em  | button、tab、field label |
+| `{typography.caption}`     | 12px | 500  | 1.4  | 0.01em   | metadata 与紧凑状态      |
+| `{typography.code}`        | 14px | 400  | 1.55 | 0        | code、command、机器值    |
 
 - 每个 route 必须有一个描述性的 `h1`；heading level 不得因外观而选择。
 - display 可用 `clamp()` 响应式缩放，但移动端仍需保持层级与可读性。
@@ -400,12 +400,12 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 
 ## Elevation & Depth
 
-| 层级 | 表现 | 用途 |
-| --- | --- | --- |
-| **0 — Flat** | canvas 或 surface，无 shadow | 页面内容、inset 区域 |
-| **1 — Contained** | surface 对比 + hairline | card、grouped control、sticky bar |
-| **2 — Floating** | raised surface + 短而柔和的 shadow | menu、popover、非模态 panel |
-| **3 — Modal** | raised surface + 更宽 shadow + scrim | dialog、modal sheet |
+| 层级              | 表现                                 | 用途                              |
+| ----------------- | ------------------------------------ | --------------------------------- |
+| **0 — Flat**      | canvas 或 surface，无 shadow         | 页面内容、inset 区域              |
+| **1 — Contained** | surface 对比 + hairline              | card、grouped control、sticky bar |
+| **2 — Floating**  | raised surface + 短而柔和的 shadow   | menu、popover、非模态 panel       |
+| **3 — Modal**     | raised surface + 更宽 shadow + scrim | dialog、modal sheet               |
 
 ```css
 --shadow-1: 0 1px 2px rgb(16 24 40 / 6%), 0 4px 12px rgb(16 24 40 / 4%);
@@ -424,13 +424,13 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 
 形状语言柔和但精确。
 
-| Token | 值 | 用途 |
-| --- | --- | --- |
-| `{rounded.none}` | 0px | divider、full-bleed 区域、table seam |
-| `{rounded.sm}` | 6px | tag、小型 control、code fragment |
-| `{rounded.md}` | 10px | button、input、menu item |
-| `{rounded.lg}` | 14px | card、grouped panel |
-| `{rounded.xl}` | 20px | dialog、sheet、重要 floating surface |
+| Token            | 值     | 用途                                  |
+| ---------------- | ------ | ------------------------------------- |
+| `{rounded.none}` | 0px    | divider、full-bleed 区域、table seam  |
+| `{rounded.sm}`   | 6px    | tag、小型 control、code fragment      |
+| `{rounded.md}`   | 10px   | button、input、menu item              |
+| `{rounded.lg}`   | 14px   | card、grouped panel                   |
+| `{rounded.xl}`   | 20px   | dialog、sheet、重要 floating surface  |
 | `{rounded.full}` | 9999px | 圆形 icon button、status pill、avatar |
 
 嵌套 surface 使用与父级相同或更小的 radius。pill 仅用于状态、紧凑 filter 与
@@ -523,14 +523,14 @@ status pill 只用于短状态。继续操作所需的错误与信息放在 inli
 
 breakpoint 表示内容压力，而不是设备品牌。
 
-| 范围 | 主要适配 |
-| --- | --- |
-| `< 40rem` | 单列、16px gutter、简洁 label、sheet 型次级 navigation |
-| `40–48rem` | label 仍易读时使用双列 field |
-| `48–64rem` | 持久 secondary navigation、更密 toolbar |
-| `64–80rem` | 多列内容、完整 table control、side panel |
-| `80–90rem` | 不拉长阅读行的宽 workspace |
-| `> 90rem` | 居中 1440px 内容或有意的 full-width 工作面 |
+| 范围       | 主要适配                                               |
+| ---------- | ------------------------------------------------------ |
+| `< 40rem`  | 单列、16px gutter、简洁 label、sheet 型次级 navigation |
+| `40–48rem` | label 仍易读时使用双列 field                           |
+| `48–64rem` | 持久 secondary navigation、更密 toolbar                |
+| `64–80rem` | 多列内容、完整 table control、side panel               |
+| `80–90rem` | 不拉长阅读行的宽 workspace                             |
+| `> 90rem`  | 居中 1440px 内容或有意的 full-width 工作面             |
 
 - 从 320 CSS px 开始，只在内容允许时增加复杂度。
 - control 保持至少 44×44px target，并为相邻 target 留足间距。
@@ -615,13 +615,13 @@ React。库可以替换，但视觉、交互、可访问性与证据合同不能
   disabled、loading、empty、error、light、dark、reduced-motion、contrast、
   long-content 与 localized state。
 
-| 层级 | 证据 |
-| --- | --- |
-| Static | type、lint、token/reference validation、production build |
-| Component | role、name、keyboard、focus、variant、state rendering |
-| Browser | route、overlay、responsive layout、overflow、真实 network state |
-| Visual | light/dark、320px、tablet、desktop、wide、zoom、long content |
-| Device 与 AT | 真实 touch 行为和代表性 screen reader 输出 |
+| 层级         | 证据                                                            |
+| ------------ | --------------------------------------------------------------- |
+| Static       | type、lint、token/reference validation、production build        |
+| Component    | role、name、keyboard、focus、variant、state rendering           |
+| Browser      | route、overlay、responsive layout、overflow、真实 network state |
+| Visual       | light/dark、320px、tablet、desktop、wide、zoom、long content    |
+| Device 与 AT | 真实 touch 行为和代表性 screen reader 输出                      |
 
 snapshot 只有在明确覆盖状态时才算证据。source 与 unit test 不能替代未验证的
 browser、device 或 assistive-technology 行为。

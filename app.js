@@ -9,7 +9,7 @@ const themeLabels = {
 
 function getStoredTheme() {
   try {
-    const stored = localStorage.getItem("calm-precision-theme");
+    const stored = localStorage.getItem("comfort-theme");
     return themeModes.includes(stored) ? stored : "light";
   } catch {
     return "light";
@@ -43,7 +43,7 @@ function setTheme(mode, persist = true) {
 
   if (persist) {
     try {
-      localStorage.setItem("calm-precision-theme", mode);
+      localStorage.setItem("comfort-theme", mode);
     } catch {}
   }
 }

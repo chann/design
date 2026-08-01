@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: Calm Precision
-description: A calm, direct, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+name: Comfort Design System
+description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
   primary: "#0066CC"
@@ -268,7 +268,7 @@ components:
 
 <!-- markdownlint-disable MD013 -->
 
-# Calm Precision デザインシステム
+# Comfort Design System
 
 > **ステータス:** 規範的デザインリファレンス · **DESIGN.md schema:** `alpha`
 >
@@ -283,15 +283,15 @@ YAML front matter は機械可読の token 契約であり、本文はその値�
 
 ## Overview
 
-Calm Precision は dashboard、制作ツール、設定、commerce、運用 workflow など、
+Comfort Design System は dashboard、制作ツール、設定、commerce、運用 workflow など、
 集中を必要とする product interface のためのシステムです。クールな neutral
 surface、節度ある単一の青い action color、system-first typography、明確な
 containment、内容の出所と移動先を説明する motion を組み合わせます。
 
-| 品質 | ユーザーが感じること | 確認できる設計根拠 |
-| --- | --- | --- |
-| **Calm** | 「タスクに集中できる」 | 一つの明確な主 action、節度ある色、段階的開示、安定した layout |
-| **Direct** | 「interface が操作についてくる」 | 押下時の即時 feedback、1:1 drag、中断・反転可能な motion |
+| 品質            | ユーザーが感じること                 | 確認できる設計根拠                                                        |
+| --------------- | ------------------------------------ | ------------------------------------------------------------------------- |
+| **Comfort**     | 「タスクに集中できる」               | 一つの明確な主 action、節度ある色、段階的開示、安定した layout            |
+| **Direct**      | 「interface が操作についてくる」     | 押下時の即時 feedback、1:1 drag、中断・反転可能な motion                  |
 | **Trustworthy** | 「何が起き、どう復旧できるか分かる」 | 明示的 state、inline validation、安全な retry、undo と具体的 confirmation |
 
 競合する場合は、信頼性、直接性、視覚的な静けさの順に守ります。安全と
@@ -360,19 +360,19 @@ Apple platform では fallback を通して system font を使えます。custom
 brand 上の理由、適切な license delivery、metric-compatible fallback がある場合
 のみ導入します。
 
-| Token | サイズ | Weight | Line height | Tracking | 用途 |
-| --- | --- | --- | --- | --- | --- |
-| `{typography.display}` | 64px | 700 | 1.02 | -0.035em | 単一の hero statement |
-| `{typography.headline-lg}` | 48px | 700 | 1.08 | -0.03em | page title |
-| `{typography.headline-md}` | 32px | 680 | 1.15 | -0.022em | major section |
-| `{typography.title-lg}` | 24px | 650 | 1.25 | -0.015em | panel・feature title |
-| `{typography.title-md}` | 20px | 620 | 1.3 | -0.01em | card・dialog title |
-| `{typography.body-lg}` | 18px | 400 | 1.55 | 0 | lead copy |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | 標準本文と control |
-| `{typography.body-sm}` | 14px | 400 | 1.5 | 0.005em | secondary UI copy |
-| `{typography.label}` | 14px | 600 | 1.3 | 0.005em | button・tab・field label |
-| `{typography.caption}` | 12px | 500 | 1.4 | 0.01em | metadata・compact status |
-| `{typography.code}` | 14px | 400 | 1.55 | 0 | code・command・machine value |
+| Token                      | サイズ | Weight | Line height | Tracking | 用途                         |
+| -------------------------- | ------ | ------ | ----------- | -------- | ---------------------------- |
+| `{typography.display}`     | 64px   | 700    | 1.02        | -0.035em | 単一の hero statement        |
+| `{typography.headline-lg}` | 48px   | 700    | 1.08        | -0.03em  | page title                   |
+| `{typography.headline-md}` | 32px   | 680    | 1.15        | -0.022em | major section                |
+| `{typography.title-lg}`    | 24px   | 650    | 1.25        | -0.015em | panel・feature title         |
+| `{typography.title-md}`    | 20px   | 620    | 1.3         | -0.01em  | card・dialog title           |
+| `{typography.body-lg}`     | 18px   | 400    | 1.55        | 0        | lead copy                    |
+| `{typography.body-md}`     | 16px   | 400    | 1.55        | 0        | 標準本文と control           |
+| `{typography.body-sm}`     | 14px   | 400    | 1.5         | 0.005em  | secondary UI copy            |
+| `{typography.label}`       | 14px   | 600    | 1.3         | 0.005em  | button・tab・field label     |
+| `{typography.caption}`     | 12px   | 500    | 1.4         | 0.01em   | metadata・compact status     |
+| `{typography.code}`        | 14px   | 400    | 1.55        | 0        | code・command・machine value |
 
 - 各 route には説明的な `h1` を一つ置き、見た目のために heading level を
   選びません。
@@ -414,12 +414,12 @@ affordance が明確な data region だけ内部 horizontal scroll を許可し�
 
 ## Elevation & Depth
 
-| Level | 表現 | 用途 |
-| --- | --- | --- |
-| **0 — Flat** | canvas または surface、shadow なし | page content、inset region |
-| **1 — Contained** | surface contrast + hairline | card、grouped control、sticky bar |
-| **2 — Floating** | raised surface + 短く柔らかな shadow | menu、popover、non-modal panel |
-| **3 — Modal** | raised surface + 広い shadow + scrim | dialog、modal sheet |
+| Level             | 表現                                 | 用途                              |
+| ----------------- | ------------------------------------ | --------------------------------- |
+| **0 — Flat**      | canvas または surface、shadow なし   | page content、inset region        |
+| **1 — Contained** | surface contrast + hairline          | card、grouped control、sticky bar |
+| **2 — Floating**  | raised surface + 短く柔らかな shadow | menu、popover、non-modal panel    |
+| **3 — Modal**     | raised surface + 広い shadow + scrim | dialog、modal sheet               |
 
 ```css
 --shadow-1: 0 1px 2px rgb(16 24 40 / 6%), 0 4px 12px rgb(16 24 40 / 4%);
@@ -438,14 +438,14 @@ affordance が明確な data region だけ内部 horizontal scroll を許可し�
 
 形状は柔らかく、同時に精密です。
 
-| Token | 値 | 用途 |
-| --- | --- | --- |
-| `{rounded.none}` | 0px | divider、full-bleed region、table seam |
-| `{rounded.sm}` | 6px | tag、小型 control、code fragment |
-| `{rounded.md}` | 10px | button、input、menu item |
-| `{rounded.lg}` | 14px | card、grouped panel |
-| `{rounded.xl}` | 20px | dialog、sheet、重要な floating surface |
-| `{rounded.full}` | 9999px | 円形 icon button、status pill、avatar |
+| Token            | 値     | 用途                                   |
+| ---------------- | ------ | -------------------------------------- |
+| `{rounded.none}` | 0px    | divider、full-bleed region、table seam |
+| `{rounded.sm}`   | 6px    | tag、小型 control、code fragment       |
+| `{rounded.md}`   | 10px   | button、input、menu item               |
+| `{rounded.lg}`   | 14px   | card、grouped panel                    |
+| `{rounded.xl}`   | 20px   | dialog、sheet、重要な floating surface |
+| `{rounded.full}` | 9999px | 円形 icon button、status pill、avatar  |
 
 nested surface は parent と同じか小さい radius を使います。pill は status、
 compact filter、本当に円形の control のみに使います。segmented control は
@@ -547,14 +547,14 @@ dark variant は agent の推測を避けるため YAML に明示します。文
 
 breakpoint は device brand ではなく content pressure を表します。
 
-| 範囲 | 主な適応 |
-| --- | --- |
-| `< 40rem` | 1列、16px gutter、簡潔な label、sheet 型 secondary navigation |
-| `40–48rem` | label が読める場合の2列 field |
-| `48–64rem` | persistent secondary navigation、密度の高い toolbar |
-| `64–80rem` | multi-column content、全 table control、side panel |
-| `80–90rem` | reading line を伸ばさない広い workspace |
-| `> 90rem` | centered 1440px content または意図的 full-width work surface |
+| 範囲       | 主な適応                                                      |
+| ---------- | ------------------------------------------------------------- |
+| `< 40rem`  | 1列、16px gutter、簡潔な label、sheet 型 secondary navigation |
+| `40–48rem` | label が読める場合の2列 field                                 |
+| `48–64rem` | persistent secondary navigation、密度の高い toolbar           |
+| `64–80rem` | multi-column content、全 table control、side panel            |
+| `80–90rem` | reading line を伸ばさない広い workspace                       |
+| `> 90rem`  | centered 1440px content または意図的 full-width work surface  |
 
 - 320 CSS px から始め、content が許すときだけ複雑さを追加します。
 - control は最低 44×44px target と十分な隣接間隔を保ちます。
@@ -650,13 +650,13 @@ accessibility、evidence contract は低下させられません。
   focus-visible、disabled、loading、empty、error、light、dark、
   reduced-motion、contrast、long-content、localized state を扱います。
 
-| Layer | Evidence |
-| --- | --- |
-| Static | type、lint、token/reference validation、production build |
-| Component | role、name、keyboard、focus、variant、state rendering |
-| Browser | route、overlay、responsive layout、overflow、実 network state |
-| Visual | light/dark、320px、tablet、desktop、wide、zoom、long content |
-| Device・AT | 実 touch behavior と代表的 screen reader output |
+| Layer      | Evidence                                                      |
+| ---------- | ------------------------------------------------------------- |
+| Static     | type、lint、token/reference validation、production build      |
+| Component  | role、name、keyboard、focus、variant、state rendering         |
+| Browser    | route、overlay、responsive layout、overflow、実 network state |
+| Visual     | light/dark、320px、tablet、desktop、wide、zoom、long content  |
+| Device・AT | 実 touch behavior と代表的 screen reader output               |
 
 snapshot は対象 state を明記した場合だけ evidence になります。source と unit
 test は未確認 browser、device、assistive-technology behavior の代替ではありません。

@@ -734,7 +734,7 @@ ol {
   position: absolute;
   inset: 18px 18px 50px;
   border-radius: 12px;
-  background: url("./assets/calm-precision-hero.webp") center / cover;
+  background: url("./assets/comfort-hero.webp") center / cover;
   filter: saturate(0.78) contrast(0.98);
 }
 
