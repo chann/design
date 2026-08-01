@@ -324,7 +324,10 @@ export function DocsLayout({
     <>
       <SiteHeader currentPath={currentPath} />
       <div className="mx-auto grid max-w-[96rem] lg:grid-cols-[15rem_minmax(0,1fr)] xl:grid-cols-[15rem_minmax(0,1fr)_13rem]">
-        <aside className="hidden border-r lg:block">
+        <aside
+          aria-label={`${section} section navigation`}
+          className="hidden border-r lg:block"
+        >
           <div className="sticky top-16 h-[calc(100dvh-4rem)] py-8">
             <ScrollArea className="h-full px-5">
               <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
@@ -401,7 +404,7 @@ export function DocsLayout({
           </div>
         </main>
 
-        <aside className="hidden border-l xl:block">
+        <aside aria-label="Page outline" className="hidden border-l xl:block">
           <nav
             className="sticky top-16 flex flex-col gap-1 px-5 py-8 text-sm"
             aria-label="On this page"

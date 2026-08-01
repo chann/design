@@ -260,7 +260,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
         <section className="mx-auto max-w-[96rem] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <Card className="bg-primary text-primary-foreground ring-0">
             <CardHeader className="p-6 sm:p-10">
-              <CardDescription className="text-primary-foreground/70">
+              <CardDescription className="text-primary-foreground">
                 Source of truth
               </CardDescription>
               <CardTitle className="max-w-3xl text-3xl tracking-[-0.04em] sm:text-5xl">
@@ -269,7 +269,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               </CardTitle>
             </CardHeader>
             <CardContent className="grid gap-4 px-6 pb-6 sm:grid-cols-[1fr_auto] sm:items-end sm:px-10 sm:pb-10">
-              <p className="max-w-2xl leading-7 text-primary-foreground/75">
+              <p className="max-w-2xl leading-7 text-primary-foreground">
                 The English specification and Korean, Simplified Chinese, and
                 Japanese references share the same normative tokens and
                 structure.

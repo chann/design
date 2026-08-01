@@ -171,7 +171,7 @@ function FoundationSpecimen({ type }: { type: FoundationKey }) {
             key={name}
           >
             <strong>{name}</strong>
-            <span className="font-mono text-xs opacity-70">{value}</span>
+            <span className="font-mono text-xs">{value}</span>
           </div>
         ))}
       </div>

@@ -14,7 +14,6 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { principles, type Principle } from "@/data/site";
 
@@ -36,9 +35,9 @@ function PrincipleCard({
             <CardDescription>
               {principle.number} · {principle.title}
             </CardDescription>
-            <CardTitle className="text-2xl tracking-[-0.03em]">
+            <h2 className="text-2xl font-semibold tracking-[-0.03em]">
               {principle.comfortTitle}
-            </CardTitle>
+            </h2>
           </div>
           <span className="mt-4 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary sm:mt-0">
             <Icon />
