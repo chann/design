@@ -1,10 +1,7 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  ComponentDetailPage,
-  type ComponentKey,
-} from "@/pages/component-detail-page";
+import type { ComponentKey } from "@/pages/component-detail-page";
 import { ComponentsPage } from "@/pages/components-page";
 import { FoundationDetailPage } from "@/pages/foundation-detail-page";
 import { FoundationsPage } from "@/pages/foundations-page";
@@ -34,6 +31,28 @@ const componentSlugs = new Set([
   "table",
   "skeleton",
 ]);
+
+const ComponentDetailPage = lazy(() =>
+  import("@/pages/component-detail-page").then((module) => ({
+    default: module.ComponentDetailPage,
+  })),
+);
+
+function RouteSkeleton() {
+  return (
+    <main
+      aria-busy="true"
+      aria-label="Loading component reference"
+      className="mx-auto flex min-h-dvh max-w-4xl flex-col gap-8 px-4 py-24 sm:px-8"
+      id="main-content"
+    >
+      <div className="route-skeleton h-4 w-24 rounded-md bg-muted" />
+      <div className="route-skeleton h-12 w-3/4 rounded-lg bg-muted" />
+      <div className="route-skeleton h-24 w-full rounded-xl bg-muted" />
+      <div className="route-skeleton h-80 w-full rounded-2xl bg-muted" />
+    </main>
+  );
+}
 
 function NotFoundPage() {
   return (
@@ -103,7 +122,9 @@ export default function App() {
   }
   if (section === "components" && componentSlugs.has(slug)) {
     return (
-      <ComponentDetailPage currentPath={route} slug={slug as ComponentKey} />
+      <Suspense fallback={<RouteSkeleton />}>
+        <ComponentDetailPage currentPath={route} slug={slug as ComponentKey} />
+      </Suspense>
     );
   }
 

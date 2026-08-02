@@ -60,6 +60,7 @@ for (const file of [
   "DESIGN.jp.md",
   "favicon.png",
   "comfort-hero.webp",
+  "third-party/Phosphor-LICENSE.txt",
 ]) {
   await access(new URL(file, dist));
 }

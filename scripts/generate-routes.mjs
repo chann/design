@@ -31,6 +31,12 @@ for (const file of ["favicon.png", "comfort-hero.webp"]) {
   await copyFile(new URL(`assets/${file}`, root), new URL(file, dist));
 }
 
+await mkdir(new URL("third-party/", dist), { recursive: true });
+await copyFile(
+  new URL("assets/icons/Phosphor-LICENSE.txt", root),
+  new URL("third-party/Phosphor-LICENSE.txt", dist),
+);
+
 await writeFile(
   new URL("routes.json", dist),
   `${JSON.stringify(routes, null, 2)}\n`,
