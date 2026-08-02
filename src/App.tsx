@@ -6,8 +6,90 @@ import { ComponentsPage } from "@/pages/components-page";
 import { FoundationDetailPage } from "@/pages/foundation-detail-page";
 import { FoundationsPage } from "@/pages/foundations-page";
 import { HomePage } from "@/pages/home-page";
+import { LegalPage } from "@/pages/legal-page";
 import { PrinciplesPage } from "@/pages/principles-page";
 import { currentRoute, siteHref } from "@/data/site";
+
+const SITE_ORIGIN = "https://chann.github.io";
+const HOME_TITLE =
+  "Comfort Design System | A design contract for clear interfaces";
+const HOME_DESCRIPTION =
+  "Comfort gives product teams and coding agents one design contract for semantic foundations, complete states, and 12 production ready component references.";
+
+type RouteMetadata = {
+  title: string;
+  description: string;
+  canonicalRoute: string;
+  robots: "index,follow" | "noindex,follow";
+};
+
+function upsertMeta(selector: string, attribute: string, value: string) {
+  const element = document.querySelector<HTMLMetaElement>(selector);
+  element?.setAttribute(attribute, value);
+}
+
+function routeMetadata(route: string): RouteMetadata {
+  if (route === "/") {
+    return {
+      title: HOME_TITLE,
+      description: HOME_DESCRIPTION,
+      canonicalRoute: route,
+      robots: "index,follow",
+    };
+  }
+
+  if (route === "/privacy") {
+    return {
+      title: "Privacy | Comfort Design System",
+      description:
+        "How the static Comfort reference handles theme preferences, hosting requests, and external links.",
+      canonicalRoute: route,
+      robots: "index,follow",
+    };
+  }
+
+  if (route === "/terms") {
+    return {
+      title: "Terms | Comfort Design System",
+      description:
+        "Terms for using the Comfort design contract, reference examples, source, and third party assets.",
+      canonicalRoute: route,
+      robots: "index,follow",
+    };
+  }
+
+  const [, group, slug] = route.split("/");
+  const documentedRoute =
+    route === "/principles" ||
+    route === "/foundations" ||
+    route === "/components" ||
+    (group === "foundations" && foundationSlugs.has(slug)) ||
+    (group === "components" && componentSlugs.has(slug));
+
+  if (!documentedRoute) {
+    return {
+      title: "Page not found | Comfort Design System",
+      description:
+        "Return to the Comfort Design System overview to find a current principle, foundation, or component reference.",
+      canonicalRoute: "/",
+      robots: "noindex,follow",
+    };
+  }
+
+  const section = route.split("/").filter(Boolean).at(-1);
+  const label = section
+    ? section
+        .split("-")
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(" ")
+    : "Reference";
+  return {
+    title: `${label} | Comfort Design System`,
+    description: `Read the Comfort guidance for ${label.toLowerCase()}, including behavior, states, accessibility, and implementation checks.`,
+    canonicalRoute: route,
+    robots: "index,follow",
+  };
+}
 
 const foundationSlugs = new Set([
   "design-tokens",
@@ -78,17 +160,32 @@ export default function App() {
   const route = currentRoute();
 
   useEffect(() => {
-    const section = route.split("/").filter(Boolean).at(-1);
-    const label = section
-      ? section
-          .split("-")
-          .map((word) => word[0].toUpperCase() + word.slice(1))
-          .join(" ")
-      : "Comfort Design System";
-    document.title =
-      route === "/"
-        ? "Comfort Design System"
-        : `${label} · Comfort Design System`;
+    const metadata = routeMetadata(route);
+    const canonicalUrl = new URL(
+      siteHref(metadata.canonicalRoute, "/design/"),
+      SITE_ORIGIN,
+    ).href;
+
+    document.title = metadata.title;
+    upsertMeta('meta[name="description"]', "content", metadata.description);
+    upsertMeta('meta[name="robots"]', "content", metadata.robots);
+    upsertMeta('meta[property="og:title"]', "content", metadata.title);
+    upsertMeta(
+      'meta[property="og:description"]',
+      "content",
+      metadata.description,
+    );
+    upsertMeta('meta[property="og:url"]', "content", canonicalUrl);
+    upsertMeta('meta[name="twitter:title"]', "content", metadata.title);
+    upsertMeta(
+      'meta[name="twitter:description"]',
+      "content",
+      metadata.description,
+    );
+    document
+      .querySelector<HTMLLinkElement>('link[rel="canonical"]')
+      ?.setAttribute("href", canonicalUrl);
+
     const hash = decodeURIComponent(window.location.hash.slice(1));
     if (!hash) return;
 
@@ -102,6 +199,12 @@ export default function App() {
   if (route === "/principles") return <PrinciplesPage currentPath={route} />;
   if (route === "/foundations") return <FoundationsPage currentPath={route} />;
   if (route === "/components") return <ComponentsPage currentPath={route} />;
+  if (route === "/privacy") {
+    return <LegalPage currentPath={route} kind="privacy" />;
+  }
+  if (route === "/terms") {
+    return <LegalPage currentPath={route} kind="terms" />;
+  }
 
   const [, section, slug] = route.split("/");
   if (section === "foundations" && foundationSlugs.has(slug)) {

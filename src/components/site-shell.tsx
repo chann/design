@@ -1,14 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import {
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  GitForkIcon,
-  MenuIcon,
-  MoonIcon,
-  MonitorIcon,
-  SunIcon,
-} from "lucide-react";
+import { CheckIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -49,12 +40,13 @@ function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", dark);
 }
 
-function Brand() {
+function Brand({ current = false }: { current?: boolean }) {
   return (
     <a
       className="flex shrink-0 items-center gap-2.5 font-semibold tracking-[-0.02em]"
       href={siteHref("/")}
       aria-label="Comfort Design System home"
+      aria-current={current ? "page" : undefined}
     >
       <span className="brand-mark" aria-hidden="true">
         <i />
@@ -94,9 +86,6 @@ function ThemeMenu() {
   }, [theme]);
 
   const labels = { light: "Light", dark: "Dark", system: "System" };
-  const Icon =
-    theme === "light" ? SunIcon : theme === "dark" ? MoonIcon : MonitorIcon;
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -104,9 +93,10 @@ function ThemeMenu() {
           variant="ghost"
           size="sm"
           aria-label={`Theme: ${labels[theme]}`}
+          className="gap-2"
         >
-          <Icon data-icon="inline-start" />
-          <span className="hidden lg:inline">{labels[theme]}</span>
+          <span className="text-muted-foreground">Theme</span>
+          <span>{labels[theme]}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -116,15 +106,9 @@ function ThemeMenu() {
           value={theme}
           onValueChange={(value) => setTheme(value as Theme)}
         >
-          <DropdownMenuRadioItem value="light">
-            <SunIcon /> Light
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">
-            <MoonIcon /> Dark
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">
-            <MonitorIcon /> System
-          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -135,47 +119,70 @@ function MobileNavigation({ currentPath }: { currentPath: string }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <MenuIcon />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="mobile-menu-button md:hidden"
+        >
+          <span className="mobile-menu-icon" aria-hidden="true">
+            <i />
+            <i />
+          </span>
           <span className="sr-only">Open navigation</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[min(90vw,24rem)]">
-        <SheetHeader>
-          <SheetTitle>Comfort Design System</SheetTitle>
-          <SheetDescription>
+      <SheetContent
+        side="top"
+        showCloseButton={false}
+        className="mobile-menu-content inset-0 h-dvh w-full max-w-none border-0 p-0 shadow-none"
+      >
+        <SheetHeader className="flex-row items-center justify-between p-4">
+          <Brand current={currentPath === "/"} />
+          <SheetTitle className="sr-only">Comfort navigation</SheetTitle>
+          <SheetDescription className="sr-only">
             Principles, foundations, and components.
           </SheetDescription>
+          <SheetClose asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="mobile-menu-button is-open"
+            >
+              <span className="mobile-menu-icon" aria-hidden="true">
+                <i />
+                <i />
+              </span>
+              <span className="sr-only">Close navigation</span>
+            </Button>
+          </SheetClose>
         </SheetHeader>
-        <ScrollArea className="h-[calc(100dvh-8rem)] px-4 pb-8">
-          <nav className="flex flex-col gap-6" aria-label="Mobile navigation">
-            {[
-              { title: "Start", items: primaryNav },
-              { title: "Foundations", items: foundationItems },
-              { title: "Components", items: componentItems },
-            ].map((group) => (
-              <div className="flex flex-col gap-1" key={group.title}>
-                <p className="px-2 pb-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  {group.title}
-                </p>
-                {group.items.map((item) => (
-                  <SheetClose asChild key={item.href}>
-                    <a
-                      className={cn(
-                        "rounded-lg px-2 py-2 text-sm transition-colors hover:bg-accent",
-                        currentPath === item.href &&
-                          "bg-accent font-medium text-accent-foreground",
-                      )}
-                      href={siteHref(item.href)}
-                    >
-                      {item.title}
-                    </a>
-                  </SheetClose>
-                ))}
-              </div>
+        <div className="flex min-h-0 flex-1 flex-col justify-between gap-8 overflow-y-auto px-4 pb-8 pt-12">
+          <nav className="flex flex-col" aria-label="Mobile navigation">
+            {primaryNav.map((item) => (
+              <SheetClose asChild key={item.href}>
+                <a
+                  aria-current={
+                    currentPath.startsWith(item.href) ? "page" : undefined
+                  }
+                  className={cn(
+                    "mobile-menu-link",
+                    currentPath.startsWith(item.href) && "is-current",
+                  )}
+                  href={siteHref(item.href)}
+                >
+                  {item.title}
+                </a>
+              </SheetClose>
             ))}
           </nav>
-        </ScrollArea>
+          <div className="mobile-menu-utilities flex flex-col gap-6">
+            <ThemeMenu />
+            <div className="flex flex-wrap gap-6 text-sm">
+              <a href={siteHref("/DESIGN.md")}>DESIGN.md</a>
+              <a href="https://github.com/chann/design">GitHub</a>
+            </div>
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   );
@@ -187,9 +194,9 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
-      <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-[96rem] items-center gap-4 px-4 sm:px-6 lg:px-8">
-          <Brand />
+      <header className="site-header sticky top-0 z-40 h-24 pointer-events-none">
+        <div className="site-nav pointer-events-auto mx-auto mt-6 flex w-[calc(100%-2rem)] items-center gap-4 rounded-full border bg-background/80 px-3 py-2 shadow-lg backdrop-blur-3xl md:w-max">
+          <Brand current={currentPath === "/"} />
           <nav
             className="ml-4 hidden items-center gap-1 md:flex"
             aria-label="Primary navigation"
@@ -203,7 +210,14 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
                 size="sm"
                 key={item.href}
               >
-                <a href={siteHref(item.href)}>{item.title}</a>
+                <a
+                  aria-current={
+                    currentPath.startsWith(item.href) ? "page" : undefined
+                  }
+                  href={siteHref(item.href)}
+                >
+                  {item.title}
+                </a>
               </Button>
             ))}
           </nav>
@@ -212,17 +226,19 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
               asChild
               variant="ghost"
               size="sm"
-              className="hidden sm:inline-flex"
+              className="hidden md:inline-flex"
             >
               <a
                 href="https://github.com/chann/design"
                 target="_blank"
                 rel="noreferrer"
               >
-                <GitForkIcon data-icon="inline-start" /> GitHub
+                GitHub
               </a>
             </Button>
-            <ThemeMenu />
+            <div className="hidden md:block">
+              <ThemeMenu />
+            </div>
             <MobileNavigation currentPath={currentPath} />
           </div>
         </div>
@@ -242,10 +258,13 @@ export function SiteFooter() {
             product interfaces.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
+        <nav
+          aria-label="Footer navigation"
+          className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm"
+        >
           {primaryNav.map((item) => (
             <a
-              className="text-muted-foreground hover:text-foreground"
+              className="site-footer-link text-muted-foreground hover:text-foreground"
               href={siteHref(item.href)}
               key={item.href}
             >
@@ -253,18 +272,30 @@ export function SiteFooter() {
             </a>
           ))}
           <a
-            className="text-muted-foreground hover:text-foreground"
+            className="site-footer-link text-muted-foreground hover:text-foreground"
             href={siteHref("/DESIGN.md")}
           >
             DESIGN.md
           </a>
           <a
-            className="text-muted-foreground hover:text-foreground"
+            className="site-footer-link text-muted-foreground hover:text-foreground"
             href="https://github.com/chann/design"
           >
             GitHub
           </a>
-        </div>
+          <a
+            className="site-footer-link text-muted-foreground hover:text-foreground"
+            href={siteHref("/privacy")}
+          >
+            Privacy
+          </a>
+          <a
+            className="site-footer-link text-muted-foreground hover:text-foreground"
+            href={siteHref("/terms")}
+          >
+            Terms
+          </a>
+        </nav>
       </div>
     </footer>
   );
@@ -328,7 +359,7 @@ export function DocsLayout({
           aria-label={`${section} section navigation`}
           className="hidden border-r lg:block"
         >
-          <div className="sticky top-16 h-[calc(100dvh-4rem)] py-8">
+          <div className="sticky top-24 h-[calc(100dvh-6rem)] py-8">
             <ScrollArea className="h-full px-5">
               <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                 {section}
@@ -406,7 +437,7 @@ export function DocsLayout({
 
         <aside aria-label="Page outline" className="hidden border-l xl:block">
           <nav
-            className="sticky top-16 flex flex-col gap-1 px-5 py-8 text-sm"
+            className="sticky top-24 flex flex-col gap-1 px-5 py-8 text-sm"
             aria-label="On this page"
           >
             <p className="mb-2 font-medium">On this page</p>

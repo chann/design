@@ -20,5 +20,7 @@
   "/components/select",
   "/components/switch",
   "/components/table",
-  "/components/skeleton"
+  "/components/skeleton",
+  "/privacy",
+  "/terms"
 ]

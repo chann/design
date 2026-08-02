@@ -263,6 +263,24 @@ function ContractPreview() {
 }
 
 export function HomePage({ currentPath }: { currentPath: string }) {
+  useEffect(() => {
+    document.getElementById("comfort-faq-schema")?.remove();
+    const schema = document.createElement("script");
+    schema.id = "comfort-faq-schema";
+    schema.type = "application/ld+json";
+    schema.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    });
+    document.head.append(schema);
+    return () => schema.remove();
+  }, []);
+
   return (
     <>
       <SiteHeader currentPath={currentPath} />
@@ -271,7 +289,10 @@ export function HomePage({ currentPath }: { currentPath: string }) {
           <div className="flex flex-col gap-8">
             <div className="landing-enter flex flex-col gap-6">
               <p className="eyebrow">A design contract for product teams</p>
-              <h1 className="hero-heading max-w-[680px] text-balance text-4xl font-semibold sm:text-6xl">
+              <h1
+                aria-label="Ship interfaces people understand, with one design contract."
+                className="hero-heading max-w-[680px] text-balance text-4xl font-semibold sm:text-6xl"
+              >
                 <span className="block">Ship interfaces</span>
                 <span className="block">people understand,</span>
                 <span className="block">
@@ -447,7 +468,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               </div>
               <div className="implementation-proof-grid">
                 {[
-                  ["22", "static routes"],
+                  ["24", "static routes"],
                   ["24", "navigation targets"],
                   ["12", "interactive references"],
                   ["4", "aligned specifications"],

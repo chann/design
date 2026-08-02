@@ -19,6 +19,8 @@ assert(
   routes.every((route) => route.startsWith("/")),
   "Every route must be absolute",
 );
+assert(routes.includes("/privacy"), "The privacy route must be published");
+assert(routes.includes("/terms"), "The terms route must be published");
 
 const siteData = await readFile(
   new URL("../src/data/site.ts", import.meta.url),
@@ -101,6 +103,18 @@ const builtHtml = await readFile(new URL("index.html", dist), "utf8");
 assert(
   builtHtml.includes("/design/assets/"),
   "Production assets must retain the GitHub Pages base path",
+);
+assert(
+  builtHtml.includes('rel="canonical" href="https://chann.github.io/design/"'),
+  "The production home page must have a canonical URL",
+);
+assert(
+  builtHtml.includes('name="twitter:card" content="summary_large_image"'),
+  "The production home page must have Twitter card metadata",
+);
+assert(
+  builtHtml.includes('name="robots" content="index,follow"'),
+  "The production home page must allow indexing",
 );
 
 console.log(
