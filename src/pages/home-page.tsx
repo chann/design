@@ -254,9 +254,6 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                   />
                 </a>
               </Button>
-              <p className="text-sm text-muted-foreground">
-                한국어가 기본이자 SSOT입니다. 설치나 계정은 필요하지 않습니다.
-              </p>
               <nav
                 aria-label="DESIGN.md language editions"
                 className="flex flex-wrap gap-x-5 gap-y-2 text-sm"
@@ -270,7 +267,6 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                     lang={edition.languageTag}
                   >
                     {edition.label}
-                    {edition.code === "ko" ? " · SSOT" : ""}
                   </a>
                 ))}
               </nav>

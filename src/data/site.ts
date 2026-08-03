@@ -28,7 +28,7 @@ export const designEditions: DesignEdition[] = [
     href: "/DESIGN.md",
     label: "한국어",
     languageTag: "ko",
-    note: "기본 · SSOT",
+    note: "기본",
   },
   {
     code: "en",
