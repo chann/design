@@ -951,7 +951,13 @@ function ComponentSpecimen({ type }: { type: ComponentKey }) {
   }
 }
 
-function CopyCodeButton({ value }: { value: string }) {
+function CopyCodeButton({
+  showLabel = false,
+  value,
+}: {
+  showLabel?: boolean;
+  value: string;
+}) {
   const [copied, setCopied] = useState(false);
   const resetTimer = useRef<number | undefined>(undefined);
 
@@ -976,13 +982,22 @@ function CopyCodeButton({ value }: { value: string }) {
   return (
     <Button
       variant="ghost"
-      size="icon-sm"
+      size={showLabel ? "sm" : "icon-sm"}
       onClick={copyCode}
       aria-label={copied ? "Copied" : "Copy code"}
       title={copied ? "Copied" : "Copy code"}
     >
       {copied ? <CheckIcon /> : <CopyIcon />}
+      {showLabel ? <span>{copied ? "Copied" : "Copy"}</span> : null}
     </Button>
+  );
+}
+
+function CodeLanguageLabel({ language }: { language: SyntaxLanguage }) {
+  return (
+    <span aria-hidden="true" className="code-language-label">
+      {language === "bash" ? "Shell" : "TSX"}
+    </span>
   );
 }
 
@@ -997,9 +1012,12 @@ function CodeBlock({
 }) {
   return (
     <div className="overflow-hidden rounded-xl border bg-muted/30">
-      <div className="flex min-h-11 items-center justify-between border-b px-3">
+      <div className="code-frame-toolbar">
         <span className="font-mono text-xs text-muted-foreground">{label}</span>
-        <CopyCodeButton value={value} />
+        <div className="code-frame-actions">
+          <CodeLanguageLabel language={language} />
+          <CopyCodeButton showLabel value={value} />
+        </div>
       </div>
       <SyntaxCode
         className="component-code-scroll"
@@ -1039,7 +1057,10 @@ function ComponentPreview({ type }: { type: ComponentKey }) {
             View code
           </TabsTrigger>
         </TabsList>
-        <CopyCodeButton value={code} />
+        <div className="code-frame-actions">
+          <CodeLanguageLabel language="tsx" />
+          <CopyCodeButton value={code} />
+        </div>
       </div>
       <TabsContent value="preview" className="m-0">
         <ComponentSpecimen type={type} />

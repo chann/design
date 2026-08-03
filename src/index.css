@@ -986,6 +986,40 @@
   border-radius: 0;
 }
 
+.code-frame-toolbar {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-inline: 0.75rem;
+}
+
+.code-frame-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.code-language-label {
+  display: inline-flex;
+  height: 1.5rem;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: color-mix(in oklch, var(--background) 72%, transparent);
+  padding-inline: 0.45rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
 .component-preview-code,
 .component-code-scroll {
   margin: 0;
@@ -1003,6 +1037,41 @@
 .syntax-code .token-line {
   display: block;
   min-width: max-content;
+}
+
+.syntax-code-line.has-line-number {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(max-content, 1fr);
+  align-items: baseline;
+}
+
+.syntax-code-line-number {
+  position: sticky;
+  left: -1.25rem;
+  z-index: 1;
+  display: block;
+  margin-left: -1.25rem;
+  padding-right: 0.875rem;
+  border-right: 1px solid color-mix(in oklch, var(--border) 72%, transparent);
+  background: color-mix(in oklch, var(--muted) 44%, var(--background));
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  user-select: none;
+}
+
+.syntax-code-line-number::before {
+  content: attr(data-line-number);
+}
+
+.syntax-code-line-content {
+  display: block;
+  min-width: max-content;
+  padding-left: 0.875rem;
+}
+
+.syntax-code[data-line-numbers="false"] .syntax-code-line-content {
+  padding-left: 0;
 }
 
 .syntax-code .token.comment,
@@ -1061,6 +1130,32 @@
 
 .component-code-scroll {
   max-height: 28rem;
+}
+
+.syntax-code::selection,
+.syntax-code *::selection {
+  background: color-mix(in oklch, var(--primary) 24%, transparent);
+}
+
+@media (max-width: 39.99rem) {
+  .component-preview > div:first-child {
+    gap: 0.5rem;
+  }
+
+  .component-preview .code-language-label {
+    display: none;
+  }
+
+  .component-preview-code,
+  .component-code-scroll {
+    padding: 1rem;
+    font-size: 0.74rem;
+  }
+
+  .syntax-code-line-number {
+    left: -1rem;
+    margin-left: -1rem;
+  }
 }
 
 .component-preview-code:focus-visible,
