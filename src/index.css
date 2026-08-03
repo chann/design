@@ -297,6 +297,10 @@
   transform: translateY(0);
 }
 
+.mobile-menu-utilities .text-muted-foreground {
+  color: var(--foreground);
+}
+
 .mobile-menu-utilities a,
 .site-footer-link {
   border-radius: 0.25rem;
