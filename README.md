@@ -3,9 +3,11 @@
 # Comfort Design System
 
 This repository contains a Google Stitch-compatible `DESIGN.md` for
-comfortable, clear, and trustworthy product interfaces.
+comfortable, clear, and trustworthy product interfaces. Korean `DESIGN.md` is
+the authoritative default; English, Japanese, and Simplified Chinese editions
+stay synchronized with it.
 
-The system combines quiet neutral surfaces, one focused orange action color,
+The system combines cool neutral surfaces, one restrained blue action color,
 system-first typography, clear containment, spatially continuous motion, and
 inclusive defaults. It borrows the discipline of high-quality native
 interfaces while remaining distinctly web-native; it does not reproduce an
@@ -58,19 +60,19 @@ npm run validate
 ```
 
 The command runs ESLint, TypeScript, the production Vite build, and static
-route generation. The four `DESIGN.md` files are validated separately with
+route generation. The four DESIGN.md editions are validated separately with
 Google's official linter below.
 
 ## Documentation
 
-- **English SSOT:** [DESIGN.md](./DESIGN.md)
-- **한국어:** [DESIGN.ko.md](./DESIGN.ko.md)
+- **한국어 기본 · SSOT:** [DESIGN.md](./DESIGN.md)
+- **English:** [DESIGN.en.md](./DESIGN.en.md)
 - **简体中文:** [DESIGN.cn.md](./DESIGN.cn.md)
 - **日本語:** [DESIGN.jp.md](./DESIGN.jp.md)
 
 All four files carry the same machine-readable YAML tokens and canonical
-section order. English is authoritative; translations preserve the same
-normative behavior in Korean, Simplified Chinese, and Japanese.
+section order. Korean is authoritative and the default; the English,
+Simplified Chinese, and Japanese editions preserve the same normative behavior.
 
 ## Format
 
@@ -108,7 +110,7 @@ Use Google's official linter:
 
 ```bash
 npx @google/design.md lint DESIGN.md
-npx @google/design.md lint DESIGN.ko.md
+npx @google/design.md lint DESIGN.en.md
 npx @google/design.md lint DESIGN.cn.md
 npx @google/design.md lint DESIGN.jp.md
 ```

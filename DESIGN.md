@@ -1,14 +1,12 @@
 ---
 version: alpha
 name: Comfort Design System
-description: A comfortable, clear, and trustworthy product interface built from quiet neutral surfaces, a focused orange action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
-  primary: "#FF6600"
-  primary-strong: "#E14D00"
-  primary-text: "#A63D00"
-  on-primary: "#111111"
-  on-status: "#FFFFFF"
+  primary: "#0066CC"
+  primary-strong: "#004F9E"
+  on-primary: "#FFFFFF"
   ink: "#17181A"
   body: "#3F4650"
   muted: "#6B7280"
@@ -28,9 +26,8 @@ colors:
   dark-ink: "#F4F6F8"
   dark-body: "#BCC2CA"
   dark-hairline: "#39404B"
-  dark-primary: "#FF6600"
-  dark-primary-text: "#FF9E65"
-  dark-on-primary: "#171717"
+  dark-primary: "#78B7FF"
+  dark-on-primary: "#0A243D"
 
 typography:
   display:
@@ -167,7 +164,7 @@ components:
     size: 44px
   text-link:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.primary-text}"
+    textColor: "{colors.primary}"
     typography: "{typography.body-md}"
     rounded: "{rounded.sm}"
   card:
@@ -206,19 +203,19 @@ components:
     height: 1px
   status-success:
     backgroundColor: "{colors.success}"
-    textColor: "{colors.on-status}"
+    textColor: "{colors.on-primary}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-warning:
     backgroundColor: "{colors.warning}"
-    textColor: "{colors.on-status}"
+    textColor: "{colors.on-primary}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-info:
     backgroundColor: "{colors.info}"
-    textColor: "{colors.on-status}"
+    textColor: "{colors.on-primary}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
@@ -263,11 +260,6 @@ components:
     rounded: "{rounded.md}"
     padding: 12px 20px
     height: 44px
-  dark-text-link:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.dark-primary-text}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.sm}"
   dark-separator:
     backgroundColor: "{colors.dark-hairline}"
     rounded: "{rounded.none}"
@@ -278,187 +270,157 @@ components:
 
 # Comfort Design System
 
-> **Status:** Normative design reference · **DESIGN.md schema:** `alpha`
+> **상태:** 규범적 디자인 참조 문서 · **DESIGN.md 스키마:** `alpha`
 >
-> **Language:** English is authoritative. Synchronized translations:
-> [한국어](./DESIGN.ko.md) · [简体中文](./DESIGN.cn.md) · [日本語](./DESIGN.jp.md)
+> **언어:** 한국어 [DESIGN.md](./DESIGN.md)가 기본이자 최종 기준(SSOT)입니다.
+> 동기화된 번역본: [English](./DESIGN.en.md) · [简体中文](./DESIGN.cn.md) ·
+> [日本語](./DESIGN.jp.md)
 
-The YAML front matter is the machine-readable token contract. The prose explains
-how to apply those values. When the two disagree, tokens are normative for exact
-values and the prose is normative for intent, hierarchy, and behavior.
+YAML front matter는 기계가 읽는 토큰 계약이고, 본문은 그 값을 언제 어떻게
+적용할지 설명합니다. 둘이 충돌할 때 정확한 값은 토큰을, 의도·위계·동작은
+본문을 따릅니다.
 
-The key words **MUST**, **SHOULD**, and **MAY** express requirement strength.
+**MUST**, **SHOULD**, **MAY**는 각각 필수, 권장, 허용을 뜻합니다.
 
 ## Overview
 
-Comfort Design System is a system for focused product interfaces: dashboards, creation
-tools, settings, commerce, and operational workflows. It combines quiet neutral
-surfaces, one focused orange action color, system-first typography, clear
-containment, and motion that explains where content came from and where it went.
+Comfort Design System은 대시보드, 제작 도구, 설정, 커머스, 운영 워크플로처럼 집중이
+필요한 제품 인터페이스를 위한 시스템입니다. 차가운 뉴트럴 표면, 절제된 단일
+블루 액션 컬러, 시스템 우선 타이포그래피, 명확한 컨테인먼트, 원인과 이동
+방향을 설명하는 모션이 핵심입니다.
 
-The intended experience has three qualities:
+| 품질            | 사용자가 느껴야 하는 것                    | 화면에서 확인되는 근거                                           |
+| --------------- | ------------------------------------------ | ---------------------------------------------------------------- |
+| **Comfort**     | “할 일에 집중할 수 있다.”                  | 하나의 명확한 주 액션, 절제된 색, 점진적 공개, 안정된 레이아웃   |
+| **Direct**      | “인터페이스가 나를 따른다.”                | 누르는 순간의 반응, 1:1 드래그, 중단·역전 가능한 모션            |
+| **Trustworthy** | “무슨 일이 일어났고 어떻게 복구할지 안다.” | 명시적 상태, 인라인 검증, 안전한 재시도, 실행 취소와 구체적 확인 |
 
-| Quality         | User perception                               | Visible evidence                                                                                           |
-| --------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Comfort**     | “I can focus on the task.”                    | One clear primary action, restrained color, progressive disclosure, stable layout.                         |
-| **Direct**      | “The interface follows me.”                   | Feedback begins on press, drag tracks 1:1, motion is interruptible and reversible.                         |
-| **Trustworthy** | “I understand what happened and can recover.” | Explicit state, inline validation, safe retry, undo where possible, specific confirmation where necessary. |
+세 품질이 충돌하면 신뢰, 직접성, 시각적 차분함 순으로 지킵니다. 안전과
+접근성은 언제나 장식보다 우선합니다.
 
-When these qualities conflict, protect trust first, then directness, then visual
-calm. Safety and accessibility always outrank decoration.
+**시그니처 특성:**
 
-**Signature characteristics:**
+- 부드러운 `{colors.canvas}` 위에 선명한 `{colors.surface}`를 배치합니다.
+- `{colors.primary}`는 액션, 포커스, 링크, 선택에만 사용합니다.
+- 큰 글자는 조밀하고 자신감 있게, 본문은 여유 있고 읽기 쉽게 구성합니다.
+- 모서리는 부드럽게 다듬되 pill은 상태와 압축 필터에만 씁니다.
+- 표면 대비, hairline, 절제된 그림자로 깊이를 만듭니다.
+- 모션은 원인, 방향, 공간적 연속성을 보존합니다.
+- 모든 컴포넌트는 키보드, 터치, 긴 콘텐츠, 다국어, 라이트·다크 테마를
+  처음부터 고려합니다.
 
-- Soft off-white `{colors.canvas}` surrounds crisp `{colors.surface}` content.
-- `{colors.primary}` marks actions, focus, links, and selection—not decoration.
-- Large type is compact and confident; body type remains open and readable.
-- Corners are gently rounded, with pills reserved for status and compact filters.
-- Depth comes from surface contrast, hairlines, and restrained shadows.
-- Motion preserves cause, direction, and spatial continuity.
-- Every component anticipates keyboard, touch, long content, localization, and
-  light/dark themes.
-
-This system is inspired by the discipline of high-quality native interfaces; it
-does not reproduce any platform or company interface.
+완성도 높은 네이티브 인터페이스의 규율을 참고하지만 특정 플랫폼이나 회사의
+UI를 복제하지 않습니다.
 
 ## Colors
 
-### Core roles
+### 핵심 역할
 
-- **Primary** (`{colors.primary}` — #FF6600): The only general interaction accent.
-  Use for the primary action, links, focus rings, active navigation, and selected
-  states.
-- **Primary Strong** (`{colors.primary-strong}` — #E14D00): Pressed or emphasized
-  primary state. It MUST NOT become a second accent family.
-- **Primary Text** (`{colors.primary-text}` — #A63D00): Accessible brand text on
-  light surfaces. Use the brighter primary for fills, strokes, and larger marks.
-- **Canvas** (`{colors.canvas}` — #F7F8FA): Default page floor.
-- **Surface** (`{colors.surface}` — #FFFFFF): Cards, controls, and principal
-  content regions.
-- **Surface Soft** (`{colors.surface-soft}` — #EEF1F5): Grouped controls, quiet
-  bands, skeletons, and secondary containment.
-- **Surface Raised** (`{colors.surface-raised}` — #FFFFFF): Floating content that
-  also receives an elevation treatment.
+- **Primary** (`{colors.primary}` — #0066CC): 유일한 범용 인터랙션
+  액센트입니다. 주 액션, 링크, 포커스 링, 활성 내비게이션, 선택 상태에 씁니다.
+- **Primary Strong** (`{colors.primary-strong}` — #004F9E): 눌림 또는 강화된
+  primary 상태입니다. 별도의 액센트 계열처럼 확장하지 않습니다.
+- **Canvas** (`{colors.canvas}` — #F7F8FA): 기본 페이지 바닥입니다.
+- **Surface** (`{colors.surface}` — #FFFFFF): 카드, 컨트롤, 핵심 콘텐츠
+  영역입니다.
+- **Surface Soft** (`{colors.surface-soft}` — #EEF1F5): 그룹 컨트롤, 조용한
+  밴드, skeleton, 보조 컨테이너에 씁니다.
+- **Surface Raised** (`{colors.surface-raised}` — #FFFFFF): elevation과 함께
+  쓰는 떠 있는 콘텐츠입니다.
 
-### Content and structure
+### 콘텐츠와 구조
 
-- **Ink** (`{colors.ink}` — #17181A): Headlines and primary content.
-- **Body** (`{colors.body}` — #3F4650): Running copy and secondary content.
-- **Muted** (`{colors.muted}` — #6B7280): Captions and metadata; never the sole
-  carrier of essential information.
-- **Hairline** (`{colors.hairline}` — #D7DCE2): Dividers, field outlines, and
-  quiet boundaries.
+- **Ink** (`{colors.ink}`): 제목과 주요 콘텐츠.
+- **Body** (`{colors.body}`): 본문과 보조 콘텐츠.
+- **Muted** (`{colors.muted}`): 캡션과 메타데이터. 필수 정보를 muted만으로
+  전달해서는 안 됩니다.
+- **Hairline** (`{colors.hairline}`): 구분선, 필드 외곽선, 조용한 경계.
 
-### Semantic roles
+### 시맨틱 역할
 
-- **Destructive** (`{colors.destructive}` — #B42318): Irreversible or
-  high-consequence actions and errors—not generic emphasis.
-- **Success** (`{colors.success}` — #137333): Confirmed completion.
-- **Warning** (`{colors.warning}` — #8A4B00): A consequence that can still be
-  avoided.
-- **Info** (`{colors.info}` — #005EA8): Neutral system information when the
-  primary action color would imply interactivity.
+- `{colors.destructive}`는 되돌릴 수 없거나 영향이 큰 액션과 오류에만 씁니다.
+- `{colors.success}`는 서버가 확인한 완료를 뜻합니다.
+- `{colors.warning}`은 아직 피할 수 있는 결과를 알립니다.
+- `{colors.info}`는 primary가 인터랙션으로 오해될 수 있는 중립 정보에 씁니다.
 
-Status MUST use an icon, label, or pattern in addition to color.
+상태는 색과 함께 아이콘, 라벨, 패턴 중 하나 이상을 반드시 사용합니다.
 
-### Dark theme
+### 다크 테마
 
-Dark mode is a tonal remapping, not a simple inversion:
+다크 모드는 단순 반전이 아니라 역할 기반 톤 재매핑입니다.
+`{colors.dark-canvas}`가 바닥, `{colors.dark-surface}`와
+`{colors.dark-surface-raised}`가 컨테이너, `{colors.dark-ink}`와
+`{colors.dark-body}`가 콘텐츠 위계를 담당합니다. `{colors.dark-primary}`는
+빛나 보이지 않으면서 충분히 눈에 띄어야 합니다.
 
-- `{colors.dark-canvas}` is the page floor.
-- `{colors.dark-surface}` and `{colors.dark-surface-raised}` create containment.
-- `{colors.dark-ink}` and `{colors.dark-body}` preserve readable hierarchy.
-- `{colors.dark-primary}` preserves the same brand orange so actions stay
-  recognizable without glowing.
-- `{colors.dark-primary-text}` keeps branded text legible on dark surfaces.
-
-Theme changes MUST preserve semantic roles, contrast, and component hierarchy.
-Never hardcode a light-theme color inside a component.
+테마 전환 후에도 시맨틱 역할, 대비, 컴포넌트 위계가 유지되어야 합니다.
 
 ## Typography
 
-The system uses a system-first sans stack. Inter is the cross-platform preference;
-on Apple platforms the native system face may render through the fallback stack.
-A product MAY introduce a custom typeface only with a documented brand reason,
-licensed delivery, and metric-compatible fallback.
+기본은 시스템 우선 sans stack입니다. Inter를 크로스플랫폼 기본으로 삼되 Apple
+플랫폼에서는 fallback을 통해 시스템 글꼴이 렌더링될 수 있습니다. 커스텀
+글꼴은 브랜드 이유, 라이선스 배포, metric-compatible fallback이 있을 때만
+도입합니다.
 
-| Token                      | Size | Weight | Line height | Tracking | Role                               |
-| -------------------------- | ---- | ------ | ----------- | -------- | ---------------------------------- |
-| `{typography.display}`     | 64px | 700    | 1.02        | -0.035em | Hero or singular product statement |
-| `{typography.headline-lg}` | 48px | 700    | 1.08        | -0.03em  | Page title                         |
-| `{typography.headline-md}` | 32px | 680    | 1.15        | -0.022em | Major section                      |
-| `{typography.title-lg}`    | 24px | 650    | 1.25        | -0.015em | Panel or feature title             |
-| `{typography.title-md}`    | 20px | 620    | 1.3         | -0.01em  | Card or dialog title               |
-| `{typography.body-lg}`     | 18px | 400    | 1.55        | 0        | Lead copy                          |
-| `{typography.body-md}`     | 16px | 400    | 1.55        | 0        | Default body and controls          |
-| `{typography.body-sm}`     | 14px | 400    | 1.5         | 0.005em  | Secondary UI copy                  |
-| `{typography.label}`       | 14px | 600    | 1.3         | 0.005em  | Buttons, tabs, and field labels    |
-| `{typography.caption}`     | 12px | 500    | 1.4         | 0.01em   | Metadata and compact status        |
-| `{typography.code}`        | 14px | 400    | 1.55        | 0        | Code, commands, and machine values |
+| 토큰                       | 크기 | 굵기 | 행간 | 자간     | 용도               |
+| -------------------------- | ---- | ---- | ---- | -------- | ------------------ |
+| `{typography.display}`     | 64px | 700  | 1.02 | -0.035em | 단일 hero 문장     |
+| `{typography.headline-lg}` | 48px | 700  | 1.08 | -0.03em  | 페이지 제목        |
+| `{typography.headline-md}` | 32px | 680  | 1.15 | -0.022em | 주요 섹션          |
+| `{typography.title-lg}`    | 24px | 650  | 1.25 | -0.015em | 패널·기능 제목     |
+| `{typography.title-md}`    | 20px | 620  | 1.3  | -0.01em  | 카드·대화상자 제목 |
+| `{typography.body-lg}`     | 18px | 400  | 1.55 | 0        | 리드 문장          |
+| `{typography.body-md}`     | 16px | 400  | 1.55 | 0        | 기본 본문과 컨트롤 |
+| `{typography.body-sm}`     | 14px | 400  | 1.5  | 0.005em  | 보조 UI 문구       |
+| `{typography.label}`       | 14px | 600  | 1.3  | 0.005em  | 버튼·탭·필드 라벨  |
+| `{typography.caption}`     | 12px | 500  | 1.4  | 0.01em   | 메타데이터·상태    |
+| `{typography.code}`        | 14px | 400  | 1.55 | 0        | 코드·명령·기계 값  |
 
-Rules:
-
-- Every route MUST have one descriptive `h1`; heading levels follow document
-  structure, not visual size.
-- Display sizes SHOULD scale with `clamp()` while preserving the hierarchy and
-  never dropping below a legible mobile size.
-- Body copy SHOULD stay between 45 and 75 characters per line.
-- Emphasis comes from weight before extra color or size.
-- Use sentence case. Uppercase is reserved for short technical labels where the
-  product voice requires it.
-- Numeric comparisons SHOULD use tabular figures.
-- CJK copy MAY require language-specific line breaking and additional leading;
-  do not force Latin metrics onto translated text.
+- 각 route에는 설명적인 `h1`이 하나 있어야 하며 heading level을 외형 때문에
+  고르지 않습니다.
+- display 크기는 `clamp()`로 조절하되 모바일에서도 위계와 가독성을 지킵니다.
+- 본문 한 줄은 45–75자를 권장합니다.
+- 강조는 새 색이나 더 큰 크기보다 굵기를 먼저 사용합니다.
+- 기본 문체는 sentence case입니다.
+- 비교 숫자는 tabular figures를 권장합니다.
+- CJK는 언어별 줄바꿈과 더 넉넉한 행간이 필요할 수 있습니다. Latin 수치를
+  번역문에 강제하지 않습니다.
 
 ## Layout
 
-### Spacing system
+### 간격 체계
 
-The base unit is 4px. Use the YAML scale rather than one-off values:
+기본 단위는 4px입니다. 임의 값을 만들지 말고 YAML scale을 사용합니다.
+`xxs/xs`는 아이콘과 라벨, `sm/md`는 컨트롤과 관련 콘텐츠, `lg/xl`은 카드와
+그룹, `xxl/section`은 큰 영역 구분에 사용합니다. 기본 page gutter는 24px이며
+좁은 화면에서 16px, 넓은 화면에서 32px까지 조정할 수 있습니다.
 
-- `{spacing.xxs}` / `{spacing.xs}`: icon-label and compact control gaps.
-- `{spacing.sm}` / `{spacing.md}`: control padding and related content.
-- `{spacing.lg}` / `{spacing.xl}`: cards, groups, and page regions.
-- `{spacing.xxl}` / `{spacing.section}`: major editorial separation.
-- `{spacing.page-gutter}`: default page gutter; it may reduce to 16px on narrow
-  screens and grow to 32px on wide screens.
+### 그리드와 컨테이너
 
-### Grid and containment
+- app shell은 viewport를 채우고 핵심 콘텐츠는 최대 1440px 안에 둡니다.
+- 읽기 열은 넓은 workspace에서도 약 65자로 제한합니다.
+- 페이지 구조는 12-column grid, 지역적 구성은 content-driven CSS Grid를
+  사용합니다.
+- 1차원 정렬은 Flexbox, 형제 간 간격은 `gap`을 우선합니다.
+- 재사용 컴포넌트는 container query, shell은 viewport breakpoint로
+  조절합니다.
+- 밀도 높은 workspace도 반복 액션과 내비게이션 위치는 안정적으로 유지합니다.
 
-- The application shell spans the viewport; principal content is centered at a
-  maximum width of 1440px.
-- Reading columns max out near 65 characters even when the surrounding workspace
-  is wide.
-- Use a 12-column grid for page structure and content-driven CSS Grid for local
-  composition.
-- Use Flexbox for one-dimensional alignment and `gap` for sibling rhythm.
-- Container queries SHOULD govern reusable components; viewport breakpoints
-  govern the shell.
-- Dense workspaces MAY use the full width, but repeated actions and navigation
-  remain in stable locations.
+여백은 판단 단위를 분리하고 위계를 세우는 도구입니다. 빈 공간을 gradient,
+badge, 장식 카드로 채우지 않습니다. 관련된 것은 가깝게, 관련 없는 영역은
+명확한 section gap으로 구분합니다.
 
-### Whitespace philosophy
-
-Whitespace separates decisions and establishes hierarchy. It is not empty space
-to be filled with gradients, badges, or decorative cards. Related items sit close;
-unrelated regions receive a clear section gap. Progressive disclosure keeps the
-common path visible and advanced controls one level deeper.
-
-No page-level horizontal scrolling is allowed from 320 CSS px upward. A data
-region MAY scroll horizontally when its boundary and affordance are explicit.
+320 CSS px 이상에서 페이지 전체 가로 스크롤은 허용하지 않습니다. 데이터
+영역의 경계와 affordance가 명확할 때만 해당 영역 내부 스크롤을 허용합니다.
 
 ## Elevation & Depth
 
-Depth explains interaction and stacking:
-
-| Level             | Treatment                                    | Use                                  |
-| ----------------- | -------------------------------------------- | ------------------------------------ |
-| **0 — Flat**      | Canvas or surface, no shadow                 | Page content, inset regions          |
-| **1 — Contained** | Surface contrast plus hairline               | Cards, grouped controls, sticky bars |
-| **2 — Floating**  | Raised surface plus soft short shadow        | Menus, popovers, non-modal panels    |
-| **3 — Modal**     | Raised surface plus broader shadow and scrim | Dialogs and modal sheets             |
-
-Suggested implementation values:
+| 레벨              | 처리                                  | 용도                          |
+| ----------------- | ------------------------------------- | ----------------------------- |
+| **0 — Flat**      | canvas 또는 surface, shadow 없음      | 페이지 콘텐츠, inset 영역     |
+| **1 — Contained** | surface 대비 + hairline               | 카드, 그룹 컨트롤, sticky bar |
+| **2 — Floating**  | raised surface + 짧고 부드러운 shadow | menu, popover, 비모달 panel   |
+| **3 — Modal**     | raised surface + 넓은 shadow + scrim  | dialog, modal sheet           |
 
 ```css
 --shadow-1: 0 1px 2px rgb(16 24 40 / 6%), 0 4px 12px rgb(16 24 40 / 4%);
@@ -466,215 +428,182 @@ Suggested implementation values:
 --shadow-3: 0 20px 50px rgb(16 24 40 / 16%), 0 8px 18px rgb(16 24 40 / 8%);
 ```
 
-- A shadow MUST correspond to a real stacking relationship.
-- Nested surfaces SHOULD use tonal contrast before adding another shadow.
-- Focus and selection MUST NOT be conveyed by elevation alone.
-- Translucent navigation or overlays require an opaque fallback for reduced
-  transparency, increased contrast, and unsupported browsers.
-- Scrims block visual competition but never replace correct modal semantics,
-  focus trapping, or background inertness.
+- shadow는 실제 stacking 관계를 설명해야 합니다.
+- 중첩 surface는 shadow를 더하기 전에 톤 대비를 사용합니다.
+- 포커스나 선택을 elevation만으로 표현하지 않습니다.
+- 반투명 UI에는 reduced transparency, increased contrast, 미지원 브라우저용
+  불투명 fallback이 필요합니다.
+- scrim은 시각적 경쟁을 줄일 뿐 modal semantics, focus trap, background
+  inert를 대신하지 않습니다.
 
 ## Shapes
 
-The shape language is softly engineered: compact controls feel precise, while
-larger containers have enough rounding to feel approachable.
+형태 언어는 부드럽지만 정밀합니다.
 
-| Token            | Value  | Use                                          |
-| ---------------- | ------ | -------------------------------------------- |
-| `{rounded.none}` | 0px    | Dividers, full-bleed regions, table seams    |
-| `{rounded.sm}`   | 6px    | Tags, small controls, code fragments         |
-| `{rounded.md}`   | 10px   | Buttons, inputs, menu items                  |
-| `{rounded.lg}`   | 14px   | Cards and grouped panels                     |
-| `{rounded.xl}`   | 20px   | Dialogs, sheets, prominent floating surfaces |
-| `{rounded.full}` | 9999px | Circular icon buttons, status pills, avatars |
+| 토큰             | 값     | 용도                                  |
+| ---------------- | ------ | ------------------------------------- |
+| `{rounded.none}` | 0px    | divider, full-bleed 영역, table seam  |
+| `{rounded.sm}`   | 6px    | tag, 작은 control, code fragment      |
+| `{rounded.md}`   | 10px   | button, input, menu item              |
+| `{rounded.lg}`   | 14px   | card, grouped panel                   |
+| `{rounded.xl}`   | 20px   | dialog, sheet, 큰 floating surface    |
+| `{rounded.full}` | 9999px | 원형 icon button, status pill, avatar |
 
-Rules:
-
-- Nested surfaces use the same or a smaller radius than their parent.
-- Pills are reserved for status, compact filters, and truly circular controls.
-- Adjacent segmented controls share an outer silhouette instead of repeating
-  separate rounded capsules.
-- Media crops inherit the container radius; essential content stays inside the
-  safe crop area.
-- Shape never substitutes for a label, selected state, or accessible name.
+중첩 surface는 부모와 같거나 더 작은 radius를 씁니다. pill은 상태, 압축 필터,
+실제 원형 컨트롤에만 사용합니다. segmented control은 개별 capsule을 반복하지
+말고 하나의 외곽 실루엣을 공유합니다.
 
 ## Components
 
-YAML component entries define reusable visual atoms. Application components MAY
-compose them but MUST preserve their semantic role.
+YAML component entry는 재사용 가능한 시각 원자를 정의합니다. application
+component는 이를 조합하되 시맨틱 역할을 바꾸면 안 됩니다.
 
-### Navigation and shell
+### 내비게이션과 shell
 
-**`app-shell`** uses `{colors.canvas}` as a quiet floor. **`top-nav`** is 56px high,
-keeps navigation destinations separate from contextual actions, and may become a
-sidebar or sheet only when space pressure requires it. The current destination
-has a visible and programmatic selected state.
+`app-shell`은 `{colors.canvas}`를 조용한 바닥으로 사용합니다. `top-nav`는
+56px 높이이며 목적지 내비게이션과 맥락 액션을 분리합니다. 공간이 부족할 때만
+sidebar나 sheet로 전환하고, 현재 목적지는 시각적·프로그램적 선택 상태를 모두
+제공합니다.
 
-### Buttons and links
+### 버튼과 링크
 
-- **`button-primary`**: one per task region. It names the outcome with a concrete
-  verb and uses `{colors.primary}`.
-- **`button-primary-pressed`**: immediate causal feedback; it MUST return to or
-  continue from the current visual state without a discontinuity.
-- **`button-secondary`**: lower-emphasis action with a surface fill and hairline.
-- **`button-destructive`**: only for a destructive outcome; the label names the
-  object and action.
-- **`button-icon`**: 44px circular target with an accessible name and tooltip when
-  the symbol is not universal.
-- **`text-link`**: destination navigation inside prose. It remains recognizable
-  without relying on color alone.
+- `button-primary`: task region마다 하나. 구체적 동사로 결과를 명명합니다.
+- `button-primary-pressed`: 누른 원인에 즉시 반응하고 현재 상태에서 연속적으로
+  복귀하거나 다음 상태로 이동합니다.
+- `button-secondary`: surface fill과 hairline을 쓰는 낮은 강조 액션입니다.
+- `button-destructive`: 파괴적 결과에만 쓰며 객체와 액션을 라벨에 명시합니다.
+- `button-icon`: 44px 원형 target. accessible name과 필요 시 tooltip을
+  제공합니다.
+- `text-link`: 본문 안의 목적지 이동이며 색상 외 단서로도 링크임을 알 수 있어야
+  합니다.
 
-Buttons support default, hover, active, focus-visible, disabled, and loading
-states. Loading retains the label or an equivalent accessible name. Disabled is
-not a substitute for explaining an unavailable action.
+버튼은 default, hover, active, focus-visible, disabled, loading 상태를
+지원합니다. loading 중에도 라벨 또는 동등한 accessible name을 유지합니다.
+disabled는 액션을 사용할 수 없는 이유를 설명하는 수단이 아닙니다.
 
-### Cards and surfaces
+### 카드와 surface
 
-**`card`** is the standard contained region. **`card-muted`** groups secondary
-content without appearing interactive. **`card-raised`** is reserved for a true
-floating layer. Do not wrap every paragraph or metric in a card; use hierarchy and
-whitespace first.
+`card`는 표준 컨테이너, `card-muted`는 비인터랙티브 보조 그룹,
+`card-raised`는 실제 floating layer에만 사용합니다. 모든 문장이나 지표를
+카드로 감싸지 말고 타이포그래피와 여백을 먼저 사용합니다.
 
-A clickable card has one primary interactive target. Nested secondary actions
-must remain separately reachable and must not create invalid nested controls.
+클릭 가능한 카드는 주 interactive target이 하나여야 합니다. 보조 액션은
+별도로 접근 가능해야 하며 잘못된 중첩 control을 만들면 안 됩니다.
 
-### Inputs and forms
+### 입력과 폼
 
-**`text-input`** is at least 44px high with a persistent label, visible
-focus-visible treatment, and space for help or error text. Placeholder text is an
-example, never the only label. Validation:
+`text-input`은 최소 44px 높이, 지속 라벨, 명확한 focus-visible, 도움말·오류
+공간을 가집니다. placeholder는 예시일 뿐 유일한 라벨이 될 수 없습니다.
 
-1. Preserves the user's input.
-2. Places the error beside the field.
-3. Adds a focused summary when multiple fields block submission.
-4. Names the problem and a concrete fix.
-5. Runs again at the server or trust boundary.
+1. 검증 실패 후에도 입력을 보존합니다.
+2. 오류는 해당 field 옆에 둡니다.
+3. 여러 field가 제출을 막으면 focus되는 summary를 추가합니다.
+4. 문제와 구체적 해결 방법을 말합니다.
+5. server 또는 trust boundary에서 다시 검증합니다.
 
-Password managers, paste, autocomplete, and locale-appropriate input modes MUST
-work.
+password manager, paste, autocomplete, locale별 input mode가 동작해야 합니다.
 
-### Overlays and feedback
+### overlay와 feedback
 
-**`dialog`** uses `{rounded.xl}` and level-3 elevation. Dialogs trap focus, make
-background content inert, close with `Escape` unless doing so would lose an
-irreversible operation, and restore focus to the invoker.
+`dialog`는 level-3 elevation을 사용합니다. focus를 가두고 background를 inert로
+만들며, irreversible operation이 유실되는 경우가 아니라면 `Escape`로 닫고
+호출자에게 focus를 돌려줍니다.
 
-Status components use compact pills only for short state labels. Persistent
-errors and information needed to continue belong inline, not in a transient
-toast. Toasts are reserved for brief confirmation whose result is otherwise out
-of view.
+status pill은 짧은 상태 라벨에만 사용합니다. 계속 봐야 하는 오류와 정보는
+inline에 둡니다. toast는 결과가 화면 밖에 있는 짧은 확인에만 사용합니다.
 
-### Dark variants
+### 다크 변형
 
-Dark variants are explicit YAML entries so agents do not guess theme mappings.
-They preserve hierarchy rather than mirror raw light values. Components without a
-documented dark variant inherit the equivalent semantic dark role before they are
-considered complete.
+다크 variant는 agent가 임의로 매핑하지 않도록 YAML에 명시합니다. 문서화되지
+않은 컴포넌트는 동등한 dark semantic role을 적용해야 완료로 간주합니다.
 
 ## Do's and Don'ts
 
 ### Do
 
-- Use semantic token references in components and implementation.
-- Give each task region one obvious primary action.
-- Let typography, spacing, and content hierarchy create emphasis before adding
-  another color or container.
-- Start feedback at the causal event and preserve spatial continuity.
-- Support pointer, touch, keyboard, assistive technology, zoom, localization,
-  reduced motion, and increased contrast from the start.
-- Keep usable content visible during refresh and recoverable failure.
-- Name destructive objects, consequences, and recovery paths.
-- Verify the real browser or device behavior represented by the change.
+- component와 구현에서 semantic token reference를 사용합니다.
+- task region마다 명확한 primary action을 하나 둡니다.
+- 새 색이나 container보다 타이포그래피, 간격, 콘텐츠 위계를 먼저 사용합니다.
+- causal event에서 feedback을 시작하고 공간적 연속성을 유지합니다.
+- pointer, touch, keyboard, assistive technology, zoom, localization,
+  reduced motion, increased contrast를 처음부터 지원합니다.
+- refresh와 복구 가능한 실패 중에도 쓸 수 있는 콘텐츠를 유지합니다.
+- 파괴적 action의 객체, 결과, 복구 경로를 구체적으로 명명합니다.
+- 변경과 관련된 실제 browser 또는 device 동작을 검증합니다.
 
 ### Don't
 
-- Don't introduce raw reusable colors, radii, shadows, or spacing inside a
-  component.
-- Don't use primary orange as decoration or assign multiple primary actions to one
-  region.
-- Don't place every section inside a floating card.
-- Don't make hover the only route to essential content or actions.
-- Don't lock input merely because an animation is running.
-- Don't show an empty state for an error, a skeleton for indefinite work, or
-  “Done” before the authoritative operation succeeds.
-- Don't remove focus outlines without a stronger focus-visible replacement.
-- Don't shrink touch targets, body type, or essential columns to make a layout fit.
+- 재사용할 색, radius, shadow, spacing을 component 안에 raw value로 넣지 않습니다.
+- primary blue를 장식으로 쓰거나 한 영역에 primary action을 여러 개 두지 않습니다.
+- 모든 section을 floating card 안에 넣지 않습니다.
+- hover를 필수 콘텐츠나 액션의 유일한 경로로 만들지 않습니다.
+- animation 실행 중이라는 이유로 input을 잠그지 않습니다.
+- error를 empty로, 무기한 작업을 skeleton으로 표시하거나 서버 확인 전에
+  “완료”라고 말하지 않습니다.
+- 더 강한 focus-visible 대체 없이 outline을 제거하지 않습니다.
+- layout을 맞추려고 touch target, body type, 필수 column을 축소하지 않습니다.
 
 ## Responsive Behavior
 
-Breakpoints represent content pressure rather than device brands:
+breakpoint는 기기 이름이 아니라 콘텐츠 압력을 뜻합니다.
 
-| Range      | Typical adaptation                                                        |
-| ---------- | ------------------------------------------------------------------------- |
-| `< 40rem`  | One column, 16px gutter, compact labels, sheet-based secondary navigation |
-| `40–48rem` | Two-column fields when labels remain readable                             |
-| `48–64rem` | Persistent secondary navigation and denser toolbars                       |
-| `64–80rem` | Multi-column content, full table controls, side panels                    |
-| `80–90rem` | Wider workspace without stretching reading lines                          |
-| `> 90rem`  | Centered 1440px content or an intentionally full-width work surface       |
+| 범위       | 주요 적응                                               |
+| ---------- | ------------------------------------------------------- |
+| `< 40rem`  | 1열, 16px gutter, 간결한 label, sheet형 보조 navigation |
+| `40–48rem` | label이 읽히는 경우 2열 field                           |
+| `48–64rem` | 지속 secondary navigation, 조밀한 toolbar               |
+| `64–80rem` | 다열 content, 전체 table control, side panel            |
+| `80–90rem` | reading line을 늘리지 않는 넓은 workspace               |
+| `> 90rem`  | 1440px 중앙 content 또는 의도적 full-width 작업면       |
 
-- Start at 320 CSS px and add complexity only when content allows it.
-- Controls maintain a minimum 44×44px target. Adjacent targets have enough
-  separation to prevent accidental activation.
-- Grids reduce columns instead of shrinking cards below readable widths.
-- Tables preserve essential comparison data; low-priority columns may collapse
-  into labeled details.
-- Images declare dimensions, keep meaningful subjects inside safe crops, and use
-  responsive sources.
-- Layouts tolerate at least 30% text expansion, 200% text size, and 400% browser
-  zoom without blocking core tasks.
+- 320 CSS px에서 시작하고 콘텐츠가 허용할 때만 복잡도를 늘립니다.
+- control은 최소 44×44px target과 충분한 인접 간격을 유지합니다.
+- grid는 card를 읽기 어려울 만큼 줄이지 말고 column 수를 줄입니다.
+- table은 필수 비교 정보를 보존하고 낮은 우선순위 column만 labeled detail로
+  접습니다.
+- image는 치수를 선언하고 의미 있는 피사체가 safe crop 안에 남도록 합니다.
+- 30% text expansion, 200% text size, 400% browser zoom에서도 핵심 task가
+  유지되어야 합니다.
 
 ## Interaction & Motion
 
-Motion communicates cause and continuity. It never exists only to make the
-interface feel “alive.”
+모션은 원인과 연속성을 설명합니다.
 
-- Press feedback begins within 100ms.
-- Micro transitions usually complete in 120–180ms; standard state changes in
-  180–240ms; larger spatial transitions in 240–360ms.
-- Dragged objects track the pointer 1:1 after any documented threshold and
-  preserve the grab offset.
-- Release behavior carries velocity into settling or target selection.
-- Entry and exit use related origins and destinations.
-- Every animation can be interrupted and reversed from its current rendered
-  state. Input is never blocked solely to protect an animation.
-- Animate `transform` and `opacity` on gesture-critical paths; measure before
-  animating layout-heavy properties.
-- `prefers-reduced-motion` removes travel, parallax, and decorative loops while
-  preserving immediate state feedback and logical continuity.
+- press feedback은 100ms 안에 시작합니다.
+- micro transition은 보통 120–180ms, 표준 상태 변화는 180–240ms, 큰 spatial
+  transition은 240–360ms 범위를 사용합니다.
+- drag는 threshold 이후 pointer를 1:1로 추적하고 grab offset을 보존합니다.
+- release velocity는 settling 또는 target 선택에 이어집니다.
+- entry와 exit는 관련된 origin과 destination을 공유합니다.
+- 모든 animation은 현재 렌더링 상태에서 중단·역전할 수 있어야 합니다.
+- gesture-critical path는 `transform`과 `opacity`를 우선합니다.
+- `prefers-reduced-motion`에서는 travel, parallax, decorative loop를 제거하되
+  즉각적인 상태 feedback과 논리적 연속성은 유지합니다.
 
-Springs are appropriate for direct manipulation and spatial settling. Timed
-easing is appropriate for opacity, color, and small non-spatial transitions. A
-team MAY tune exact values, but one interaction family must share one motion
-language.
+spring은 direct manipulation과 spatial settling에, timed easing은 opacity,
+color, 작은 비공간 전환에 적합합니다.
 
 ## Accessibility & Responsible UX
 
-WCAG 2.2 AA is the minimum target.
+최소 목표는 WCAG 2.2 AA입니다.
 
-- Use native semantics first; add ARIA only where native HTML cannot express the
-  behavior.
-- Keyboard order follows visual and reading order. Focus is always visible and
-  restored after overlays close or content is removed.
-- Icon-only controls have names; dynamic status uses an appropriately polite live
-  region.
-- Text meets 4.5:1 contrast and large text 3:1. Non-text controls and focus
-  indicators meet 3:1 against adjacent colors.
-- Color is never the only status channel.
-- All strings are externalized. Never concatenate translated sentence fragments.
-- Dates, numbers, currency, plurals, and relative time use locale-aware formatters.
-- Use logical properties so RTL does not require a parallel layout.
-- Request the least permission at the moment it is needed and explain the purpose
-  before the browser or operating-system prompt.
-- Sensitive values never enter URLs, analytics, logs, or toast messages.
-- Prefer undo for cheap reversible changes. Confirm irreversible, financial,
-  legal, privacy-sensitive, or broad-permission actions with specific copy.
-- AI-generated or uncertain output is labeled when users could mistake it for
-  verified fact; high-impact output requires a review step.
+- native semantics를 먼저 사용하고 HTML로 표현할 수 없을 때만 ARIA를 추가합니다.
+- keyboard 순서는 시각·읽기 순서와 같고 focus는 항상 보이며 overlay가 닫히면
+  호출 위치로 복구됩니다.
+- icon-only control에는 name이 있고 동적 status는 적절한 live region을 씁니다.
+- 일반 text는 4.5:1, large text는 3:1, non-text control과 focus indicator는
+  인접 색 대비 3:1을 충족합니다.
+- 모든 string은 component logic 밖에 두며 번역 문장 조각을 이어 붙이지 않습니다.
+- 날짜, 숫자, 통화, 복수형, 상대 시간은 locale-aware formatter를 사용합니다.
+- logical property를 사용해 RTL을 별도 stylesheet 없이 지원합니다.
+- 최소 권한을 필요한 순간 요청하고 OS/browser prompt 전에 목적을 설명합니다.
+- 민감한 값은 URL, analytics, log, toast에 넣지 않습니다.
+- 저비용 가역 action은 undo를 우선하고, irreversible·financial·legal·privacy
+  action은 구체적 문구로 확인합니다.
+- 검증된 사실로 오해할 수 있는 AI·불확실 출력은 표시하고 영향이 큰 출력에는
+  review 단계를 둡니다.
 
 ## State & Feedback
-
-Every data surface defines:
 
 ```text
 idle → pending → success
@@ -683,89 +612,77 @@ idle → pending → success
              ↘ terminal error
 
 success → refreshing
-success → stale or offline
+success → stale 또는 offline
 ```
 
-- Initial pending has no usable data; refreshing keeps usable data visible.
-- Skeletons match predictable final geometry. Spinners are for compact,
-  indeterminate actions—not entire pages.
-- Empty states explain what belongs there, why it is empty when known, and the
-  most useful next action.
-- Errors stay at the actionable scope and follow: outcome, safety of retained
-  work, recovery action.
-- Optimistic updates are allowed only when success is likely, rollback is
-  deterministic, and pending state is visible.
-- Retried mutations are idempotent or reconcile with the server before repeating.
-- A toast undo remains available long enough to use and has a persistent
-  alternative for consequential changes.
+- initial pending에는 쓸 수 있는 data가 없고 refreshing에는 이전 data를 유지합니다.
+- skeleton은 예측 가능한 최종 geometry와 같아야 합니다. spinner는 작고
+  indeterminate한 action에만 씁니다.
+- empty state는 무엇이 들어가는지, 가능한 경우 왜 비었는지, 다음 action을
+  설명합니다.
+- error는 조치 가능한 scope에 두고 결과, 보존된 작업의 안전, 복구 action을
+  순서대로 말합니다.
+- optimistic update는 성공 가능성이 높고 rollback이 결정적이며 pending 상태가
+  보일 때만 사용합니다.
+- 재시도 mutation은 idempotent하거나 반복 전 server 상태를 reconcile합니다.
 
-Shareable navigation state belongs in the URL. Server-authoritative state stays
-on the server. Local interaction state stays local. A shared store is introduced
-only after a real cross-tree lifetime requires it.
+공유 가능한 navigation state는 URL, authoritative state는 server, local
+interaction은 component에 둡니다. shared store는 실제 cross-tree lifetime이
+확인된 뒤에만 도입합니다.
 
 ## Implementation Contract
 
-The reference implementation assumes Next.js App Router, React, TypeScript strict
-mode, Tailwind CSS, owned shadcn/ui source, Radix primitives where necessary,
-Lucide icons, and Motion for React. These libraries are replaceable; the visual,
-interaction, accessibility, and evidence contracts are not.
+참조 구현은 Next.js App Router, React, TypeScript strict mode, Tailwind CSS,
+소유하는 shadcn/ui source, 필요한 Radix primitive, Lucide, Motion for React를
+가정합니다. 라이브러리는 바꿀 수 있지만 시각·인터랙션·접근성·증거 계약은
+바꿀 수 없습니다.
 
-- Server Components own privileged data access and initial rendering. Client
-  boundaries stay as small as interaction requires.
-- Map YAML roles to CSS variables or theme tokens once. Components consume role
-  tokens and MUST NOT duplicate raw values.
-- Application primitives remain domain-free. Promote a composition to shared
-  code only after multiple real consumers share behavior, not merely appearance.
-- Overlays, menus, tabs, forms, and composite widgets start from tested semantic
-  primitives instead of reimplementing keyboard behavior.
-- Meaningful component changes cover relevant default, hover, active,
-  focus-visible, disabled, loading, empty, error, light, dark, reduced-motion,
-  contrast, long-content, and localized states.
+- Server Component가 privileged data access와 initial render를 소유하고 client
+  boundary는 interaction에 필요한 최소 범위로 둡니다.
+- YAML role을 CSS variable 또는 theme token에 한 번 매핑하고 component는
+  raw value를 중복하지 않습니다.
+- application primitive에는 domain logic을 넣지 않습니다.
+- overlay, menu, tab, form, composite widget은 검증된 semantic primitive에서
+  시작합니다.
+- 의미 있는 component 변경은 해당하는 default, hover, active, focus-visible,
+  disabled, loading, empty, error, light, dark, reduced-motion, contrast,
+  long-content, localized state를 다룹니다.
 
-Verification is proportional to the change:
+| 계층      | 필요한 증거                                                     |
+| --------- | --------------------------------------------------------------- |
+| Static    | type, lint, token/reference validation, production build        |
+| Component | role, name, keyboard, focus, variant, state rendering           |
+| Browser   | route, overlay, responsive layout, overflow, 실제 network state |
+| Visual    | light/dark, 320px, tablet, desktop, wide, zoom, long content    |
+| Device·AT | 실제 touch 동작과 대표 screen reader 출력                       |
 
-| Layer                           | Evidence                                                           |
-| ------------------------------- | ------------------------------------------------------------------ |
-| Static                          | Types, lint, token/reference validation, production build          |
-| Component                       | Roles, names, keyboard, focus, variants, state rendering           |
-| Browser                         | Routing, overlays, responsive layout, overflow, real network state |
-| Visual                          | Light/dark, 320px, tablet, desktop, wide, zoom, long content       |
-| Device and assistive technology | Physical touch behavior and representative screen-reader output    |
-
-Generated snapshots count only when the state they cover is named. Source and unit
-tests do not substitute for unavailable browser, device, or assistive-technology
-evidence.
+snapshot은 어떤 상태를 다루는지 명시할 때만 증거가 됩니다. source와 unit test는
+확인하지 못한 browser, device, assistive-technology 동작의 대체 증거가 아닙니다.
 
 ## Iteration Guide
 
-1. Change the YAML token first when an exact reusable value changes.
-2. Update the matching canonical prose section without reordering the eight
-   canonical sections.
-3. Work on one component family at a time and reference its YAML key.
-4. Add state variants as related component entries; do not hide a reusable value
-   in prose.
-5. Use `{token.references}` inside YAML components instead of repeating raw values.
-6. Run `npx @google/design.md lint DESIGN.md` and resolve errors and warnings.
-7. Check light, dark, narrow, wide, keyboard, reduced-motion, long-content, and
-   localized states affected by the change.
-8. Synchronize localized documents when tokens or normative behavior change.
+1. 재사용 정확 값이 바뀌면 YAML token을 먼저 수정합니다.
+2. canonical 8개 section 순서를 유지하며 해당 본문을 함께 수정합니다.
+3. 한 번에 하나의 component family를 다루고 YAML key를 참조합니다.
+4. state variant는 관련 component entry로 추가합니다.
+5. YAML component에서는 raw value 반복 대신 `{token.references}`를 사용합니다.
+6. `npx @google/design.md lint DESIGN.md`의 error와 warning을 해결합니다.
+7. light, dark, narrow, wide, keyboard, reduced motion, long content, locale
+   상태를 확인합니다.
+8. token 또는 normative behavior가 바뀌면 모든 언어본을 동기화합니다.
 
 ## Known Gaps
 
-- The palette is a neutral product baseline, not a product-specific brand
-  identity. A consuming product may remap semantic values while preserving roles
-  and contrast.
-- No licensed custom font, logo, illustration language, or photography direction
-  is prescribed.
-- Motion ranges are production defaults; gesture-heavy products still need
-  measured tuning and physical-device review.
-- Data visualization needs a separate, accessible categorical and sequential
-  palette derived for the actual data domain.
-- Product-specific navigation, table density, editor canvases, maps, media
-  timelines, and financial interfaces require extensions after their information
-  architecture is known.
-- Translation documents preserve this contract, but every consuming product must
-  still verify its actual copy, fonts, line breaking, and RTL behavior.
+- 현재 palette는 제품별 브랜드가 아니라 뉴트럴한 출발점입니다.
+- licensed custom font, logo, illustration, photography 방향은 포함하지 않습니다.
+- motion 범위는 기본값이며 gesture-heavy 제품은 측정과 실제 기기 조율이
+  필요합니다.
+- data visualization은 실제 데이터 영역에 맞춘 별도 accessible palette가
+  필요합니다.
+- navigation, table density, editor canvas, map, media timeline, finance UI는
+  정보 구조가 정해진 뒤 확장해야 합니다.
+- 번역본은 계약을 보존하지만 실제 제품의 copy, font, line breaking, RTL은
+  제품별로 다시 검증해야 합니다.
 
 ## References
 
@@ -775,6 +692,3 @@ evidence.
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
 - [Apple Human Interface Guidelines: Motion](https://developer.apple.com/design/human-interface-guidelines/motion)
 - [Apple Human Interface Guidelines: Materials](https://developer.apple.com/design/human-interface-guidelines/materials)
-- [Next.js: Server and Client Components](https://nextjs.org/docs/app/getting-started/server-and-client-components)
-- [Tailwind CSS: Theme variables](https://tailwindcss.com/docs/theme)
-- [Motion for React](https://motion.dev/docs/react)

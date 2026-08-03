@@ -31,12 +31,37 @@ const internalLinks = [...siteData.matchAll(/href:\s*"(\/[^"]+)"/g)].map(
 );
 const { siteHref } = await import("../src/data/site.ts");
 
-for (const href of internalLinks) {
+for (const href of internalLinks.filter((href) => !href.endsWith(".md"))) {
   assert(
     routes.includes(href),
     `Navigation target is missing from routes.json: ${href}`,
   );
 }
+
+const designEditions = [
+  "DESIGN.md",
+  "DESIGN.en.md",
+  "DESIGN.jp.md",
+  "DESIGN.cn.md",
+];
+
+for (const edition of designEditions) {
+  assert(
+    siteData.includes(`href: "/${edition}"`),
+    `The language menu is missing ${edition}`,
+  );
+}
+
+const designSource = await readFile(
+  new URL("../DESIGN.md", import.meta.url),
+  "utf8",
+);
+assert(
+  designSource.includes(
+    "한국어 [DESIGN.md](./DESIGN.md)가 기본이자 최종 기준(SSOT)입니다.",
+  ),
+  "Korean DESIGN.md must declare itself as the authoritative default",
+);
 
 assert(
   siteHref("/principles#natural", "/design/") === "/design/principles/#natural",
@@ -56,10 +81,7 @@ for (const route of routes) {
 for (const file of [
   ".nojekyll",
   "404.html",
-  "DESIGN.md",
-  "DESIGN.ko.md",
-  "DESIGN.cn.md",
-  "DESIGN.jp.md",
+  ...designEditions,
   "favicon.png",
   "comfort-hero.webp",
   "third-party/Phosphor-LICENSE.txt",

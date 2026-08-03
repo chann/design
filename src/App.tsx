@@ -13,7 +13,7 @@ import { currentRoute, siteHref } from "@/data/site";
 const SITE_ORIGIN = "https://chann.github.io";
 const HOME_TITLE = "Comfort Design System | Design clear interfaces";
 const HOME_DESCRIPTION =
-  "Comfort gives product teams and coding agents one design contract for semantic foundations, complete states, and 12 production ready component references.";
+  "Comfort gives product teams and coding agents one DESIGN.md for semantic foundations, complete states, and 12 production ready component references, with Korean as the default source of truth.";
 
 type RouteMetadata = {
   title: string;
@@ -51,7 +51,7 @@ function routeMetadata(route: string): RouteMetadata {
     return {
       title: "Terms | Comfort Design System",
       description:
-        "Terms for using the Comfort design contract, reference examples, source, and third party assets.",
+        "Terms for using Comfort DESIGN.md, reference examples, source, and third party assets.",
       canonicalRoute: route,
       robots: "index,follow",
     };
@@ -139,7 +139,7 @@ function NotFoundPage() {
   return (
     <main id="main-content" className="grid min-h-dvh place-items-center px-4">
       <div className="flex max-w-lg flex-col items-center gap-5 text-center">
-        <span className="font-mono text-sm text-primary-text">404</span>
+        <span className="font-mono text-sm text-primary">404</span>
         <h1 className="text-4xl font-semibold tracking-[-0.04em]">
           This reference has moved.
         </h1>

@@ -14,6 +14,45 @@ export type Principle = {
   question: string;
 };
 
+export type DesignEdition = {
+  code: "ko" | "en" | "jp" | "cn";
+  href: string;
+  label: string;
+  languageTag: string;
+  note: string;
+};
+
+export const designEditions: DesignEdition[] = [
+  {
+    code: "ko",
+    href: "/DESIGN.md",
+    label: "한국어",
+    languageTag: "ko",
+    note: "기본 · SSOT",
+  },
+  {
+    code: "en",
+    href: "/DESIGN.en.md",
+    label: "English",
+    languageTag: "en",
+    note: "Translation",
+  },
+  {
+    code: "jp",
+    href: "/DESIGN.jp.md",
+    label: "日本語",
+    languageTag: "ja",
+    note: "翻訳",
+  },
+  {
+    code: "cn",
+    href: "/DESIGN.cn.md",
+    label: "简体中文",
+    languageTag: "zh-CN",
+    note: "翻译",
+  },
+];
+
 export const primaryNav = [
   { href: "/principles", title: "Principles" },
   { href: "/foundations", title: "Foundations" },
@@ -78,7 +117,7 @@ export const foundationItems: NavItem[] = [
     href: "/foundations/color",
     title: "Color",
     description:
-      "Quiet neutrals and focused orange that explain hierarchy and state.",
+      "Cool neutrals and a focused blue that explain hierarchy and state.",
   },
   {
     href: "/foundations/typography",

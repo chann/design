@@ -39,7 +39,7 @@ function PrincipleCard({
               {principle.comfortTitle}
             </h2>
           </div>
-          <span className="mt-4 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary-text sm:mt-0">
+          <span className="mt-4 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary sm:mt-0">
             <Icon />
           </span>
         </CardHeader>

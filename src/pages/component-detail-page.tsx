@@ -658,7 +658,7 @@ function ComponentSpecimen({ type }: { type: ComponentKey }) {
             </TableHeader>
             <TableBody>
               {[
-                ["primary", "Action", "#FF6600"],
+                ["primary", "Action", "#0066CC"],
                 ["canvas", "Background", "#F7F8FA"],
                 ["radius-lg", "Container", "14 px"],
               ].map((row) => (
@@ -789,7 +789,7 @@ export function ComponentDetailPage({
         <div className="grid gap-3 md:grid-cols-3">
           {detail.anatomy.map((item, index) => (
             <div className="rounded-xl border bg-card p-5" key={item}>
-              <span className="font-mono text-xs text-primary-text">
+              <span className="font-mono text-xs text-primary">
                 0{index + 1}
               </span>
               <p className="mt-8 text-sm font-medium leading-6">{item}</p>

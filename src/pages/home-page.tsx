@@ -7,11 +7,11 @@ import {
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { siteHref } from "@/data/site";
+import { designEditions, siteHref } from "@/data/site";
 
 const proofPoints = [
   { value: "4", label: "language editions" },
-  { value: "6", label: "foundations" },
+  { value: "KO", label: "default source of truth" },
   { value: "12", label: "component references" },
 ];
 
@@ -35,7 +35,7 @@ const benefits: Array<{
   {
     title: "Design the whole journey",
     description:
-      "Loading, empty, error, focus, and recovery states stay part of the contract, not release week cleanup.",
+      "Loading, empty, error, focus, and recovery states stay in DESIGN.md, not release week cleanup.",
     icon: "check-circle",
   },
   {
@@ -69,9 +69,9 @@ const steps = [
 
 const faqs = [
   {
-    question: "What is Comfort?",
+    question: "What is DESIGN.md?",
     answer:
-      "Comfort is a design contract. It explains the principles, semantic foundations, component behavior, states, and verification rules behind clear product interfaces.",
+      "DESIGN.md is Comfort’s shared specification for principles, semantic foundations, component behavior, states, and verification rules.",
   },
   {
     question: "Does it replace our brand?",
@@ -86,22 +86,22 @@ const faqs = [
   {
     question: "Does it require React or shadcn?",
     answer:
-      "No. The reference site uses React and shadcn, but the contract describes semantic roles and behavior that can map to another web stack.",
+      "No. The reference site uses React and shadcn, but DESIGN.md describes semantic roles and behavior that can map to another web stack.",
   },
   {
     question: "How does it handle accessibility?",
     answer:
-      "Accessibility is part of the core contract, including contrast, focus, keyboard use, reduced motion, semantics, and recovery from errors.",
+      "Accessibility is part of DESIGN.md, including contrast, focus, keyboard use, reduced motion, semantics, and recovery from errors.",
   },
   {
     question: "What do I need to install?",
     answer:
-      "Nothing to read or evaluate the contract. Open DESIGN.md in the browser, then map only the roles your product needs.",
+      "Nothing. Open DESIGN.md in the browser, then map only the roles your product needs.",
   },
   {
     question: "Which language edition is authoritative?",
     answer:
-      "The English DESIGN.md is the source of truth. Korean, Simplified Chinese, and Japanese editions preserve the same token structure and guidance.",
+      "Korean DESIGN.md is the default source of truth. English, Japanese, and Simplified Chinese editions preserve the same token structure and guidance.",
   },
 ];
 
@@ -145,7 +145,7 @@ function Reveal({
 function TaglineReveal() {
   const words = [
     "One",
-    "contract",
+    "DESIGN.md",
     "turns",
     "scattered",
     "decisions",
@@ -180,7 +180,7 @@ function TaglineReveal() {
 
   return (
     <h2
-      aria-label="One contract turns scattered decisions into a system your whole team can predict."
+      aria-label="One DESIGN.md turns scattered decisions into a system your whole team can predict."
       className={cn(
         "tagline-copy max-w-[680px] text-balance text-4xl font-semibold sm:text-5xl lg:text-6xl",
         visible && "is-visible",
@@ -223,7 +223,7 @@ function FoundationPreview() {
         <div className="foundation-preview-roles">
           <div>
             <span>primary</span>
-            <strong>#FF6600</strong>
+            <strong>#0066CC</strong>
           </div>
           <div>
             <span>focus</span>
@@ -265,15 +265,15 @@ export function HomePage({ currentPath }: { currentPath: string }) {
         <section className="landing-hero mx-auto grid max-w-7xl gap-12 px-4 pb-20 pt-12 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(28rem,0.95fr)] lg:items-center lg:gap-16 lg:px-8 lg:pb-24 lg:pt-20">
           <div className="flex flex-col gap-8">
             <div className="landing-enter flex flex-col gap-6">
-              <p className="eyebrow">A design contract for product teams</p>
+              <p className="eyebrow">DESIGN.md for product teams</p>
               <h1
-                aria-label="Ship interfaces people trust, from one clear design contract."
+                aria-label="Ship interfaces people trust, from one clear DESIGN.md."
                 className="hero-heading max-w-[680px] text-balance text-4xl font-semibold sm:text-6xl lg:text-7xl"
               >
                 <span className="block">Ship interfaces</span>
                 <span className="block">people trust,</span>
                 <span className="block">from one clear</span>
-                <span className="block">design contract.</span>
+                <span className="block">DESIGN.md.</span>
               </h1>
               <p className="max-w-[680px] text-pretty text-lg text-muted-foreground">
                 Comfort gives designers, engineers, and coding agents the same
@@ -287,7 +287,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 className="h-auto px-3 py-2 text-base font-semibold duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 <a href={siteHref("/DESIGN.md")}>
-                  Read the design contract
+                  Read DESIGN.md
                   <PhosphorIcon
                     aria-hidden="true"
                     data-icon="inline-end"
@@ -296,8 +296,25 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 </a>
               </Button>
               <p className="text-sm text-muted-foreground">
-                No account or package install required.
+                한국어가 기본이자 SSOT입니다. 설치나 계정은 필요하지 않습니다.
               </p>
+              <nav
+                aria-label="DESIGN.md language editions"
+                className="flex flex-wrap gap-x-5 gap-y-2 text-sm"
+              >
+                {designEditions.map((edition) => (
+                  <a
+                    className="landing-text-link text-muted-foreground"
+                    href={siteHref(edition.href)}
+                    hrefLang={edition.languageTag}
+                    key={edition.code}
+                    lang={edition.languageTag}
+                  >
+                    {edition.label}
+                    {edition.code === "ko" ? " · SSOT" : ""}
+                  </a>
+                ))}
+              </nav>
             </div>
           </div>
           <FoundationPreview />
@@ -310,7 +327,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
           <div className="proof-strip grid gap-6 rounded-2xl bg-secondary px-6 py-6 sm:grid-cols-3 lg:px-8">
             {proofPoints.map((item) => (
               <div className="flex items-baseline gap-3" key={item.label}>
-                <strong className="font-mono text-3xl font-semibold text-primary-text">
+                <strong className="font-mono text-3xl font-semibold text-primary">
                   {item.value}
                 </strong>
                 <span className="text-sm text-muted-foreground">
@@ -329,7 +346,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
           <Reveal className="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-24 sm:px-6 lg:px-8">
             <header className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
               <div className="flex flex-col gap-4">
-                <p className="eyebrow">Why one contract works</p>
+                <p className="eyebrow">Why one DESIGN.md works</p>
                 <h2 className="max-w-[680px] text-balance text-4xl font-semibold sm:text-5xl">
                   Replace scattered taste with shared decisions.
                 </h2>
@@ -379,7 +396,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
             <header className="flex max-w-xl flex-col gap-4">
               <p className="eyebrow">How it works</p>
               <h2 className="text-balance text-4xl font-semibold sm:text-5xl">
-                From contract to release in three clear steps.
+                From DESIGN.md to release in three clear steps.
               </h2>
               <p className="text-pretty text-base text-muted-foreground">
                 Start with the source, connect it to your stack, then prove the
@@ -389,7 +406,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
             <ol className="step-list">
               {steps.map((step) => (
                 <li className="step-item" key={step.number}>
-                  <span className="font-mono text-sm text-primary-text">
+                  <span className="font-mono text-sm text-primary">
                     {step.number}
                   </span>
                   <div className="flex flex-col gap-2">
@@ -412,12 +429,12 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 The reference runs on the rules it documents.
               </h2>
               <p className="text-pretty text-lg text-muted-foreground">
-                This site turns the contract into responsive foundations,
+                This site turns DESIGN.md into responsive foundations,
                 interactive component specimens, complete states, and production
                 checks. The reference and the source stay close enough to audit.
               </p>
               <a
-                className="landing-text-link w-fit text-base font-semibold text-primary-text"
+                className="landing-text-link w-fit text-base font-semibold text-primary"
                 href={siteHref("/components")}
               >
                 Inspect the component references
@@ -433,7 +450,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 <span className="flex items-center gap-2 text-sm font-semibold">
                   <PhosphorIcon
                     aria-hidden="true"
-                    className="size-5 text-primary-text"
+                    className="size-5 text-primary"
                     name="globe"
                   />
                   Live reference
@@ -462,7 +479,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
                 <PhosphorIcon
                   aria-hidden="true"
-                  className="size-5 text-primary-text"
+                  className="size-5 text-primary"
                   name="check-circle"
                 />
                 Route, type, lint, and production build checks are part of the
@@ -478,7 +495,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               <div className="flex flex-col gap-4">
                 <p className="eyebrow">Questions before you start</p>
                 <h2 className="max-w-[680px] text-balance text-4xl font-semibold sm:text-5xl">
-                  Know what the contract changes, and what it leaves yours.
+                  Know what DESIGN.md changes, and what it leaves yours.
                 </h2>
               </div>
               <p className="max-w-xl text-pretty text-base text-muted-foreground lg:justify-self-end">
@@ -509,7 +526,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 Give every contributor the same clear starting point.
               </h2>
               <p className="max-w-2xl text-pretty text-lg text-primary-foreground/80">
-                Open the contract in the browser. No account, setup, or package
+                Open DESIGN.md in the browser. No account, setup, or package
                 install stands between your team and the source.
               </p>
             </div>
@@ -519,7 +536,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               className="h-auto shrink-0 px-3 py-2 text-base font-semibold duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98]"
             >
               <a href={siteHref("/DESIGN.md")}>
-                Read the design contract
+                Read DESIGN.md
                 <PhosphorIcon
                   aria-hidden="true"
                   data-icon="inline-end"

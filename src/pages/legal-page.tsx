@@ -104,7 +104,7 @@ export function LegalPage({
               </section>
             ))}
             <a
-              className="landing-text-link w-fit text-base font-semibold text-primary-text"
+              className="landing-text-link w-fit text-base font-semibold text-primary"
               href="https://github.com/chann/design/issues"
             >
               Open a GitHub issue

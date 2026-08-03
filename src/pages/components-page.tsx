@@ -82,7 +82,7 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
                 <Card className="h-full min-h-60 transition-[transform,box-shadow] group-hover:-translate-y-0.5 group-hover:shadow-lg">
                   <CardHeader>
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary-text">
+                      <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <Icon />
                       </span>
                       <Badge variant="outline">{categories[index]}</Badge>
@@ -120,7 +120,7 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
               ["Comfort", "Semantic tokens, guidance, and product voice"],
             ].map(([title, description], index) => (
               <div className="rounded-xl border bg-background p-5" key={title}>
-                <span className="font-mono text-xs text-primary-text">
+                <span className="font-mono text-xs text-primary">
                   0{index + 1}
                 </span>
                 <h3 className="mt-8 font-semibold">{title}</h3>

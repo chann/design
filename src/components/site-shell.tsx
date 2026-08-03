@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -24,6 +25,7 @@ import {
 import { cn } from "@/lib/utils";
 import {
   componentItems,
+  designEditions,
   foundationItems,
   primaryNav,
   siteHref,
@@ -115,6 +117,43 @@ function ThemeMenu() {
   );
 }
 
+function LanguageMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          aria-label="DESIGN.md language editions. Korean is the default source of truth."
+          className="gap-2"
+        >
+          <span className="text-muted-foreground">DESIGN.md</span>
+          <span>KO</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-52">
+        <DropdownMenuLabel>Language editions</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {designEditions.map((edition) => (
+          <DropdownMenuItem asChild key={edition.code}>
+            <a
+              className="justify-between gap-4"
+              href={siteHref(edition.href)}
+              hrefLang={edition.languageTag}
+              lang={edition.languageTag}
+            >
+              <span>{edition.label}</span>
+              <span className="text-xs text-muted-foreground">
+                {edition.note}
+              </span>
+            </a>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 function MobileNavigation({ currentPath }: { currentPath: string }) {
   return (
     <Sheet>
@@ -176,6 +215,7 @@ function MobileNavigation({ currentPath }: { currentPath: string }) {
             ))}
           </nav>
           <div className="mobile-menu-utilities flex flex-col gap-6">
+            <LanguageMenu />
             <ThemeMenu />
             <div className="flex flex-wrap gap-6 text-sm">
               <a href={siteHref("/DESIGN.md")}>DESIGN.md</a>
@@ -194,8 +234,8 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
-      <header className="site-header sticky top-0 z-40 h-24 pointer-events-none">
-        <div className="site-nav pointer-events-auto mx-auto mt-6 flex w-[calc(100%-2rem)] items-center gap-4 rounded-full border bg-background/80 px-3 py-2 shadow-lg backdrop-blur-3xl md:w-max">
+      <header className="site-header pointer-events-none sticky top-0 z-40 h-24 pt-6">
+        <div className="site-nav pointer-events-auto mx-auto flex w-[calc(100%-2rem)] items-center gap-4 rounded-full border bg-background/80 px-3 py-2 shadow-lg backdrop-blur-3xl md:w-max">
           <Brand current={currentPath === "/"} />
           <nav
             className="ml-4 hidden items-center gap-1 md:flex"
@@ -226,7 +266,7 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
               asChild
               variant="ghost"
               size="sm"
-              className="hidden md:inline-flex"
+              className="hidden lg:inline-flex"
             >
               <a
                 href="https://github.com/chann/design"
@@ -237,6 +277,9 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
               </a>
             </Button>
             <div className="hidden md:block">
+              <LanguageMenu />
+            </div>
+            <div className="hidden lg:block">
               <ThemeMenu />
             </div>
             <MobileNavigation currentPath={currentPath} />
@@ -254,8 +297,8 @@ export function SiteFooter() {
         <div className="flex max-w-md flex-col gap-3">
           <Brand />
           <p className="text-sm leading-6 text-muted-foreground">
-            A practical design contract for comfortable, clear, and trustworthy
-            product interfaces.
+            A practical DESIGN.md for comfortable, clear, and trustworthy
+            product interfaces, with Korean as the default source of truth.
           </p>
         </div>
         <nav
@@ -463,7 +506,7 @@ export function CheckList({ items }: { items: string[] }) {
     <ul className="flex flex-col gap-3">
       {items.map((item) => (
         <li className="flex gap-3 text-sm leading-6" key={item}>
-          <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-text">
+          <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
             <CheckIcon className="size-3" />
           </span>
           {item}

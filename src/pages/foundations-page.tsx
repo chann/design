@@ -56,7 +56,7 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
               <a className="group" href={siteHref(item.href)} key={item.href}>
                 <Card className="h-full transition-[transform,box-shadow] group-hover:-translate-y-0.5 group-hover:shadow-lg">
                   <CardHeader>
-                    <span className="mb-4 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary-text">
+                    <span className="mb-4 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                       <Icon />
                     </span>
                     <CardTitle className="text-xl">{item.title}</CardTitle>
@@ -97,9 +97,7 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
               ["03", "Components", "How roles become reusable interactions"],
             ].map(([number, title, description]) => (
               <div className="rounded-xl border bg-background p-5" key={number}>
-                <span className="font-mono text-xs text-primary-text">
-                  {number}
-                </span>
+                <span className="font-mono text-xs text-primary">{number}</span>
                 <h3 className="mt-8 font-semibold">{title}</h3>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   {description}

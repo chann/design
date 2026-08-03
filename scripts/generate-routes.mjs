@@ -20,7 +20,7 @@ await copyFile(new URL("index.html", dist), new URL("404.html", dist));
 for (const file of [
   ".nojekyll",
   "DESIGN.md",
-  "DESIGN.ko.md",
+  "DESIGN.en.md",
   "DESIGN.cn.md",
   "DESIGN.jp.md",
 ]) {
