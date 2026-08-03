@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import {
   AlertCircleIcon,
   CheckIcon,
+  Code2Icon,
   CopyIcon,
+  EyeIcon,
   InfoIcon,
   SaveIcon,
 } from "lucide-react";
@@ -1011,9 +1013,24 @@ function ComponentPreview({ type }: { type: ComponentKey }) {
       className="component-preview gap-0 overflow-hidden rounded-xl border bg-card"
     >
       <div className="flex min-h-12 items-center justify-between border-b bg-muted/20 px-3">
-        <TabsList variant="line" aria-label="Component example view">
-          <TabsTrigger value="preview">Preview</TabsTrigger>
-          <TabsTrigger value="code">View code</TabsTrigger>
+        <TabsList
+          aria-label="Component example view"
+          className="component-preview-view-switch h-9 gap-0.5 rounded-lg border bg-muted/60 p-1"
+        >
+          <TabsTrigger
+            className="h-7 flex-none gap-1.5 px-2.5 text-[0.8rem]"
+            value="preview"
+          >
+            <EyeIcon aria-hidden="true" data-icon="inline-start" />
+            Preview
+          </TabsTrigger>
+          <TabsTrigger
+            className="h-7 flex-none gap-1.5 px-2.5 text-[0.8rem]"
+            value="code"
+          >
+            <Code2Icon aria-hidden="true" data-icon="inline-start" />
+            View code
+          </TabsTrigger>
         </TabsList>
         <CopyCodeButton value={code} />
       </div>

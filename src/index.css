@@ -963,8 +963,8 @@
   color: var(--muted-foreground);
 }
 
-.component-preview [data-slot="tabs-list"] {
-  align-self: stretch;
+.component-preview .component-preview-view-switch {
+  align-self: center;
 }
 
 .component-preview .specimen-panel {
