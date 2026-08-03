@@ -1,10 +1,25 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { CheckIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import {
+  BookOpenIcon,
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  PanelLeftIcon,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
@@ -24,9 +39,8 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import {
-  componentItems,
   designEditions,
-  foundationItems,
+  docsNavigation,
   primaryNav,
   siteHref,
   type NavItem,
@@ -134,21 +148,23 @@ function LanguageMenu() {
       <DropdownMenuContent align="end" className="min-w-52">
         <DropdownMenuLabel>Language editions</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {designEditions.map((edition) => (
-          <DropdownMenuItem asChild key={edition.code}>
-            <a
-              className="justify-between gap-4"
-              href={siteHref(edition.href)}
-              hrefLang={edition.languageTag}
-              lang={edition.languageTag}
-            >
-              <span>{edition.label}</span>
-              <span className="text-xs text-muted-foreground">
-                {edition.note}
-              </span>
-            </a>
-          </DropdownMenuItem>
-        ))}
+        <DropdownMenuGroup>
+          {designEditions.map((edition) => (
+            <DropdownMenuItem asChild key={edition.code}>
+              <a
+                className="justify-between gap-4"
+                href={siteHref(edition.href)}
+                hrefLang={edition.languageTag}
+                lang={edition.languageTag}
+              >
+                <span>{edition.label}</span>
+                <span className="text-xs text-muted-foreground">
+                  {edition.note}
+                </span>
+              </a>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -346,6 +362,80 @@ export function SiteFooter() {
 
 type OutlineItem = { id: string; title: string };
 
+function DocsNavigationList({
+  currentPath,
+  closeOnSelect = false,
+}: {
+  currentPath: string;
+  closeOnSelect?: boolean;
+}) {
+  return (
+    <div className="flex flex-col gap-7">
+      {docsNavigation.map((group) => (
+        <div className="flex flex-col gap-2" key={group.title}>
+          <p className="px-2.5 text-xs font-medium text-foreground">
+            {group.title}
+          </p>
+          <nav
+            className="flex flex-col gap-0.5"
+            aria-label={`${group.title} documentation`}
+          >
+            {group.items.map((item) => {
+              const link = (
+                <a
+                  aria-current={currentPath === item.href ? "page" : undefined}
+                  className={cn(
+                    "rounded-lg px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
+                    currentPath === item.href &&
+                      "bg-accent font-medium text-accent-foreground",
+                  )}
+                  href={siteHref(item.href)}
+                >
+                  {item.title}
+                </a>
+              );
+
+              return closeOnSelect ? (
+                <SheetClose asChild key={item.href}>
+                  {link}
+                </SheetClose>
+              ) : (
+                <span className="contents" key={item.href}>
+                  {link}
+                </span>
+              );
+            })}
+          </nav>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DocsMobileNavigation({ currentPath }: { currentPath: string }) {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="outline" size="sm">
+          <PanelLeftIcon data-icon="inline-start" />
+          Browse docs
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left" className="w-[min(24rem,90vw)] border-0 p-0">
+        <SheetHeader className="border-b px-5 py-4">
+          <SheetTitle>Documentation</SheetTitle>
+          <SheetDescription>
+            Browse principles, foundations, and components.
+          </SheetDescription>
+        </SheetHeader>
+        <ScrollArea className="min-h-0 flex-1 px-3 py-5">
+          <DocsNavigationList currentPath={currentPath} closeOnSelect={true} />
+        </ScrollArea>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
 export function DocsLayout({
   currentPath,
   section,
@@ -367,81 +457,88 @@ export function DocsLayout({
   next?: NavItem;
   children: ReactNode;
 }) {
-  const items: NavItem[] =
-    section === "foundations"
-      ? [
-          {
-            href: "/foundations",
-            title: "Overview",
-            description: "Foundation overview",
-          },
-          ...foundationItems,
-        ]
-      : section === "components"
-        ? [
-            {
-              href: "/components",
-              title: "Overview",
-              description: "Component overview",
-            },
-            ...componentItems,
-          ]
-        : [
-            {
-              href: "/principles",
-              title: "Overview",
-              description: "Design principles",
-            },
-          ];
+  const sectionTitle =
+    section === "principles"
+      ? "Principles"
+      : section === "foundations"
+        ? "Foundations"
+        : "Components";
+  const sectionPath = `/${section}`;
+  const isSectionOverview = currentPath === sectionPath;
 
   return (
     <>
       <SiteHeader currentPath={currentPath} />
-      <div className="mx-auto grid max-w-[96rem] lg:grid-cols-[15rem_minmax(0,1fr)] xl:grid-cols-[15rem_minmax(0,1fr)_13rem]">
+      <div className="mx-auto grid max-w-[96rem] lg:grid-cols-[17rem_minmax(0,1fr)] xl:grid-cols-[17rem_minmax(0,1fr)_14rem]">
         <aside
-          aria-label={`${section} section navigation`}
+          aria-label="Documentation navigation"
           className="hidden lg:block"
         >
           <div className="sticky top-24 h-[calc(100dvh-6rem)] py-8">
-            <ScrollArea className="h-full px-5">
-              <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                {section}
-              </p>
-              <nav
-                className="flex flex-col gap-1"
-                aria-label={`${section} navigation`}
-              >
-                {items.map((item) => (
-                  <a
-                    className={cn(
-                      "rounded-lg px-2.5 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
-                      currentPath === item.href &&
-                        "bg-accent font-medium text-accent-foreground",
-                    )}
-                    href={siteHref(item.href)}
-                    key={item.href}
-                  >
-                    {item.title}
-                  </a>
-                ))}
-              </nav>
+            <ScrollArea className="h-full px-4">
+              <DocsNavigationList currentPath={currentPath} />
             </ScrollArea>
           </div>
         </aside>
 
         <main
           id="main-content"
-          className="min-w-0 px-4 py-10 sm:px-8 sm:py-14 lg:px-10 xl:px-14"
+          className="min-w-0 px-4 py-10 sm:px-8 sm:py-12 lg:px-10 xl:px-12"
         >
-          <div className="mx-auto flex max-w-4xl flex-col gap-12">
-            <header className="flex max-w-3xl flex-col gap-4">
-              <p className="eyebrow">{eyebrow}</p>
-              <h1 className="text-balance text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">
-                {title}
-              </h1>
-              <p className="max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
-                {description}
-              </p>
+          <div className="mx-auto flex max-w-3xl flex-col gap-14">
+            <div className="lg:hidden">
+              <DocsMobileNavigation currentPath={currentPath} />
+            </div>
+            <header className="flex flex-col gap-6">
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                      <a href={siteHref("/DESIGN.md")}>DESIGN.md</a>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    {isSectionOverview ? (
+                      <BreadcrumbPage>{sectionTitle}</BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink asChild>
+                        <a href={siteHref(sectionPath)}>{sectionTitle}</a>
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+                  {!isSectionOverview && (
+                    <>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>{title}</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                </BreadcrumbList>
+              </Breadcrumb>
+              <div className="flex items-start justify-between gap-6">
+                <div className="flex max-w-2xl flex-col gap-4">
+                  <p className="eyebrow">{eyebrow}</p>
+                  <h1 className="text-balance text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">
+                    {title}
+                  </h1>
+                  <p className="text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
+                    {description}
+                  </p>
+                </div>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="hidden shrink-0 sm:inline-flex"
+                >
+                  <a href={siteHref("/DESIGN.md")}>
+                    <BookOpenIcon data-icon="inline-start" />
+                    Read source
+                  </a>
+                </Button>
+              </div>
             </header>
             {children}
             <nav
