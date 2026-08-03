@@ -12,7 +12,7 @@ import { designEditions, siteHref } from "@/data/site";
 
 const proofPoints = [
   { value: "4", label: "language editions" },
-  { value: "KO", label: "default source of truth" },
+  { value: "6", label: "semantic foundations" },
   { value: "12", label: "component references" },
 ];
 
