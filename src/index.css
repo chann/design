@@ -82,6 +82,13 @@
   --sidebar-accent-foreground: #17181a;
   --sidebar-border: #d7dce2;
   --sidebar-ring: #0066cc;
+  --syntax-comment: #7b8491;
+  --syntax-keyword: #9b2f5f;
+  --syntax-function: #6750a4;
+  --syntax-string: #14734f;
+  --syntax-number: #9a4d08;
+  --syntax-property: #075eaa;
+  --syntax-operator: #596474;
 }
 
 .dark {
@@ -116,6 +123,13 @@
   --sidebar-accent-foreground: #f4f6f8;
   --sidebar-border: #39404b;
   --sidebar-ring: #78b7ff;
+  --syntax-comment: #929baa;
+  --syntax-keyword: #f08ab4;
+  --syntax-function: #c1a7ff;
+  --syntax-string: #78d3a3;
+  --syntax-number: #e9b36b;
+  --syntax-property: #82bdff;
+  --syntax-operator: #aeb7c4;
 }
 
 @layer base {
@@ -983,6 +997,61 @@
   font-size: 0.78rem;
   line-height: 1.75;
   tab-size: 2;
+}
+
+.syntax-code code,
+.syntax-code .token-line {
+  display: block;
+  min-width: max-content;
+}
+
+.syntax-code .token.comment,
+.syntax-code .token.prolog,
+.syntax-code .token.doctype,
+.syntax-code .token.cdata {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+.syntax-code .token.keyword,
+.syntax-code .token.control-flow,
+.syntax-code .token.important,
+.syntax-code .token.tag {
+  color: var(--syntax-keyword);
+}
+
+.syntax-code .token.function,
+.syntax-code .token.class-name,
+.syntax-code .token.builtin {
+  color: var(--syntax-function);
+}
+
+.syntax-code .token.string,
+.syntax-code .token.char,
+.syntax-code .token.attr-value {
+  color: var(--syntax-string);
+}
+
+.syntax-code .token.number,
+.syntax-code .token.boolean,
+.syntax-code .token.constant {
+  color: var(--syntax-number);
+}
+
+.syntax-code .token.property,
+.syntax-code .token.attr-name,
+.syntax-code .token.variable {
+  color: var(--syntax-property);
+}
+
+.syntax-code .token.operator,
+.syntax-code .token.punctuation {
+  color: var(--syntax-operator);
+}
+
+.syntax-code .token.bold,
+.syntax-code .token.important {
+  font-weight: 600;
 }
 
 .component-preview-code {

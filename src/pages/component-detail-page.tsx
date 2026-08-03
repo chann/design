@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { CheckList, DocsLayout } from "@/components/site-shell";
+import { SyntaxCode, type SyntaxLanguage } from "@/components/syntax-code";
 import {
   Accordion,
   AccordionContent,
@@ -985,21 +986,27 @@ function CopyCodeButton({ value }: { value: string }) {
   );
 }
 
-function CodeBlock({ label, value }: { label: string; value: string }) {
+function CodeBlock({
+  label,
+  language = "tsx",
+  value,
+}: {
+  label: string;
+  language?: SyntaxLanguage;
+  value: string;
+}) {
   return (
     <div className="overflow-hidden rounded-xl border bg-muted/30">
       <div className="flex min-h-11 items-center justify-between border-b px-3">
         <span className="font-mono text-xs text-muted-foreground">{label}</span>
         <CopyCodeButton value={value} />
       </div>
-      <pre
+      <SyntaxCode
         className="component-code-scroll"
-        role="region"
-        aria-label={`${label} code`}
-        tabIndex={0}
-      >
-        <code>{value}</code>
-      </pre>
+        label={label}
+        language={language}
+        value={value}
+      />
     </div>
   );
 }
@@ -1038,14 +1045,12 @@ function ComponentPreview({ type }: { type: ComponentKey }) {
         <ComponentSpecimen type={type} />
       </TabsContent>
       <TabsContent value="code" className="m-0">
-        <pre
+        <SyntaxCode
           className="component-preview-code"
-          role="region"
-          aria-label={`${type} interactive preview source`}
-          tabIndex={0}
-        >
-          <code>{code}</code>
-        </pre>
+          label={`${type} interactive preview source`}
+          language="tsx"
+          value={code}
+        />
       </TabsContent>
     </Tabs>
   );
@@ -1061,7 +1066,7 @@ function Installation({ type }: { type: ComponentKey }) {
         <TabsTrigger value="manual">Manual</TabsTrigger>
       </TabsList>
       <TabsContent value="command">
-        <CodeBlock label="Terminal" value={command} />
+        <CodeBlock label="Terminal" language="bash" value={command} />
       </TabsContent>
       <TabsContent value="manual">
         <Card>
