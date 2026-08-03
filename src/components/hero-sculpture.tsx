@@ -31,12 +31,12 @@ export function HeroSculpture() {
 
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.94;
+      renderer.toneMappingExposure = 0.82;
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 40);
-      camera.position.set(0, 0.1, 7.6);
+      camera.position.set(0, 0.08, 7.2);
 
       const environmentGenerator = new THREE.PMREMGenerator(renderer);
       const room = new RoomEnvironment();
@@ -45,118 +45,92 @@ export function HeroSculpture() {
       room.dispose();
 
       const sculpture = new THREE.Group();
-      sculpture.rotation.set(-0.04, -0.16, 0.03);
+      sculpture.rotation.set(-0.03, -0.12, 0.02);
       scene.add(sculpture);
 
       const blueMaterial = new THREE.MeshPhysicalMaterial({
-        clearcoat: 1,
-        clearcoatRoughness: 0.12,
+        clearcoat: 0.55,
+        clearcoatRoughness: 0.3,
         color: 0x0066cc,
         flatShading: true,
-        iridescence: 0.18,
-        metalness: 0.24,
-        roughness: 0.3,
+        metalness: 0.08,
+        roughness: 0.42,
       });
-      const obsidianMaterial = new THREE.MeshPhysicalMaterial({
-        clearcoat: 0.7,
-        clearcoatRoughness: 0.2,
-        color: 0x111820,
-        metalness: 0.82,
-        roughness: 0.2,
+      const obsidianMaterial = new THREE.MeshStandardMaterial({
+        color: 0x151a20,
+        metalness: 0.76,
+        roughness: 0.28,
       });
       const chromeMaterial = new THREE.MeshStandardMaterial({
-        color: 0xe8eef4,
-        metalness: 0.96,
-        roughness: 0.12,
+        color: 0x9da8b3,
+        metalness: 0.85,
+        roughness: 0.36,
       });
-      const orbitMaterial = new THREE.MeshStandardMaterial({
-        color: 0x0066cc,
-        metalness: 0.72,
-        opacity: 0.48,
-        roughness: 0.2,
+      const shadowMaterial = new THREE.MeshBasicMaterial({
+        color: 0x718096,
+        depthWrite: false,
+        opacity: 0.14,
         transparent: true,
       });
-      const groundMaterial = new THREE.MeshStandardMaterial({
-        color: 0xdce5ed,
-        metalness: 0.12,
-        roughness: 0.8,
-      });
-
-      const darkDisc = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.42, 1.42, 0.2, 96),
-        obsidianMaterial,
-      );
-      darkDisc.position.z = -0.64;
-      darkDisc.rotation.x = Math.PI / 2;
-      sculpture.add(darkDisc);
 
       const core = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(1.2, 0),
+        new THREE.OctahedronGeometry(1.18, 0),
         blueMaterial,
       );
-      core.position.z = 0.18;
-      core.scale.set(0.88, 1.15, 0.88);
-      core.rotation.set(0.28, 0.18, -0.12);
+      core.position.z = 0.12;
+      core.scale.set(0.84, 1.28, 0.84);
+      core.rotation.set(0.22, 0.24, -0.08);
       sculpture.add(core);
 
       const portal = new THREE.Mesh(
-        new THREE.TorusGeometry(1.82, 0.072, 24, 192),
+        new THREE.TorusGeometry(1.7, 0.052, 20, 160),
         chromeMaterial,
       );
-      portal.rotation.set(0.08, 0.46, -0.14);
+      portal.rotation.set(0.08, 0.48, -0.16);
       sculpture.add(portal);
 
-      const outerOrbit = new THREE.Mesh(
-        new THREE.TorusGeometry(2.34, 0.018, 8, 192),
-        orbitMaterial,
-      );
-      outerOrbit.rotation.set(0.38, -0.7, 0.18);
-      sculpture.add(outerOrbit);
-
-      const base = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.28, 1.48, 0.14, 96),
+      const axis = new THREE.Mesh(
+        new THREE.TorusGeometry(1.35, 0.024, 12, 144),
         obsidianMaterial,
       );
-      base.position.y = -2.02;
-      sculpture.add(base);
+      axis.rotation.set(1.12, -0.38, 0.42);
+      sculpture.add(axis);
 
-      const baseLight = new THREE.Mesh(
-        new THREE.TorusGeometry(1.35, 0.022, 12, 128),
-        orbitMaterial,
+      const shadow = new THREE.Mesh(
+        new THREE.CircleGeometry(1.16, 64),
+        shadowMaterial,
       );
-      baseLight.position.y = -1.94;
-      baseLight.rotation.x = Math.PI / 2;
-      sculpture.add(baseLight);
+      shadow.position.set(0, -1.78, -0.2);
+      shadow.rotation.x = -Math.PI / 2;
+      scene.add(shadow);
 
-      const ground = new THREE.Mesh(
-        new THREE.CircleGeometry(3.2, 96),
-        groundMaterial,
-      );
-      ground.position.set(0, -2.1, -0.05);
-      ground.rotation.x = -Math.PI / 2;
-      scene.add(ground);
-
-      scene.add(new THREE.HemisphereLight(0xffffff, 0x6b7a89, 2));
-      const keyLight = new THREE.DirectionalLight(0xffffff, 3.2);
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x606a74, 1.45));
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
       keyLight.position.set(4.5, 5, 6);
       scene.add(keyLight);
-      const blueLight = new THREE.PointLight(0x1485f5, 9, 11, 2);
-      blueLight.position.set(-3.5, 1.4, 3.8);
-      scene.add(blueLight);
-      const rimLight = new THREE.PointLight(0xffffff, 7, 10, 2);
-      rimLight.position.set(3, -1, 2.5);
+      const rimLight = new THREE.PointLight(0xffffff, 3.5, 10, 2);
+      rimLight.position.set(-3, -1, 3.5);
       scene.add(rimLight);
 
       const syncTheme = () => {
         const dark = document.documentElement.classList.contains("dark");
-        const background = dark ? 0x0f141a : 0xeef3f7;
+        const background = dark ? 0x181818 : 0xf1f3f5;
         scene.background = new THREE.Color(background);
-        scene.fog = new THREE.Fog(background, 7.2, 13);
-        groundMaterial.color.set(dark ? 0x17202a : 0xdce5ed);
+        blueMaterial.color.set(0x0066cc);
+        obsidianMaterial.color.set(dark ? 0x4b5661 : 0x151a20);
+        shadowMaterial.color.set(dark ? 0x000000 : 0x718096);
+        shadowMaterial.opacity = dark ? 0.24 : 0.14;
       };
       syncTheme();
 
-      const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
+      const pointer = {
+        velocityX: 0,
+        velocityY: 0,
+        x: 0,
+        y: 0,
+        targetX: 0,
+        targetY: 0,
+      };
       const onPointerMove = (event: PointerEvent) => {
         const bounds = canvas.getBoundingClientRect();
         pointer.targetX =
@@ -188,21 +162,33 @@ export function HeroSculpture() {
       );
       let isIntersecting = true;
       let isPageVisible = !document.hidden;
+      let lastFrame = 0;
 
       const renderFrame = (milliseconds: number) => {
         const time = milliseconds * 0.001;
-        pointer.x += (pointer.targetX - pointer.x) * 0.045;
-        pointer.y += (pointer.targetY - pointer.y) * 0.045;
-        sculpture.position.y = Math.sin(time * 0.62) * 0.1;
-        sculpture.rotation.y = -0.16 + time * 0.09 + pointer.x * 0.13;
+        const delta = lastFrame
+          ? Math.min((milliseconds - lastFrame) * 0.001, 0.05)
+          : 1 / 60;
+        lastFrame = milliseconds;
+        const spring = 10;
+        const damping = Math.exp(-8 * delta);
+        pointer.velocityX += (pointer.targetX - pointer.x) * spring * delta;
+        pointer.velocityY += (pointer.targetY - pointer.y) * spring * delta;
+        pointer.velocityX *= damping;
+        pointer.velocityY *= damping;
+        pointer.x += pointer.velocityX * delta;
+        pointer.y += pointer.velocityY * delta;
+
+        sculpture.position.y = Math.sin(time * 0.48) * 0.08;
+        sculpture.rotation.y = -0.12 + time * 0.055 + pointer.x * 0.12;
         sculpture.rotation.x =
-          -0.04 + Math.sin(time * 0.38) * 0.025 + pointer.y * 0.05;
-        core.rotation.y = 0.18 - time * 0.07;
-        core.rotation.z = -0.12 + time * 0.035;
-        portal.rotation.z = -0.14 + time * 0.035;
-        outerOrbit.rotation.z = 0.18 - time * 0.055;
-        camera.position.x = pointer.x * 0.12;
-        camera.position.y = 0.1 - pointer.y * 0.08;
+          -0.03 + Math.sin(time * 0.32) * 0.02 + pointer.y * 0.05;
+        core.rotation.y = 0.24 - time * 0.045;
+        core.rotation.z = -0.08 + Math.sin(time * 0.36) * 0.035;
+        portal.rotation.z = -0.16 + Math.sin(time * 0.22) * 0.07;
+        axis.rotation.z = 0.42 - time * 0.075;
+        camera.position.x = pointer.x * 0.1;
+        camera.position.y = 0.08 - pointer.y * 0.06;
         camera.lookAt(0, -0.05, 0);
         renderer.render(scene, camera);
       };
@@ -210,6 +196,7 @@ export function HeroSculpture() {
       const animate = (milliseconds: number) => renderFrame(milliseconds);
       const syncAnimation = () => {
         renderer.setAnimationLoop(null);
+        lastFrame = 0;
         if (reducedMotion.matches || !isIntersecting || !isPageVisible) {
           renderFrame(0);
           return;
@@ -278,9 +265,9 @@ export function HeroSculpture() {
       className={`foundation-preview hero-sculpture landing-enter landing-enter-late${isReady ? " is-ready" : ""}`}
     >
       <div aria-hidden="true" className="hero-sculpture-fallback">
-        <span className="hero-sculpture-fallback-disc" />
         <span className="hero-sculpture-fallback-core" />
-        <span className="hero-sculpture-fallback-orbit" />
+        <span className="hero-sculpture-fallback-halo" />
+        <span className="hero-sculpture-fallback-axis" />
       </div>
       <canvas
         aria-hidden="true"
@@ -289,8 +276,8 @@ export function HeroSculpture() {
         tabIndex={-1}
       />
       <figcaption className="sr-only">
-        A slowly rotating blue geometric sculpture held between precise metal
-        orbits, representing one living system shared across every role.
+        A blue geometric form held between two slowly moving metal axes,
+        representing one living system shared across every role.
       </figcaption>
     </figure>
   );
