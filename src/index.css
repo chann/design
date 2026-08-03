@@ -161,25 +161,6 @@
   transform: translateY(0);
 }
 
-.brand-mark {
-  display: grid;
-  width: 1.5rem;
-  height: 1.5rem;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  transform: rotate(8deg);
-}
-
-.brand-mark i {
-  border-radius: 3px;
-  background: var(--primary);
-}
-
-.brand-mark i:nth-child(2),
-.brand-mark i:nth-child(3) {
-  opacity: 0.58;
-}
-
 .site-nav {
   box-shadow: 0 16px 48px rgb(22 51 82 / 12%);
 }

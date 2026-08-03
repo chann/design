@@ -56,20 +56,23 @@ function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", dark);
 }
 
-function Brand({ current = false }: { current?: boolean }) {
+function Brand({
+  className,
+  current = false,
+}: {
+  className?: string;
+  current?: boolean;
+}) {
   return (
     <a
-      className="flex shrink-0 items-center gap-2.5 font-semibold tracking-[-0.02em]"
+      className={cn(
+        "flex shrink-0 items-center font-semibold tracking-[-0.02em]",
+        className,
+      )}
       href={siteHref("/")}
       aria-label="Comfort Design System home"
       aria-current={current ? "page" : undefined}
     >
-      <span className="brand-mark" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-        <i />
-      </span>
       <span className="hidden sm:inline">Comfort Design System</span>
       <span className="sm:hidden">Comfort</span>
     </a>
@@ -251,10 +254,10 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
         Skip to content
       </a>
       <header className="site-header pointer-events-none sticky top-0 z-40 h-24 pt-6">
-        <div className="site-nav pointer-events-auto mx-auto flex w-[calc(100%-2rem)] items-center gap-4 rounded-full border bg-background/80 px-3 py-2 shadow-lg backdrop-blur-3xl md:w-max">
-          <Brand current={currentPath === "/"} />
+        <div className="site-nav pointer-events-auto mx-auto flex w-[calc(100%-2rem)] items-center gap-2 rounded-full border bg-background/80 px-3 py-2 shadow-lg backdrop-blur-3xl md:w-max">
+          <Brand className="px-2" current={currentPath === "/"} />
           <nav
-            className="ml-4 hidden items-center gap-1 md:flex"
+            className="ml-2 hidden items-center gap-1 md:flex"
             aria-label="Primary navigation"
           >
             {primaryNav.map((item) => (
