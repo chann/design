@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-import { HeroSculpture } from "@/components/hero-sculpture";
+import { HeroLetterGlitch } from "@/components/hero-letter-glitch";
 import {
   PhosphorIcon,
   type PhosphorIconName,
@@ -272,7 +272,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               </nav>
             </div>
           </div>
-          <HeroSculpture />
+          <HeroLetterGlitch />
         </section>
 
         <section
