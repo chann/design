@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-import designSystemCollaboration from "@/assets/design-system-collaboration.webp";
+import { HeroSculpture } from "@/components/hero-sculpture";
 import {
   PhosphorIcon,
   type PhosphorIconName,
@@ -198,34 +198,6 @@ function TaglineReveal() {
   );
 }
 
-function FoundationPreview() {
-  return (
-    <figure className="foundation-preview landing-enter landing-enter-late">
-      <img
-        alt="A designer, engineer, and AI coding console working from one shared interface specification."
-        className="foundation-preview-image"
-        decoding="async"
-        fetchPriority="high"
-        height="1254"
-        loading="eager"
-        sizes="(min-width: 1024px) 42vw, 100vw"
-        src={designSystemCollaboration}
-        width="1254"
-      />
-      <figcaption className="foundation-preview-caption">
-        <span className="foundation-preview-label">
-          DESIGN.md · shared source
-        </span>
-        <strong>One source aligns every role.</strong>
-        <p className="sr-only">
-          Design, engineering, and coding agents stay aligned from decision to
-          interface.
-        </p>
-      </figcaption>
-    </figure>
-  );
-}
-
 export function HomePage({ currentPath }: { currentPath: string }) {
   useEffect(() => {
     document.getElementById("comfort-faq-schema")?.remove();
@@ -304,7 +276,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               </nav>
             </div>
           </div>
-          <FoundationPreview />
+          <HeroSculpture />
         </section>
 
         <section
