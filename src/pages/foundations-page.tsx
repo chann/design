@@ -10,14 +10,15 @@ import {
 
 import { DocsLayout } from "@/components/site-shell";
 import { Badge } from "@/components/ui/badge";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { foundationItems, siteHref } from "@/data/site";
 
 const icons = [
@@ -27,6 +28,14 @@ const icons = [
   LayoutGridIcon,
   BoxIcon,
   AccessibilityIcon,
+];
+const bentoSpans = [
+  "md:col-span-4 md:row-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
 ];
 
 export function FoundationsPage({ currentPath }: { currentPath: string }) {
@@ -49,32 +58,64 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
       next={foundationItems[0]}
     >
       <section className="scroll-mt-24" id="catalog">
-        <div className="grid gap-4 md:grid-cols-2">
+        <BentoGrid>
           {foundationItems.map((item, index) => {
             const Icon = icons[index];
             return (
-              <a className="group" href={siteHref(item.href)} key={item.href}>
-                <Card className="h-full transition-[transform,box-shadow] group-hover:-translate-y-0.5 group-hover:shadow-lg">
-                  <CardHeader>
-                    <span className="mb-4 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Icon />
+              <a
+                className={cn(
+                  "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                  bentoSpans[index],
+                )}
+                href={siteHref(item.href)}
+                key={item.href}
+              >
+                <BentoCard
+                  className={cn(
+                    index === 0 &&
+                      "min-h-80 bg-primary/10 group-hover:bg-primary/15 md:min-h-0",
+                  )}
+                >
+                  <Icon
+                    aria-hidden="true"
+                    className={cn(
+                      "absolute -right-4 -top-4 size-32 text-primary opacity-[0.07] transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-rotate-3 group-hover:scale-105",
+                      index === 0 && "size-48 opacity-10",
+                    )}
+                    strokeWidth={1}
+                  />
+                  <div className="relative z-10 flex items-center justify-between">
+                    <span className="flex size-11 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
+                      <Icon aria-hidden="true" className="size-5" />
                     </span>
-                    <CardTitle className="text-xl">{item.title}</CardTitle>
-                    <CardDescription className="leading-6">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      0{index + 1}
+                    </span>
+                  </div>
+                  <div className="relative z-10 mt-auto flex max-w-lg flex-col gap-2 pt-6">
+                    <h2 className="text-xl font-semibold">{item.title}</h2>
+                    <p
+                      className={cn(
+                        "text-pretty text-sm leading-6 text-muted-foreground",
+                        index === 0 && "text-foreground/80",
+                      )}
+                    >
                       {item.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardFooter className="justify-between">
-                    <span className="text-xs text-muted-foreground">
-                      Reference + guidance
-                    </span>
-                    <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
-                  </CardFooter>
-                </Card>
+                    </p>
+                  </div>
+                  {index === 0 ? (
+                    <footer className="relative z-10 mt-6 flex items-center justify-between">
+                      <span className="text-xs font-medium text-foreground/80">
+                        Reference + guidance
+                      </span>
+                      <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
+                    </footer>
+                  ) : null}
+                </BentoCard>
               </a>
             );
           })}
-        </div>
+        </BentoGrid>
       </section>
 
       <section className="scroll-mt-24" id="layers">
