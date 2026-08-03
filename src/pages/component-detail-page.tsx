@@ -1,5 +1,11 @@
-import { useState } from "react";
-import { AlertCircleIcon, InfoIcon, SaveIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import {
+  AlertCircleIcon,
+  CheckIcon,
+  CopyIcon,
+  InfoIcon,
+  SaveIcon,
+} from "lucide-react";
 
 import { CheckList, DocsLayout } from "@/components/site-shell";
 import {
@@ -42,6 +48,7 @@ import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -423,6 +430,243 @@ const details: Record<ComponentKey, ComponentDetail> = {
   },
 };
 
+const snippets: Record<ComponentKey, string> = {
+  button: `import { SaveIcon } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+
+export function ButtonDemo() {
+  return (
+    <Button>
+      <SaveIcon data-icon="inline-start" />
+      Save changes
+    </Button>
+  )
+}`,
+  card: `import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+export function CardDemo() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Release readiness</CardTitle>
+        <CardDescription>Three checks remain.</CardDescription>
+        <CardAction>In review</CardAction>
+      </CardHeader>
+      <CardContent>Build, accessibility, and parity</CardContent>
+      <CardFooter>
+        <Button size="sm">Review checks</Button>
+      </CardFooter>
+    </Card>
+  )
+}`,
+  dialog: `import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+export function DialogDemo() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Publish this reference?</DialogTitle>
+          <DialogDescription>
+            The latest documentation will become public.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button>Publish</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}`,
+  input: `import { Field, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+
+export function InputDemo() {
+  return (
+    <Field>
+      <FieldLabel htmlFor="email">Work email</FieldLabel>
+      <Input
+        id="email"
+        type="email"
+        placeholder="you@example.com"
+        autoComplete="email"
+      />
+    </Field>
+  )
+}`,
+  tabs: `import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+
+export function TabsDemo() {
+  return (
+    <Tabs defaultValue="overview">
+      <TabsList>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="states">States</TabsTrigger>
+      </TabsList>
+      <TabsContent value="overview">Overview content</TabsContent>
+      <TabsContent value="states">State guidance</TabsContent>
+    </Tabs>
+  )
+}`,
+  alert: `import { InfoIcon } from "lucide-react"
+
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+
+export function AlertDemo() {
+  return (
+    <Alert>
+      <InfoIcon />
+      <AlertTitle>Reference updated</AlertTitle>
+      <AlertDescription>
+        Color guidance now includes dark-theme pairings.
+      </AlertDescription>
+    </Alert>
+  )
+}`,
+  badge: `import { Badge } from "@/components/ui/badge"
+
+export function BadgeDemo() {
+  return (
+    <div className="flex gap-2">
+      <Badge>Stable</Badge>
+      <Badge variant="secondary">Draft</Badge>
+      <Badge variant="outline">Experimental</Badge>
+    </div>
+  )
+}`,
+  checkbox: `import { Checkbox } from "@/components/ui/checkbox"
+import { Field, FieldLabel } from "@/components/ui/field"
+
+export function CheckboxDemo() {
+  return (
+    <Field orientation="horizontal">
+      <Checkbox id="release-notes" defaultChecked />
+      <FieldLabel htmlFor="release-notes">
+        Send release notes
+      </FieldLabel>
+    </Field>
+  )
+}`,
+  select: `import { Field, FieldLabel } from "@/components/ui/field"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectDemo() {
+  return (
+    <Field>
+      <FieldLabel>Interface density</FieldLabel>
+      <Select defaultValue="comfortable">
+        <SelectTrigger>
+          <SelectValue placeholder="Select density" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="compact">Compact</SelectItem>
+            <SelectItem value="comfortable">Comfortable</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </Field>
+  )
+}`,
+  switch: `import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+} from "@/components/ui/field"
+import { Switch } from "@/components/ui/switch"
+
+export function SwitchDemo() {
+  return (
+    <Field orientation="horizontal">
+      <FieldContent>
+        <FieldLabel htmlFor="notifications">
+          Release notifications
+        </FieldLabel>
+        <FieldDescription>Receive deployment updates.</FieldDescription>
+      </FieldContent>
+      <Switch id="notifications" defaultChecked />
+    </Field>
+  )
+}`,
+  table: `import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
+export function TableDemo() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Token</TableHead>
+          <TableHead>Role</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>primary</TableCell>
+          <TableCell>Action</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  )
+}`,
+  skeleton: `import { Skeleton } from "@/components/ui/skeleton"
+
+export function SkeletonDemo() {
+  return (
+    <div aria-busy="true" aria-label="Loading profile">
+      <Skeleton className="size-12 rounded-full" />
+      <Skeleton className="mt-3 h-4 w-2/5" />
+      <Skeleton className="mt-2 h-4 w-4/5" />
+    </div>
+  )
+}`,
+};
+
 function ComponentSpecimen({ type }: { type: ComponentKey }) {
   const [enabled, setEnabled] = useState(true);
   const [checked, setChecked] = useState(true);
@@ -612,9 +856,11 @@ function ComponentSpecimen({ type }: { type: ComponentKey }) {
                 <SelectValue placeholder="Select density" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="compact">Compact</SelectItem>
-                <SelectItem value="comfortable">Comfortable</SelectItem>
-                <SelectItem value="spacious">Spacious</SelectItem>
+                <SelectGroup>
+                  <SelectItem value="compact">Compact</SelectItem>
+                  <SelectItem value="comfortable">Comfortable</SelectItem>
+                  <SelectItem value="spacious">Spacious</SelectItem>
+                </SelectGroup>
               </SelectContent>
             </Select>
             <FieldDescription>
@@ -702,6 +948,124 @@ function ComponentSpecimen({ type }: { type: ComponentKey }) {
   }
 }
 
+function CopyCodeButton({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+  const resetTimer = useRef<number | undefined>(undefined);
+
+  useEffect(
+    () => () => {
+      if (resetTimer.current) window.clearTimeout(resetTimer.current);
+    },
+    [],
+  );
+
+  async function copyCode() {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      if (resetTimer.current) window.clearTimeout(resetTimer.current);
+      resetTimer.current = window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      setCopied(false);
+    }
+  }
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon-sm"
+      onClick={copyCode}
+      aria-label={copied ? "Copied" : "Copy code"}
+      title={copied ? "Copied" : "Copy code"}
+    >
+      {copied ? <CheckIcon /> : <CopyIcon />}
+    </Button>
+  );
+}
+
+function CodeBlock({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="overflow-hidden rounded-xl border bg-muted/30">
+      <div className="flex min-h-11 items-center justify-between border-b px-3">
+        <span className="font-mono text-xs text-muted-foreground">{label}</span>
+        <CopyCodeButton value={value} />
+      </div>
+      <pre
+        className="component-code-scroll"
+        role="region"
+        aria-label={`${label} code`}
+        tabIndex={0}
+      >
+        <code>{value}</code>
+      </pre>
+    </div>
+  );
+}
+
+function ComponentPreview({ type }: { type: ComponentKey }) {
+  const code = snippets[type];
+
+  return (
+    <Tabs
+      defaultValue="preview"
+      className="component-preview gap-0 overflow-hidden rounded-xl border bg-card"
+    >
+      <div className="flex min-h-12 items-center justify-between border-b bg-muted/20 px-3">
+        <TabsList variant="line" aria-label="Component example view">
+          <TabsTrigger value="preview">Preview</TabsTrigger>
+          <TabsTrigger value="code">View code</TabsTrigger>
+        </TabsList>
+        <CopyCodeButton value={code} />
+      </div>
+      <TabsContent value="preview" className="m-0">
+        <ComponentSpecimen type={type} />
+      </TabsContent>
+      <TabsContent value="code" className="m-0">
+        <pre
+          className="component-preview-code"
+          role="region"
+          aria-label={`${type} interactive preview source`}
+          tabIndex={0}
+        >
+          <code>{code}</code>
+        </pre>
+      </TabsContent>
+    </Tabs>
+  );
+}
+
+function Installation({ type }: { type: ComponentKey }) {
+  const command = `npx shadcn@latest add ${type}`;
+
+  return (
+    <Tabs defaultValue="command" className="gap-4">
+      <TabsList variant="line" aria-label="Installation method">
+        <TabsTrigger value="command">Command</TabsTrigger>
+        <TabsTrigger value="manual">Manual</TabsTrigger>
+      </TabsList>
+      <TabsContent value="command">
+        <CodeBlock label="Terminal" value={command} />
+      </TabsContent>
+      <TabsContent value="manual">
+        <Card>
+          <CardHeader>
+            <CardTitle>Own the generated source</CardTitle>
+            <CardDescription>
+              Copy the component into the project, then review it against the
+              Comfort tokens before extending behavior.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <code className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
+              src/components/ui/{type}.tsx
+            </code>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  );
+}
+
 function GuidanceColumns({ detail }: { detail: ComponentDetail }) {
   return (
     <div className="grid gap-4 md:grid-cols-2">
@@ -764,7 +1128,8 @@ export function ComponentDetailPage({
       description={detail.description}
       outline={[
         { id: "preview", title: "Preview" },
-        { id: "when-to-use", title: "When to use" },
+        { id: "installation", title: "Installation" },
+        { id: "usage", title: "Usage" },
         { id: "anatomy", title: "Anatomy" },
         { id: "guidelines", title: "Guidelines" },
         { id: "api", title: "API reference" },
@@ -773,27 +1138,41 @@ export function ComponentDetailPage({
       next={next}
     >
       <section className="scroll-mt-24" id="preview">
-        <ComponentSpecimen type={slug} />
+        <ComponentPreview type={slug} />
       </section>
-      <section
-        className="scroll-mt-24 grid gap-4 md:grid-cols-[10rem_1fr]"
-        id="when-to-use"
-      >
-        <div>
-          <Badge variant="secondary">When to use</Badge>
+      <section className="scroll-mt-24 flex flex-col gap-5" id="installation">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-semibold tracking-[-0.03em]">
+            Installation
+          </h2>
+          <p className="text-sm leading-6 text-muted-foreground">
+            Add the shadcn source to your project, then keep local ownership of
+            the implementation.
+          </p>
         </div>
-        <p className="leading-7 text-muted-foreground">{detail.usage}</p>
+        <Installation type={slug} />
+      </section>
+      <section className="scroll-mt-24 flex flex-col gap-5" id="usage">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-semibold tracking-[-0.03em]">Usage</h2>
+          <p className="leading-7 text-muted-foreground">{detail.usage}</p>
+        </div>
+        <CodeBlock label={`${detail.title} usage`} value={snippets[slug]} />
       </section>
       <section className="scroll-mt-24 flex flex-col gap-5" id="anatomy">
         <h2 className="text-2xl font-semibold tracking-[-0.03em]">Anatomy</h2>
         <div className="grid gap-3 md:grid-cols-3">
           {detail.anatomy.map((item, index) => (
-            <div className="rounded-xl border bg-card p-5" key={item}>
-              <span className="font-mono text-xs text-primary">
-                0{index + 1}
-              </span>
-              <p className="mt-8 text-sm font-medium leading-6">{item}</p>
-            </div>
+            <Card size="sm" key={item}>
+              <CardHeader>
+                <CardDescription className="font-mono text-xs text-primary">
+                  0{index + 1}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm font-medium leading-6">{item}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
