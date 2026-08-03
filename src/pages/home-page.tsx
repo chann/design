@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+import designSystemCollaboration from "@/assets/design-system-collaboration.webp";
 import {
   PhosphorIcon,
   type PhosphorIconName,
@@ -200,41 +201,27 @@ function TaglineReveal() {
 function FoundationPreview() {
   return (
     <figure className="foundation-preview landing-enter landing-enter-late">
-      <figcaption className="sr-only">
-        Comfort foundation preview showing brand color, typography, semantic
-        roles, and interface states
+      <img
+        alt="A designer, engineer, and AI coding console working from one shared interface specification."
+        className="foundation-preview-image"
+        decoding="async"
+        fetchPriority="high"
+        height="1254"
+        loading="eager"
+        sizes="(min-width: 1024px) 42vw, 100vw"
+        src={designSystemCollaboration}
+        width="1254"
+      />
+      <figcaption className="foundation-preview-caption">
+        <span className="foundation-preview-label">
+          DESIGN.md · shared source
+        </span>
+        <strong>One source aligns every role.</strong>
+        <p className="sr-only">
+          Design, engineering, and coding agents stay aligned from decision to
+          interface.
+        </p>
       </figcaption>
-      <div aria-hidden="true" className="foundation-preview-grid">
-        <div className="foundation-preview-token">
-          <span className="foundation-preview-label">design token · 01</span>
-          <strong>$color.bg.brand</strong>
-          <p>One semantic role, shared across every surface.</p>
-        </div>
-        <div className="foundation-preview-shape">
-          <span className="foundation-shape foundation-shape-square" />
-          <span className="foundation-shape foundation-shape-circle" />
-          <span className="foundation-shape foundation-shape-arch" />
-        </div>
-        <div className="foundation-preview-type">
-          <span className="foundation-preview-label">typography · 02</span>
-          <strong>Aa</strong>
-          <p>Geist · display</p>
-        </div>
-        <div className="foundation-preview-roles">
-          <div>
-            <span>primary</span>
-            <strong>#0066CC</strong>
-          </div>
-          <div>
-            <span>focus</span>
-            <strong>visible</strong>
-          </div>
-          <div>
-            <span>states</span>
-            <strong>complete</strong>
-          </div>
-        </div>
-      </div>
     </figure>
   );
 }
