@@ -11,8 +11,7 @@ import { PrinciplesPage } from "@/pages/principles-page";
 import { currentRoute, siteHref } from "@/data/site";
 
 const SITE_ORIGIN = "https://chann.github.io";
-const HOME_TITLE =
-  "Comfort Design System | A design contract for clear interfaces";
+const HOME_TITLE = "Comfort Design System | Design clear interfaces";
 const HOME_DESCRIPTION =
   "Comfort gives product teams and coding agents one design contract for semantic foundations, complete states, and 12 production ready component references.";
 

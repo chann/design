@@ -197,64 +197,41 @@ function TaglineReveal() {
   );
 }
 
-function ContractPreview() {
+function FoundationPreview() {
   return (
-    <figure className="contract-preview landing-enter landing-enter-late">
+    <figure className="foundation-preview landing-enter landing-enter-late">
       <figcaption className="sr-only">
-        Comfort design contract structure and semantic token example
+        Comfort foundation preview showing brand color, typography, semantic
+        roles, and interface states
       </figcaption>
-      <div className="contract-preview-bar">
-        <span className="flex items-center gap-2 text-sm font-semibold">
-          <PhosphorIcon
-            aria-hidden="true"
-            className="size-5 text-primary-text"
-            name="file-code"
-          />
-          DESIGN.md
-        </span>
-        <span className="flex items-center gap-2 text-xs text-muted-foreground">
-          <PhosphorIcon
-            aria-hidden="true"
-            className="size-4 text-primary-text"
-            name="check-circle"
-          />
-          validated
-        </span>
-      </div>
-      <div className="contract-preview-body">
-        <ol aria-label="Contract sections" className="contract-preview-index">
-          {["Overview", "Colors", "Typography", "Components"].map(
-            (item, index) => (
-              <li className={index === 0 ? "is-active" : undefined} key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {item}
-              </li>
-            ),
-          )}
-        </ol>
-        <div className="contract-preview-code">
-          <p className="text-xs text-muted-foreground">semantic roles</p>
-          <div className="mt-6 flex flex-col gap-4 font-mono text-sm">
-            <p>
-              <span>canvas</span>
-              <strong>#F7F8FA</strong>
-            </p>
-            <p>
-              <span>foreground</span>
-              <strong>#17181A</strong>
-            </p>
-            <p>
-              <span>primary</span>
-              <strong>#FF6600</strong>
-            </p>
+      <div aria-hidden="true" className="foundation-preview-grid">
+        <div className="foundation-preview-token">
+          <span className="foundation-preview-label">design token · 01</span>
+          <strong>$color.bg.brand</strong>
+          <p>One semantic role, shared across every surface.</p>
+        </div>
+        <div className="foundation-preview-shape">
+          <span className="foundation-shape foundation-shape-square" />
+          <span className="foundation-shape foundation-shape-circle" />
+          <span className="foundation-shape foundation-shape-arch" />
+        </div>
+        <div className="foundation-preview-type">
+          <span className="foundation-preview-label">typography · 02</span>
+          <strong>Aa</strong>
+          <p>Geist · display</p>
+        </div>
+        <div className="foundation-preview-roles">
+          <div>
+            <span>primary</span>
+            <strong>#FF6600</strong>
           </div>
-          <div className="contract-preview-focus">
-            <span>focus visible</span>
-            <PhosphorIcon
-              aria-hidden="true"
-              className="size-5"
-              name="flow-arrow"
-            />
+          <div>
+            <span>focus</span>
+            <strong>visible</strong>
+          </div>
+          <div>
+            <span>states</span>
+            <strong>complete</strong>
           </div>
         </div>
       </div>
@@ -285,19 +262,18 @@ export function HomePage({ currentPath }: { currentPath: string }) {
     <>
       <SiteHeader currentPath={currentPath} />
       <main id="main-content">
-        <section className="landing-hero mx-auto grid max-w-7xl gap-12 px-4 pb-24 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(28rem,0.9fr)] lg:items-center lg:gap-16 lg:px-8 lg:pb-24 lg:pt-24">
+        <section className="landing-hero mx-auto grid max-w-7xl gap-12 px-4 pb-20 pt-12 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(28rem,0.95fr)] lg:items-center lg:gap-16 lg:px-8 lg:pb-24 lg:pt-20">
           <div className="flex flex-col gap-8">
             <div className="landing-enter flex flex-col gap-6">
               <p className="eyebrow">A design contract for product teams</p>
               <h1
-                aria-label="Ship interfaces people understand, with one design contract."
-                className="hero-heading max-w-[680px] text-balance text-4xl font-semibold sm:text-6xl"
+                aria-label="Ship interfaces people trust, from one clear design contract."
+                className="hero-heading max-w-[680px] text-balance text-4xl font-semibold sm:text-6xl lg:text-7xl"
               >
                 <span className="block">Ship interfaces</span>
-                <span className="block">people understand,</span>
-                <span className="block">
-                  with one design{"\u00a0"}contract.
-                </span>
+                <span className="block">people trust,</span>
+                <span className="block">from one clear</span>
+                <span className="block">design contract.</span>
               </h1>
               <p className="max-w-[680px] text-pretty text-lg text-muted-foreground">
                 Comfort gives designers, engineers, and coding agents the same
@@ -324,16 +300,16 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               </p>
             </div>
           </div>
-          <ContractPreview />
+          <FoundationPreview />
         </section>
 
-        <section aria-label="Comfort in numbers" className="border-y bg-card">
-          <div className="mx-auto grid max-w-7xl sm:grid-cols-3">
+        <section
+          aria-label="Comfort in numbers"
+          className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8"
+        >
+          <div className="proof-strip grid gap-6 rounded-2xl bg-secondary px-6 py-6 sm:grid-cols-3 lg:px-8">
             {proofPoints.map((item) => (
-              <div
-                className="flex items-baseline gap-3 px-4 py-6 sm:px-6 sm:not-last:border-r lg:px-8"
-                key={item.label}
-              >
+              <div className="flex items-baseline gap-3" key={item.label}>
                 <strong className="font-mono text-3xl font-semibold text-primary-text">
                   {item.value}
                 </strong>
@@ -428,7 +404,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
           </Reveal>
         </section>
 
-        <section className="border-y bg-card">
+        <section className="bg-card">
           <Reveal className="mx-auto grid max-w-7xl gap-12 px-4 py-24 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
             <div className="flex max-w-xl flex-col gap-6">
               <p className="eyebrow">Proof in the product</p>
