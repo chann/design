@@ -1,12 +1,14 @@
 ---
 version: alpha
 name: Comfort Design System
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A comfortable, clear, and trustworthy product interface built from quiet neutral surfaces, a focused orange action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
-  primary: "#0066CC"
-  primary-strong: "#004F9E"
-  on-primary: "#FFFFFF"
+  primary: "#FF6600"
+  primary-strong: "#E14D00"
+  primary-text: "#A63D00"
+  on-primary: "#111111"
+  on-status: "#FFFFFF"
   ink: "#17181A"
   body: "#3F4650"
   muted: "#6B7280"
@@ -26,8 +28,9 @@ colors:
   dark-ink: "#F4F6F8"
   dark-body: "#BCC2CA"
   dark-hairline: "#39404B"
-  dark-primary: "#78B7FF"
-  dark-on-primary: "#0A243D"
+  dark-primary: "#FF6600"
+  dark-primary-text: "#FF9E65"
+  dark-on-primary: "#171717"
 
 typography:
   display:
@@ -164,7 +167,7 @@ components:
     size: 44px
   text-link:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.primary}"
+    textColor: "{colors.primary-text}"
     typography: "{typography.body-md}"
     rounded: "{rounded.sm}"
   card:
@@ -203,19 +206,19 @@ components:
     height: 1px
   status-success:
     backgroundColor: "{colors.success}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-warning:
     backgroundColor: "{colors.warning}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-info:
     backgroundColor: "{colors.info}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
@@ -260,6 +263,11 @@ components:
     rounded: "{rounded.md}"
     padding: 12px 20px
     height: 44px
+  dark-text-link:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.dark-primary-text}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.sm}"
   dark-separator:
     backgroundColor: "{colors.dark-hairline}"
     rounded: "{rounded.none}"
@@ -284,8 +292,8 @@ YAML front matter는 기계가 읽는 토큰 계약이고, 본문은 그 값을 
 ## Overview
 
 Comfort Design System은 대시보드, 제작 도구, 설정, 커머스, 운영 워크플로처럼 집중이
-필요한 제품 인터페이스를 위한 시스템입니다. 차가운 뉴트럴 표면, 절제된 단일
-블루 액션 컬러, 시스템 우선 타이포그래피, 명확한 컨테인먼트, 원인과 이동
+필요한 제품 인터페이스를 위한 시스템입니다. 차분한 뉴트럴 표면, 집중된 단일
+오렌지 액션 컬러, 시스템 우선 타이포그래피, 명확한 컨테인먼트, 원인과 이동
 방향을 설명하는 모션이 핵심입니다.
 
 | 품질            | 사용자가 느껴야 하는 것                    | 화면에서 확인되는 근거                                           |
@@ -315,10 +323,12 @@ UI를 복제하지 않습니다.
 
 ### 핵심 역할
 
-- **Primary** (`{colors.primary}` — #0066CC): 유일한 범용 인터랙션
+- **Primary** (`{colors.primary}` — #FF6600): 유일한 범용 인터랙션
   액센트입니다. 주 액션, 링크, 포커스 링, 활성 내비게이션, 선택 상태에 씁니다.
-- **Primary Strong** (`{colors.primary-strong}` — #004F9E): 눌림 또는 강화된
+- **Primary Strong** (`{colors.primary-strong}` — #E14D00): 눌림 또는 강화된
   primary 상태입니다. 별도의 액센트 계열처럼 확장하지 않습니다.
+- **Primary Text** (`{colors.primary-text}` — #A63D00): 밝은 표면에서 접근성을
+  확보하는 브랜드 텍스트입니다. 더 밝은 primary는 채움, 선, 큰 마크에 씁니다.
 - **Canvas** (`{colors.canvas}` — #F7F8FA): 기본 페이지 바닥입니다.
 - **Surface** (`{colors.surface}` — #FFFFFF): 카드, 컨트롤, 핵심 콘텐츠
   영역입니다.
@@ -533,7 +543,7 @@ inline에 둡니다. toast는 결과가 화면 밖에 있는 짧은 확인에만
 ### Don't
 
 - 재사용할 색, radius, shadow, spacing을 component 안에 raw value로 넣지 않습니다.
-- primary blue를 장식으로 쓰거나 한 영역에 primary action을 여러 개 두지 않습니다.
+- primary orange를 장식으로 쓰거나 한 영역에 primary action을 여러 개 두지 않습니다.
 - 모든 section을 floating card 안에 넣지 않습니다.
 - hover를 필수 콘텐츠나 액션의 유일한 경로로 만들지 않습니다.
 - animation 실행 중이라는 이유로 input을 잠그지 않습니다.

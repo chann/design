@@ -1,12 +1,14 @@
 ---
 version: alpha
 name: Comfort Design System
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A comfortable, clear, and trustworthy product interface built from quiet neutral surfaces, a focused orange action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
-  primary: "#0066CC"
-  primary-strong: "#004F9E"
-  on-primary: "#FFFFFF"
+  primary: "#FF6600"
+  primary-strong: "#E14D00"
+  primary-text: "#A63D00"
+  on-primary: "#111111"
+  on-status: "#FFFFFF"
   ink: "#17181A"
   body: "#3F4650"
   muted: "#6B7280"
@@ -26,8 +28,9 @@ colors:
   dark-ink: "#F4F6F8"
   dark-body: "#BCC2CA"
   dark-hairline: "#39404B"
-  dark-primary: "#78B7FF"
-  dark-on-primary: "#0A243D"
+  dark-primary: "#FF6600"
+  dark-primary-text: "#FF9E65"
+  dark-on-primary: "#171717"
 
 typography:
   display:
@@ -164,7 +167,7 @@ components:
     size: 44px
   text-link:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.primary}"
+    textColor: "{colors.primary-text}"
     typography: "{typography.body-md}"
     rounded: "{rounded.sm}"
   card:
@@ -203,19 +206,19 @@ components:
     height: 1px
   status-success:
     backgroundColor: "{colors.success}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-warning:
     backgroundColor: "{colors.warning}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-info:
     backgroundColor: "{colors.info}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
@@ -260,6 +263,11 @@ components:
     rounded: "{rounded.md}"
     padding: 12px 20px
     height: 44px
+  dark-text-link:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.dark-primary-text}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.sm}"
   dark-separator:
     backgroundColor: "{colors.dark-hairline}"
     rounded: "{rounded.none}"
@@ -284,8 +292,8 @@ YAML front matter は機械可読の token 契約であり、本文はその値�
 ## Overview
 
 Comfort Design System は dashboard、制作ツール、設定、commerce、運用 workflow など、
-集中を必要とする product interface のためのシステムです。クールな neutral
-surface、節度ある単一の青い action color、system-first typography、明確な
+集中を必要とする product interface のためのシステムです。静かな neutral
+surface、焦点を絞った単一のオレンジ action color、system-first typography、明確な
 containment、内容の出所と移動先を説明する motion を組み合わせます。
 
 | 品質            | ユーザーが感じること                 | 確認できる設計根拠                                                        |
@@ -315,10 +323,13 @@ interface を複製しません。
 
 ### 中核 role
 
-- **Primary** (`{colors.primary}` — #0066CC): 唯一の汎用 interaction accent。
+- **Primary** (`{colors.primary}` — #FF6600): 唯一の汎用 interaction accent。
   主 action、link、focus ring、active navigation、selected state に使います。
-- **Primary Strong** (`{colors.primary-strong}` — #004F9E): pressed または
+- **Primary Strong** (`{colors.primary-strong}` — #E14D00): pressed または
   強調された primary state。別の accent 系列には展開しません。
+- **Primary Text** (`{colors.primary-text}` — #A63D00): light surface 上で
+  accessibility を確保する brand text。明るい primary は fill、stroke、
+  大きな mark に使います。
 - **Canvas** (`{colors.canvas}` — #F7F8FA): 標準の page floor。
 - **Surface** (`{colors.surface}` — #FFFFFF): card、control、主要 content。
 - **Surface Soft** (`{colors.surface-soft}` — #EEF1F5): grouped control、静かな
@@ -533,7 +544,7 @@ dark variant は agent の推測を避けるため YAML に明示します。文
 
 - reusable color、radius、shadow、spacing を component に raw value で
   埋め込みません。
-- primary blue を装飾に使わず、一つの region に複数の primary action を
+- primary orange を装飾に使わず、一つの region に複数の primary action を
   置きません。
 - すべての section を floating card にしません。
 - hover を必須 content や action への唯一の経路にしません。

@@ -207,7 +207,7 @@ function ContractPreview() {
         <span className="flex items-center gap-2 text-sm font-semibold">
           <PhosphorIcon
             aria-hidden="true"
-            className="size-5 text-primary"
+            className="size-5 text-primary-text"
             name="file-code"
           />
           DESIGN.md
@@ -215,7 +215,7 @@ function ContractPreview() {
         <span className="flex items-center gap-2 text-xs text-muted-foreground">
           <PhosphorIcon
             aria-hidden="true"
-            className="size-4 text-primary"
+            className="size-4 text-primary-text"
             name="check-circle"
           />
           validated
@@ -245,7 +245,7 @@ function ContractPreview() {
             </p>
             <p>
               <span>primary</span>
-              <strong>#0066CC</strong>
+              <strong>#FF6600</strong>
             </p>
           </div>
           <div className="contract-preview-focus">
@@ -334,7 +334,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 className="flex items-baseline gap-3 px-4 py-6 sm:px-6 sm:not-last:border-r lg:px-8"
                 key={item.label}
               >
-                <strong className="font-mono text-3xl font-semibold text-primary">
+                <strong className="font-mono text-3xl font-semibold text-primary-text">
                   {item.value}
                 </strong>
                 <span className="text-sm text-muted-foreground">
@@ -413,7 +413,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
             <ol className="step-list">
               {steps.map((step) => (
                 <li className="step-item" key={step.number}>
-                  <span className="font-mono text-sm text-primary">
+                  <span className="font-mono text-sm text-primary-text">
                     {step.number}
                   </span>
                   <div className="flex flex-col gap-2">
@@ -441,7 +441,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 checks. The reference and the source stay close enough to audit.
               </p>
               <a
-                className="landing-text-link w-fit text-base font-semibold text-primary"
+                className="landing-text-link w-fit text-base font-semibold text-primary-text"
                 href={siteHref("/components")}
               >
                 Inspect the component references
@@ -457,7 +457,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
                 <span className="flex items-center gap-2 text-sm font-semibold">
                   <PhosphorIcon
                     aria-hidden="true"
-                    className="size-5 text-primary"
+                    className="size-5 text-primary-text"
                     name="globe"
                   />
                   Live reference
@@ -486,7 +486,7 @@ export function HomePage({ currentPath }: { currentPath: string }) {
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
                 <PhosphorIcon
                   aria-hidden="true"
-                  className="size-5 text-primary"
+                  className="size-5 text-primary-text"
                   name="check-circle"
                 />
                 Route, type, lint, and production build checks are part of the

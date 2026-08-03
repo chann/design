@@ -5,7 +5,7 @@
 This repository contains a Google Stitch-compatible `DESIGN.md` for
 comfortable, clear, and trustworthy product interfaces.
 
-The system combines cool neutral surfaces, one restrained blue action color,
+The system combines quiet neutral surfaces, one focused orange action color,
 system-first typography, clear containment, spatially continuous motion, and
 inclusive defaults. It borrows the discipline of high-quality native
 interfaces while remaining distinctly web-native; it does not reproduce an

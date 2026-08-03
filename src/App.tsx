@@ -140,7 +140,7 @@ function NotFoundPage() {
   return (
     <main id="main-content" className="grid min-h-dvh place-items-center px-4">
       <div className="flex max-w-lg flex-col items-center gap-5 text-center">
-        <span className="font-mono text-sm text-primary">404</span>
+        <span className="font-mono text-sm text-primary-text">404</span>
         <h1 className="text-4xl font-semibold tracking-[-0.04em]">
           This reference has moved.
         </h1>

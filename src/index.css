@@ -32,6 +32,8 @@
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
+  --color-primary-text: var(--primary-text);
+  --color-primary-strong: var(--primary-strong);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
@@ -56,19 +58,21 @@
   --card-foreground: #17181a;
   --popover: #ffffff;
   --popover-foreground: #17181a;
-  --primary: #0066cc;
-  --primary-foreground: #ffffff;
-  --secondary: #eef1f5;
+  --primary: #ff6600;
+  --primary-strong: #e14d00;
+  --primary-text: #a63d00;
+  --primary-foreground: #111111;
+  --secondary: #fff2ec;
   --secondary-foreground: #17181a;
   --muted: #eef1f5;
   --muted-foreground: #626b78;
-  --accent: #e7edf5;
+  --accent: #ffe8db;
   --accent-foreground: #17181a;
   --destructive: #b42318;
   --border: #d7dce2;
   --input: #c9d0d9;
-  --ring: #0066cc;
-  --chart-1: #0066cc;
+  --ring: #e14d00;
+  --chart-1: #ff6600;
   --chart-2: #137333;
   --chart-3: #8a4b00;
   --chart-4: #6b7280;
@@ -76,12 +80,12 @@
   --radius: 0.625rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #17181a;
-  --sidebar-primary: #0066cc;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary: #ff6600;
+  --sidebar-primary-foreground: #1a1c20;
   --sidebar-accent: #eef1f5;
   --sidebar-accent-foreground: #17181a;
   --sidebar-border: #d7dce2;
-  --sidebar-ring: #0066cc;
+  --sidebar-ring: #e14d00;
 }
 
 .dark {
@@ -91,8 +95,10 @@
   --card-foreground: #f4f6f8;
   --popover: #272727;
   --popover-foreground: #f4f6f8;
-  --primary: #78b7ff;
-  --primary-foreground: #0a243d;
+  --primary: #ff6600;
+  --primary-strong: #ff9e65;
+  --primary-text: #ff9e65;
+  --primary-foreground: #171717;
   --secondary: #272727;
   --secondary-foreground: #f4f6f8;
   --muted: #272727;
@@ -102,20 +108,20 @@
   --destructive: #ff8a80;
   --border: #39404b;
   --input: #4a5361;
-  --ring: #78b7ff;
-  --chart-1: #78b7ff;
+  --ring: #ff9e65;
+  --chart-1: #ff6600;
   --chart-2: #66c987;
   --chart-3: #ffbb66;
   --chart-4: #bcc2ca;
   --chart-5: #f4f6f8;
   --sidebar: #1f1f1f;
   --sidebar-foreground: #f4f6f8;
-  --sidebar-primary: #78b7ff;
-  --sidebar-primary-foreground: #0a243d;
-  --sidebar-accent: #242832;
+  --sidebar-primary: #ff6600;
+  --sidebar-primary-foreground: #171717;
+  --sidebar-accent: #313131;
   --sidebar-accent-foreground: #f4f6f8;
   --sidebar-border: #39404b;
-  --sidebar-ring: #78b7ff;
+  --sidebar-ring: #ff9e65;
 }
 
 @layer base {
@@ -255,7 +261,7 @@
 
 .mobile-menu-link:hover,
 .mobile-menu-link.is-current {
-  color: var(--primary);
+  color: var(--primary-text);
 }
 
 .mobile-menu-link:active {
@@ -322,7 +328,7 @@
 }
 
 .eyebrow {
-  color: var(--primary);
+  color: var(--primary-text);
   font-size: 0.75rem;
   font-weight: 650;
   letter-spacing: 0.14em;
@@ -481,7 +487,7 @@
 }
 
 .contract-preview-code strong {
-  color: var(--primary);
+  color: var(--primary-text);
   font-weight: 600;
 }
 
@@ -494,7 +500,7 @@
   border: 1px solid var(--primary);
   border-radius: 0.75rem;
   padding: 1rem;
-  color: var(--primary);
+  color: var(--primary-text);
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 600;
@@ -594,7 +600,7 @@
   place-items: center;
   border-radius: 0.75rem;
   background: var(--secondary);
-  color: var(--primary);
+  color: var(--primary-text);
 }
 
 .benefit-icon svg {
@@ -624,7 +630,7 @@
 }
 
 .benefit-token-map strong {
-  color: var(--primary);
+  color: var(--primary-text);
 }
 
 .step-list {
@@ -683,7 +689,7 @@
 }
 
 .landing-text-link:hover {
-  color: color-mix(in srgb, var(--primary) 80%, var(--foreground));
+  color: var(--primary-text);
   transform: translateX(2px);
 }
 
@@ -820,7 +826,7 @@
 }
 
 .principle-map-center span {
-  color: var(--primary);
+  color: var(--primary-text);
   font-size: 0.75rem;
   font-weight: 650;
   text-transform: uppercase;
@@ -831,7 +837,7 @@
 .principle-node {
   border-radius: 0.8rem;
   padding: 0.7rem 0.85rem;
-  color: var(--primary);
+  color: var(--primary-text);
   font-family: var(--font-mono);
   font-size: 0.65rem;
 }
@@ -882,7 +888,7 @@
   border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border));
   border-radius: 0.75rem;
   background: color-mix(in srgb, var(--primary) 12%, var(--card));
-  color: var(--primary);
+  color: var(--primary-text);
   font-size: 0.75rem;
   font-weight: 650;
 }

@@ -55,24 +55,24 @@ const details: Record<
     roles: [
       ["background", "Page canvas", "#F7F8FA"],
       ["foreground", "Primary text", "#17181A"],
-      ["primary", "Primary action", "#0066CC"],
+      ["primary", "Primary action", "#FF6600"],
       ["border", "Structure", "#D7DCE2"],
     ],
   },
   color: {
     title: "Color",
     description:
-      "Cool neutral surfaces create quiet structure while a restrained blue signals action, selection, and focus.",
-    why: "Comfort uses color to clarify hierarchy and state, never as the only source of meaning. Most product surfaces stay neutral so actionable blue remains useful.",
+      "Quiet neutral surfaces create structure while focused orange signals action, selection, and focus.",
+    why: "Comfort uses color to clarify hierarchy and state, never as the only source of meaning. Most product surfaces stay neutral so actionable orange remains useful.",
     rules: [
-      "Reserve primary blue for actions, active selection, and focus.",
+      "Reserve primary orange for actions, active selection, and focus.",
       "Pair status color with text, iconography, or shape.",
       "Evaluate contrast in both themes and every interactive state.",
     ],
     roles: [
       ["canvas", "App background", "#F7F8FA"],
       ["surface", "Content surface", "#FFFFFF"],
-      ["primary", "Action and focus", "#0066CC"],
+      ["primary", "Action and focus", "#FF6600"],
       ["destructive", "Critical action", "#B42318"],
     ],
   },
@@ -162,7 +162,7 @@ function FoundationSpecimen({ type }: { type: FoundationKey }) {
         {[
           ["Canvas", "#F7F8FA", "text-zinc-950"],
           ["Surface", "#FFFFFF", "text-zinc-950"],
-          ["Primary", "#0066CC", "text-white"],
+          ["Primary", "#FF6600", "text-zinc-950"],
           ["Ink", "#17181A", "text-white"],
         ].map(([name, value, color]) => (
           <div
@@ -284,7 +284,7 @@ export function FoundationDetailPage({
         className="scroll-mt-24 grid gap-5 md:grid-cols-[auto_1fr]"
         id="system"
       >
-        <span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary-text">
           <Icon />
         </span>
         <div className="flex flex-col gap-3">

@@ -1,12 +1,14 @@
 ---
 version: alpha
 name: Comfort Design System
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A comfortable, clear, and trustworthy product interface built from quiet neutral surfaces, a focused orange action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
-  primary: "#0066CC"
-  primary-strong: "#004F9E"
-  on-primary: "#FFFFFF"
+  primary: "#FF6600"
+  primary-strong: "#E14D00"
+  primary-text: "#A63D00"
+  on-primary: "#111111"
+  on-status: "#FFFFFF"
   ink: "#17181A"
   body: "#3F4650"
   muted: "#6B7280"
@@ -26,8 +28,9 @@ colors:
   dark-ink: "#F4F6F8"
   dark-body: "#BCC2CA"
   dark-hairline: "#39404B"
-  dark-primary: "#78B7FF"
-  dark-on-primary: "#0A243D"
+  dark-primary: "#FF6600"
+  dark-primary-text: "#FF9E65"
+  dark-on-primary: "#171717"
 
 typography:
   display:
@@ -164,7 +167,7 @@ components:
     size: 44px
   text-link:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.primary}"
+    textColor: "{colors.primary-text}"
     typography: "{typography.body-md}"
     rounded: "{rounded.sm}"
   card:
@@ -203,19 +206,19 @@ components:
     height: 1px
   status-success:
     backgroundColor: "{colors.success}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-warning:
     backgroundColor: "{colors.warning}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-info:
     backgroundColor: "{colors.info}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
@@ -260,6 +263,11 @@ components:
     rounded: "{rounded.md}"
     padding: 12px 20px
     height: 44px
+  dark-text-link:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.dark-primary-text}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.sm}"
   dark-separator:
     backgroundColor: "{colors.dark-hairline}"
     rounded: "{rounded.none}"
@@ -283,7 +291,7 @@ YAML front matter 是机器可读的 token 合同，正文说明如何应用这�
 ## Overview
 
 Comfort Design System 面向需要高度专注的产品界面，例如 dashboard、创作工具、设置、
-电商与运营流程。它以冷静的中性色 surface、单一且克制的蓝色 action、系统优先
+电商与运营流程。它以安静的中性色 surface、单一且聚焦的橙色 action、系统优先
 排版、清晰的容器关系，以及能解释来源与去向的 motion 为核心。
 
 | 品质            | 用户应当感受到                       | 可观察的产品证据                             |
@@ -310,10 +318,12 @@ Comfort Design System 面向需要高度专注的产品界面，例如 dashboard
 
 ### 核心角色
 
-- **Primary** (`{colors.primary}` — #0066CC)：唯一的通用交互强调色，用于
+- **Primary** (`{colors.primary}` — #FF6600)：唯一的通用交互强调色，用于
   主操作、link、focus ring、激活 navigation 与选中状态。
-- **Primary Strong** (`{colors.primary-strong}` — #004F9E)：按下或强化的
+- **Primary Strong** (`{colors.primary-strong}` — #E14D00)：按下或强化的
   primary 状态，不得扩展成第二套强调色。
+- **Primary Text** (`{colors.primary-text}` — #A63D00)：用于浅色表面的无障碍
+  品牌文本。更明亮的 primary 用于填充、描边和较大的品牌标记。
 - **Canvas** (`{colors.canvas}` — #F7F8FA)：默认页面底色。
 - **Surface** (`{colors.surface}` — #FFFFFF)：card、control 和主要内容区。
 - **Surface Soft** (`{colors.surface-soft}` — #EEF1F5)：分组 control、安静的
@@ -510,7 +520,7 @@ status pill 只用于短状态。继续操作所需的错误与信息放在 inli
 ### Don't
 
 - 不在 component 中硬编码可复用 color、radius、shadow 或 spacing。
-- 不把 primary blue 当装饰，也不在同一区域放多个 primary action。
+- 不把 primary orange 当装饰，也不在同一区域放多个 primary action。
 - 不把所有 section 都放进 floating card。
 - 不让 hover 成为必要内容或 action 的唯一入口。
 - 不因 animation 正在执行而锁定 input。

@@ -357,7 +357,7 @@ export function DocsLayout({
       <div className="mx-auto grid max-w-[96rem] lg:grid-cols-[15rem_minmax(0,1fr)] xl:grid-cols-[15rem_minmax(0,1fr)_13rem]">
         <aside
           aria-label={`${section} section navigation`}
-          className="hidden border-r lg:block"
+          className="hidden lg:block"
         >
           <div className="sticky top-24 h-[calc(100dvh-6rem)] py-8">
             <ScrollArea className="h-full px-5">
@@ -435,7 +435,7 @@ export function DocsLayout({
           </div>
         </main>
 
-        <aside aria-label="Page outline" className="hidden border-l xl:block">
+        <aside aria-label="Page outline" className="hidden xl:block">
           <nav
             className="sticky top-24 flex flex-col gap-1 px-5 py-8 text-sm"
             aria-label="On this page"
@@ -463,7 +463,7 @@ export function CheckList({ items }: { items: string[] }) {
     <ul className="flex flex-col gap-3">
       {items.map((item) => (
         <li className="flex gap-3 text-sm leading-6" key={item}>
-          <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-text">
             <CheckIcon className="size-3" />
           </span>
           {item}

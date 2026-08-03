@@ -1,12 +1,14 @@
 ---
 version: alpha
 name: Comfort Design System
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A comfortable, clear, and trustworthy product interface built from quiet neutral surfaces, a focused orange action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
-  primary: "#0066CC"
-  primary-strong: "#004F9E"
-  on-primary: "#FFFFFF"
+  primary: "#FF6600"
+  primary-strong: "#E14D00"
+  primary-text: "#A63D00"
+  on-primary: "#111111"
+  on-status: "#FFFFFF"
   ink: "#17181A"
   body: "#3F4650"
   muted: "#6B7280"
@@ -26,8 +28,9 @@ colors:
   dark-ink: "#F4F6F8"
   dark-body: "#BCC2CA"
   dark-hairline: "#39404B"
-  dark-primary: "#78B7FF"
-  dark-on-primary: "#0A243D"
+  dark-primary: "#FF6600"
+  dark-primary-text: "#FF9E65"
+  dark-on-primary: "#171717"
 
 typography:
   display:
@@ -164,7 +167,7 @@ components:
     size: 44px
   text-link:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.primary}"
+    textColor: "{colors.primary-text}"
     typography: "{typography.body-md}"
     rounded: "{rounded.sm}"
   card:
@@ -203,19 +206,19 @@ components:
     height: 1px
   status-success:
     backgroundColor: "{colors.success}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-warning:
     backgroundColor: "{colors.warning}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
   status-info:
     backgroundColor: "{colors.info}"
-    textColor: "{colors.on-primary}"
+    textColor: "{colors.on-status}"
     typography: "{typography.label}"
     rounded: "{rounded.full}"
     padding: 6px 10px
@@ -260,6 +263,11 @@ components:
     rounded: "{rounded.md}"
     padding: 12px 20px
     height: 44px
+  dark-text-link:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.dark-primary-text}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.sm}"
   dark-separator:
     backgroundColor: "{colors.dark-hairline}"
     rounded: "{rounded.none}"
@@ -284,8 +292,8 @@ The key words **MUST**, **SHOULD**, and **MAY** express requirement strength.
 ## Overview
 
 Comfort Design System is a system for focused product interfaces: dashboards, creation
-tools, settings, commerce, and operational workflows. It combines cool neutral
-surfaces, one restrained blue action color, system-first typography, clear
+tools, settings, commerce, and operational workflows. It combines quiet neutral
+surfaces, one focused orange action color, system-first typography, clear
 containment, and motion that explains where content came from and where it went.
 
 The intended experience has three qualities:
@@ -317,11 +325,13 @@ does not reproduce any platform or company interface.
 
 ### Core roles
 
-- **Primary** (`{colors.primary}` — #0066CC): The only general interaction accent.
+- **Primary** (`{colors.primary}` — #FF6600): The only general interaction accent.
   Use for the primary action, links, focus rings, active navigation, and selected
   states.
-- **Primary Strong** (`{colors.primary-strong}` — #004F9E): Pressed or emphasized
+- **Primary Strong** (`{colors.primary-strong}` — #E14D00): Pressed or emphasized
   primary state. It MUST NOT become a second accent family.
+- **Primary Text** (`{colors.primary-text}` — #A63D00): Accessible brand text on
+  light surfaces. Use the brighter primary for fills, strokes, and larger marks.
 - **Canvas** (`{colors.canvas}` — #F7F8FA): Default page floor.
 - **Surface** (`{colors.surface}` — #FFFFFF): Cards, controls, and principal
   content regions.
@@ -358,8 +368,9 @@ Dark mode is a tonal remapping, not a simple inversion:
 - `{colors.dark-canvas}` is the page floor.
 - `{colors.dark-surface}` and `{colors.dark-surface-raised}` create containment.
 - `{colors.dark-ink}` and `{colors.dark-body}` preserve readable hierarchy.
-- `{colors.dark-primary}` is brighter than light-theme primary so actions remain
-  salient without glowing.
+- `{colors.dark-primary}` preserves the same brand orange so actions stay
+  recognizable without glowing.
+- `{colors.dark-primary-text}` keeps branded text legible on dark surfaces.
 
 Theme changes MUST preserve semantic roles, contrast, and component hierarchy.
 Never hardcode a light-theme color inside a component.
@@ -579,7 +590,7 @@ considered complete.
 
 - Don't introduce raw reusable colors, radii, shadows, or spacing inside a
   component.
-- Don't use primary blue as decoration or assign multiple primary actions to one
+- Don't use primary orange as decoration or assign multiple primary actions to one
   region.
 - Don't place every section inside a floating card.
 - Don't make hover the only route to essential content or actions.

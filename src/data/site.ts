@@ -78,7 +78,7 @@ export const foundationItems: NavItem[] = [
     href: "/foundations/color",
     title: "Color",
     description:
-      "Cool neutrals and a focused blue that explain hierarchy and state.",
+      "Quiet neutrals and focused orange that explain hierarchy and state.",
   },
   {
     href: "/foundations/typography",
