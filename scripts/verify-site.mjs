@@ -128,10 +128,8 @@ const designSource = await readFile(
   "utf8",
 );
 assert(
-  designSource.includes(
-    "한국어 [DESIGN.md](./DESIGN.md)가 기본이자 최종 기준(SSOT)입니다.",
-  ),
-  "Korean DESIGN.md must declare itself as the authoritative default",
+  designSource.includes("한국어 [DESIGN.md](./DESIGN.md)가 규범 원문입니다."),
+  "Korean DESIGN.md must declare itself as the normative source",
 );
 
 assert(

@@ -31,67 +31,67 @@ colors:
 
 typography:
   display:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 64px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
   headline-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 48px
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
     lineHeight: 1.15
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-sm:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.01em
   code:
-    fontFamily: "SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
+    fontFamily: "Geist Mono, SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.55
@@ -272,9 +272,10 @@ components:
 
 > **Status:** Normative design reference · **DESIGN.md schema:** `alpha`
 >
-> **Language:** Korean [DESIGN.md](./DESIGN.md) is the authoritative default
-> (SSOT). This is the synchronized English edition. Other editions:
-> [简体中文](./DESIGN.cn.md) · [日本語](./DESIGN.jp.md)
+> **Language contract:** Korean [DESIGN.md](./DESIGN.md) is the normative source.
+> When an implementation contract changes, the [English](./DESIGN.en.md),
+> [日本語](./DESIGN.jp.md), and [简体中文](./DESIGN.cn.md) editions are updated with
+> the same structure and meaning.
 
 The YAML front matter is the machine-readable token contract. The prose explains
 how to apply those values. When the two disagree, tokens are normative for exact
@@ -288,6 +289,11 @@ Comfort Design System is a system for focused product interfaces: dashboards, cr
 tools, settings, commerce, and operational workflows. It combines quiet neutral
 surfaces, one restrained blue action color, system-first typography, clear
 containment, and motion that explains where content came from and where it went.
+
+The reference site covers 15 Foundations, 63 components across eight families,
+and 84 static routes. Every detail route follows the same sequence: real
+specimen, segmented Preview and View code control, usage, anatomy, states,
+accessibility, internationalization, and implementation contract.
 
 The intended experience has three qualities:
 
@@ -433,6 +439,14 @@ to be filled with gradients, badges, or decorative cards. Related items sit clos
 unrelated regions receive a clear section gap. Progressive disclosure keeps the
 common path visible and advanced controls one level deeper.
 
+The documentation header remains a floating surface 24px from the viewport top
+both initially and after scroll. Left and right documentation rails have no
+vertical separators; whitespace alone distinguishes them from the reading
+column. The footer distributes System, Foundations, Components, Resources, and
+Legal sitemap groups, then closes with a partially clipped, intersection-driven
+`Comfort / DESIGN.md` text signature. Reduced motion shows its final state
+without travel.
+
 No page-level horizontal scrolling is allowed from 320 CSS px upward. A data
 region MAY scroll horizontally when its boundary and affordance are explicit.
 
@@ -487,10 +501,54 @@ Rules:
   safe crop area.
 - Shape never substitutes for a label, selected state, or accessible name.
 
+## Foundations
+
+The Foundation catalog borrows the legible information architecture of SEED
+Foundations, then rewrites it for Comfort tokens and product contexts. Its 15
+entries are **Design Token, Color, Typography, Iconography, Elevation, Gradient,
+Inclusive Design, International Design, Layout, Motion, Radius, Spacing, State,
+Voice and Tone, and Writing**.
+
+- Every Foundation route includes intent, rules, reference values, a real visual
+  specimen, accessibility checks, and related destinations.
+- Color preserves light `#0066CC` and dark `#78B7FF` primary values without
+  inventing a decorative secondary brand palette.
+- International Design verifies long Korean, English, Japanese, and Chinese
+  strings together with 30% text expansion, RTL, and locale-aware formatting.
+- Motion compares base, fast, and slow timing and removes travel and decorative
+  loops under reduced motion.
+- State explains transitions from default through hover, active, focus-visible,
+  disabled, loading, empty, and error without changing the underlying geometry.
+
+`src/data/catalog.json` is the machine-readable route and inventory list; this
+document is the normative guide for selecting and applying Foundations. Counts
+and titles MUST remain aligned.
+
 ## Components
 
 YAML component entries define reusable visual atoms. Application components MAY
 compose them but MUST preserve their semantic role.
+
+The 63 components are maintained in eight families:
+
+- **Actions (4):** Button, Button Group, Toggle, Toggle Group
+- **Forms (15):** Calendar, Checkbox, Combobox, Date Picker, Field, Input,
+  Input Group, Input OTP, Label, Native Select, Radio Group, Select, Slider,
+  Switch, Textarea
+- **Navigation (7):** Breadcrumb, Command, Menubar, Navigation Menu, Pagination,
+  Sidebar, Tabs
+- **Overlays (9):** Alert Dialog, Context Menu, Dialog, Drawer, Dropdown Menu,
+  Hover Card, Popover, Sheet, Tooltip
+- **Data display (10):** Avatar, Badge, Card, Carousel, Chart, Data Table, Item,
+  Kbd, Table, Typography
+- **Feedback (8):** Accordion, Alert, Collapsible, Empty, Progress, Skeleton,
+  Spinner, Toast
+- **Layout (5):** Aspect Ratio, Direction, Resizable, Scroll Area, Separator
+- **Conversation (5):** Attachment, Bubble, Marker, Message, Message Scroller
+
+Every route provides a real interactive specimen rather than a placeholder and
+lazy-loads its family bundle. Preview and View code form one contiguous segmented
+control, and the code panel exposes an in-context copy result.
 
 ### Navigation and shell
 
@@ -692,15 +750,35 @@ Shareable navigation state belongs in the URL. Server-authoritative state stays
 on the server. Local interaction state stays local. A shared store is introduced
 only after a real cross-tree lifetime requires it.
 
+## Content & Localization
+
+Korean `DESIGN.md` is the normative source. The en, jp, and cn editions preserve
+the same heading order, tokens, inventory, and MUST, SHOULD, and MAY strength.
+Translations preserve meaning while using natural syntax and punctuation for
+each language.
+
+- Site copy does not expose internal document-governance terminology. The
+  language selector identifies the current and available editions with `KO`,
+  `EN`, `JP`, and `CN`.
+- Natural-language text defaults to `word-break: keep-all`. Code, commands,
+  URLs, file paths, and tokens scroll or wrap safely inside their own regions.
+- Labels prefer outcome-oriented verbs over vague nouns; placeholders never
+  replace labels.
+- Do not concatenate translatable sentence fragments. Use locale-aware formatters
+  for dates, numbers, currencies, and plurals.
+- Keep 30% text expansion, CJK line breaking, RTL logical properties, and 200%
+  text size in the minimum localized regression set.
+
 ## Implementation Contract
 
-The reference implementation assumes Next.js App Router, React, TypeScript strict
-mode, Tailwind CSS, owned shadcn/ui source, Radix primitives where necessary,
-Lucide icons, and Motion for React. These libraries are replaceable; the visual,
-interaction, accessibility, and evidence contracts are not.
+The current reference implementation uses Vite 8.2, React 19.2, TypeScript 6 in
+strict mode, Tailwind CSS 4.3, repository-owned shadcn/ui source, Radix UI and
+Base UI primitives, Lucide, TanStack Table, Recharts, and Embla. These libraries
+are replaceable; the visual, interaction, accessibility, and evidence contracts
+are not.
 
-- Server Components own privileged data access and initial rendering. Client
-  boundaries stay as small as interaction requires.
+- Vite builds a static site under the `/design/` base and generates 84 route
+  artifacts from the catalog contract.
 - Map YAML roles to CSS variables or theme tokens once. Components consume role
   tokens and MUST NOT duplicate raw values.
 - Application primitives remain domain-free. Promote a composition to shared
@@ -711,7 +789,21 @@ interaction, accessibility, and evidence contracts are not.
   focus-visible, disabled, loading, empty, error, light, dark, reduced-motion,
   contrast, long-content, and localized states.
 
-Verification is proportional to the change:
+## Verification Contract
+
+Completion requires `npm run verify:catalog`, `npm run lint`, `npm run check`,
+and `npm run build` to pass. Catalog verification checks exactly 63 components,
+15 Foundations, 84 static routes, identical inventory across four language
+editions, and light `#0066CC` plus dark `#78B7FF` primary values.
+
+Browser QA exercises representative specimens from every family at 390px and
+1440px, including search, empty/reset, overlay focus return, form input, table
+sorting, chart, carousel, message anchoring, Preview and View code, and copy
+feedback. Evidence also covers the scrolled header top gap, absence of page
+overflow and rail separators, light/dark themes, and reduced motion. Axe
+violations MUST be zero; untestable `incomplete` findings are reported separately.
+Deployment proof includes a successful GitHub Pages job, live-route checks, a
+clean worktree, and `0 0` local/upstream/live-remote parity.
 
 | Layer                           | Evidence                                                           |
 | ------------------------------- | ------------------------------------------------------------------ |
@@ -728,16 +820,18 @@ evidence.
 ## Iteration Guide
 
 1. Change the YAML token first when an exact reusable value changes.
-2. Update the matching canonical prose section without reordering the eight
-   canonical sections.
-3. Work on one component family at a time and reference its YAML key.
-4. Add state variants as related component entries; do not hide a reusable value
-   in prose.
-5. Use `{token.references}` inside YAML components instead of repeating raw values.
-6. Run `npx @google/design.md lint DESIGN.en.md` and resolve errors and warnings.
-7. Check light, dark, narrow, wide, keyboard, reduced-motion, long-content, and
-   localized states affected by the change.
-8. Synchronize localized documents when tokens or normative behavior change.
+2. When inventory changes, update `catalog.json`, the real module, specimen,
+   route, and all four component and Foundation lists as one logical unit.
+3. Preserve this document's core heading order and update the Korean normative
+   source first.
+4. Add state variants to the relevant component entry and use
+   `{token.references}` instead of raw reusable values.
+5. Mirror the same meaning and MUST, SHOULD, and MAY strength in en, jp, and cn.
+6. Run `npm run validate` and `git diff --check`.
+7. Exercise light, dark, narrow, wide, keyboard, reduced-motion, long-content,
+   and localized states in a real browser.
+8. Finish explicit staging, an ordinary push, and `0 0` parity for each logical
+   unit.
 
 ## Known Gaps
 

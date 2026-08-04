@@ -31,67 +31,67 @@ colors:
 
 typography:
   display:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 64px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
   headline-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 48px
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
     lineHeight: 1.15
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-sm:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.01em
   code:
-    fontFamily: "SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
+    fontFamily: "Geist Mono, SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.55
@@ -272,9 +272,9 @@ components:
 
 > **상태:** 규범적 디자인 참조 문서 · **DESIGN.md 스키마:** `alpha`
 >
-> **언어:** 한국어 [DESIGN.md](./DESIGN.md)가 기본이자 최종 기준(SSOT)입니다.
-> 동기화된 번역본: [English](./DESIGN.en.md) · [简体中文](./DESIGN.cn.md) ·
-> [日本語](./DESIGN.jp.md)
+> **언어 계약:** 한국어 [DESIGN.md](./DESIGN.md)가 규범 원문입니다. 구현 계약이
+> 바뀌면 [English](./DESIGN.en.md) · [日本語](./DESIGN.jp.md) ·
+> [简体中文](./DESIGN.cn.md) 판본도 같은 구조와 의미로 갱신합니다.
 
 YAML front matter는 기계가 읽는 토큰 계약이고, 본문은 그 값을 언제 어떻게
 적용할지 설명합니다. 둘이 충돌할 때 정확한 값은 토큰을, 의도·위계·동작은
@@ -288,6 +288,11 @@ Comfort Design System은 대시보드, 제작 도구, 설정, 커머스, 운영 
 필요한 제품 인터페이스를 위한 시스템입니다. 차가운 뉴트럴 표면, 절제된 단일
 블루 액션 컬러, 시스템 우선 타이포그래피, 명확한 컨테인먼트, 원인과 이동
 방향을 설명하는 모션이 핵심입니다.
+
+현재 참조 사이트는 15개 Foundation, 8개 family의 63개 component, 84개 정적
+route를 제공합니다. 각 상세 route는 실제 specimen, Preview·View code
+segmented control, 사용법, anatomy, state, 접근성, 국제화, 구현 계약을
+같은 순서로 보여 줍니다.
 
 | 품질            | 사용자가 느껴야 하는 것                    | 화면에서 확인되는 근거                                           |
 | --------------- | ------------------------------------------ | ---------------------------------------------------------------- |
@@ -410,6 +415,13 @@ UI를 복제하지 않습니다.
 badge, 장식 카드로 채우지 않습니다. 관련된 것은 가깝게, 관련 없는 영역은
 명확한 section gap으로 구분합니다.
 
+문서 shell의 header는 첫 화면과 스크롤 상태 모두 viewport 상단에서 24px 떨어진
+floating surface로 유지합니다. 왼쪽·오른쪽 documentation rail과 본문 사이에는
+세로 구분선을 두지 않고 여백만으로 영역을 나눕니다. footer는 System,
+Foundations, Components, Resources, Legal sitemap을 분산 배치하고, 교차 시점에
+부분적으로 드러나는 대형 `Comfort / DESIGN.md` text signature로 문서를 닫습니다.
+reduced motion에서는 signature 이동 없이 최종 상태를 즉시 표시합니다.
+
 320 CSS px 이상에서 페이지 전체 가로 스크롤은 허용하지 않습니다. 데이터
 영역의 경계와 affordance가 명확할 때만 해당 영역 내부 스크롤을 허용합니다.
 
@@ -453,10 +465,53 @@ badge, 장식 카드로 채우지 않습니다. 관련된 것은 가깝게, 관�
 실제 원형 컨트롤에만 사용합니다. segmented control은 개별 capsule을 반복하지
 말고 하나의 외곽 실루엣을 공유합니다.
 
+## Foundations
+
+Foundation catalog는 SEED Foundation의 명확한 정보 구조를 참고하되 Comfort의
+토큰과 제품 맥락으로 다시 작성합니다. 15개 항목은 **Design Token, Color,
+Typography, Iconography, Elevation, Gradient, Inclusive Design, International
+Design, Layout, Motion, Radius, Spacing, State, Voice and Tone, Writing**입니다.
+
+- 각 Foundation route는 의도, 규칙, 참조 값, 실제 시각 specimen, 접근성 점검,
+  관련 목적지를 모두 제공합니다.
+- Color는 light `#0066CC`, dark `#78B7FF` primary를 보존하며 장식용 보조
+  브랜드 컬러를 만들지 않습니다.
+- International Design은 한국어·영어·일본어·중국어의 긴 문장, 30% text
+  expansion, RTL, locale-aware format을 함께 검증합니다.
+- Motion specimen은 기본·빠른·느린 시간축을 비교하고 reduced motion에서 이동과
+  장식 반복을 제거합니다.
+- State는 default에서 hover·active·focus-visible·disabled·loading·empty·error로
+  이어지는 변화를 동일한 geometry 안에서 설명합니다.
+
+`src/data/catalog.json`은 route와 inventory의 기계 판독 목록이고, 이 문서는
+Foundation을 선택하고 적용하는 규범을 정의합니다. 두 자료의 개수와 title은
+항상 일치해야 합니다.
+
 ## Components
 
 YAML component entry는 재사용 가능한 시각 원자를 정의합니다. application
 component는 이를 조합하되 시맨틱 역할을 바꾸면 안 됩니다.
+
+63개 component는 다음 8개 family로 관리합니다.
+
+- **Actions (4):** Button, Button Group, Toggle, Toggle Group
+- **Forms (15):** Calendar, Checkbox, Combobox, Date Picker, Field, Input,
+  Input Group, Input OTP, Label, Native Select, Radio Group, Select, Slider,
+  Switch, Textarea
+- **Navigation (7):** Breadcrumb, Menubar, Navigation Menu, Pagination, Sidebar,
+  Tabs와 탐색 surface로 쓰는 Command
+- **Overlays (9):** Alert Dialog, Context Menu, Dialog, Drawer, Dropdown Menu,
+  Hover Card, Popover, Sheet, Tooltip
+- **Data display (10):** Avatar, Badge, Card, Carousel, Chart, Data Table, Item,
+  Kbd, Table, Typography
+- **Feedback (8):** Accordion, Alert, Collapsible, Empty, Progress, Skeleton,
+  Spinner, Toast
+- **Layout (5):** Aspect Ratio, Direction, Resizable, Scroll Area, Separator
+- **Conversation (5):** Attachment, Bubble, Marker, Message, Message Scroller
+
+모든 route는 placeholder가 아닌 실제 interactive specimen을 제공하며, family
+단위로 lazy-load합니다. Preview와 View code는 간격이 끊기지 않는 하나의
+segmented control이고 code panel 안에서 복사 결과를 확인할 수 있어야 합니다.
 
 ### 내비게이션과 shell
 
@@ -630,15 +685,32 @@ success → stale 또는 offline
 interaction은 component에 둡니다. shared store는 실제 cross-tree lifetime이
 확인된 뒤에만 도입합니다.
 
+## Content & Localization
+
+한국어 `DESIGN.md`가 규범 원문이며 en·jp·cn 판본은 같은 heading 순서, token,
+inventory, MUST·SHOULD·MAY 강도를 유지합니다. 번역은 문장 의미를 보존하되 해당
+언어에서 자연스러운 어순과 구두점을 사용합니다.
+
+- 사이트 설명 문구에는 내부 문서 운영 용어를 노출하지 않습니다. 언어 선택기는
+  `KO`, `EN`, `JP`, `CN`처럼 현재 판본과 이동 가능한 판본만 명확히 표시합니다.
+- 자연어는 `word-break: keep-all`을 기본으로 해 낱말 중간 단절을 피합니다. code,
+  command, URL, file path, token은 영역 안에서 안전하게 scroll 또는 wrap합니다.
+- label은 짧은 명사보다 결과를 알 수 있는 동사를 우선하고, placeholder를 label로
+  대신하지 않습니다.
+- 번역 가능한 문장을 조각내 이어 붙이지 않고 날짜·숫자·통화·복수형은 locale
+  formatter에 맡깁니다.
+- 30% text expansion, CJK 줄바꿈, RTL logical property, 200% text size를 최소
+  localized regression set으로 유지합니다.
+
 ## Implementation Contract
 
-참조 구현은 Next.js App Router, React, TypeScript strict mode, Tailwind CSS,
-소유하는 shadcn/ui source, 필요한 Radix primitive, Lucide, Motion for React를
-가정합니다. 라이브러리는 바꿀 수 있지만 시각·인터랙션·접근성·증거 계약은
-바꿀 수 없습니다.
+현재 참조 구현은 Vite 8.2, React 19.2, TypeScript 6 strict mode, Tailwind CSS
+4.3, 저장소가 소유하는 shadcn/ui source, Radix UI와 Base UI primitive, Lucide,
+TanStack Table, Recharts, Embla를 사용합니다. 라이브러리는 바꿀 수 있지만
+시각·인터랙션·접근성·증거 계약은 바꿀 수 없습니다.
 
-- Server Component가 privileged data access와 initial render를 소유하고 client
-  boundary는 interaction에 필요한 최소 범위로 둡니다.
+- Vite는 `/design/` base 아래 정적 site를 만들고 catalog contract에서 84개 route
+  artifact를 생성합니다.
 - YAML role을 CSS variable 또는 theme token에 한 번 매핑하고 component는
   raw value를 중복하지 않습니다.
 - application primitive에는 domain logic을 넣지 않습니다.
@@ -647,6 +719,21 @@ interaction은 component에 둡니다. shared store는 실제 cross-tree lifetim
 - 의미 있는 component 변경은 해당하는 default, hover, active, focus-visible,
   disabled, loading, empty, error, light, dark, reduced-motion, contrast,
   long-content, localized state를 다룹니다.
+
+## Verification Contract
+
+완료 전 `npm run verify:catalog`, `npm run lint`, `npm run check`, `npm run build`를
+모두 통과해야 합니다. catalog 검증은 정확히 63 component, 15 Foundation, 84
+static route, 네 언어 문서의 동일 inventory, light `#0066CC`와 dark `#78B7FF`
+primary를 확인합니다.
+
+browser QA는 390px와 1440px에서 모든 family의 대표 specimen을 실행하고 search,
+empty/reset, overlay focus 복귀, form input, table sort, chart, carousel, message
+anchor, Preview·View code, copy feedback을 확인합니다. 스크롤 뒤 header top gap,
+page overflow 부재, rail 구분선 부재, light/dark, reduced motion도 증거에 포함합니다.
+Axe violation은 0이어야 하며 판정 불가 `incomplete`는 violation과 분리해 기록합니다.
+배포 완료는 GitHub Pages 성공과 live route 확인, clean worktree, local·upstream·
+live remote `0 0` 정합성으로 증명합니다.
 
 | 계층      | 필요한 증거                                                     |
 | --------- | --------------------------------------------------------------- |
@@ -662,14 +749,16 @@ snapshot은 어떤 상태를 다루는지 명시할 때만 증거가 됩니다. 
 ## Iteration Guide
 
 1. 재사용 정확 값이 바뀌면 YAML token을 먼저 수정합니다.
-2. canonical 8개 section 순서를 유지하며 해당 본문을 함께 수정합니다.
-3. 한 번에 하나의 component family를 다루고 YAML key를 참조합니다.
-4. state variant는 관련 component entry로 추가합니다.
-5. YAML component에서는 raw value 반복 대신 `{token.references}`를 사용합니다.
-6. `npx @google/design.md lint DESIGN.md`의 error와 warning을 해결합니다.
+2. inventory가 바뀌면 `catalog.json`, 실제 module, specimen, route, 네 언어
+   component·Foundation 목록을 한 논리 단위로 수정합니다.
+3. 이 문서의 핵심 heading 순서를 유지하며 한국어 규범 원문을 먼저 갱신합니다.
+4. state variant는 관련 component entry로 추가하고 raw value 대신
+   `{token.references}`를 사용합니다.
+5. en·jp·cn 판본에 같은 MUST·SHOULD·MAY 강도와 의미를 반영합니다.
+6. `npm run validate`와 `git diff --check`를 실행합니다.
 7. light, dark, narrow, wide, keyboard, reduced motion, long content, locale
-   상태를 확인합니다.
-8. token 또는 normative behavior가 바뀌면 모든 언어본을 동기화합니다.
+   상태를 실제 browser에서 확인합니다.
+8. 논리 단위별 명시적 staging, 일반 push, `0 0` 정합성 확인을 완료합니다.
 
 ## Known Gaps
 

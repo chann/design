@@ -31,67 +31,67 @@ colors:
 
 typography:
   display:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 64px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
   headline-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 48px
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
     lineHeight: 1.15
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-sm:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.01em
   code:
-    fontFamily: "SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
+    fontFamily: "Geist Mono, SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.55
@@ -272,8 +272,9 @@ components:
 
 > **ステータス:** 規範的デザインリファレンス · **DESIGN.md schema:** `alpha`
 >
-> **言語:** 韓国語版 [DESIGN.md](./DESIGN.md) がデフォルトかつ最終基準
-> (SSOT) です。この文書は同一の token と規範を反映した日本語版です。
+> **言語契約:** 韓国語版 [DESIGN.md](./DESIGN.md) を規範原文とします。実装契約を
+> 変更した場合、[English](./DESIGN.en.md)・[日本語](./DESIGN.jp.md)・
+> [简体中文](./DESIGN.cn.md) も同じ構造と意味で更新します。
 
 YAML front matter は機械可読の token 契約であり、本文はその値をいつ、どのように
 適用するかを説明します。両者が矛盾する場合、正確な値は token、意図・階層・
@@ -287,6 +288,11 @@ Comfort Design System は dashboard、制作ツール、設定、commerce、運�
 集中を必要とする product interface のためのシステムです。クールな neutral
 surface、節度ある単一の青い action color、system-first typography、明確な
 containment、内容の出所と移動先を説明する motion を組み合わせます。
+
+参照サイトは 15 の Foundation、8 family・63 component、84 static route を
+収録します。各 detail route は real specimen、Preview・View code の segmented
+control、usage、anatomy、state、accessibility、internationalization、実装契約を
+同じ順序で示します。
 
 | 品質            | ユーザーが感じること                 | 確認できる設計根拠                                                        |
 | --------------- | ------------------------------------ | ------------------------------------------------------------------------- |
@@ -409,6 +415,13 @@ icon と label、`sm/md` は control と関連 content、`lg/xl` は card と gr
 decorative card で埋めません。関連項目は近く、無関係な領域は明確な section
 gap で分離します。
 
+document shell の header は初期状態と scroll 後の両方で viewport 上端から 24px
+離れた floating surface として維持します。左右の documentation rail と本文の
+間に vertical separator を置かず、余白だけで領域を分けます。footer は System、
+Foundations、Components、Resources、Legal の sitemap を分散配置し、交差時に
+一部が現れる大きな `Comfort / DESIGN.md` text signature で閉じます。reduced
+motion では移動せず最終状態を即時表示します。
+
 320 CSS px 以上で page-level horizontal scroll を許可しません。境界と
 affordance が明確な data region だけ内部 horizontal scroll を許可します。
 
@@ -451,10 +464,53 @@ nested surface は parent と同じか小さい radius を使います。pill �
 compact filter、本当に円形の control のみに使います。segmented control は
 capsule を反復せず一つの外形を共有します。
 
+## Foundations
+
+Foundation catalog は SEED Foundations の読みやすい情報構造を参考にしつつ、
+Comfort の token と product context に合わせて再構成します。15項目は
+**Design Token, Color, Typography, Iconography, Elevation, Gradient, Inclusive Design,
+International Design, Layout, Motion, Radius, Spacing, State, Voice and Tone,
+Writing** です。
+
+- 各 Foundation route は intent、rule、reference value、実際の visual
+  specimen、accessibility check、関連 destination を提供します。
+- Color は light `#0066CC` と dark `#78B7FF` の primary を維持し、装飾用の
+  secondary brand palette を追加しません。
+- International Design は韓国語・英語・日本語・中国語の長文、30% text
+  expansion、RTL、locale-aware format を同時に検証します。
+- Motion は base・fast・slow timing を比較し、reduced motion では移動と装飾的な
+  loop を除去します。
+- State は geometry を変えず、default から hover・active・focus-visible・
+  disabled・loading・empty・error への変化を説明します。
+
+`src/data/catalog.json` は route と inventory の機械可読リストであり、本書は
+Foundation の選択と適用を定める規範です。件数と title は常に一致させます。
+
 ## Components
 
 YAML component entry は再利用可能な visual atom を定義します。application
 component は組み合わせられますが semantic role を変えてはいけません。
+
+63 component は次の 8 family で管理します。
+
+- **Actions (4):** Button, Button Group, Toggle, Toggle Group
+- **Forms (15):** Calendar, Checkbox, Combobox, Date Picker, Field, Input,
+  Input Group, Input OTP, Label, Native Select, Radio Group, Select, Slider,
+  Switch, Textarea
+- **Navigation (7):** Breadcrumb, Command, Menubar, Navigation Menu, Pagination,
+  Sidebar, Tabs
+- **Overlays (9):** Alert Dialog, Context Menu, Dialog, Drawer, Dropdown Menu,
+  Hover Card, Popover, Sheet, Tooltip
+- **Data display (10):** Avatar, Badge, Card, Carousel, Chart, Data Table, Item,
+  Kbd, Table, Typography
+- **Feedback (8):** Accordion, Alert, Collapsible, Empty, Progress, Skeleton,
+  Spinner, Toast
+- **Layout (5):** Aspect Ratio, Direction, Resizable, Scroll Area, Separator
+- **Conversation (5):** Attachment, Bubble, Marker, Message, Message Scroller
+
+各 route は placeholder ではなく実際の interactive specimen を提供し、family
+bundle 単位で lazy-load します。Preview と View code は隙間のない一つの
+segmented control とし、code panel 内で copy 結果を確認できるようにします。
 
 ### Navigation と shell
 
@@ -632,15 +688,32 @@ shareable navigation state は URL、authoritative state は server、local
 interaction state は component に置きます。shared store は実際の cross-tree
 lifetime が必要になった後だけ導入します。
 
+## Content & Localization
+
+韓国語 `DESIGN.md` を規範原文とし、en・jp・cn 版は同じ heading 順序、token、
+inventory、MUST・SHOULD・MAY の強度を保ちます。翻訳は意味を維持しながら、
+各言語で自然な語順と句読点を使います。
+
+- site copy に内部の文書運用用語を露出しません。language selector は `KO`、
+  `EN`、`JP`、`CN` で現在版と移動可能な版だけを明確に示します。
+- 自然言語は `word-break: keep-all` を既定とし、code、command、URL、file path、
+  token は領域内で安全に scroll または wrap します。
+- label は曖昧な名詞より結果が分かる動詞を優先し、placeholder で代用しません。
+- 翻訳対象の文を断片連結せず、日付・数値・通貨・複数形は locale-aware
+  formatter を使います。
+- 30% text expansion、CJK line breaking、RTL logical property、200% text size を
+  localized regression の最小セットに含めます。
+
 ## Implementation Contract
 
-reference implementation は Next.js App Router、React、TypeScript strict mode、
-Tailwind CSS、所有する shadcn/ui source、必要な Radix primitive、Lucide、
-Motion for React を想定します。library は交換できますが visual、interaction、
-accessibility、evidence contract は低下させられません。
+現在の reference implementation は Vite 8.2、React 19.2、TypeScript 6 strict
+mode、Tailwind CSS 4.3、repository が所有する shadcn/ui source、Radix UI と
+Base UI primitive、Lucide、TanStack Table、Recharts、Embla を使います。
+library は交換できますが visual、interaction、accessibility、evidence
+contract は低下させられません。
 
-- Server Component が privileged data access と initial render を所有し、
-  client boundary は interaction に必要な最小範囲にします。
+- Vite は `/design/` base 下の static site を build し、catalog contract から
+  84 route artifact を生成します。
 - YAML role を CSS variable または theme token に一度 map し、component は raw
   value を重複させません。
 - application primitive に domain logic を入れません。
@@ -649,6 +722,21 @@ accessibility、evidence contract は低下させられません。
 - 意味のある component change は該当する default、hover、active、
   focus-visible、disabled、loading、empty、error、light、dark、
   reduced-motion、contrast、long-content、localized state を扱います。
+
+## Verification Contract
+
+完了前に `npm run verify:catalog`、`npm run lint`、`npm run check`、
+`npm run build` をすべて通過させます。catalog verification は正確に 63
+component、15 Foundation、84 static route、4言語版の同一 inventory、light
+`#0066CC` と dark `#78B7FF` primary を確認します。
+
+browser QA は 390px と 1440px で全 family の代表 specimen を実行し、search、
+empty/reset、overlay focus 復帰、form input、table sort、chart、carousel、message
+anchor、Preview・View code、copy feedback を確認します。scroll 後の header top
+gap、page overflow と rail separator の不在、light/dark、reduced motion も証拠に
+含めます。Axe violation は 0 とし、判定不能な `incomplete` は別に報告します。
+deployment は GitHub Pages job 成功、live route、clean worktree、local・upstream・
+live remote の `0 0` parity で証明します。
 
 | Layer      | Evidence                                                      |
 | ---------- | ------------------------------------------------------------- |
@@ -664,14 +752,16 @@ test は未確認 browser、device、assistive-technology behavior の代替で�
 ## Iteration Guide
 
 1. 再利用する正確な値が変わる場合は YAML token を先に更新します。
-2. canonical 8 section の順序を保ちながら該当本文を更新します。
-3. 一度に一つの component family を扱い YAML key を参照します。
-4. state variant は関連 component entry として追加します。
-5. YAML component では raw value の反復でなく `{token.references}` を使います。
-6. `npx @google/design.md lint DESIGN.jp.md` の error と warning を解消します。
-7. light、dark、narrow、wide、keyboard、reduced motion、long content、
-   locale state を確認します。
-8. token または normative behavior が変わったら全言語版を同期します。
+2. inventory 変更時は `catalog.json`、実際の module、specimen、route、4言語の
+   component・Foundation リストを一つの論理単位で更新します。
+3. 本書の主要 heading 順序を維持し、韓国語の規範原文を先に更新します。
+4. state variant は関連 component entry に追加し、raw value ではなく
+   `{token.references}` を使います。
+5. en・jp・cn 版に同じ意味と MUST・SHOULD・MAY の強度を反映します。
+6. `npm run validate` と `git diff --check` を実行します。
+7. light、dark、narrow、wide、keyboard、reduced motion、long content、locale
+   state を実 browser で確認します。
+8. 論理単位ごとの明示的 staging、通常 push、`0 0` parity を完了します。
 
 ## Known Gaps
 

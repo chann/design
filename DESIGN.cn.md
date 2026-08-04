@@ -31,67 +31,67 @@ colors:
 
 typography:
   display:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 64px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
   headline-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 48px
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
     lineHeight: 1.15
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-md:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: 0
   body-sm:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.01em
   code:
-    fontFamily: "SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
+    fontFamily: "Geist Mono, SFMono-Regular, Cascadia Code, Consolas, ui-monospace, monospace"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.55
@@ -272,8 +272,9 @@ components:
 
 > **状态：**规范性设计参考 · **DESIGN.md schema：**`alpha`
 >
-> **语言：**韩文 [DESIGN.md](./DESIGN.md) 是默认版本与最终依据 (SSOT)。
-> 本文件是使用相同 token 与规范的简体中文版本。
+> **语言合同：**韩文 [DESIGN.md](./DESIGN.md) 是规范原文。实现合同发生变化时，
+> [English](./DESIGN.en.md)、[日本語](./DESIGN.jp.md) 与
+> [简体中文](./DESIGN.cn.md) 版本必须以相同结构和含义同步更新。
 
 YAML front matter 是机器可读的 token 合同，正文说明如何应用这些值。若两者
 出现冲突，精确值以 token 为准，设计意图、层级与行为以正文为准。
@@ -285,6 +286,11 @@ YAML front matter 是机器可读的 token 合同，正文说明如何应用这�
 Comfort Design System 面向需要高度专注的产品界面，例如 dashboard、创作工具、设置、
 电商与运营流程。它以冷静的中性色 surface、单一且克制的蓝色 action、系统优先
 排版、清晰的容器关系，以及能解释来源与去向的 motion 为核心。
+
+参考站点覆盖 15 个 Foundation、8 个 family 中的 63 个 component，以及 84 条
+static route。每个 detail route 都按相同顺序提供真实 specimen、Preview 与
+View code segmented control、usage、anatomy、state、accessibility、
+internationalization 与实现合同。
 
 | 品质            | 用户应当感受到                       | 可观察的产品证据                             |
 | --------------- | ------------------------------------ | -------------------------------------------- |
@@ -395,6 +401,12 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 留白用于分隔决策和建立层级，不应被 gradient、badge 或装饰 card 填满。相关内容
 靠近，无关区域使用清晰的 section gap。
 
+文档 shell 的 header 在初始状态与滚动后都保持为距 viewport 顶部 24px 的
+floating surface。左右 documentation rail 与正文之间不设置 vertical separator，
+只用留白区分。footer 分布 System、Foundations、Components、Resources、Legal
+sitemap 分组，并以滚动进入时部分露出的大型 `Comfort / DESIGN.md` text signature
+收尾。reduced motion 下不产生位移，直接显示最终状态。
+
 从 320 CSS px 起不得出现页面级横向滚动。只有边界和操作提示明确的数据区域
 可以在自身内部横向滚动。
 
@@ -436,10 +448,51 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 嵌套 surface 使用与父级相同或更小的 radius。pill 仅用于状态、紧凑 filter 与
 真正的圆形 control。segmented control 应共享一个外轮廓，而不是重复胶囊。
 
+## Foundations
+
+Foundation catalog 借鉴 SEED Foundations 清晰的信息架构，再按照 Comfort 的
+token 与产品语境重写。15 个条目为 **Design Token、Color、Typography、
+Iconography、Elevation、Gradient、Inclusive Design、International Design、
+Layout、Motion、Radius、Spacing、State、Voice and Tone、Writing**。
+
+- 每个 Foundation route 都提供 intent、规则、参考值、真实 visual specimen、
+  accessibility 检查与相关 destination。
+- Color 保留 light `#0066CC` 与 dark `#78B7FF` primary，不创建装饰性的第二套
+  brand palette。
+- International Design 同时验证韩文、英文、日文、中文长文、30% text
+  expansion、RTL 与 locale-aware format。
+- Motion 比较 base、fast、slow timing，并在 reduced motion 下移除位移和装饰循环。
+- State 在同一 geometry 中解释 default、hover、active、focus-visible、disabled、
+  loading、empty 与 error 的转换。
+
+`src/data/catalog.json` 是 route 与 inventory 的机器可读清单；本文定义如何选择和
+应用 Foundation 的规范。条目数量与 title 必须始终一致。
+
 ## Components
 
 YAML component entry 定义可复用视觉原子。application component 可以组合它们，
 但必须保持语义角色。
+
+63 个 component 按以下 8 个 family 维护：
+
+- **Actions (4)：**Button、Button Group、Toggle、Toggle Group
+- **Forms (15)：**Calendar、Checkbox、Combobox、Date Picker、Field、Input、
+  Input Group、Input OTP、Label、Native Select、Radio Group、Select、Slider、
+  Switch、Textarea
+- **Navigation (7)：**Breadcrumb、Command、Menubar、Navigation Menu、
+  Pagination、Sidebar、Tabs
+- **Overlays (9)：**Alert Dialog、Context Menu、Dialog、Drawer、Dropdown Menu、
+  Hover Card、Popover、Sheet、Tooltip
+- **Data display (10)：**Avatar、Badge、Card、Carousel、Chart、Data Table、Item、
+  Kbd、Table、Typography
+- **Feedback (8)：**Accordion、Alert、Collapsible、Empty、Progress、Skeleton、
+  Spinner、Toast
+- **Layout (5)：**Aspect Ratio、Direction、Resizable、Scroll Area、Separator
+- **Conversation (5)：**Attachment、Bubble、Marker、Message、Message Scroller
+
+每条 route 都提供真实 interactive specimen，而不是 placeholder，并按 family
+bundle lazy-load。Preview 与 View code 组成一个连续 segmented control，code
+panel 内必须显示 copy 操作结果。
 
 ### Navigation 与 shell
 
@@ -598,14 +651,29 @@ success → stale 或 offline
 interaction state 留在 component。只有真实 cross-tree lifetime 出现后才引入
 shared store。
 
+## Content & Localization
+
+韩文 `DESIGN.md` 是规范原文；en、jp、cn 版本保持相同 heading 顺序、token、
+inventory，以及 MUST、SHOULD、MAY 的强度。翻译保留含义，同时使用各语言自然的
+语序与标点。
+
+- site copy 不暴露内部文档治理术语。language selector 仅以 `KO`、`EN`、`JP`、
+  `CN` 明确当前版本与可切换版本。
+- 自然语言默认使用 `word-break: keep-all`。code、command、URL、file path、token
+  在各自区域内安全 scroll 或 wrap。
+- label 优先使用能说明结果的动词，而非模糊名词；placeholder 不能代替 label。
+- 不拼接可翻译句子片段。日期、数字、货币与复数使用 locale-aware formatter。
+- 将 30% text expansion、CJK line breaking、RTL logical property、200% text size
+  纳入最小 localized regression set。
+
 ## Implementation Contract
 
-参考实现假定 Next.js App Router、React、TypeScript strict mode、Tailwind CSS、
-项目自有的 shadcn/ui source、必要的 Radix primitive、Lucide 与 Motion for
-React。库可以替换，但视觉、交互、可访问性与证据合同不能降低。
+当前参考实现使用 Vite 8.2、React 19.2、TypeScript 6 strict mode、Tailwind CSS
+4.3、仓库自有 shadcn/ui source、Radix UI 与 Base UI primitive、Lucide、TanStack
+Table、Recharts、Embla。库可以替换，但视觉、交互、可访问性与证据合同不能降低。
 
-- Server Component 负责 privileged data access 与 initial render，client
-  boundary 保持在交互所需的最小范围。
+- Vite 在 `/design/` base 下构建 static site，并从 catalog contract 生成 84 个
+  route artifact。
 - 将 YAML role 一次映射为 CSS variable 或 theme token，component 不重复 raw
   value。
 - application primitive 不包含 domain logic。
@@ -614,6 +682,20 @@ React。库可以替换，但视觉、交互、可访问性与证据合同不能
 - 有意义的 component 变更覆盖相关 default、hover、active、focus-visible、
   disabled、loading、empty、error、light、dark、reduced-motion、contrast、
   long-content 与 localized state。
+
+## Verification Contract
+
+完成前必须通过 `npm run verify:catalog`、`npm run lint`、`npm run check` 与
+`npm run build`。catalog verification 必须确认正好 63 个 component、15 个
+Foundation、84 条 static route、四种语言版本具有相同 inventory，以及 light
+`#0066CC` 与 dark `#78B7FF` primary。
+
+browser QA 在 390px 与 1440px 执行每个 family 的代表 specimen，覆盖 search、
+empty/reset、overlay focus 恢复、form input、table sort、chart、carousel、message
+anchor、Preview 与 View code、copy feedback。证据还包括滚动后的 header top gap、
+无 page overflow、无 rail separator、light/dark 与 reduced motion。Axe violation
+必须为 0；无法判定的 `incomplete` 单独记录。deployment 以 GitHub Pages job 成功、
+live route、clean worktree，以及 local、upstream、live remote `0 0` parity 证明。
 
 | 层级         | 证据                                                            |
 | ------------ | --------------------------------------------------------------- |
@@ -629,14 +711,16 @@ browser、device 或 assistive-technology 行为。
 ## Iteration Guide
 
 1. 可复用精确值变化时先修改 YAML token。
-2. 同步更新对应正文，并保持八个 canonical section 的顺序。
-3. 每次处理一个 component family，并引用其 YAML key。
-4. state variant 作为相关 component entry 添加。
-5. YAML component 使用 `{token.references}`，不重复 raw value。
-6. 运行 `npx @google/design.md lint DESIGN.cn.md` 并解决 error 与 warning。
-7. 检查 light、dark、narrow、wide、keyboard、reduced motion、long content
-   与 locale state。
-8. token 或 normative behavior 变化时同步所有语言文件。
+2. inventory 变化时，将 `catalog.json`、实际 module、specimen、route，以及四种
+   语言的 component 与 Foundation 清单作为一个逻辑单元更新。
+3. 保持本文核心 heading 顺序，并先更新韩文规范原文。
+4. state variant 添加到相关 component entry，并使用 `{token.references}`，
+   不重复 raw value。
+5. en、jp、cn 版本反映相同含义与 MUST、SHOULD、MAY 强度。
+6. 运行 `npm run validate` 与 `git diff --check`。
+7. 在真实 browser 中检查 light、dark、narrow、wide、keyboard、reduced motion、
+   long content 与 locale state。
+8. 每个逻辑单元都完成显式 staging、普通 push 与 `0 0` parity。
 
 ## Known Gaps
 
