@@ -1,4 +1,4 @@
-name: Deploy Comfort Design System to GitHub Pages
+name: Deploy Comfort DESIGN.md to GitHub Pages
 
 on:
   push:
