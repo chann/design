@@ -42,9 +42,10 @@ import { cn } from "@/lib/utils";
 import en from "@/content/home/en";
 import {
   homeContents,
-  homePathForLocale,
   type HomeContent,
+  type HomeLocale,
 } from "@/content/home";
+import { designDocumentForLocale, docsContents } from "@/content/docs";
 import {
   componentCatalog,
   componentFamilies,
@@ -52,6 +53,9 @@ import {
 } from "@/data/catalog";
 import {
   designEditions,
+  localizedRoute,
+  parseSiteRoute,
+  routeForLocale,
   primaryNav,
   siteHref,
   type NavItem,
@@ -71,7 +75,7 @@ function Brand({
   className,
   current = false,
   homeHref = "/",
-  homeLabel = "Comfort Design System home",
+  homeLabel = "Comfort DESIGN.md home",
 }: {
   className?: string;
   current?: boolean;
@@ -88,38 +92,41 @@ function Brand({
       aria-label={homeLabel}
       aria-current={current ? "page" : undefined}
     >
-      <span className="hidden sm:inline">Comfort Design System</span>
+      <span className="hidden sm:inline">Comfort DESIGN.md</span>
       <span className="sm:hidden">Comfort</span>
     </a>
   );
 }
 
-const documentationGroups = [
-  {
-    title: "Overview",
-    items: [
-      { href: "/principles", title: "Principles" },
-      { href: "/foundations", title: "Foundations" },
-      { href: "/components", title: "Components" },
-    ],
-  },
-  {
-    title: "Foundations",
-    items: foundationCatalog.map(({ slug, title }) => ({
-      href: `/foundations/${slug}`,
-      title,
-    })),
-  },
-  ...componentFamilies.map((family) => ({
-    title: `Components / ${family.replace("-", " ")}`,
-    items: componentCatalog
-      .filter((component) => component.family === family)
-      .map(({ slug, title }) => ({
-        href: `/components/${slug}`,
+function documentationGroups(locale: HomeLocale) {
+  const docs = docsContents[locale];
+  return [
+    {
+      title: docs.shell.overviewGroup,
+      items: [
+        { href: "/principles", title: docs.shell.sections.principles },
+        { href: "/foundations", title: docs.shell.sections.foundations },
+        { href: "/components", title: docs.shell.sections.components },
+      ],
+    },
+    {
+      title: docs.shell.sections.foundations,
+      items: foundationCatalog.map(({ slug, title }) => ({
+        href: `/foundations/${slug}`,
         title,
       })),
-  })),
-];
+    },
+    ...componentFamilies.map((family) => ({
+      title: `${docs.shell.familyGroup} / ${docs.families[family]}`,
+      items: componentCatalog
+        .filter((component) => component.family === family)
+        .map(({ slug, title }) => ({
+          href: `/components/${slug}`,
+          title,
+        })),
+    })),
+  ];
+}
 
 function footerGroups(content: HomeContent) {
   return [
@@ -128,13 +135,16 @@ function footerGroups(content: HomeContent) {
       title: content.footer.groups.system,
       links: [
         { href: content.path, title: content.footer.links.overview },
-        { href: "/principles", title: content.footer.links.principles },
         {
-          href: "/foundations",
+          href: localizedRoute("/principles", content.locale),
+          title: content.footer.links.principles,
+        },
+        {
+          href: localizedRoute("/foundations", content.locale),
           title: content.footer.links.foundationCatalog,
         },
         {
-          href: "/components",
+          href: localizedRoute("/components", content.locale),
           title: content.footer.links.componentCatalog,
         },
       ],
@@ -143,7 +153,7 @@ function footerGroups(content: HomeContent) {
       kind: "foundations",
       title: content.footer.groups.foundations,
       links: foundationCatalog.map(({ slug, title }) => ({
-        href: `/foundations/${slug}`,
+        href: localizedRoute(`/foundations/${slug}`, content.locale),
         title,
       })),
     },
@@ -165,17 +175,20 @@ function footerGroups(content: HomeContent) {
       kind: "legal",
       title: content.footer.groups.legal,
       links: [
-        { href: "/privacy", title: content.footer.links.privacy },
-        { href: "/terms", title: content.footer.links.terms },
+        {
+          href: localizedRoute("/privacy", content.locale),
+          title: content.footer.links.privacy,
+        },
+        {
+          href: localizedRoute("/terms", content.locale),
+          title: content.footer.links.terms,
+        },
       ],
     },
   ];
 }
 
-function primaryNavTitle(
-  href: string,
-  shell: HomeContent["shell"],
-) {
+function primaryNavTitle(href: string, shell: HomeContent["shell"]) {
   if (href === "/principles") return shell.nav.principles;
   if (href === "/foundations") return shell.nav.foundations;
   return shell.nav.components;
@@ -242,10 +255,16 @@ function ThemeMenu({ content = en }: { content?: HomeContent }) {
   );
 }
 
-function LanguageMenu({ homeContent }: { homeContent?: HomeContent }) {
+function LanguageMenu({
+  currentPath,
+  homeContent,
+}: {
+  currentPath: string;
+  homeContent: HomeContent;
+}) {
   const items = designEditions.map((edition) => ({
     ...edition,
-    href: homeContent ? homePathForLocale(edition.code) : edition.href,
+    href: routeForLocale(currentPath, edition.code),
     languageTag: homeContents[edition.code].languageTag,
   }));
 
@@ -255,21 +274,18 @@ function LanguageMenu({ homeContent }: { homeContent?: HomeContent }) {
         <Button
           variant="ghost"
           size="sm"
-          aria-label={
-            homeContent?.shell.languageMenuLabel ??
-            "DESIGN.md language editions"
-          }
+          aria-label={homeContent.shell.languageMenuLabel}
           className="gap-2"
         >
           <span className="text-muted-foreground">
-            {homeContent?.shell.language ?? "DESIGN.md"}
+            {homeContent.shell.language}
           </span>
-          <span>{homeContent?.locale.toUpperCase() ?? "KO"}</span>
+          <span>{homeContent.locale.toUpperCase()}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-52">
         <DropdownMenuLabel>
-          {homeContent?.shell.languageMenuLabel ?? "Language editions"}
+          {homeContent.shell.languageMenuLabel}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -277,7 +293,7 @@ function LanguageMenu({ homeContent }: { homeContent?: HomeContent }) {
             <DropdownMenuItem asChild key={edition.code}>
               <a
                 aria-current={
-                  homeContent?.locale === edition.code ? "page" : undefined
+                  homeContent.locale === edition.code ? "page" : undefined
                 }
                 className="justify-between gap-4"
                 href={siteHref(edition.href)}
@@ -286,7 +302,7 @@ function LanguageMenu({ homeContent }: { homeContent?: HomeContent }) {
               >
                 <span>{edition.label}</span>
                 <span className="text-xs text-muted-foreground">
-                  {homeContent ? edition.code.toUpperCase() : edition.note}
+                  {edition.code.toUpperCase()}
                 </span>
               </a>
             </DropdownMenuItem>
@@ -300,12 +316,12 @@ function LanguageMenu({ homeContent }: { homeContent?: HomeContent }) {
 function MobileNavigation({
   currentPath,
   content = en,
-  homeContent,
 }: {
   currentPath: string;
   content?: HomeContent;
-  homeContent?: HomeContent;
 }) {
+  const { contentRoute } = parseSiteRoute(currentPath);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -328,8 +344,8 @@ function MobileNavigation({
       >
         <SheetHeader className="flex-row items-center justify-between p-4">
           <Brand
-            current={Boolean(homeContent) && currentPath === content.path}
-            homeHref={homeContent ? content.path : "/"}
+            current={contentRoute === "/"}
+            homeHref={content.path}
             homeLabel={content.shell.homeLabel}
           />
           <SheetTitle className="sr-only">
@@ -354,28 +370,29 @@ function MobileNavigation({
         </SheetHeader>
         <div className="flex min-h-0 flex-1 flex-col justify-between gap-8 overflow-y-auto px-4 pb-8 pt-12">
           <nav className="flex flex-col" aria-label="Mobile navigation">
-            {primaryNav.map((item) => (
-              <SheetClose asChild key={item.href}>
-                <a
-                  aria-current={
-                    currentPath.startsWith(item.href) ? "page" : undefined
-                  }
-                  className={cn(
-                    "mobile-menu-link",
-                    currentPath.startsWith(item.href) && "is-current",
-                  )}
-                  href={siteHref(item.href)}
-                >
-                  {primaryNavTitle(item.href, content.shell)}
-                </a>
-              </SheetClose>
-            ))}
+            {primaryNav.map((item) => {
+              const href = localizedRoute(item.href, content.locale);
+              const current = contentRoute.startsWith(item.href);
+              return (
+                <SheetClose asChild key={item.href}>
+                  <a
+                    aria-current={current ? "page" : undefined}
+                    className={cn("mobile-menu-link", current && "is-current")}
+                    href={siteHref(href)}
+                  >
+                    {primaryNavTitle(item.href, content.shell)}
+                  </a>
+                </SheetClose>
+              );
+            })}
           </nav>
           <div className="mobile-menu-utilities flex flex-col gap-6">
-            <LanguageMenu homeContent={homeContent} />
+            <LanguageMenu currentPath={currentPath} homeContent={content} />
             <ThemeMenu content={content} />
             <div className="flex flex-wrap gap-6 text-sm">
-              <a href={siteHref("/DESIGN.md")}>DESIGN.md</a>
+              <a href={siteHref(designDocumentForLocale[content.locale])}>
+                DESIGN.md
+              </a>
               <a href="https://github.com/chann/design">GitHub</a>
             </div>
           </div>
@@ -393,6 +410,7 @@ export function SiteHeader({
   homeContent?: HomeContent;
 }) {
   const content = homeContent ?? en;
+  const { contentRoute } = parseSiteRoute(currentPath);
 
   return (
     <>
@@ -403,33 +421,32 @@ export function SiteHeader({
         <div className="site-nav pointer-events-auto mx-auto flex w-[calc(100%-2rem)] items-center gap-2 rounded-full border bg-background/80 px-3 py-2 shadow-lg backdrop-blur-3xl md:w-max">
           <Brand
             className="px-2"
-            current={currentPath === content.path}
-            homeHref={homeContent ? content.path : "/"}
+            current={contentRoute === "/"}
+            homeHref={content.path}
             homeLabel={content.shell.homeLabel}
           />
           <nav
             className="ml-2 hidden items-center gap-1 md:flex"
             aria-label={content.shell.primaryNavigationLabel}
           >
-            {primaryNav.map((item) => (
-              <Button
-                asChild
-                variant={
-                  currentPath.startsWith(item.href) ? "secondary" : "ghost"
-                }
-                size="sm"
-                key={item.href}
-              >
-                <a
-                  aria-current={
-                    currentPath.startsWith(item.href) ? "page" : undefined
-                  }
-                  href={siteHref(item.href)}
+            {primaryNav.map((item) => {
+              const current = contentRoute.startsWith(item.href);
+              return (
+                <Button
+                  asChild
+                  variant={current ? "secondary" : "ghost"}
+                  size="sm"
+                  key={item.href}
                 >
-                  {primaryNavTitle(item.href, content.shell)}
-                </a>
-              </Button>
-            ))}
+                  <a
+                    aria-current={current ? "page" : undefined}
+                    href={siteHref(localizedRoute(item.href, content.locale))}
+                  >
+                    {primaryNavTitle(item.href, content.shell)}
+                  </a>
+                </Button>
+              );
+            })}
           </nav>
           <div className="ml-auto flex items-center gap-1">
             <Button
@@ -447,16 +464,12 @@ export function SiteHeader({
               </a>
             </Button>
             <div className="hidden md:block">
-              <LanguageMenu homeContent={homeContent} />
+              <LanguageMenu currentPath={currentPath} homeContent={content} />
             </div>
             <div className="hidden lg:block">
               <ThemeMenu content={content} />
             </div>
-            <MobileNavigation
-              currentPath={currentPath}
-              content={content}
-              homeContent={homeContent}
-            />
+            <MobileNavigation currentPath={currentPath} content={content} />
           </div>
         </div>
       </header>
@@ -476,10 +489,7 @@ export function SiteFooter({
     <footer className="site-footer overflow-hidden border-t">
       <div className="mx-auto max-w-[96rem] px-4 pb-16 pt-12 sm:px-6 lg:px-8 lg:pt-16">
         <div className="flex max-w-xl flex-col gap-3">
-          <Brand
-            homeHref={homeContent ? content.path : "/"}
-            homeLabel={content.shell.homeLabel}
-          />
+          <Brand homeHref={content.path} homeLabel={content.shell.homeLabel} />
           <p className="text-sm leading-6 text-muted-foreground">
             {content.footer.description}
           </p>
@@ -492,8 +502,7 @@ export function SiteFooter({
             <section
               className={cn(
                 group.kind === "system" && "lg:col-span-3",
-                group.kind === "foundations" &&
-                  "sm:col-span-2 lg:col-span-4",
+                group.kind === "foundations" && "sm:col-span-2 lg:col-span-4",
                 group.kind === "resources" && "lg:col-span-3",
                 group.kind === "legal" && "lg:col-span-2",
               )}
@@ -533,32 +542,36 @@ type OutlineItem = { id: string; title: string };
 
 function DocsNavigationList({
   currentPath,
+  locale,
   closeOnSelect = false,
 }: {
   currentPath: string;
+  locale: HomeLocale;
   closeOnSelect?: boolean;
 }) {
+  const docs = docsContents[locale];
   return (
     <div className="flex flex-col gap-7">
-      {documentationGroups.map((group) => (
+      {documentationGroups(locale).map((group) => (
         <div className="flex flex-col gap-2" key={group.title}>
           <p className="px-2.5 text-xs font-medium text-foreground">
             {group.title}
           </p>
           <nav
             className="flex flex-col gap-0.5"
-            aria-label={`${group.title} documentation`}
+            aria-label={`${group.title} · ${docs.shell.navigationLabel}`}
           >
             {group.items.map((item) => {
+              const href = localizedRoute(item.href, locale);
               const link = (
                 <a
-                  aria-current={currentPath === item.href ? "page" : undefined}
+                  aria-current={currentPath === href ? "page" : undefined}
                   className={cn(
                     "rounded-lg px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
-                    currentPath === item.href &&
+                    currentPath === href &&
                       "bg-accent font-medium text-accent-foreground",
                   )}
-                  href={siteHref(item.href)}
+                  href={siteHref(href)}
                 >
                   {item.title}
                 </a>
@@ -581,24 +594,33 @@ function DocsNavigationList({
   );
 }
 
-function DocsMobileNavigation({ currentPath }: { currentPath: string }) {
+function DocsMobileNavigation({
+  currentPath,
+  locale,
+}: {
+  currentPath: string;
+  locale: HomeLocale;
+}) {
+  const docs = docsContents[locale];
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline" size="sm">
           <PanelLeftIcon data-icon="inline-start" />
-          Browse docs
+          {docs.shell.browse}
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-[min(24rem,90vw)] border-0 p-0">
         <SheetHeader className="border-b px-5 py-4">
-          <SheetTitle>Documentation</SheetTitle>
-          <SheetDescription>
-            Browse principles, foundations, and components.
-          </SheetDescription>
+          <SheetTitle>{docs.shell.title}</SheetTitle>
+          <SheetDescription>{docs.shell.description}</SheetDescription>
         </SheetHeader>
         <ScrollArea className="min-h-0 flex-1 px-3 py-5">
-          <DocsNavigationList currentPath={currentPath} closeOnSelect={true} />
+          <DocsNavigationList
+            currentPath={currentPath}
+            locale={locale}
+            closeOnSelect={true}
+          />
         </ScrollArea>
       </SheetContent>
     </Sheet>
@@ -607,6 +629,7 @@ function DocsMobileNavigation({ currentPath }: { currentPath: string }) {
 
 export function DocsLayout({
   currentPath,
+  locale,
   section,
   eyebrow,
   title,
@@ -617,6 +640,7 @@ export function DocsLayout({
   children,
 }: {
   currentPath: string;
+  locale: HomeLocale;
   section: "principles" | "foundations" | "components";
   eyebrow: string;
   title: string;
@@ -626,26 +650,24 @@ export function DocsLayout({
   next?: NavItem;
   children: ReactNode;
 }) {
-  const sectionTitle =
-    section === "principles"
-      ? "Principles"
-      : section === "foundations"
-        ? "Foundations"
-        : "Components";
-  const sectionPath = `/${section}`;
+  const docs = docsContents[locale];
+  const homeContent = homeContents[locale];
+  const sectionTitle = docs.shell.sections[section];
+  const sectionPath = localizedRoute(`/${section}`, locale);
   const isSectionOverview = currentPath === sectionPath;
+  const designDocument = designDocumentForLocale[locale];
 
   return (
     <>
-      <SiteHeader currentPath={currentPath} />
+      <SiteHeader currentPath={currentPath} homeContent={homeContent} />
       <div className="mx-auto grid max-w-[96rem] lg:grid-cols-[17rem_minmax(0,1fr)] xl:grid-cols-[17rem_minmax(0,1fr)_14rem]">
         <aside
-          aria-label="Documentation navigation"
+          aria-label={docs.shell.navigationLabel}
           className="hidden lg:block"
         >
           <div className="sticky top-24 h-[calc(100dvh-6rem)] py-8">
             <ScrollArea className="h-full px-4">
-              <DocsNavigationList currentPath={currentPath} />
+              <DocsNavigationList currentPath={currentPath} locale={locale} />
             </ScrollArea>
           </div>
         </aside>
@@ -656,14 +678,14 @@ export function DocsLayout({
         >
           <div className="mx-auto flex max-w-3xl flex-col gap-14">
             <div className="lg:hidden">
-              <DocsMobileNavigation currentPath={currentPath} />
+              <DocsMobileNavigation currentPath={currentPath} locale={locale} />
             </div>
             <header className="flex flex-col gap-6">
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                      <a href={siteHref("/DESIGN.md")}>DESIGN.md</a>
+                      <a href={siteHref(designDocument)}>DESIGN.md</a>
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
@@ -702,9 +724,9 @@ export function DocsLayout({
                   size="sm"
                   className="hidden shrink-0 sm:inline-flex"
                 >
-                  <a href={siteHref("/DESIGN.md")}>
+                  <a href={siteHref(designDocument)}>
                     <BookOpenIcon data-icon="inline-start" />
-                    Read source
+                    {docs.shell.readDesign}
                   </a>
                 </Button>
               </div>
@@ -712,13 +734,16 @@ export function DocsLayout({
             {children}
             <nav
               className="grid gap-3 border-t pt-8 sm:grid-cols-2"
-              aria-label="Pagination"
+              aria-label={docs.shell.paginationLabel}
             >
               {previous ? (
-                <a className="doc-pager" href={siteHref(previous.href)}>
+                <a
+                  className="doc-pager"
+                  href={siteHref(localizedRoute(previous.href, locale))}
+                >
                   <ChevronLeftIcon />
                   <span>
-                    <small>Previous</small>
+                    <small>{docs.shell.previous}</small>
                     {previous.title}
                   </span>
                 </a>
@@ -728,10 +753,10 @@ export function DocsLayout({
               {next && (
                 <a
                   className="doc-pager justify-end text-right"
-                  href={siteHref(next.href)}
+                  href={siteHref(localizedRoute(next.href, locale))}
                 >
                   <span>
-                    <small>Next</small>
+                    <small>{docs.shell.next}</small>
                     {next.title}
                   </span>
                   <ChevronRightIcon />
@@ -739,17 +764,17 @@ export function DocsLayout({
               )}
             </nav>
             <p className="text-xs text-muted-foreground">
-              Last reviewed · August 2026
+              {docs.shell.reviewed}
             </p>
           </div>
         </main>
 
-        <aside aria-label="Page outline" className="hidden xl:block">
+        <aside aria-label={docs.shell.outlineLabel} className="hidden xl:block">
           <nav
             className="sticky top-24 flex flex-col gap-1 px-5 py-8 text-sm"
-            aria-label="On this page"
+            aria-label={docs.shell.outlineLabel}
           >
-            <p className="mb-2 font-medium">On this page</p>
+            <p className="mb-2 font-medium">{docs.shell.outlineTitle}</p>
             {outline.map((item) => (
               <a
                 className="rounded-md py-1.5 text-muted-foreground hover:text-foreground"
@@ -762,7 +787,7 @@ export function DocsLayout({
           </nav>
         </aside>
       </div>
-      <SiteFooter />
+      <SiteFooter homeContent={homeContent} />
     </>
   );
 }

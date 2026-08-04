@@ -282,7 +282,7 @@ function HoverCardSpecimen() {
           </a>
         </HoverCardTrigger>
         <HoverCardContent className="w-72">
-          <strong className="text-sm">Normative design contract</strong>
+          <strong className="text-sm">Product design guide</strong>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             Tokens, component behavior, content rules, and release checks in one
             readable source.

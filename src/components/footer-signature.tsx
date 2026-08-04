@@ -1,16 +1,11 @@
-import {
-  type CSSProperties,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-const signatureText = "Comfort / DESIGN.md";
+const signatureText = "Comfort DESIGN.md";
 
 export function FooterSignature({
-  accessibleLabel = "Comfort Design System, documented in DESIGN.md",
+  accessibleLabel = "Comfort DESIGN.md",
 }: {
   accessibleLabel?: string;
 }) {
@@ -45,9 +40,7 @@ export function FooterSignature({
           <span
             className="footer-signature-letter"
             key={`${character}-${index}`}
-            style={
-              { "--footer-signature-index": index } as CSSProperties
-            }
+            style={{ "--footer-signature-index": index } as CSSProperties}
           >
             {character === " " ? "\u00a0" : character}
           </span>

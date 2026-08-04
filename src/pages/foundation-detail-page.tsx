@@ -18,16 +18,22 @@ import {
 } from "@/components/ui/table";
 import { getFoundation } from "@/data/catalog";
 import { foundationItems } from "@/data/site";
+import { docsContents, localizedFoundation } from "@/content/docs";
+import type { HomeLocale } from "@/content/home";
 
 export function FoundationDetailPage({
   currentPath,
+  locale,
   slug,
 }: {
   currentPath: string;
+  locale: HomeLocale;
   slug: string;
 }) {
-  const foundation = getFoundation(slug);
-  if (!foundation) return null;
+  const baseFoundation = getFoundation(slug);
+  if (!baseFoundation) return null;
+  const foundation = localizedFoundation(baseFoundation, locale);
+  const content = docsContents[locale].foundationDetail;
 
   const Specimen =
     foundationSpecimens[foundation.specimen as FoundationSpecimenKey];
@@ -36,29 +42,30 @@ export function FoundationDetailPage({
     index === 0
       ? {
           href: "/foundations",
-          title: "Foundations",
-          description: "Foundation overview",
+          title: docsContents[locale].shell.sections.foundations,
+          description: content.overviewDescription,
         }
       : foundationItems[index - 1];
   const next = foundationItems[index + 1] ?? {
     href: "/components",
-    title: "Components",
-    description: "Component catalog",
+    title: docsContents[locale].shell.sections.components,
+    description: docsContents[locale].components.title,
   };
 
   return (
     <DocsLayout
       currentPath={currentPath}
+      locale={locale}
       section="foundations"
-      eyebrow="Foundation"
+      eyebrow={content.eyebrow}
       title={foundation.title}
       description={foundation.description}
       outline={[
-        { id: "overview", title: "Overview" },
-        { id: "intent", title: "Intent" },
-        { id: "guidelines", title: "Guidelines" },
-        { id: "accessibility", title: "Accessibility" },
-        { id: "reference", title: "Reference values" },
+        { id: "overview", title: content.overview },
+        { id: "intent", title: content.intent },
+        { id: "guidelines", title: content.guidelines },
+        { id: "accessibility", title: content.accessibility },
+        { id: "reference", title: content.reference },
       ]}
       previous={previous}
       next={next}
@@ -68,9 +75,9 @@ export function FoundationDetailPage({
       </section>
 
       <section className="scroll-mt-24 flex flex-col gap-4" id="intent">
-        <p className="eyebrow">System intent</p>
+        <p className="eyebrow">{content.intentEyebrow}</p>
         <h2 className="text-2xl font-semibold tracking-[-0.03em]">
-          What this foundation protects
+          {content.intentTitle}
         </h2>
         <p className="max-w-2xl leading-7 text-muted-foreground">
           {foundation.intent}
@@ -90,10 +97,10 @@ export function FoundationDetailPage({
       <section className="scroll-mt-24 flex flex-col gap-5" id="guidelines">
         <div className="flex flex-col gap-2">
           <Badge className="w-fit" variant="secondary">
-            Core guidance
+            {content.guidanceBadge}
           </Badge>
           <h2 className="text-2xl font-semibold tracking-[-0.03em]">
-            Apply it with intent
+            {content.guidanceTitle}
           </h2>
         </div>
         <CheckList items={foundation.rules} />
@@ -101,9 +108,9 @@ export function FoundationDetailPage({
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="accessibility">
         <div className="flex flex-col gap-2">
-          <p className="eyebrow">Inclusive baseline</p>
+          <p className="eyebrow">{content.accessibilityEyebrow}</p>
           <h2 className="text-2xl font-semibold tracking-[-0.03em]">
-            Accessibility checks
+            {content.accessibilityTitle}
           </h2>
         </div>
         <CheckList items={foundation.accessibility} />
@@ -112,11 +119,10 @@ export function FoundationDetailPage({
       <section className="scroll-mt-24 flex flex-col gap-5" id="reference">
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold tracking-[-0.03em]">
-            Reference values
+            {content.referenceTitle}
           </h2>
           <p className="text-sm leading-6 text-muted-foreground">
-            Semantic roles stay stable while rendered values adapt to theme,
-            viewport, language, and interaction state.
+            {content.referenceDescription}
           </p>
         </div>
         <Card>
@@ -124,9 +130,9 @@ export function FoundationDetailPage({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Use</TableHead>
-                  <TableHead>Reference</TableHead>
+                  <TableHead>{content.role}</TableHead>
+                  <TableHead>{content.use}</TableHead>
+                  <TableHead>{content.value}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -143,11 +149,8 @@ export function FoundationDetailPage({
         </Card>
         <Alert>
           <InfoIcon />
-          <AlertTitle>Normative source</AlertTitle>
-          <AlertDescription>
-            Exact production values and acceptance rules live in DESIGN.md; this
-            page makes their visual and behavioral intent inspectable.
-          </AlertDescription>
+          <AlertTitle>{content.sourceTitle}</AlertTitle>
+          <AlertDescription>{content.sourceDescription}</AlertDescription>
         </Alert>
       </section>
     </DocsLayout>

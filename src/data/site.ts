@@ -1,4 +1,5 @@
 import { componentCatalog, foundationCatalog } from "./catalog";
+import { homeContents, type HomeLocale } from "@/content/home";
 
 export type NavItem = {
   href: string;
@@ -21,37 +22,32 @@ export type DesignEdition = {
   href: string;
   label: string;
   languageTag: string;
-  note: string;
 };
 
 export const designEditions: DesignEdition[] = [
-  {
-    code: "ko",
-    href: "/DESIGN.md",
-    label: "한국어",
-    languageTag: "ko",
-    note: "기본",
-  },
   {
     code: "en",
     href: "/DESIGN.en.md",
     label: "English",
     languageTag: "en",
-    note: "Translation",
+  },
+  {
+    code: "ko",
+    href: "/DESIGN.md",
+    label: "한국어",
+    languageTag: "ko",
   },
   {
     code: "jp",
     href: "/DESIGN.jp.md",
     label: "日本語",
     languageTag: "ja",
-    note: "翻訳",
   },
   {
     code: "cn",
     href: "/DESIGN.cn.md",
     label: "简体中文",
     languageTag: "zh-CN",
-    note: "翻译",
   },
 ];
 
@@ -81,7 +77,7 @@ export const principles: Principle[] = [
     summary:
       "Stable rules, restrained choices, and repeatable patterns let people act without second-guessing the interface.",
     practice:
-      "Build from semantic tokens, keep component contracts predictable, and reserve exceptions for meaningful differences.",
+      "Build from semantic tokens, keep component behavior predictable, and reserve exceptions for meaningful differences.",
     question: "Can someone predict what happens before they act?",
   },
   {
@@ -135,6 +131,33 @@ export const docsNavigation = [
     items: [{ href: "/components", title: "Overview" }, ...componentItems],
   },
 ];
+
+export function parseSiteRoute(route: string): {
+  locale: HomeLocale;
+  contentRoute: string;
+} {
+  for (const locale of ["ko", "jp", "cn"] as const) {
+    const prefix = homeContents[locale].path;
+    if (route === prefix || route.startsWith(`${prefix}/`)) {
+      return {
+        locale,
+        contentRoute: route.slice(prefix.length) || "/",
+      };
+    }
+  }
+  return { locale: "en", contentRoute: route };
+}
+
+export function localizedRoute(path: string, locale: HomeLocale) {
+  if (/^(https?:|#)/.test(path) || /\.[a-z]+$/i.test(path)) return path;
+  const prefix = homeContents[locale].path;
+  if (path === "/") return prefix;
+  return prefix === "/" ? path : `${prefix}${path}`;
+}
+
+export function routeForLocale(route: string, locale: HomeLocale) {
+  return localizedRoute(parseSiteRoute(route).contentRoute, locale);
+}
 
 export function siteHref(path: string, basePath = import.meta.env.BASE_URL) {
   if (/^(https?:|#)/.test(path)) return path;

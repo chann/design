@@ -1,6 +1,6 @@
 ---
 version: alpha
-name: Comfort Design System
+name: Comfort DESIGN.md
 description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
@@ -268,15 +268,15 @@ components:
 
 <!-- markdownlint-disable MD013 -->
 
-# Comfort Design System
+# Comfort DESIGN.md
 
-> **ステータス:** 規範的デザインリファレンス · **DESIGN.md schema:** `alpha`
+> **ステータス:** プロダクトテーマガイド · **DESIGN.md schema:** `alpha`
 >
-> **言語契約:** 韓国語版 [DESIGN.md](./DESIGN.md) を規範原文とします。実装契約を
-> 変更した場合、[English](./DESIGN.en.md)・[日本語](./DESIGN.jp.md)・
+> 韓国語版 [DESIGN.md](./DESIGN.md) を先に更新します。実装ガイドを変更した場合、
+> [English](./DESIGN.en.md)・[日本語](./DESIGN.jp.md)・
 > [简体中文](./DESIGN.cn.md) も同じ構造と意味で更新します。
 
-YAML front matter は機械可読の token 契約であり、本文はその値をいつ、どのように
+YAML front matter は機械可読の token 一覧であり、本文はその値をいつ、どのように
 適用するかを説明します。両者が矛盾する場合、正確な値は token、意図・階層・
 挙動は本文を優先します。
 
@@ -284,14 +284,19 @@ YAML front matter は機械可読の token 契約であり、本文はその値�
 
 ## Overview
 
-Comfort Design System は dashboard、制作ツール、設定、commerce、運用 workflow など、
-集中を必要とする product interface のためのシステムです。クールな neutral
+Comfort DESIGN.md は dashboard、制作ツール、設定、commerce、運用 workflow など、
+集中を必要とする product interface のテーマを定義します。クールな neutral
 surface、節度ある単一の青い action color、system-first typography、明確な
 containment、内容の出所と移動先を説明する motion を組み合わせます。
 
-参照サイトは 15 の Foundation、8 family・63 component、84 static route を
+shadcnコンポーネントから始め、DESIGN.mdでテーマを定義します。信頼性の高い
+shadcn/uiをベースに、`DESIGN.md`でsemantic token、state、motion、content、
+accessibilityなどの詳細を製品に合わせます。real specimenとstatic artifactで
+結果を確認します。
+
+参照サイトは 15 の Foundation、8 family・63 component、336 static route を
 収録します。各 detail route は real specimen、Preview・View code の segmented
-control、usage、anatomy、state、accessibility、internationalization、実装契約を
+control、usage、anatomy、state、accessibility、internationalization、実装ガイドを
 同じ順序で示します。
 
 | 品質            | ユーザーが感じること                 | 確認できる設計根拠                                                        |
@@ -418,9 +423,10 @@ gap で分離します。
 document shell の header は初期状態と scroll 後の両方で viewport 上端から 24px
 離れた floating surface として維持します。左右の documentation rail と本文の
 間に vertical separator を置かず、余白だけで領域を分けます。footer は System、
-Foundations、Components、Resources、Legal の sitemap を分散配置し、交差時に
-一部が現れる大きな `Comfort / DESIGN.md` text signature で閉じます。reduced
-motion では移動せず最終状態を即時表示します。
+Foundations、Resources、Legal の compact sitemap のみを配置します。63 component
+を繰り返さず Components catalog への link を一つだけ置き、交差時に一部が現れる
+大きな `Comfort DESIGN.md` text signature で閉じます。reduced motion では
+移動せず最終状態を即時表示します。
 
 320 CSS px 以上で page-level horizontal scroll を許可しません。境界と
 affordance が明確な data region だけ内部 horizontal scroll を許可します。
@@ -484,12 +490,16 @@ Writing** です。
   disabled・loading・empty・error への変化を説明します。
 
 `src/data/catalog.json` は route と inventory の機械可読リストであり、本書は
-Foundation の選択と適用を定める規範です。件数と title は常に一致させます。
+Foundation の選択と適用を説明するガイドです。件数と title は常に一致させます。
 
 ## Components
 
 YAML component entry は再利用可能な visual atom を定義します。application
 component は組み合わせられますが semantic role を変えてはいけません。
+
+信頼性の高いshadcn/uiを基本コンポーネントとして使います。`DESIGN.md`でsemantic
+color、typography、spacing、shape、state、motionなどの詳細を定義し、accessible
+primitiveの動作を保ちながらプロダクトに合う表現へ整えます。
 
 63 component は次の 8 family で管理します。
 
@@ -594,7 +604,7 @@ dark variant は agent の推測を避けるため YAML に明示します。文
 - すべての section を floating card にしません。
 - hover を必須 content や action への唯一の経路にしません。
 - animation 実行中という理由だけで input を lock しません。
-- error を empty として、無期限処理を skeleton として表示せず、authoritative
+- error を empty として、無期限処理を skeleton として表示せず、server が
   operation の成功前に「完了」と言いません。
 - 強い focus-visible の代替なしに outline を消しません。
 - layout に収めるため touch target、body type、必須 column を縮めません。
@@ -628,6 +638,8 @@ motion は原因と連続性を説明します。
 - press feedback は 100ms 以内に開始します。
 - micro transition は通常 120–180ms、標準 state change は 180–240ms、大きな
   spatial transition は 240–360ms です。
+- header の language・theme utility dropdown は約 140–150ms で開き、約 100ms で
+  閉じます。移動は 4px 以下に抑え、keyboard focus return を保ちます。
 - drag は threshold 後に pointer を 1:1 追従し grab offset を保ちます。
 - release velocity は settling または target selection へ引き継ぎます。
 - entry と exit は関連する origin と destination を共有します。
@@ -684,16 +696,22 @@ success → stale または offline
   場合のみ許可します。
 - retry mutation は idempotent にするか、反復前に server と reconcile します。
 
-shareable navigation state は URL、authoritative state は server、local
+shareable navigation state は URL、server で確認する state は server、local
 interaction state は component に置きます。shared store は実際の cross-tree
 lifetime が必要になった後だけ導入します。
 
 ## Content & Localization
 
-韓国語 `DESIGN.md` を規範原文とし、en・jp・cn 版は同じ heading 順序、token、
+韓国語 `DESIGN.md` を先に更新し、en・jp・cn 版は同じ heading 順序、token、
 inventory、MUST・SHOULD・MAY の強度を保ちます。翻訳は意味を維持しながら、
 各言語で自然な語順と句読点を使います。
 
+- homepage とすべての detail page は英語 `/` を既定とし、韓国語 `/ko/`、
+  日本語 `/jp/`、中国語 `/cn/` を提供します。locale 選択は URL path を優先し、保存済み
+  preference より優先します。
+- homepage の全 copy と metadata は `src/content/home/ko.ts`、`en.ts`、`jp.ts`、
+  `cn.ts` の typed content module に分離します。presentation component に文言を
+  直接置かず、copy-only change は対応する content file だけを変更します。
 - site copy に内部の文書運用用語を露出しません。language selector は `KO`、
   `EN`、`JP`、`CN` で現在版と移動可能な版だけを明確に示します。
 - 自然言語は `word-break: keep-all` を既定とし、code、command、URL、file path、
@@ -704,16 +722,16 @@ inventory、MUST・SHOULD・MAY の強度を保ちます。翻訳は意味を維
 - 30% text expansion、CJK line breaking、RTL logical property、200% text size を
   localized regression の最小セットに含めます。
 
-## Implementation Contract
+## Implementation Guide
 
 現在の reference implementation は Vite 8.2、React 19.2、TypeScript 6 strict
-mode、Tailwind CSS 4.3、repository が所有する shadcn/ui source、Radix UI と
-Base UI primitive、Lucide、TanStack Table、Recharts、Embla を使います。
-library は交換できますが visual、interaction、accessibility、evidence
-contract は低下させられません。
+mode、Tailwind CSS 4.3、Radix UI と Base UI primitive、Lucide、TanStack Table、
+Recharts、Embla を使います。shadcn/uiを基本コンポーネントソースとし、
+`DESIGN.md` をプロダクトテーマガイドとして適用します。library は交換できますが
+visual、interaction、accessibility、verification の品質は低下させません。
 
-- Vite は `/design/` base 下の static site を build し、catalog contract から
-  84 route artifact を生成します。
+- Vite は `/design/` base 下の static site を build し、catalog manifest から
+  336 route artifact を生成します。
 - YAML role を CSS variable または theme token に一度 map し、component は raw
   value を重複させません。
 - application primitive に domain logic を入れません。
@@ -723,12 +741,16 @@ contract は低下させられません。
   focus-visible、disabled、loading、empty、error、light、dark、
   reduced-motion、contrast、long-content、localized state を扱います。
 
-## Verification Contract
+## Verification
 
 完了前に `npm run verify:catalog`、`npm run lint`、`npm run check`、
 `npm run build` をすべて通過させます。catalog verification は正確に 63
-component、15 Foundation、84 static route、4言語版の同一 inventory、light
+component、15 Foundation、336 static route、4言語版の同一 inventory、light
 `#0066CC` と dark `#78B7FF` primary を確認します。
+
+static output は英語 `dist/index.html`、韓国語 `dist/ko/index.html`、日本語
+`dist/jp/index.html`、中国語 `dist/cn/index.html` をすべて含めます。各 artifact
+の `lang`、canonical、`hreflang` set と英語 `x-default` を検証します。
 
 browser QA は 390px と 1440px で全 family の代表 specimen を実行し、search、
 empty/reset、overlay focus 復帰、form input、table sort、chart、carousel、message
@@ -754,7 +776,7 @@ test は未確認 browser、device、assistive-technology behavior の代替で�
 1. 再利用する正確な値が変わる場合は YAML token を先に更新します。
 2. inventory 変更時は `catalog.json`、実際の module、specimen、route、4言語の
    component・Foundation リストを一つの論理単位で更新します。
-3. 本書の主要 heading 順序を維持し、韓国語の規範原文を先に更新します。
+3. 本書の主要 heading 順序を維持し、韓国語 `DESIGN.md` を先に更新します。
 4. state variant は関連 component entry に追加し、raw value ではなく
    `{token.references}` を使います。
 5. en・jp・cn 版に同じ意味と MUST・SHOULD・MAY の強度を反映します。
@@ -773,7 +795,7 @@ test は未確認 browser、device、assistive-technology behavior の代替で�
   が必要です。
 - navigation、table density、editor canvas、map、media timeline、finance UI は
   information architecture 決定後に拡張します。
-- 翻訳版は契約を維持しますが、実 product の copy、font、line breaking、RTL は
+- 他言語版も同じガイドを保ちますが、実 product の copy、font、line breaking、RTL は
   個別検証が必要です。
 
 ## References

@@ -68,7 +68,7 @@ function AccordionSpecimen() {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="accessibility">
-          <AccordionTrigger>Accessibility contract</AccordionTrigger>
+          <AccordionTrigger>Accessibility guidance</AccordionTrigger>
           <AccordionContent>
             Enter or Space toggles the focused heading; content remains in
             reading order.

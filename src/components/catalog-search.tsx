@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { docsContents } from "@/content/docs";
+import type { HomeLocale } from "@/content/home";
+import type { ComponentFamily } from "@/data/catalog";
 
 export type CatalogSearchItem = {
   slug: string;
@@ -21,6 +24,7 @@ export function CatalogSearch<T extends CatalogSearchItem>({
   onValueChange,
   onFamilyChange,
   onResultsChange,
+  locale,
 }: {
   items: T[];
   value: string;
@@ -28,7 +32,9 @@ export function CatalogSearch<T extends CatalogSearchItem>({
   onValueChange: (value: string) => void;
   onFamilyChange: (family: string) => void;
   onResultsChange: (items: T[]) => void;
+  locale: HomeLocale;
 }) {
+  const copy = docsContents[locale].search;
   const families = useMemo(
     () => [
       ...new Set(items.flatMap((item) => (item.family ? [item.family] : []))),
@@ -58,13 +64,13 @@ export function CatalogSearch<T extends CatalogSearchItem>({
 
   return (
     <section
-      aria-label="Catalog filters"
+      aria-label={copy.ariaLabel}
       className="catalog-search rounded-2xl border bg-card p-4 sm:p-5"
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div className="flex flex-1 flex-col gap-2">
-            <Label htmlFor="catalog-search-input">Search the catalog</Label>
+            <Label htmlFor="catalog-search-input">{copy.label}</Label>
             <div className="relative">
               <SearchIcon
                 aria-hidden="true"
@@ -75,7 +81,7 @@ export function CatalogSearch<T extends CatalogSearchItem>({
                 className="h-10 pl-9 pr-9"
                 id="catalog-search-input"
                 onChange={(event) => onValueChange(event.target.value)}
-                placeholder="Search by name, purpose, or behavior"
+                placeholder={copy.placeholder}
                 type="search"
                 value={value}
               />
@@ -92,13 +98,13 @@ export function CatalogSearch<T extends CatalogSearchItem>({
               variant="ghost"
             >
               <XIcon aria-hidden="true" data-icon="inline-start" />
-              Reset
+              {copy.reset}
             </Button>
           ) : null}
         </div>
         {families.length > 0 ? (
           <div
-            aria-label="Filter by family"
+            aria-label={copy.familyLabel}
             className="flex flex-wrap gap-2"
             role="group"
           >
@@ -114,13 +120,15 @@ export function CatalogSearch<T extends CatalogSearchItem>({
                 onClick={() => onFamilyChange(option)}
                 type="button"
               >
-                {option === "all" ? "All" : option.replace("-", " ")}
+                {option === "all"
+                  ? copy.all
+                  : docsContents[locale].families[option as ComponentFamily]}
               </button>
             ))}
           </div>
         ) : null}
         <p aria-live="polite" className="text-xs text-muted-foreground">
-          {results.length} {results.length === 1 ? "result" : "results"}
+          {results.length} {results.length === 1 ? copy.result : copy.results}
         </p>
       </div>
     </section>

@@ -15,16 +15,22 @@ import {
   CardDescription,
   CardHeader,
 } from "@/components/ui/card";
-import { principles, type Principle } from "@/data/site";
+import { docsContents } from "@/content/docs";
+import type { HomeLocale } from "@/content/home";
+import type { Principle } from "@/data/site";
 
 const principleIcons = [CompassIcon, EyeIcon, RouteIcon, SproutIcon];
 
 function PrincipleCard({
   principle,
   index,
+  intentLabel,
+  practiceLabel,
 }: {
   principle: Principle;
   index: number;
+  intentLabel: string;
+  practiceLabel: string;
 }) {
   const Icon = principleIcons[index];
   return (
@@ -45,13 +51,13 @@ function PrincipleCard({
         </CardHeader>
         <CardContent className="grid gap-8 py-2 md:grid-cols-2">
           <div className="flex flex-col gap-3">
-            <h3 className="font-medium">Intent</h3>
+            <h3 className="font-medium">{intentLabel}</h3>
             <p className="text-sm leading-6 text-muted-foreground">
               {principle.summary}
             </p>
           </div>
           <div className="flex flex-col gap-3">
-            <h3 className="font-medium">Put it into practice</h3>
+            <h3 className="font-medium">{practiceLabel}</h3>
             <p className="text-sm leading-6 text-muted-foreground">
               {principle.practice}
             </p>
@@ -65,33 +71,40 @@ function PrincipleCard({
   );
 }
 
-export function PrinciplesPage({ currentPath }: { currentPath: string }) {
+export function PrinciplesPage({
+  currentPath,
+  locale,
+}: {
+  currentPath: string;
+  locale: HomeLocale;
+}) {
+  const content = docsContents[locale].principles;
+  const principles = content.items;
+
   return (
     <DocsLayout
       currentPath={currentPath}
+      locale={locale}
       section="principles"
-      eyebrow="Design principles"
-      title="Four values for comfortable products"
-      description="Comfort is not softness for its own sake. It is the confidence that comes from natural behavior, certain rules, meaningful guidance, and room to grow."
+      eyebrow={content.eyebrow}
+      title={content.title}
+      description={content.description}
       outline={[
-        { id: "model", title: "The model" },
+        { id: "model", title: content.outlineModel },
         ...principles.map(({ id, title }) => ({ id, title })),
-        { id: "review", title: "Review checklist" },
+        { id: "review", title: content.outlineReview },
       ]}
       next={{
         href: "/foundations",
-        title: "Foundations",
-        description: "System foundations",
+        title: docsContents[locale].shell.sections.foundations,
+        description: docsContents[locale].foundations.title,
       }}
     >
       <section className="scroll-mt-24" id="model">
-        <div
-          className="principle-map"
-          aria-label="Four Comfort principles arranged as one continuous decision loop"
-        >
+        <div className="principle-map" aria-label={content.modelLabel}>
           <div className="principle-map-center">
             <span>Comfort</span>
-            <strong>Trust through clarity</strong>
+            <strong>{content.modelCenter}</strong>
           </div>
           {principles.map((principle, index) => (
             <span
@@ -107,18 +120,16 @@ export function PrinciplesPage({ currentPath }: { currentPath: string }) {
 
       <Alert>
         <CompassIcon />
-        <AlertTitle>Reference model</AlertTitle>
+        <AlertTitle>{content.referenceTitle}</AlertTitle>
         <AlertDescription>
-          This framework adapts Ant Design’s Natural, Certain, Meaningful, and
-          Growing values to Comfort’s product language and implementation
-          contract. It is an interpretation, not a reproduction.{" "}
+          {content.referenceDescription}{" "}
           <a
             className="font-medium underline underline-offset-4"
             href="https://ant.design/docs/spec/values/"
             target="_blank"
             rel="noreferrer"
           >
-            Read the original values{" "}
+            {content.referenceAction}{" "}
             <ArrowUpRightIcon className="inline size-3.5" />
           </a>
         </AlertDescription>
@@ -129,6 +140,8 @@ export function PrinciplesPage({ currentPath }: { currentPath: string }) {
           <PrincipleCard
             principle={principle}
             index={index}
+            intentLabel={content.intent}
+            practiceLabel={content.practice}
             key={principle.id}
           />
         ))}
@@ -140,20 +153,13 @@ export function PrinciplesPage({ currentPath }: { currentPath: string }) {
       >
         <div className="mb-6 flex flex-col gap-2">
           <Badge variant="secondary" className="w-fit">
-            Decision review
+            {content.reviewBadge}
           </Badge>
           <h2 className="text-2xl font-semibold tracking-[-0.03em]">
-            Before a pattern ships
+            {content.reviewTitle}
           </h2>
         </div>
-        <CheckList
-          items={[
-            "The next action is understandable from language, placement, and state—not color alone.",
-            "The pattern behaves like its peers and uses semantic tokens without one-off exceptions.",
-            "Feedback arrives close to the action and gives a clear path forward or back.",
-            "Advanced capability can appear progressively without changing learned behavior.",
-          ]}
-        />
+        <CheckList items={[...content.reviewItems]} />
       </section>
     </DocsLayout>
   );

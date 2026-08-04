@@ -5,13 +5,13 @@ const jp = {
   languageTag: "ja",
   path: "/jp",
   metadata: {
-    title: "Comfort Design System | shadcnをDESIGN.mdでカスタマイズ",
+    title: "Comfort DESIGN.md | shadcnのテーマを定義",
     description:
       "アクセシブルなshadcn/uiコンポーネントから始め、DESIGN.mdでプロダクトのトークン、状態、モーション、コンテンツ、検証ルールを定義します。",
   },
   shell: {
     skipToContent: "本文へ移動",
-    homeLabel: "Comfort Design System ホーム",
+    homeLabel: "Comfort DESIGN.md ホーム",
     primaryNavigationLabel: "メインナビゲーション",
     mobileNavigationTitle: "Comfort ナビゲーション",
     mobileNavigationDescription:
@@ -31,10 +31,15 @@ const jp = {
   },
   hero: {
     eyebrow: "shadcn/ui + DESIGN.md",
-    accessibleTitle: "shadcnから始め、DESIGN.mdでプロダクトらしく。",
-    titleLines: ["shadcnから始め、", "DESIGN.mdで", "プロダクトらしく。"],
+    accessibleTitle:
+      "shadcnコンポーネントから始め、DESIGN.mdでテーマを定義します。",
+    titleLines: [
+      "shadcnコンポーネントから始め、",
+      "DESIGN.mdで",
+      "テーマを定義します。",
+    ],
     description:
-      "shadcn/uiをアクセシブルなコンポーネント基盤にし、セマンティックトークンから状態、インタラクション、コンテンツルールまでプロダクトに合わせて設計します。",
+      "shadcn/uiのアクセシブルな動きを保ち、色、文字、余白、状態、モーションをDESIGN.mdでプロダクトに合わせます。",
     primaryAction: "DESIGN.mdを読む",
     languageNavigationLabel: "ホームページの言語",
   },
@@ -48,33 +53,32 @@ const jp = {
   },
   tagline: {
     accessibleLabel:
-      "shadcnコンポーネントから始め、DESIGN.mdでプロダクトのシステムをつくります。",
+      "shadcnコンポーネントから始め、DESIGN.mdでプロダクトのテーマをつくります。",
     segments: [
       "shadcnコンポーネントから始め、",
       "DESIGN.mdで",
-      "プロダクトのシステムを",
+      "プロダクトのテーマを",
       "つくります。",
     ],
   },
   benefits: {
     eyebrow: "自分たちらしく変えられる基盤",
-    title:
-      "アクセシブルなコンポーネントを保ち、一般的な判断を置き換えます。",
+    title: "アクセシブルなコンポーネントを保ち、一般的な判断を置き換えます。",
     description:
-      "shadcn/uiは所有できるソースを提供します。DESIGN.mdは、そのソースにブランド、振る舞い、品質をまとめたプロダクト固有の言語を与えます。",
+      "信頼性の高いshadcn/uiをベースにします。色、文字、余白、状態、モーションの詳細をDESIGN.mdで定義します。",
     items: [
       {
-        title: "実績あるプリミティブから始める",
+        title: "信頼性の高いshadcn/uiをベースに",
         description:
           "キーボード、フォーカス、オーバーレイの仕組みを作り直さず、shadcnとRadixの基盤を利用します。",
       },
       {
-        title: "プロダクトの意味を一度だけ定義する",
+        title: "DESIGN.mdで詳細を定義",
         description:
           "コンポーネントを装飾する前に、色、書体、余白、形、状態、モーションをDESIGN.mdのセマンティックロールへ接続します。",
       },
       {
-        title: "全員が同じ契約を使う",
+        title: "チームで同じ文書を参照",
         description:
           "デザイナー、エンジニア、コーディングエージェントが、散在する好みを翻訳せず同じルールで作業します。",
       },
@@ -88,21 +92,21 @@ const jp = {
   },
   workflow: {
     eyebrow: "使い方",
-    title: "shadcnのソースからプロダクト固有のシステムへ。",
+    title: "shadcn/uiからDESIGN.mdで定義するテーマへ。",
     description:
-      "必要なコンポーネントだけを選び、共通のデザイン契約を適用して、利用者が触れるすべての状態を検証します。",
+      "信頼性の高いshadcn/uiをベースにし、DESIGN.mdで細部を定義して、利用者が触れるすべての状態を確認します。",
     steps: [
       {
         number: "01",
-        title: "shadcnコンポーネントを選ぶ",
+        title: "shadcn/uiをベースに使う",
         description:
-          "必要なアクセシブルなコンポーネントソースをコピーし、リポジトリで所有します。",
+          "アクセシビリティとインタラクションが確認されたshadcn/uiコンポーネントから始めます。",
       },
       {
         number: "02",
-        title: "DESIGN.mdのロールを適用する",
+        title: "DESIGN.mdで詳細を定義する",
         description:
-          "所有するコンポーネントへセマンティックトークン、状態、コンテンツ、モーション、アクセシビリティを接続します。",
+          "追加したコンポーネントへセマンティックトークン、状態、コンテンツ、モーション、アクセシビリティを接続します。",
       },
       {
         number: "03",
@@ -116,15 +120,15 @@ const jp = {
     eyebrow: "プロダクトで実証",
     title: "このリファレンス自体が、記載した手順で作られています。",
     description:
-      "このサイトはリポジトリ所有のshadcnコンポーネントから始め、DESIGN.mdのセマンティックロールを適用し、その結果となるファウンデーション、状態、検証項目を公開しています。",
+      "このサイトもshadcnコンポーネントから始め、DESIGN.mdのセマンティックロールを適用しています。ファウンデーション、状態、確認項目を実際に見られます。",
     action: "コンポーネントリファレンスを見る",
     panelTitle: "ライブリファレンス",
     reviewed: "2026年8月",
     metrics: [
-      { value: "87", label: "静的ルート" },
+      { value: "336", label: "静的ルート" },
       { value: "15", label: "セマンティックファウンデーション" },
       { value: "63", label: "コンポーネントリファレンス" },
-      { value: "4", label: "整合したDESIGN.md版" },
+      { value: "4", label: "対応言語" },
     ],
     verification:
       "ルート、コンテンツ、型、lint、本番ビルドの検証をリポジトリで実行します。",
@@ -133,17 +137,17 @@ const jp = {
     eyebrow: "始める前の質問",
     title: "shadcnが提供するものと、DESIGN.mdが変えるもの。",
     description:
-      "コンポーネントソースは馴染みのあるまま、プロダクト契約によって見た目、振る舞い、リリース基準を具体化します。",
+      "馴染みのあるコンポーネントコードを使いながら、DESIGN.mdで見た目、振る舞い、公開前の確認項目を整えます。",
     items: [
       {
         question: "shadcn/uiとDESIGN.mdはどう連携しますか？",
         answer:
-          "shadcn/uiは基本コンポーネントソースとインタラクションプリミティブを提供します。DESIGN.mdは、そのソースへ適用するトークン、状態、モーション、コンテンツ、アクセシビリティ、検証を定めるプロダクト固有のデザイン契約です。",
+          "shadcn/uiは基本コンポーネントコードとインタラクションプリミティブを提供します。DESIGN.mdには、適用するトークン、状態、モーション、コンテンツ、アクセシビリティ、確認項目をまとめます。",
       },
       {
-        question: "コンポーネントコードを所有できますか？",
+        question: "コンポーネントコードを調整できますか？",
         answer:
-          "はい。必要なshadcnコンポーネントだけをリポジトリへコピーし、同じDESIGN.md契約のもとで発展させます。",
+          "はい。必要なshadcnコンポーネントだけをプロジェクトに追加し、DESIGN.mdのガイドに沿って改善できます。",
       },
       {
         question: "DESIGN.mdはブランドの代わりですか？",
@@ -161,22 +165,22 @@ const jp = {
           "基盤プリミティブのセマンティクスとキーボード操作を保ち、コントラスト、フォーカス、モーション、コンテンツ、復旧要件をDESIGN.mdに定義します。",
       },
       {
-        question: "4つの言語版はどう整合しますか？",
+        question: "既存のプロダクトにも段階的に導入できますか？",
         answer:
-          "韓国語版を基準に、英語、日本語、中国語版が同じトークン名、セクション順、コンポーネント一覧、要件の強さを保ちます。",
+          "はい。一つの画面やよく使うコンポーネントから始め、tokenとstateをDESIGN.mdにまとめてから範囲を広げられます。",
       },
     ],
   },
   cta: {
-    eyebrow: "すべてのUI判断に明確な契約を",
-    title: "コンポーネントを所有し、システムをDESIGN.mdに定義します。",
+    eyebrow: "プロダクトらしいUIをつくるガイド",
+    title: "shadcnから始め、DESIGN.mdでプロダクトらしく。",
     description:
-      "必要なshadcnコンポーネントを選び、ブランド、振る舞い、アクセシビリティ、リリース検証を一つの契約で適用します。",
+      "必要なshadcnコンポーネントを選び、ブランド、振る舞い、アクセシビリティ、公開前の確認項目をDESIGN.mdにまとめます。",
     action: "DESIGN.mdを読む",
   },
   footer: {
     description:
-      "所有するshadcnコンポーネントを、明確でアクセシブルなプロダクト固有のUIシステムへカスタマイズするための実践的なDESIGN.mdです。",
+      "shadcnコンポーネントの色、文字、余白、状態をプロダクトらしく整える実践的なDESIGN.mdです。",
     navigationLabel: "フッターナビゲーション",
     groups: {
       system: "システム",
@@ -193,8 +197,7 @@ const jp = {
       privacy: "プライバシー",
       terms: "利用規約",
     },
-    signatureLabel:
-      "shadcnでカスタマイズし、DESIGN.mdに記録したComfort Design System",
+    signatureLabel: "shadcnコンポーネントのテーマを定義するComfort DESIGN.md",
   },
 } satisfies HomeContent;
 

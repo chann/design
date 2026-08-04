@@ -22,10 +22,19 @@ assert(
 );
 assert(routes.includes("/privacy"), "The privacy route must be published");
 assert(routes.includes("/terms"), "The terms route must be published");
-for (const route of ["/", "/en", "/jp", "/cn"]) {
-  assert(routes.includes(route), `Localized homepage route missing: ${route}`);
+for (const route of [
+  "/",
+  "/components/button",
+  "/ko/components/button",
+  "/jp/foundations/color",
+  "/cn/principles",
+]) {
+  assert(
+    routes.includes(route),
+    `Localized documentation route missing: ${route}`,
+  );
 }
-assert(routes.length === 87, "The complete site must publish 87 routes");
+assert(routes.length === 336, "The complete site must publish 336 routes");
 
 const siteData = await readFile(
   new URL("../src/data/site.ts", import.meta.url),
@@ -51,6 +60,14 @@ const englishHomeContent = await readFile(
   new URL("../src/content/home/en.ts", import.meta.url),
   "utf8",
 );
+const koreanHomeContent = await readFile(
+  new URL("../src/content/home/ko.ts", import.meta.url),
+  "utf8",
+);
+const phosphorIconSource = await readFile(
+  new URL("../src/components/phosphor-icon.tsx", import.meta.url),
+  "utf8",
+);
 const cssSource = await readFile(
   new URL("../src/index.css", import.meta.url),
   "utf8",
@@ -63,12 +80,67 @@ const readmeSource = await readFile(
   new URL("../README.md", import.meta.url),
   "utf8",
 );
+const requiredDesignGuidance = [
+  [
+    "DESIGN.md",
+    [
+      "shadcn 컴포넌트로 시작하고 DESIGN.md로 테마를 정의하세요",
+      "## Implementation Guide",
+      "/ko/",
+      "/jp/",
+      "/cn/",
+    ],
+  ],
+  [
+    "DESIGN.en.md",
+    [
+      "Start with shadcn components. Define your theme in DESIGN.md",
+      "## Implementation Guide",
+      "/ko/",
+      "/jp/",
+      "/cn/",
+    ],
+  ],
+  [
+    "DESIGN.jp.md",
+    [
+      "shadcnコンポーネントから始め、DESIGN.mdでテーマを定義します",
+      "## Implementation Guide",
+      "/ko/",
+      "/jp/",
+      "/cn/",
+    ],
+  ],
+  [
+    "DESIGN.cn.md",
+    [
+      "从shadcn组件开始，用DESIGN.md定义主题",
+      "## Implementation Guide",
+      "/ko/",
+      "/jp/",
+      "/cn/",
+    ],
+  ],
+];
+
+for (const [file, requiredPhrases] of requiredDesignGuidance) {
+  const source = await readFile(new URL(`../${file}`, import.meta.url), "utf8");
+  for (const phrase of requiredPhrases) {
+    assert(source.includes(phrase), `${file} is missing: ${phrase}`);
+  }
+}
 
 assert(
-  indexTemplate.includes('lang="ko"') &&
+  readmeSource.includes("336") &&
+    readmeSource.includes("Start with shadcn components"),
+  "README must describe the shadcn theme workflow and 336-route build",
+);
+
+assert(
+  indexTemplate.includes('lang="en"') &&
     indexTemplate.includes("shadcn/ui") &&
-    indexTemplate.includes("DESIGN.md"),
-  "Static metadata must use the Korean shadcn and DESIGN.md positioning",
+    indexTemplate.includes("Comfort DESIGN.md"),
+  "Static metadata must use the English Comfort DESIGN.md positioning",
 );
 assert(
   !indexTemplate.includes("default source of truth") &&
@@ -76,12 +148,7 @@ assert(
   "Public metadata and documentation must avoid internal source-of-truth jargon",
 );
 
-for (const group of [
-  "System",
-  "Foundations",
-  "Resources",
-  "Legal",
-]) {
+for (const group of ["System", "Foundations", "Resources", "Legal"]) {
   assert(
     englishHomeContent.includes(`: "${group}"`),
     `Footer sitemap group is missing: ${group}`,
@@ -100,9 +167,7 @@ assert(
 );
 assert(
   shellSource.includes("aria-label={homeLabel}") &&
-    englishHomeContent.includes(
-      'homeLabel: "Comfort Design System home"',
-    ),
+    englishHomeContent.includes('homeLabel: "Comfort DESIGN.md home"'),
   "The footer must retain an accessible home link",
 );
 assert(
@@ -122,6 +187,18 @@ assert(
   englishHomeContent.includes("shadcn/ui") &&
     englishHomeContent.includes("DESIGN.md"),
   "English homepage content must explain the shadcn and DESIGN.md model",
+);
+assert(
+  koreanHomeContent.includes(
+    "shadcn 컴포넌트로 시작하고 DESIGN.md로 테마를 정의하세요.",
+  ),
+  "Korean homepage must use the requested theme-focused headline",
+);
+assert(
+  homePageSource.includes('from "lucide-react"') &&
+    homePageSource.includes("<ArrowRightIcon") &&
+    !phosphorIconSource.includes("M245.66,74.34"),
+  "Homepage arrows must use Lucide and omit the previous flow-arrow path",
 );
 assert(
   footerSignatureSource.includes("--footer-signature-index") &&
@@ -200,8 +277,10 @@ const designSource = await readFile(
   "utf8",
 );
 assert(
-  designSource.includes("한국어 [DESIGN.md](./DESIGN.md)가 규범 원문입니다."),
-  "Korean DESIGN.md must declare itself as the normative source",
+  designSource.includes(
+    "shadcn 컴포넌트로 시작하고 DESIGN.md로 테마를 정의하세요.",
+  ),
+  "Korean DESIGN.md must include the theme-focused positioning",
 );
 
 assert(
@@ -220,8 +299,8 @@ for (const route of routes) {
 }
 
 const localizedHomes = [
-  ["index.html", 'lang="ko"', "/design/"],
-  ["en/index.html", 'lang="en"', "/design/en/"],
+  ["index.html", 'lang="en"', "/design/"],
+  ["ko/index.html", 'lang="ko"', "/design/ko/"],
   ["jp/index.html", 'lang="ja"', "/design/jp/"],
   ["cn/index.html", 'lang="zh-CN"', "/design/cn/"],
 ];
@@ -239,21 +318,23 @@ for (const [file, lang, canonicalPath] of localizedHomes) {
   );
 }
 
-const builtDocumentation = await readFile(
-  new URL("principles/index.html", dist),
-  "utf8",
-);
-assert(
-  builtDocumentation.includes('lang="en"') &&
-    builtDocumentation.includes(
-      'href="https://chann.github.io/design/principles/"',
-    ),
-  "English documentation routes must retain their own static language and canonical",
-);
-assert(
-  !builtDocumentation.includes('data-home-alternate="true"'),
-  "Documentation routes must not inherit homepage language alternates",
-);
+for (const [file, lang, canonicalPath] of [
+  ["principles/index.html", 'lang="en"', "/design/principles/"],
+  ["ko/principles/index.html", 'lang="ko"', "/design/ko/principles/"],
+  ["jp/principles/index.html", 'lang="ja"', "/design/jp/principles/"],
+  ["cn/principles/index.html", 'lang="zh-CN"', "/design/cn/principles/"],
+]) {
+  const html = await readFile(new URL(file, dist), "utf8");
+  assert(html.includes(lang), `${file} has the wrong language`);
+  assert(
+    html.includes(`href="https://chann.github.io${canonicalPath}"`),
+    `${file} has the wrong canonical`,
+  );
+  assert(
+    html.includes('hreflang="x-default"'),
+    `${file} must publish localized documentation alternates`,
+  );
+}
 
 for (const file of [
   ".nojekyll",
@@ -319,5 +400,5 @@ assert(
 );
 
 console.log(
-  `Verified ${routes.length} static routes, ${internalLinks.length} navigation targets, and the shadcn component contract.`,
+  `Verified ${routes.length} static routes, ${internalLinks.length} navigation targets, and the shadcn theme guidance.`,
 );

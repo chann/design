@@ -68,7 +68,7 @@ function ColorSpecimen() {
           key={name}
         >
           <strong className="text-sm">{name}</strong>
-          <span className="mt-1 text-xs opacity-75">semantic role</span>
+          <span className="mt-1 text-xs">semantic role</span>
         </div>
       ))}
     </div>

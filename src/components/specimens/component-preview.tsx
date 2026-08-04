@@ -9,10 +9,19 @@ import { SyntaxCode } from "@/components/syntax-code";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ComponentRecord } from "@/data/catalog";
+import { docsContents } from "@/content/docs";
+import type { HomeLocale } from "@/content/home";
 
-function CopyCodeButton({ value }: { value: string }) {
+function CopyCodeButton({
+  value,
+  locale,
+}: {
+  value: string;
+  locale: HomeLocale;
+}) {
   const [copied, setCopied] = React.useState(false);
   const timerRef = React.useRef<number | undefined>(undefined);
+  const labels = docsContents[locale].componentDetail;
 
   React.useEffect(
     () => () => {
@@ -21,7 +30,7 @@ function CopyCodeButton({ value }: { value: string }) {
     [],
   );
 
-  async function copy() {
+  async function copyToClipboard() {
     try {
       await navigator.clipboard.writeText(value);
       setCopied(true);
@@ -34,14 +43,14 @@ function CopyCodeButton({ value }: { value: string }) {
 
   return (
     <Button
-      aria-label={copied ? "Code copied" : "Copy code"}
-      onClick={copy}
+      aria-label={copied ? labels.copied : labels.copy}
+      onClick={copyToClipboard}
       size="sm"
       type="button"
       variant="ghost"
     >
       {copied ? <CheckIcon /> : <CopyIcon />}
-      {copied ? "Copied" : "Copy"}
+      {copied ? labels.copied : labels.copy}
     </Button>
   );
 }
@@ -49,10 +58,13 @@ function CopyCodeButton({ value }: { value: string }) {
 export function ComponentPreview({
   record,
   code,
+  locale,
 }: {
   record: ComponentRecord;
   code: string;
+  locale: HomeLocale;
 }) {
+  const copy = docsContents[locale].componentDetail;
   const Specimen = specimenRegistry[
     record.specimen as keyof typeof specimenRegistry
   ] as React.ComponentType<SpecimenProps>;
@@ -64,7 +76,7 @@ export function ComponentPreview({
     >
       <div className="flex min-h-12 items-center border-b bg-muted/20 px-3">
         <TabsList
-          aria-label="Component example view"
+          aria-label={copy.previewLabel}
           className="component-preview-view-switch h-9 gap-0 rounded-lg border bg-muted/60 p-1"
         >
           <TabsTrigger
@@ -72,14 +84,14 @@ export function ComponentPreview({
             value="preview"
           >
             <EyeIcon aria-hidden="true" data-icon="inline-start" />
-            Preview
+            {copy.previewTab}
           </TabsTrigger>
           <TabsTrigger
             className="h-7 flex-none rounded-l-none px-3 text-[0.8rem]"
             value="code"
           >
             <Code2Icon aria-hidden="true" data-icon="inline-start" />
-            View code
+            {copy.codeTab}
           </TabsTrigger>
         </TabsList>
       </div>
@@ -89,7 +101,7 @@ export function ComponentPreview({
             <div aria-busy="true" className="specimen-stage flex-col gap-3">
               <span className="size-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
               <span className="text-sm text-muted-foreground">
-                Loading specimen…
+                {copy.loading}
               </span>
             </div>
           }
@@ -100,12 +112,12 @@ export function ComponentPreview({
       <TabsContent className="m-0" value="code">
         <div className="flex min-h-11 items-center justify-between border-b bg-muted/20 px-3">
           <span className="font-mono text-xs text-muted-foreground">TSX</span>
-          <CopyCodeButton value={code} />
+          <CopyCodeButton value={code} locale={locale} />
         </div>
         <SyntaxCode
           className="component-preview-code"
           focusable="auto"
-          label={`${record.title} example`}
+          label={copy.codeLabel(record.title)}
           language="tsx"
           value={code}
         />

@@ -5,13 +5,13 @@ const cn = {
   languageTag: "zh-CN",
   path: "/cn",
   metadata: {
-    title: "Comfort Design System | 用DESIGN.md定制shadcn",
+    title: "Comfort DESIGN.md | 定义shadcn主题",
     description:
       "从无障碍的shadcn/ui组件开始，再用DESIGN.md定义产品的令牌、状态、动效、内容和验证规则。",
   },
   shell: {
     skipToContent: "跳到正文",
-    homeLabel: "Comfort Design System 首页",
+    homeLabel: "Comfort DESIGN.md 首页",
     primaryNavigationLabel: "主导航",
     mobileNavigationTitle: "Comfort 导航",
     mobileNavigationDescription: "浏览原则、基础和组件文档。",
@@ -26,10 +26,10 @@ const cn = {
   },
   hero: {
     eyebrow: "shadcn/ui + DESIGN.md",
-    accessibleTitle: "从shadcn开始，用DESIGN.md塑造你的产品。",
-    titleLines: ["从shadcn开始，", "用DESIGN.md", "塑造你的产品。"],
+    accessibleTitle: "从shadcn组件开始，用DESIGN.md定义主题。",
+    titleLines: ["从shadcn组件开始，", "用DESIGN.md", "定义产品主题。"],
     description:
-      "以shadcn/ui作为无障碍组件基础，再根据产品定义语义令牌、状态、交互和内容规则。",
+      "保留shadcn/ui的无障碍行为，再在DESIGN.md中定义产品的颜色、字体、间距、状态和动效。",
     primaryAction: "阅读DESIGN.md",
     languageNavigationLabel: "主页语言",
   },
@@ -42,27 +42,27 @@ const cn = {
     ],
   },
   tagline: {
-    accessibleLabel: "从shadcn组件开始，用DESIGN.md构建你的产品系统。",
-    segments: ["从shadcn组件开始，", "用DESIGN.md", "构建你的产品系统。"],
+    accessibleLabel: "从shadcn组件开始，用DESIGN.md定义产品主题。",
+    segments: ["从shadcn组件开始，", "用DESIGN.md", "定义产品主题。"],
   },
   benefits: {
     eyebrow: "可塑造成产品风格的基础",
     title: "保留无障碍组件，替换千篇一律的设计决策。",
     description:
-      "shadcn/ui提供可直接拥有的源码，DESIGN.md则为这些源码注入统一的品牌、行为和质量语言。",
+      "以可靠的shadcn/ui作为基础，再在DESIGN.md中定义颜色、字体、间距、状态与动效。",
     items: [
       {
-        title: "从成熟的原语开始",
+        title: "以可靠的shadcn/ui为基础",
         description:
           "直接采用shadcn和Radix的基础能力，无需重做键盘、焦点和浮层机制。",
       },
       {
-        title: "只定义一次产品语义",
+        title: "在DESIGN.md中定义细节",
         description:
           "在装饰组件之前，把颜色、字体、间距、形状、状态和动效映射到DESIGN.md的语义角色。",
       },
       {
-        title: "让所有贡献者遵循同一份契约",
+        title: "让团队参考同一份文档",
         description:
           "设计师、工程师和编码智能体使用相同规则，不再反复翻译零散偏好。",
       },
@@ -76,27 +76,25 @@ const cn = {
   },
   workflow: {
     eyebrow: "使用流程",
-    title: "从shadcn源码到产品级系统。",
+    title: "从shadcn/ui到DESIGN.md中的产品主题。",
     description:
-      "只选择产品需要的组件，应用统一的设计契约，再验证用户会经历的每一种状态。",
+      "以可靠的shadcn/ui作为基础，用DESIGN.md定义设计细节，再检查用户会经历的每一种状态。",
     steps: [
       {
         number: "01",
-        title: "选择shadcn组件",
-        description:
-          "复制产品需要的无障碍组件源码，并在自己的代码仓库中持有它们。",
+        title: "以shadcn/ui为基础",
+        description: "从已经验证无障碍与交互行为的shadcn/ui组件开始。",
       },
       {
         number: "02",
-        title: "应用DESIGN.md角色",
+        title: "用DESIGN.md定义设计细节",
         description:
-          "把语义令牌、状态、内容、动效和无障碍规则连接到自有组件。",
+          "把语义令牌、状态、内容、动效和无障碍要求连接到已加入的组件。",
       },
       {
         number: "03",
         title: "验证每一种状态",
-        description:
-          "发布前检查响应式、主题、键盘、反馈、多语言和恢复流程。",
+        description: "发布前检查响应式、主题、键盘、反馈、多语言和恢复流程。",
       },
     ],
   },
@@ -104,15 +102,15 @@ const cn = {
     eyebrow: "在产品中验证",
     title: "这份参考本身就遵循它所记录的流程。",
     description:
-      "本网站从仓库自有的shadcn组件开始，应用DESIGN.md语义角色，并公开由此形成的基础、组件状态和验证项目。",
+      "本网站也从shadcn组件开始，并应用DESIGN.md中的语义角色。你可以直接查看基础、组件状态和检查项。",
     action: "查看组件参考",
     panelTitle: "在线参考",
     reviewed: "2026年8月",
     metrics: [
-      { value: "87", label: "静态路由" },
+      { value: "336", label: "静态路由" },
       { value: "15", label: "语义基础" },
       { value: "63", label: "组件参考" },
-      { value: "4", label: "一致的DESIGN.md版本" },
+      { value: "4", label: "支持语言" },
     ],
     verification: "路由、内容、类型、lint和生产构建检查都在仓库中执行。",
   },
@@ -120,17 +118,17 @@ const cn = {
     eyebrow: "开始前的问题",
     title: "分清shadcn提供什么，以及DESIGN.md改变什么。",
     description:
-      "组件源码保持熟悉，产品契约则让视觉语言、行为和发布标准更具体。",
+      "继续使用熟悉的组件代码，再通过DESIGN.md把视觉语言、行为和发布检查调整到产品需要的样子。",
     items: [
       {
         question: "shadcn/ui和DESIGN.md如何配合？",
         answer:
-          "shadcn/ui提供基础组件源码和交互原语；DESIGN.md则是一份产品级设计契约，用来定义这些源码所采用的令牌、状态、动效、内容、无障碍和验证规则。",
+          "shadcn/ui提供基础组件代码和交互原语；DESIGN.md整理这些代码采用的令牌、状态、动效、内容、无障碍要求和检查项。",
       },
       {
-        question: "我们会拥有组件代码吗？",
+        question: "我们可以调整组件代码吗？",
         answer:
-          "会。只把产品需要的shadcn组件复制进仓库，并在同一份DESIGN.md契约下持续演进。",
+          "可以。只把产品需要的shadcn组件加入项目，再按照DESIGN.md中的指南持续改进。",
       },
       {
         question: "DESIGN.md会取代品牌吗？",
@@ -138,7 +136,7 @@ const cn = {
           "不会。它记录产品的品牌角色和行为，让颜色、字体、形状、语气和交互在不同贡献者之间保持一致。",
       },
       {
-        question: "编码智能体也能使用这份契约吗？",
+        question: "编码智能体也能使用DESIGN.md吗？",
         answer:
           "可以。在UI工作开始前提供DESIGN.md，让实现和评审都遵循相同的语义角色与验收条件。",
       },
@@ -148,22 +146,22 @@ const cn = {
           "保留底层原语的语义和键盘行为，并在DESIGN.md中定义对比度、焦点、动效、内容与恢复要求。",
       },
       {
-        question: "四种语言版本如何保持一致？",
+        question: "可以在现有产品中逐步采用吗？",
         answer:
-          "以韩文版本为基准，英文、日文和中文版本保持相同的令牌名称、章节顺序、组件清单和要求强度。",
+          "可以。从一个界面或常用组件开始，把token和state整理到DESIGN.md中，再逐步扩大范围。",
       },
     ],
   },
   cta: {
-    eyebrow: "为每一个界面决策建立清晰契约",
-    title: "拥有组件，把系统定义在DESIGN.md中。",
+    eyebrow: "让界面更符合产品特点",
+    title: "从shadcn开始，在DESIGN.md中完善产品细节。",
     description:
-      "选择产品需要的shadcn组件，再用一份统一契约落实品牌、行为、无障碍和发布验证。",
+      "选择产品需要的shadcn组件，再把品牌、行为、无障碍和发布检查整理到DESIGN.md中。",
     action: "阅读DESIGN.md",
   },
   footer: {
     description:
-      "一份实用的DESIGN.md，用于把自有shadcn组件定制成清晰、无障碍且符合产品特质的界面系统。",
+      "一份实用的DESIGN.md，用于按产品需要调整shadcn组件的颜色、字体、间距、状态和动效。",
     navigationLabel: "页脚导航",
     groups: {
       system: "系统",
@@ -180,8 +178,7 @@ const cn = {
       privacy: "隐私",
       terms: "条款",
     },
-    signatureLabel:
-      "使用shadcn定制并记录在DESIGN.md中的Comfort Design System",
+    signatureLabel: "使用shadcn组件定义产品主题的Comfort DESIGN.md",
   },
 } satisfies HomeContent;
 

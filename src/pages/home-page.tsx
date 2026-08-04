@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ArrowRightIcon } from "lucide-react";
 
 import { HeroLetterGlitch } from "@/components/hero-letter-glitch";
 import {
@@ -14,6 +15,8 @@ import {
 } from "@/content/home";
 import { cn } from "@/lib/utils";
 import { designEditions, siteHref } from "@/data/site";
+import { localizedRoute } from "@/data/site";
+import { designDocumentForLocale } from "@/content/docs";
 
 const benefitIcons: readonly PhosphorIconName[] = [
   "brackets-curly",
@@ -59,10 +62,7 @@ function Reveal({
   );
 }
 
-function TaglineReveal({
-  accessibleLabel,
-  segments,
-}: HomeContent["tagline"]) {
+function TaglineReveal({ accessibleLabel, segments }: HomeContent["tagline"]) {
   const containerRef = useRef<HTMLHeadingElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -158,13 +158,9 @@ export function HomePage({
                 asChild
                 className="h-auto px-3 py-2 text-base font-semibold duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98]"
               >
-                <a href={siteHref("/DESIGN.md")}>
+                <a href={siteHref(designDocumentForLocale[content.locale])}>
                   {content.hero.primaryAction}
-                  <PhosphorIcon
-                    aria-hidden="true"
-                    data-icon="inline-end"
-                    name="arrow-right"
-                  />
+                  <ArrowRightIcon aria-hidden="true" data-icon="inline-end" />
                 </a>
               </Button>
               <nav
@@ -248,9 +244,9 @@ export function HomePage({
                   {index === 0 && (
                     <div className="benefit-token-map" aria-hidden="true">
                       <span>{content.benefits.tokenFlow[0]}</span>
-                      <PhosphorIcon name="flow-arrow" />
+                      <ArrowRightIcon />
                       <span>{content.benefits.tokenFlow[1]}</span>
-                      <PhosphorIcon name="flow-arrow" />
+                      <ArrowRightIcon />
                       <strong>{content.benefits.tokenFlow[2]}</strong>
                     </div>
                   )}
@@ -301,14 +297,10 @@ export function HomePage({
               </p>
               <a
                 className="landing-text-link w-fit text-base font-semibold text-primary"
-                href={siteHref("/components")}
+                href={siteHref(localizedRoute("/components", content.locale))}
               >
                 {content.productProof.action}
-                <PhosphorIcon
-                  aria-hidden="true"
-                  className="size-5"
-                  name="arrow-right"
-                />
+                <ArrowRightIcon aria-hidden="true" className="size-5" />
               </a>
             </div>
             <div className="implementation-proof">
@@ -393,13 +385,9 @@ export function HomePage({
               variant="secondary"
               className="h-auto shrink-0 px-3 py-2 text-base font-semibold duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98]"
             >
-              <a href={siteHref("/DESIGN.md")}>
+              <a href={siteHref(designDocumentForLocale[content.locale])}>
                 {content.cta.action}
-                <PhosphorIcon
-                  aria-hidden="true"
-                  data-icon="inline-end"
-                  name="arrow-right"
-                />
+                <ArrowRightIcon aria-hidden="true" data-icon="inline-end" />
               </a>
             </Button>
           </Reveal>

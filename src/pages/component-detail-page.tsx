@@ -5,20 +5,15 @@ import { CheckList, DocsLayout } from "@/components/site-shell";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { componentCatalog, getComponent } from "@/data/catalog";
-import { componentItems, siteHref } from "@/data/site";
-
-function familyLabel(family: string) {
-  return family
-    .split("-")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
-}
+import { componentItems, localizedRoute, siteHref } from "@/data/site";
+import { docsContents, localizedComponent } from "@/content/docs";
+import type { HomeLocale } from "@/content/home";
 
 function componentName(title: string) {
   return title.replace(/\s+/g, "");
 }
 
-function createSnippet(title: string, module: string) {
+function createSnippet(title: string, module: string, comment: string) {
   const name = componentName(title);
   const modulePath = module.replace(/\.tsx$/, "");
   return `import { ${name} } from "@/components/ui/${modulePath}"
@@ -26,7 +21,7 @@ function createSnippet(title: string, module: string) {
 export function ${name}Example() {
   return (
     <${name}>
-      {/* Compose content with the documented anatomy and states. */}
+      {/* ${comment} */}
     </${name}>
   )
 }`;
@@ -34,62 +29,83 @@ export function ${name}Example() {
 
 export function ComponentDetailPage({
   currentPath,
+  locale,
   slug,
 }: {
   currentPath: string;
+  locale: HomeLocale;
   slug: string;
 }) {
-  const component = getComponent(slug);
-  if (!component) return null;
+  const baseComponent = getComponent(slug);
+  if (!baseComponent) return null;
+  const component = localizedComponent(baseComponent, locale);
+  const content = docsContents[locale].componentDetail;
+  const family = docsContents[locale].families[component.family];
+  const localizedComponents = componentCatalog.map((record) =>
+    localizedComponent(record, locale),
+  );
 
   const index = componentItems.findIndex((item) => item.href.endsWith(slug));
   const previous =
     index === 0
       ? {
           href: "/components",
-          title: "Components",
-          description: "Component catalog",
+          title: docsContents[locale].shell.sections.components,
+          description: docsContents[locale].components.title,
         }
-      : componentItems[index - 1];
-  const next = componentItems[index + 1];
-  const related = componentCatalog
+      : {
+          ...componentItems[index - 1],
+          description: localizedComponents[index - 1].description,
+        };
+  const next = componentItems[index + 1]
+    ? {
+        ...componentItems[index + 1],
+        description: localizedComponents[index + 1].description,
+      }
+    : undefined;
+  const related = localizedComponents
     .filter(
       (candidate) =>
         candidate.family === component.family &&
         candidate.slug !== component.slug,
     )
     .slice(0, 4);
-  const snippet = createSnippet(component.title, component.module);
+  const snippet = createSnippet(
+    component.title,
+    component.module,
+    content.snippetComment,
+  );
 
   return (
     <DocsLayout
       currentPath={currentPath}
+      locale={locale}
       section="components"
-      eyebrow={`${familyLabel(component.family)} component`}
+      eyebrow={content.componentEyebrow(family)}
       title={component.title}
       description={component.description}
       outline={[
-        { id: "preview", title: "Preview and code" },
-        { id: "usage", title: "Usage" },
-        { id: "anatomy", title: "Anatomy" },
-        { id: "variants", title: "Variants" },
-        { id: "states", title: "States" },
-        { id: "accessibility", title: "Accessibility" },
-        { id: "internationalization", title: "Internationalization" },
-        { id: "implementation", title: "Implementation" },
-        { id: "related", title: "Related" },
+        { id: "preview", title: content.preview },
+        { id: "usage", title: content.usage },
+        { id: "anatomy", title: content.anatomy },
+        { id: "variants", title: content.variants },
+        { id: "states", title: content.states },
+        { id: "accessibility", title: content.accessibility },
+        { id: "internationalization", title: content.internationalization },
+        { id: "implementation", title: content.implementation },
+        { id: "related", title: content.related },
       ]}
       previous={previous}
       next={next}
     >
       <section className="scroll-mt-24" id="preview">
-        <ComponentPreview code={snippet} record={component} />
+        <ComponentPreview code={snippet} locale={locale} record={component} />
       </section>
 
       <section className="scroll-mt-24 flex flex-col gap-4" id="usage">
-        <p className="eyebrow">When to use it</p>
+        <p className="eyebrow">{content.usageEyebrow}</p>
         <h2 className="text-2xl font-semibold tracking-[-0.03em]">
-          Keep the task and result explicit
+          {content.usageTitle}
         </h2>
         <p className="max-w-2xl leading-7 text-muted-foreground">
           {component.usage}
@@ -104,7 +120,9 @@ export function ComponentDetailPage({
       </section>
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="anatomy">
-        <h2 className="text-2xl font-semibold tracking-[-0.03em]">Anatomy</h2>
+        <h2 className="text-2xl font-semibold tracking-[-0.03em]">
+          {content.anatomy}
+        </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {component.anatomy.map((part, partIndex) => (
             <Card size="sm" key={part}>
@@ -123,22 +141,16 @@ export function ComponentDetailPage({
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="variants">
         <div>
-          <p className="eyebrow">Composition</p>
+          <p className="eyebrow">{content.variantsEyebrow}</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-            Variants preserve one behavioral contract
+            {content.variantsTitle}
           </h2>
         </div>
         <div className="grid gap-3 md:grid-cols-3">
           {[
-            ["Default", "The clearest common path and semantic baseline."],
-            [
-              familyLabel(component.family),
-              `Shared behavior for the ${familyLabel(component.family).toLowerCase()} family.`,
-            ],
-            [
-              "Comfort",
-              "Semantic tokens, restrained density, and complete feedback.",
-            ],
+            [content.variantDefault, content.variantDefaultDescription],
+            [family, content.variantFamilyDescription(family)],
+            ["Comfort", content.variantComfortDescription],
           ].map(([title, description]) => (
             <Card key={title}>
               <CardHeader>
@@ -154,9 +166,9 @@ export function ComponentDetailPage({
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="states">
         <div>
-          <p className="eyebrow">Interaction contract</p>
+          <p className="eyebrow">{content.statesEyebrow}</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-            Required states
+            {content.statesTitle}
           </h2>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -167,7 +179,7 @@ export function ComponentDetailPage({
             >
               <CheckIcon className="size-4 text-primary" />
               <strong className="text-sm capitalize">
-                {state.replace("-", " ")}
+                {docsContents[locale].states[state]}
               </strong>
             </div>
           ))}
@@ -176,9 +188,9 @@ export function ComponentDetailPage({
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="accessibility">
         <div>
-          <p className="eyebrow">Inclusive baseline</p>
+          <p className="eyebrow">{content.accessibilityEyebrow}</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-            Accessibility checks
+            {content.accessibilityTitle}
           </h2>
         </div>
         <CheckList items={component.accessibility} />
@@ -189,25 +201,19 @@ export function ComponentDetailPage({
         id="internationalization"
       >
         <div>
-          <p className="eyebrow">Four language editions</p>
+          <p className="eyebrow">{content.i18nEyebrow}</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-            Internationalization
+            {content.internationalization}
           </h2>
         </div>
-        <CheckList
-          items={[
-            "Allow at least 30% text expansion without clipping labels or controls.",
-            "Use logical start and end positioning so RTL order can mirror safely.",
-            "Keep component names and token identifiers stable while translating guidance.",
-          ]}
-        />
+        <CheckList items={[...content.i18nItems]} />
       </section>
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="implementation">
         <div>
-          <p className="eyebrow">Local source ownership</p>
+          <p className="eyebrow">{content.implementationEyebrow}</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-            Implementation contract
+            {content.implementationTitle}
           </h2>
         </div>
         <Card>
@@ -217,34 +223,34 @@ export function ComponentDetailPage({
                 <FileCode2Icon className="size-5" />
               </span>
               <div>
-                <strong className="text-sm">Verified module</strong>
+                <strong className="text-sm">{content.verifiedModule}</strong>
                 <code className="mt-1 block font-mono text-xs text-muted-foreground break-all">
                   src/components/ui/{component.module}
                 </code>
               </div>
             </div>
-            <Badge variant="outline">Source available</Badge>
+            <Badge variant="outline">{content.sourceAvailable}</Badge>
           </CardContent>
         </Card>
         <p className="text-sm leading-6 text-muted-foreground">
-          This reference can be read without an account or setup. When the
-          component is adopted in a product, keep feature-specific behavior in
-          the consuming feature and preserve this shared interaction contract.
+          {content.implementationDescription}
         </p>
       </section>
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="related">
         <div>
-          <p className="eyebrow">Same family</p>
+          <p className="eyebrow">{content.relatedEyebrow}</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-            Related destinations
+            {content.relatedTitle}
           </h2>
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
           {related.map((item) => (
             <a
               className="group flex items-center justify-between rounded-xl border bg-card p-4 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              href={siteHref(`/components/${item.slug}`)}
+              href={siteHref(
+                localizedRoute(`/components/${item.slug}`, locale),
+              )}
               key={item.slug}
             >
               {item.title}

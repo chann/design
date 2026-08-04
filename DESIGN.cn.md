@@ -1,6 +1,6 @@
 ---
 version: alpha
-name: Comfort Design System
+name: Comfort DESIGN.md
 description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
@@ -268,29 +268,33 @@ components:
 
 <!-- markdownlint-disable MD013 -->
 
-# Comfort Design System
+# Comfort DESIGN.md
 
-> **状态：**规范性设计参考 · **DESIGN.md schema：**`alpha`
+> **状态：**产品主题指南 · **DESIGN.md schema：**`alpha`
 >
-> **语言合同：**韩文 [DESIGN.md](./DESIGN.md) 是规范原文。实现合同发生变化时，
+> 请先更新韩文 [DESIGN.md](./DESIGN.md)。实现指南发生变化时，
 > [English](./DESIGN.en.md)、[日本語](./DESIGN.jp.md) 与
 > [简体中文](./DESIGN.cn.md) 版本必须以相同结构和含义同步更新。
 
-YAML front matter 是机器可读的 token 合同，正文说明如何应用这些值。若两者
+YAML front matter 是机器可读的 token 列表，正文说明如何应用这些值。若两者
 出现冲突，精确值以 token 为准，设计意图、层级与行为以正文为准。
 
 **MUST**、**SHOULD**、**MAY**分别表示必须、应当与可以。
 
 ## Overview
 
-Comfort Design System 面向需要高度专注的产品界面，例如 dashboard、创作工具、设置、
+Comfort DESIGN.md 为需要高度专注的产品界面定义主题，例如 dashboard、创作工具、设置、
 电商与运营流程。它以冷静的中性色 surface、单一且克制的蓝色 action、系统优先
 排版、清晰的容器关系，以及能解释来源与去向的 motion 为核心。
 
-参考站点覆盖 15 个 Foundation、8 个 family 中的 63 个 component，以及 84 条
+从shadcn组件开始，用DESIGN.md定义主题。以可靠的shadcn/ui组件为基础，在
+`DESIGN.md`中整理semantic token、state、motion、content与accessibility等设计
+细节，并通过真实specimen检查结果。
+
+参考站点覆盖 15 个 Foundation、8 个 family 中的 63 个 component，以及 336 条
 static route。每个 detail route 都按相同顺序提供真实 specimen、Preview 与
 View code segmented control、usage、anatomy、state、accessibility、
-internationalization 与实现合同。
+internationalization 与实现指南。
 
 | 品质            | 用户应当感受到                       | 可观察的产品证据                             |
 | --------------- | ------------------------------------ | -------------------------------------------- |
@@ -404,7 +408,7 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 文档 shell 的 header 在初始状态与滚动后都保持为距 viewport 顶部 24px 的
 floating surface。左右 documentation rail 与正文之间不设置 vertical separator，
 只用留白区分。footer 分布 System、Foundations、Components、Resources、Legal
-sitemap 分组，并以滚动进入时部分露出的大型 `Comfort / DESIGN.md` text signature
+sitemap 分组，并以滚动进入时部分露出的大型 `Comfort DESIGN.md` text signature
 收尾。reduced motion 下不产生位移，直接显示最终状态。
 
 从 320 CSS px 起不得出现页面级横向滚动。只有边界和操作提示明确的数据区域
@@ -466,12 +470,16 @@ Layout、Motion、Radius、Spacing、State、Voice and Tone、Writing**。
   loading、empty 与 error 的转换。
 
 `src/data/catalog.json` 是 route 与 inventory 的机器可读清单；本文定义如何选择和
-应用 Foundation 的规范。条目数量与 title 必须始终一致。
+应用 Foundation 的方法。条目数量与 title 必须始终一致。
 
 ## Components
 
 YAML component entry 定义可复用视觉原子。application component 可以组合它们，
 但必须保持语义角色。
+
+以可靠的shadcn/ui组件为基础。用`DESIGN.md`定义semantic color、typography、
+spacing、shape、state和motion等设计细节，在保留可访问primitive行为的同时，
+将界面调整为符合产品的表达。
 
 63 个 component 按以下 8 个 family 维护：
 
@@ -567,7 +575,7 @@ status pill 只用于短状态。继续操作所需的错误与信息放在 inli
 - 不把所有 section 都放进 floating card。
 - 不让 hover 成为必要内容或 action 的唯一入口。
 - 不因 animation 正在执行而锁定 input。
-- 不把 error 显示成 empty，不给无限期工作显示 skeleton，也不在权威操作确认前
+- 不把 error 显示成 empty，不给无限期工作显示 skeleton，也不在服务端确认前
   显示“完成”。
 - 不在没有更强 focus-visible 替代时移除 outline。
 - 不为塞进布局而缩小 touch target、body type 或必要 column。
@@ -647,16 +655,20 @@ success → stale 或 offline
 - optimistic update 只在成功概率高、rollback 确定且 pending 可见时使用。
 - 重试 mutation 必须 idempotent，或在重复前与 server reconcile。
 
-可分享 navigation state 放在 URL，authoritative state 留在 server，本地
+可分享 navigation state 放在 URL，需要服务端确认的 state 留在 server，本地
 interaction state 留在 component。只有真实 cross-tree lifetime 出现后才引入
 shared store。
 
 ## Content & Localization
 
-韩文 `DESIGN.md` 是规范原文；en、jp、cn 版本保持相同 heading 顺序、token、
+先更新韩文 `DESIGN.md`；en、jp、cn 版本保持相同 heading 顺序、token、
 inventory，以及 MUST、SHOULD、MAY 的强度。翻译保留含义，同时使用各语言自然的
 语序与标点。
 
+- 主页与所有详情页默认使用英文 `/`，并提供韩文 `/ko/`、日文 `/jp/` 与中文
+  `/cn/`。语言选择优先读取 URL path，再读取浏览器中的偏好。
+- 主页文案与 metadata 分别位于 `src/content/home/en.ts`、`ko.ts`、`jp.ts` 与
+  `cn.ts`；详情页文案位于 `src/content/docs/`。
 - site copy 不暴露内部文档治理术语。language selector 仅以 `KO`、`EN`、`JP`、
   `CN` 明确当前版本与可切换版本。
 - 自然语言默认使用 `word-break: keep-all`。code、command、URL、file path、token
@@ -666,13 +678,13 @@ inventory，以及 MUST、SHOULD、MAY 的强度。翻译保留含义，同时�
 - 将 30% text expansion、CJK line breaking、RTL logical property、200% text size
   纳入最小 localized regression set。
 
-## Implementation Contract
+## Implementation Guide
 
 当前参考实现使用 Vite 8.2、React 19.2、TypeScript 6 strict mode、Tailwind CSS
-4.3、仓库自有 shadcn/ui source、Radix UI 与 Base UI primitive、Lucide、TanStack
-Table、Recharts、Embla。库可以替换，但视觉、交互、可访问性与证据合同不能降低。
+4.3、shadcn/ui source、Radix UI 与 Base UI primitive、Lucide、TanStack Table、
+Recharts、Embla。库可以替换，但视觉、交互、可访问性与验证质量不能降低。
 
-- Vite 在 `/design/` base 下构建 static site，并从 catalog contract 生成 84 个
+- Vite 在 `/design/` base 下构建 static site，并从 catalog manifest 生成 336 个
   route artifact。
 - 将 YAML role 一次映射为 CSS variable 或 theme token，component 不重复 raw
   value。
@@ -683,12 +695,16 @@ Table、Recharts、Embla。库可以替换，但视觉、交互、可访问性�
   disabled、loading、empty、error、light、dark、reduced-motion、contrast、
   long-content 与 localized state。
 
-## Verification Contract
+## Verification
 
 完成前必须通过 `npm run verify:catalog`、`npm run lint`、`npm run check` 与
 `npm run build`。catalog verification 必须确认正好 63 个 component、15 个
-Foundation、84 条 static route、四种语言版本具有相同 inventory，以及 light
+Foundation、336 条 static route、四种语言版本具有相同 inventory，以及 light
 `#0066CC` 与 dark `#78B7FF` primary。
+
+static output 必须包含英文 `dist/index.html`、韩文 `dist/ko/index.html`、日文
+`dist/jp/index.html` 与中文 `dist/cn/index.html`。逐项检查 `lang`、canonical、
+`hreflang`，并将英文设为 `x-default`。
 
 browser QA 在 390px 与 1440px 执行每个 family 的代表 specimen，覆盖 search、
 empty/reset、overlay focus 恢复、form input、table sort、chart、carousel、message
@@ -713,7 +729,7 @@ browser、device 或 assistive-technology 行为。
 1. 可复用精确值变化时先修改 YAML token。
 2. inventory 变化时，将 `catalog.json`、实际 module、specimen、route，以及四种
    语言的 component 与 Foundation 清单作为一个逻辑单元更新。
-3. 保持本文核心 heading 顺序，并先更新韩文规范原文。
+3. 保持本文核心 heading 顺序，并先更新韩文 `DESIGN.md`。
 4. state variant 添加到相关 component entry，并使用 `{token.references}`，
    不重复 raw value。
 5. en、jp、cn 版本反映相同含义与 MUST、SHOULD、MAY 强度。

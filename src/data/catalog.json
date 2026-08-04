@@ -93,7 +93,7 @@
       "slug": "avatar",
       "title": "Avatar",
       "description": "Represents a person or entity with an image and resilient fallback.",
-      "usage": "Use when identity supports scanning, ownership, or conversation context.",
+      "usage": "Use when identity supports scanning, responsibility, or conversation context.",
       "anatomy": ["Image", "Text fallback", "Optional status"],
       "accessibility": [
         "Decorative duplicates are hidden",
@@ -455,7 +455,7 @@
       "accessibility": [
         "Focus is trapped and restored",
         "Title and description label the dialog",
-        "Escape follows the task contract"
+        "Escape follows the task behavior"
       ],
       "family": "overlays",
       "keywords": ["modal", "overlay", "focus"],
@@ -1209,7 +1209,7 @@
       "anatomy": ["Named group", "Toggle items", "Shared silhouette"],
       "accessibility": [
         "Selection mode is programmatic",
-        "Arrow behavior matches the group contract",
+        "Arrow behavior matches the group pattern",
         "Each item has a clear name"
       ],
       "family": "actions",

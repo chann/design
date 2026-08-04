@@ -1,11 +1,11 @@
-export const homeLocales = ["ko", "en", "jp", "cn"] as const;
+export const homeLocales = ["en", "ko", "jp", "cn"] as const;
 
 export type HomeLocale = (typeof homeLocales)[number];
 
 export type HomeContent = {
   locale: HomeLocale;
   languageTag: "ko" | "en" | "ja" | "zh-CN";
-  path: "/" | "/en" | "/jp" | "/cn";
+  path: "/" | "/ko" | "/jp" | "/cn";
   metadata: { title: string; description: string };
   shell: {
     skipToContent: string;

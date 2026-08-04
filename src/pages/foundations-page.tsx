@@ -22,7 +22,9 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { foundationCatalog } from "@/data/catalog";
-import { foundationItems, siteHref } from "@/data/site";
+import { localizedRoute, siteHref } from "@/data/site";
+import { docsContents, localizedFoundation } from "@/content/docs";
+import type { HomeLocale } from "@/content/home";
 
 const icons = [
   CircleDotDashedIcon,
@@ -41,34 +43,50 @@ const bentoSpans = [
   "md:col-span-2",
 ];
 
-export function FoundationsPage({ currentPath }: { currentPath: string }) {
+export function FoundationsPage({
+  currentPath,
+  locale,
+}: {
+  currentPath: string;
+  locale: HomeLocale;
+}) {
+  const content = docsContents[locale].foundations;
+  const foundations = foundationCatalog.map((record) =>
+    localizedFoundation(record, locale),
+  );
   const [query, setQuery] = useState("");
   const [family, setFamily] = useState("all");
-  const [results, setResults] = useState(foundationCatalog);
+  const [results, setResults] = useState(foundations);
 
   return (
     <DocsLayout
       currentPath={currentPath}
+      locale={locale}
       section="foundations"
-      eyebrow="Foundations"
-      title="Shared rules beneath every interface"
-      description="Foundations translate Comfort’s principles into a reusable visual and behavioral language. Start with semantic roles, then compose with restraint."
+      eyebrow={content.eyebrow}
+      title={content.title}
+      description={content.description}
       outline={[
-        { id: "catalog", title: "Foundation catalog" },
-        { id: "directory", title: "Complete directory" },
-        { id: "layers", title: "System layers" },
+        { id: "catalog", title: content.outlineCatalog },
+        { id: "directory", title: content.outlineDirectory },
+        { id: "layers", title: content.outlineLayers },
       ]}
       previous={{
         href: "/principles",
-        title: "Principles",
-        description: "Design principles",
+        title: docsContents[locale].shell.sections.principles,
+        description: docsContents[locale].principles.title,
       }}
-      next={foundationItems[0]}
+      next={{
+        href: `/foundations/${foundations[0].slug}`,
+        title: foundations[0].title,
+        description: foundations[0].description,
+      }}
     >
       <section className="scroll-mt-24 flex flex-col gap-5" id="catalog">
         <CatalogSearch
           family={family}
-          items={foundationCatalog}
+          items={foundations}
+          locale={locale}
           onFamilyChange={setFamily}
           onResultsChange={setResults}
           onValueChange={setQuery}
@@ -77,10 +95,11 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
         {results.length > 0 ? (
           <BentoGrid>
             {results.map((record) => {
-              const index = foundationCatalog.findIndex(
+              const index = foundations.findIndex(
                 (foundation) => foundation.slug === record.slug,
               );
-              const item = foundationItems[index];
+              const item = foundations[index];
+              const href = `/foundations/${item.slug}`;
               const Icon = icons[index % icons.length];
               return (
                 <a
@@ -88,8 +107,8 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
                     "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                     bentoSpans[index % bentoSpans.length],
                   )}
-                  href={siteHref(item.href)}
-                  key={item.href}
+                  href={siteHref(localizedRoute(href, locale))}
+                  key={href}
                 >
                   <BentoCard
                     className={cn(
@@ -127,7 +146,7 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
                     {index === 0 ? (
                       <footer className="relative z-10 mt-6 flex items-center justify-between">
                         <span className="text-xs font-medium text-foreground/80">
-                          Reference + guidance
+                          {content.featuredNote}
                         </span>
                         <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
                       </footer>
@@ -140,9 +159,9 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
         ) : (
           <div className="grid min-h-56 place-items-center rounded-2xl border border-dashed bg-muted/25 p-8 text-center">
             <div>
-              <h2 className="font-semibold">No Foundations found</h2>
+              <h2 className="font-semibold">{content.emptyTitle}</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Try a broader name or purpose.
+                {content.emptyDescription}
               </p>
             </div>
           </div>
@@ -151,17 +170,19 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
 
       <section className="scroll-mt-24 flex flex-col gap-5" id="directory">
         <div className="flex flex-col gap-2">
-          <p className="eyebrow">All 15 Foundations</p>
+          <p className="eyebrow">{content.directoryEyebrow}</p>
           <h2 className="text-2xl font-semibold tracking-[-0.03em]">
-            Complete directory
+            {content.directoryTitle}
           </h2>
         </div>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {foundationItems.map((item, index) => (
+          {foundations.map((item, index) => (
             <a
               className="group flex items-center justify-between rounded-xl border bg-card px-4 py-3 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              href={siteHref(item.href)}
-              key={item.href}
+              href={siteHref(
+                localizedRoute(`/foundations/${item.slug}`, locale),
+              )}
+              key={item.slug}
             >
               <span>{item.title}</span>
               <span className="font-mono text-xs text-muted-foreground">
@@ -176,21 +197,13 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
         <Card className="bg-muted/35">
           <CardHeader>
             <Badge variant="secondary" className="w-fit">
-              System model
+              {content.layersBadge}
             </Badge>
-            <CardTitle className="text-2xl">
-              From intent to rendered interface
-            </CardTitle>
-            <CardDescription>
-              Each layer gives the next one a stable contract.
-            </CardDescription>
+            <CardTitle className="text-2xl">{content.layersTitle}</CardTitle>
+            <CardDescription>{content.layersDescription}</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 md:grid-cols-3">
-            {[
-              ["01", "Principles", "Why the interface behaves this way"],
-              ["02", "Semantic tokens", "What roles stay stable across themes"],
-              ["03", "Components", "How roles become reusable interactions"],
-            ].map(([number, title, description]) => (
+            {content.layers.map(([number, title, description]) => (
               <div className="rounded-xl border bg-background p-5" key={number}>
                 <span className="font-mono text-xs text-primary">{number}</span>
                 <h3 className="mt-8 font-semibold">{title}</h3>

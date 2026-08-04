@@ -13,12 +13,14 @@ import { FoundationsPage } from "@/pages/foundations-page";
 import { HomePage } from "@/pages/home-page";
 import { LegalPage } from "@/pages/legal-page";
 import { PrinciplesPage } from "@/pages/principles-page";
-import { currentRoute, siteHref } from "@/data/site";
 import {
-  homeContents,
-  homeLocaleFromRoute,
-  homeLocales,
-} from "@/content/home";
+  currentRoute,
+  localizedRoute,
+  parseSiteRoute,
+  siteHref,
+} from "@/data/site";
+import { homeContents, homeLocales, type HomeLocale } from "@/content/home";
+import { docsContents } from "@/content/docs";
 
 const SITE_ORIGIN = "https://chann.github.io";
 
@@ -41,68 +43,111 @@ function upsertMeta(selector: string, attribute: string, value: string) {
   element?.setAttribute(attribute, value);
 }
 
+function updateDocumentIdentity(languageTag: string, title: string) {
+  document.documentElement.lang = languageTag;
+  document.title = title;
+}
+
+function localizedMetadata(locale: HomeLocale) {
+  return {
+    ko: {
+      guides: "가이드",
+      privacy: "개인정보 안내",
+      terms: "이용 안내",
+      notFound: "페이지를 찾을 수 없습니다",
+      description:
+        "Comfort의 원칙, 파운데이션, 컴포넌트 예시와 접근성·구현 가이드를 살펴보세요.",
+    },
+    en: {
+      guides: "Guides",
+      privacy: "Privacy",
+      terms: "Terms",
+      notFound: "Page not found",
+      description:
+        "Browse Comfort principles, foundations, component examples, accessibility notes, and implementation guidance.",
+    },
+    jp: {
+      guides: "ガイド",
+      privacy: "プライバシー",
+      terms: "利用案内",
+      notFound: "ページが見つかりません",
+      description:
+        "Comfortの原則、ファウンデーション、コンポーネント例、アクセシビリティと実装ガイドを確認できます。",
+    },
+    cn: {
+      guides: "指南",
+      privacy: "隐私说明",
+      terms: "使用说明",
+      notFound: "找不到页面",
+      description: "查看Comfort的原则、基础、组件示例、无障碍说明与实现指南。",
+    },
+  }[locale];
+}
+
 function routeMetadata(route: string): RouteMetadata {
-  const homeLocale = homeLocaleFromRoute(route);
-  if (homeLocale) {
-    const content = homeContents[homeLocale];
+  const { locale, contentRoute } = parseSiteRoute(route);
+  const localeMetadata = localizedMetadata(locale);
+  const alternates = [
+    ...homeLocales.map((alternateLocale) => ({
+      hrefLang: homeContents[alternateLocale].languageTag,
+      route: localizedRoute(contentRoute, alternateLocale),
+    })),
+    { hrefLang: "x-default", route: localizedRoute(contentRoute, "en") },
+  ];
+
+  if (contentRoute === "/") {
+    const content = homeContents[locale];
     return {
       ...content.metadata,
       canonicalRoute: content.path,
       robots: "index,follow",
       languageTag: content.languageTag,
-      alternates: [
-        ...homeLocales.map((locale) => ({
-          hrefLang: homeContents[locale].languageTag,
-          route: homeContents[locale].path,
-        })),
-        { hrefLang: "x-default", route: homeContents.ko.path },
-      ],
+      alternates,
     };
   }
 
-  if (route === "/privacy") {
+  if (contentRoute === "/privacy") {
     return {
-      title: "Privacy | Comfort Design System",
-      description:
-        "How the static Comfort reference handles theme preferences, hosting requests, and external links.",
+      title: `${localeMetadata.privacy} | Comfort DESIGN.md`,
+      description: localeMetadata.description,
       canonicalRoute: route,
       robots: "index,follow",
-      languageTag: "en",
+      languageTag: homeContents[locale].languageTag,
+      alternates,
     };
   }
 
-  if (route === "/terms") {
+  if (contentRoute === "/terms") {
     return {
-      title: "Terms | Comfort Design System",
-      description:
-        "Terms for using Comfort DESIGN.md, reference examples, source, and third party assets.",
+      title: `${localeMetadata.terms} | Comfort DESIGN.md`,
+      description: localeMetadata.description,
       canonicalRoute: route,
       robots: "index,follow",
-      languageTag: "en",
+      languageTag: homeContents[locale].languageTag,
+      alternates,
     };
   }
 
-  const [, group, slug] = route.split("/");
+  const [, group, slug] = contentRoute.split("/");
   const documentedRoute =
-    route === "/principles" ||
-    route === "/foundations" ||
-    route === "/components" ||
+    contentRoute === "/principles" ||
+    contentRoute === "/foundations" ||
+    contentRoute === "/components" ||
     (group === "foundations" && foundationSlugs.has(slug)) ||
     (group === "components" && componentSlugs.has(slug));
 
   if (!documentedRoute) {
     return {
-      title: "Page not found | Comfort Design System",
-      description:
-        "Return to the Comfort Design System overview to find a current principle, foundation, or component reference.",
-      canonicalRoute: "/",
+      title: `${localeMetadata.notFound} | Comfort DESIGN.md`,
+      description: localeMetadata.description,
+      canonicalRoute: localizedRoute("/", locale),
       robots: "noindex,follow",
-      languageTag: "en",
+      languageTag: homeContents[locale].languageTag,
     };
   }
 
   const record = getFoundation(slug) ?? getComponent(slug);
-  const section = route.split("/").filter(Boolean).at(-1);
+  const section = contentRoute.split("/").filter(Boolean).at(-1);
   const label =
     record?.title ??
     (section
@@ -112,11 +157,12 @@ function routeMetadata(route: string): RouteMetadata {
           .join(" ")
       : "Reference");
   return {
-    title: `${label} | Comfort Design System`,
-    description: `Read the Comfort guidance for ${label.toLowerCase()}, including behavior, states, accessibility, and implementation checks.`,
+    title: `${label} | Comfort DESIGN.md`,
+    description: localeMetadata.description,
     canonicalRoute: route,
     robots: "index,follow",
-    languageTag: "en",
+    languageTag: homeContents[locale].languageTag,
+    alternates,
   };
 }
 
@@ -129,7 +175,10 @@ function syncAlternates(alternates: readonly LocaleAlternate[] = []) {
     const link = document.createElement("link");
     link.rel = "alternate";
     link.hreflang = alternate.hrefLang;
-    link.href = new URL(siteHref(alternate.route, "/design/"), SITE_ORIGIN).href;
+    link.href = new URL(
+      siteHref(alternate.route, "/design/"),
+      SITE_ORIGIN,
+    ).href;
     link.dataset.homeAlternate = "true";
     document.head.append(link);
   }
@@ -148,11 +197,11 @@ const ComponentDetailPage = lazy(() =>
   })),
 );
 
-function RouteSkeleton() {
+function RouteSkeleton({ locale }: { locale: HomeLocale }) {
   return (
     <main
       aria-busy="true"
-      aria-label="Loading component reference"
+      aria-label={docsContents[locale].componentDetail.loading}
       className="mx-auto flex min-h-dvh max-w-4xl flex-col gap-8 px-4 py-24 sm:px-8"
       id="main-content"
     >
@@ -164,20 +213,18 @@ function RouteSkeleton() {
   );
 }
 
-function NotFoundPage() {
+function NotFoundPage({ locale }: { locale: HomeLocale }) {
+  const content = docsContents[locale].notFound;
   return (
     <main id="main-content" className="grid min-h-dvh place-items-center px-4">
       <div className="flex max-w-lg flex-col items-center gap-5 text-center">
         <span className="font-mono text-sm text-primary">404</span>
         <h1 className="text-4xl font-semibold tracking-[-0.04em]">
-          This reference has moved.
+          {content.title}
         </h1>
-        <p className="leading-7 text-muted-foreground">
-          Return to the system overview and continue from a current principle,
-          foundation, or component.
-        </p>
+        <p className="leading-7 text-muted-foreground">{content.description}</p>
         <Button asChild>
-          <a href={siteHref("/")}>Back to Comfort</a>
+          <a href={siteHref(localizedRoute("/", locale))}>{content.action}</a>
         </Button>
       </div>
     </main>
@@ -186,6 +233,7 @@ function NotFoundPage() {
 
 export default function App() {
   const route = currentRoute();
+  const { locale, contentRoute } = parseSiteRoute(route);
 
   useEffect(() => {
     const metadata = routeMetadata(route);
@@ -194,8 +242,7 @@ export default function App() {
       SITE_ORIGIN,
     ).href;
 
-    document.documentElement.lang = metadata.languageTag;
-    document.title = metadata.title;
+    updateDocumentIdentity(metadata.languageTag, metadata.title);
     upsertMeta('meta[name="description"]', "content", metadata.description);
     upsertMeta('meta[name="robots"]', "content", metadata.robots);
     upsertMeta('meta[property="og:title"]', "content", metadata.title);
@@ -225,31 +272,38 @@ export default function App() {
     return () => window.cancelAnimationFrame(frame);
   }, [route]);
 
-  const homeLocale = homeLocaleFromRoute(route);
-  if (homeLocale) {
-    return <HomePage currentPath={route} content={homeContents[homeLocale]} />;
+  if (contentRoute === "/") {
+    return <HomePage currentPath={route} content={homeContents[locale]} />;
   }
-  if (route === "/principles") return <PrinciplesPage currentPath={route} />;
-  if (route === "/foundations") return <FoundationsPage currentPath={route} />;
-  if (route === "/components") return <ComponentsPage currentPath={route} />;
-  if (route === "/privacy") {
-    return <LegalPage currentPath={route} kind="privacy" />;
+  if (contentRoute === "/principles") {
+    return <PrinciplesPage currentPath={route} locale={locale} />;
   }
-  if (route === "/terms") {
-    return <LegalPage currentPath={route} kind="terms" />;
+  if (contentRoute === "/foundations") {
+    return <FoundationsPage currentPath={route} locale={locale} />;
+  }
+  if (contentRoute === "/components") {
+    return <ComponentsPage currentPath={route} locale={locale} />;
+  }
+  if (contentRoute === "/privacy") {
+    return <LegalPage currentPath={route} kind="privacy" locale={locale} />;
+  }
+  if (contentRoute === "/terms") {
+    return <LegalPage currentPath={route} kind="terms" locale={locale} />;
   }
 
-  const [, section, slug] = route.split("/");
+  const [, section, slug] = contentRoute.split("/");
   if (section === "foundations" && foundationSlugs.has(slug)) {
-    return <FoundationDetailPage currentPath={route} slug={slug} />;
+    return (
+      <FoundationDetailPage currentPath={route} locale={locale} slug={slug} />
+    );
   }
   if (section === "components" && componentSlugs.has(slug)) {
     return (
-      <Suspense fallback={<RouteSkeleton />}>
-        <ComponentDetailPage currentPath={route} slug={slug} />
+      <Suspense fallback={<RouteSkeleton locale={locale} />}>
+        <ComponentDetailPage currentPath={route} locale={locale} slug={slug} />
       </Suspense>
     );
   }
 
-  return <NotFoundPage />;
+  return <NotFoundPage locale={locale} />;
 }

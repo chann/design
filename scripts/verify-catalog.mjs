@@ -32,7 +32,7 @@ assert(catalog.components.length === 63, "Expected 63 components");
 assert(catalog.foundations.length === 15, "Expected 15 Foundations");
 assert(new Set(componentSlugs).size === 63, "Component slugs must be unique");
 assert(new Set(foundationSlugs).size === 15, "Foundation slugs must be unique");
-assert(catalogRoutes(catalog).length === 87, "Expected 87 static routes");
+assert(catalogRoutes(catalog).length === 336, "Expected 336 static routes");
 
 for (const component of catalog.components) {
   await access(new URL(`src/components/ui/${component.module}`, root));
@@ -121,8 +121,8 @@ const requiredDesignHeadings = [
   "## Accessibility & Responsible UX",
   "## State & Feedback",
   "## Content & Localization",
-  "## Implementation Contract",
-  "## Verification Contract",
+  "## Implementation Guide",
+  "## Verification",
   "## Iteration Guide",
   "## Known Gaps",
   "## References",
@@ -145,12 +145,12 @@ for (const { file, source } of designDocuments) {
   const frontMatter = source.match(/^---\n([\s\S]*?)\n---/)?.[1];
   assert(
     frontMatter === canonicalFrontMatter,
-    `${file} token contract drifted`,
+    `${file} token front matter drifted`,
   );
   assert(source.includes("63"), `${file} must document 63 components`);
   assert(source.includes("15"), `${file} must document 15 Foundations`);
   assert(
-    source.includes("Comfort / DESIGN.md"),
+    source.includes("Comfort DESIGN.md"),
     `${file} must document the footer signature`,
   );
   assert(!source.includes("SSOT"), `${file} must avoid the SSOT abbreviation`);
@@ -163,4 +163,4 @@ const css = await readFile(new URL("src/index.css", root), "utf8");
 assert(css.includes("#0066cc"), "Light primary must remain #0066CC");
 assert(css.includes("#78b7ff"), "Dark primary must remain #78B7FF");
 
-console.log("Verified 63 components, 15 Foundations, and 87 routes.");
+console.log("Verified 63 components, 15 Foundations, and 336 routes.");

@@ -68,7 +68,7 @@ function BubbleSpecimen() {
     <div className="specimen-stage items-stretch">
       <div className="mx-auto flex w-full max-w-xl flex-col gap-3">
         <Bubble>
-          The component contract now includes loading, empty, error, and
+          The component guide now includes loading, empty, error, and
           focus-visible states.
         </Bubble>
         <Bubble variant="user">Great—publish the verified reference.</Bubble>
@@ -113,7 +113,7 @@ function MessageSpecimen() {
         <MessageContent>
           <p>
             I verified the component against keyboard, responsive, and
-            reduced-motion contracts.
+            reduced-motion guidance.
           </p>
           <Collapsible className="mt-3">
             <CollapsibleTrigger asChild>
@@ -122,7 +122,7 @@ function MessageSpecimen() {
               </Button>
             </CollapsibleTrigger>
             <CollapsibleContent className="mt-2 rounded-lg bg-muted p-3 text-xs text-muted-foreground">
-              84 routes · zero Axe violations · primary token preserved
+              336 routes · zero Axe violations · primary token preserved
             </CollapsibleContent>
           </Collapsible>
         </MessageContent>

@@ -32,6 +32,13 @@ import {
 } from "@/data/catalog";
 import { componentItems, siteHref } from "@/data/site";
 import { cn } from "@/lib/utils";
+import {
+  docsContents,
+  localizedComponent,
+  localizedFoundation,
+} from "@/content/docs";
+import type { HomeLocale } from "@/content/home";
+import { localizedRoute } from "@/data/site";
 
 const familyIcons: Record<ComponentFamily, typeof BlocksIcon> = {
   actions: MousePointerClickIcon,
@@ -68,22 +75,25 @@ const bentoSpans = [
   "md:col-span-2",
 ];
 
-function familyLabel(family: string) {
-  return family
-    .split("-")
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-export function ComponentsPage({ currentPath }: { currentPath: string }) {
+export function ComponentsPage({
+  currentPath,
+  locale,
+}: {
+  currentPath: string;
+  locale: HomeLocale;
+}) {
+  const content = docsContents[locale].components;
+  const components = componentCatalog.map((record) =>
+    localizedComponent(record, locale),
+  );
   const [query, setQuery] = React.useState("");
   const [family, setFamily] = React.useState("all");
-  const [results, setResults] = React.useState(componentCatalog);
+  const [results, setResults] = React.useState(components);
   const hasFilters = query.trim().length > 0 || family !== "all";
   const displayed = hasFilters
     ? results
     : featuredSlugs.flatMap((slug) =>
-        componentCatalog.filter((component) => component.slug === slug),
+        components.filter((component) => component.slug === slug),
       );
 
   function resetFilters() {
@@ -91,19 +101,23 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
     setFamily("all");
   }
 
-  const lastFoundation = foundationCatalog.at(-1);
+  const lastFoundationRecord = foundationCatalog.at(-1);
+  const lastFoundation = lastFoundationRecord
+    ? localizedFoundation(lastFoundationRecord, locale)
+    : undefined;
 
   return (
     <DocsLayout
       currentPath={currentPath}
+      locale={locale}
       section="components"
-      eyebrow="Components"
-      title="Predictable parts for product work"
-      description="Comfort documents every current shadcn component as an interaction contract: real behavior, complete states, accessible structure, and implementation guidance in one coherent system."
+      eyebrow={content.eyebrow}
+      title={content.title}
+      description={content.description}
       outline={[
-        { id: "catalog", title: "Find a component" },
-        { id: "featured", title: "Component specimens" },
-        { id: "directory", title: "Complete family list" },
+        { id: "catalog", title: content.outlineFind },
+        { id: "featured", title: content.outlineExamples },
+        { id: "directory", title: content.outlineDirectory },
       ]}
       previous={
         lastFoundation
@@ -114,21 +128,25 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
             }
           : undefined
       }
-      next={componentItems[0]}
+      next={{
+        ...componentItems[0],
+        description: components[0].description,
+      }}
     >
       <section className="scroll-mt-24 flex flex-col gap-5" id="catalog">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow">Complete coverage</p>
+            <p className="eyebrow">{content.coverageEyebrow}</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-              63 components across 8 families
+              {content.coverageTitle}
             </h2>
           </div>
           <Badge variant="outline">shadcn · radix-nova</Badge>
         </div>
         <CatalogSearch
           family={family}
-          items={componentCatalog}
+          items={components}
+          locale={locale}
           onFamilyChange={setFamily}
           onResultsChange={setResults}
           onValueChange={setQuery}
@@ -140,12 +158,12 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="eyebrow">
-              {hasFilters ? "Filtered results" : "Representative specimens"}
+              {hasFilters ? content.filtered : content.featured}
             </p>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
               {hasFilters
-                ? `${results.length} matching components`
-                : "Start from a real behavior"}
+                ? content.matching(results.length)
+                : content.startTitle}
             </h2>
           </div>
         </div>
@@ -159,7 +177,9 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
                     "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                     bentoSpans[index % bentoSpans.length],
                   )}
-                  href={siteHref(`/components/${record.slug}`)}
+                  href={siteHref(
+                    localizedRoute(`/components/${record.slug}`, locale),
+                  )}
                   key={record.slug}
                 >
                   <BentoCard
@@ -180,7 +200,7 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
                         <Icon className="size-5" />
                       </span>
                       <Badge variant="outline">
-                        {familyLabel(record.family)}
+                        {docsContents[locale].families[record.family]}
                       </Badge>
                     </div>
                     <div className="relative z-10 mt-auto max-w-lg pt-8">
@@ -200,14 +220,12 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
               <EmptyMedia variant="icon">
                 <SearchXIcon />
               </EmptyMedia>
-              <EmptyTitle>No components match “{query}”</EmptyTitle>
-              <EmptyDescription>
-                Search a broader purpose or clear the active family filter.
-              </EmptyDescription>
+              <EmptyTitle>{content.emptyTitle(query)}</EmptyTitle>
+              <EmptyDescription>{content.emptyDescription}</EmptyDescription>
             </EmptyHeader>
             <EmptyContent>
               <Button onClick={resetFilters} size="sm" variant="outline">
-                Reset filters
+                {content.reset}
               </Button>
             </EmptyContent>
           </Empty>
@@ -216,9 +234,9 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
 
       <section className="scroll-mt-24 flex flex-col gap-6" id="directory">
         <div>
-          <p className="eyebrow">Always available</p>
+          <p className="eyebrow">{content.directoryEyebrow}</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
-            Complete family list
+            {content.directoryTitle}
           </h2>
         </div>
         <div className="grid gap-8 md:grid-cols-2">
@@ -235,7 +253,7 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
                 <div className="mb-4 flex items-center justify-between gap-4">
                   <h3 className="flex items-center gap-2 font-semibold">
                     <Icon className="size-4 text-primary" />
-                    {familyLabel(componentFamily)}
+                    {docsContents[locale].families[componentFamily]}
                   </h3>
                   <span className="font-mono text-xs text-muted-foreground">
                     {components.length}
@@ -246,7 +264,12 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
                     <li key={component.slug}>
                       <a
                         className="block rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                        href={siteHref(`/components/${component.slug}`)}
+                        href={siteHref(
+                          localizedRoute(
+                            `/components/${component.slug}`,
+                            locale,
+                          ),
+                        )}
                       >
                         {component.title}
                       </a>

@@ -7,11 +7,8 @@ export async function readCatalog() {
 }
 
 export function catalogRoutes(catalog) {
-  return [
+  const documentationRoutes = [
     "/",
-    "/en",
-    "/jp",
-    "/cn",
     "/principles",
     "/foundations",
     ...catalog.foundations.map(
@@ -22,4 +19,10 @@ export function catalogRoutes(catalog) {
     "/privacy",
     "/terms",
   ];
+
+  return ["", "/ko", "/jp", "/cn"].flatMap((prefix) =>
+    documentationRoutes.map((route) =>
+      route === "/" ? prefix || "/" : `${prefix}${route}`,
+    ),
+  );
 }

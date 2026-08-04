@@ -1,6 +1,6 @@
 ---
 version: alpha
-name: Comfort Design System
+name: Comfort DESIGN.md
 description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
 
 colors:
@@ -268,32 +268,37 @@ components:
 
 <!-- markdownlint-disable MD013 -->
 
-# Comfort Design System
+# Comfort DESIGN.md
 
-> **Status:** Normative design reference · **DESIGN.md schema:** `alpha`
+> **Status:** Product theme guide · **DESIGN.md schema:** `alpha`
 >
-> **Language contract:** Korean [DESIGN.md](./DESIGN.md) is the normative source.
-> When an implementation contract changes, the [English](./DESIGN.en.md),
+> Update Korean [DESIGN.md](./DESIGN.md) first. When its implementation guidance
+> changes, the [English](./DESIGN.en.md),
 > [日本語](./DESIGN.jp.md), and [简体中文](./DESIGN.cn.md) editions are updated with
 > the same structure and meaning.
 
-The YAML front matter is the machine-readable token contract. The prose explains
-how to apply those values. When the two disagree, tokens are normative for exact
-values and the prose is normative for intent, hierarchy, and behavior.
+The YAML front matter is the machine-readable token list. The prose explains how
+to apply those values. When the two disagree, use tokens for exact values and the
+prose for intent, hierarchy, and behavior.
 
 The key words **MUST**, **SHOULD**, and **MAY** express requirement strength.
 
 ## Overview
 
-Comfort Design System is a system for focused product interfaces: dashboards, creation
+Comfort DESIGN.md defines themes for focused product interfaces: dashboards, creation
 tools, settings, commerce, and operational workflows. It combines quiet neutral
 surfaces, one restrained blue action color, system-first typography, clear
 containment, and motion that explains where content came from and where it went.
 
+Start with shadcn components. Define your theme in DESIGN.md. Use trusted
+shadcn/ui components as the baseline, then define semantic tokens, states,
+motion, content, and accessibility details in `DESIGN.md`. Inspect the result in
+real specimens and static artifacts.
+
 The reference site covers 15 Foundations, 63 components across eight families,
-and 84 static routes. Every detail route follows the same sequence: real
+and 336 static routes. Every detail route follows the same sequence: real
 specimen, segmented Preview and View code control, usage, anatomy, states,
-accessibility, internationalization, and implementation contract.
+accessibility, internationalization, and implementation guidance.
 
 The intended experience has three qualities:
 
@@ -442,10 +447,11 @@ common path visible and advanced controls one level deeper.
 The documentation header remains a floating surface 24px from the viewport top
 both initially and after scroll. Left and right documentation rails have no
 vertical separators; whitespace alone distinguishes them from the reading
-column. The footer distributes System, Foundations, Components, Resources, and
-Legal sitemap groups, then closes with a partially clipped, intersection-driven
-`Comfort / DESIGN.md` text signature. Reduced motion shows its final state
-without travel.
+column. The footer keeps a compact System, Foundations, Resources, and Legal
+sitemap. It links to the Components catalog once instead of repeating all 63
+component detail links, then closes with a partially clipped,
+intersection-driven `Comfort DESIGN.md` text signature. Reduced motion shows
+its final state without travel.
 
 No page-level horizontal scrolling is allowed from 320 CSS px upward. A data
 region MAY scroll horizontally when its boundary and affordance are explicit.
@@ -521,13 +527,17 @@ Voice and Tone, and Writing**.
   disabled, loading, empty, and error without changing the underlying geometry.
 
 `src/data/catalog.json` is the machine-readable route and inventory list; this
-document is the normative guide for selecting and applying Foundations. Counts
+document explains how to select and apply Foundations. Counts
 and titles MUST remain aligned.
 
 ## Components
 
 YAML component entries define reusable visual atoms. Application components MAY
 compose them but MUST preserve their semantic role.
+
+Use trusted shadcn/ui components as the baseline. Define semantic color,
+typography, spacing, shape, state, and motion details in `DESIGN.md`, then adapt
+the presentation while preserving accessible primitive behavior.
 
 The 63 components are maintained in eight families:
 
@@ -643,7 +653,7 @@ considered complete.
 - Don't make hover the only route to essential content or actions.
 - Don't lock input merely because an animation is running.
 - Don't show an empty state for an error, a skeleton for indefinite work, or
-  “Done” before the authoritative operation succeeds.
+  “Done” before the server confirms the operation.
 - Don't remove focus outlines without a stronger focus-visible replacement.
 - Don't shrink touch targets, body type, or essential columns to make a layout fit.
 
@@ -679,6 +689,9 @@ interface feel “alive.”
 - Press feedback begins within 100ms.
 - Micro transitions usually complete in 120–180ms; standard state changes in
   180–240ms; larger spatial transitions in 240–360ms.
+- Header language and theme utility dropdowns open in about 140–150ms and close
+  in about 100ms. Travel stays at or below 4px and keyboard focus return is
+  preserved.
 - Dragged objects track the pointer 1:1 after any documented threshold and
   preserve the grab offset.
 - Release behavior carries velocity into settling or target selection.
@@ -746,17 +759,24 @@ success → stale or offline
 - A toast undo remains available long enough to use and has a persistent
   alternative for consequential changes.
 
-Shareable navigation state belongs in the URL. Server-authoritative state stays
+Shareable navigation state belongs in the URL. State confirmed by the server stays
 on the server. Local interaction state stays local. A shared store is introduced
 only after a real cross-tree lifetime requires it.
 
 ## Content & Localization
 
-Korean `DESIGN.md` is the normative source. The en, jp, and cn editions preserve
+Update Korean `DESIGN.md` first. The en, jp, and cn editions preserve
 the same heading order, tokens, inventory, and MUST, SHOULD, and MAY strength.
 Translations preserve meaning while using natural syntax and punctuation for
 each language.
 
+- The homepage and every detail page use English `/` by default and support Korean
+  `/ko/`, Japanese `/jp/`, and Chinese `/cn/`. Use the URL path for locale selection
+  and overrides any stored preference.
+- Complete homepage copy and metadata live in typed modules at
+  `src/content/home/ko.ts`, `en.ts`, `jp.ts`, and `cn.ts`. Presentation components
+  contain no direct prose, so copy-only changes touch only the matching content
+  file.
 - Site copy does not expose internal document-governance terminology. The
   language selector identifies the current and available editions with `KO`,
   `EN`, `JP`, and `CN`.
@@ -769,16 +789,16 @@ each language.
 - Keep 30% text expansion, CJK line breaking, RTL logical properties, and 200%
   text size in the minimum localized regression set.
 
-## Implementation Contract
+## Implementation Guide
 
 The current reference implementation uses Vite 8.2, React 19.2, TypeScript 6 in
-strict mode, Tailwind CSS 4.3, repository-owned shadcn/ui source, Radix UI and
-Base UI primitives, Lucide, TanStack Table, Recharts, and Embla. These libraries
-are replaceable; the visual, interaction, accessibility, and evidence contracts
-are not.
+strict mode, Tailwind CSS 4.3, Radix UI and Base UI primitives, Lucide, TanStack
+Table, Recharts, and Embla. It uses shadcn/ui as the baseline component source
+and `DESIGN.md` as the product theme guide. These libraries are replaceable, but
+visual, interaction, accessibility, and verification quality must not decline.
 
-- Vite builds a static site under the `/design/` base and generates 84 route
-  artifacts from the catalog contract.
+- Vite builds a static site under the `/design/` base and generates 336 route
+  artifacts from the catalog manifest.
 - Map YAML roles to CSS variables or theme tokens once. Components consume role
   tokens and MUST NOT duplicate raw values.
 - Application primitives remain domain-free. Promote a composition to shared
@@ -789,12 +809,17 @@ are not.
   focus-visible, disabled, loading, empty, error, light, dark, reduced-motion,
   contrast, long-content, and localized states.
 
-## Verification Contract
+## Verification
 
 Completion requires `npm run verify:catalog`, `npm run lint`, `npm run check`,
 and `npm run build` to pass. Catalog verification checks exactly 63 components,
-15 Foundations, 84 static routes, identical inventory across four language
+15 Foundations, 336 static routes, identical inventory across four language
 editions, and light `#0066CC` plus dark `#78B7FF` primary values.
+
+Static output MUST include English `dist/index.html`, Korean
+`dist/ko/index.html`, Japanese `dist/jp/index.html`, and Chinese
+`dist/cn/index.html`. Verify the `lang`, canonical, and `hreflang` set for each
+artifact, with English as `x-default`.
 
 Browser QA exercises representative specimens from every family at 390px and
 1440px, including search, empty/reset, overlay focus return, form input, table
@@ -822,8 +847,8 @@ evidence.
 1. Change the YAML token first when an exact reusable value changes.
 2. When inventory changes, update `catalog.json`, the real module, specimen,
    route, and all four component and Foundation lists as one logical unit.
-3. Preserve this document's core heading order and update the Korean normative
-   source first.
+3. Preserve this document's core heading order and update Korean `DESIGN.md`
+   first.
 4. Add state variants to the relevant component entry and use
    `{token.references}` instead of raw reusable values.
 5. Mirror the same meaning and MUST, SHOULD, and MAY strength in en, jp, and cn.
@@ -847,7 +872,7 @@ evidence.
 - Product-specific navigation, table density, editor canvases, maps, media
   timelines, and financial interfaces require extensions after their information
   architecture is known.
-- Translation documents preserve this contract, but every consuming product must
+- Other language editions preserve the same guidance, but every product must
   still verify its actual copy, fonts, line breaking, and RTL behavior.
 
 ## References

@@ -3,15 +3,15 @@ import type { HomeContent } from "./types";
 const en = {
   locale: "en",
   languageTag: "en",
-  path: "/en",
+  path: "/",
   metadata: {
-    title: "Comfort Design System | Customize shadcn with DESIGN.md",
+    title: "Comfort DESIGN.md | Define your shadcn theme",
     description:
       "Start with accessible shadcn/ui components, then use DESIGN.md to define your product’s tokens, states, motion, content, and verification rules.",
   },
   shell: {
     skipToContent: "Skip to content",
-    homeLabel: "Comfort Design System home",
+    homeLabel: "Comfort DESIGN.md home",
     primaryNavigationLabel: "Primary navigation",
     mobileNavigationTitle: "Comfort navigation",
     mobileNavigationDescription:
@@ -31,10 +31,15 @@ const en = {
   },
   hero: {
     eyebrow: "shadcn/ui + DESIGN.md",
-    accessibleTitle: "Start with shadcn. Make it yours with DESIGN.md.",
-    titleLines: ["Start with shadcn.", "Make it yours", "with DESIGN.md."],
+    accessibleTitle:
+      "Start with shadcn components. Define your theme in DESIGN.md.",
+    titleLines: [
+      "Start with shadcn components.",
+      "Define your theme",
+      "in DESIGN.md.",
+    ],
     description:
-      "Use shadcn/ui as the accessible component baseline, then shape every semantic token, state, interaction, and content rule around your product.",
+      "Keep shadcn/ui’s accessible behavior, then define product color, type, spacing, states, and motion in DESIGN.md.",
     primaryAction: "Read DESIGN.md",
     languageNavigationLabel: "Homepage languages",
   },
@@ -48,17 +53,16 @@ const en = {
   },
   tagline: {
     accessibleLabel:
-      "Start with shadcn components. Turn them into your system with DESIGN.md.",
+      "Start with shadcn components. Define your product theme in DESIGN.md.",
     segments: [
       "Start",
       "with",
       "shadcn",
       "components.",
-      "Turn",
-      "them",
-      "into",
+      "Define",
       "your",
-      "system",
+      "product",
+      "theme",
       "with",
       "DESIGN.md.",
     ],
@@ -67,20 +71,20 @@ const en = {
     eyebrow: "A baseline you can make your own",
     title: "Keep accessible components. Replace generic decisions.",
     description:
-      "shadcn/ui supplies source you can own. DESIGN.md gives that source one product-specific language for brand, behavior, and quality.",
+      "Use trusted shadcn/ui components as the baseline. Define color, type, spacing, states, and motion in DESIGN.md.",
     items: [
       {
-        title: "Start from proven primitives",
+        title: "Use trusted shadcn/ui as the baseline",
         description:
           "Use shadcn and Radix behavior as the foundation instead of rebuilding keyboard, focus, and overlay mechanics.",
       },
       {
-        title: "Define product meaning once",
+        title: "Define the details in DESIGN.md",
         description:
           "Map color, type, spacing, radius, state, and motion to semantic roles in DESIGN.md before styling components.",
       },
       {
-        title: "Give every contributor the same contract",
+        title: "Keep the team on one document",
         description:
           "Designers, engineers, and coding agents work from the same rules rather than translating scattered preferences.",
       },
@@ -94,21 +98,21 @@ const en = {
   },
   workflow: {
     eyebrow: "How it works",
-    title: "From shadcn source to a product-specific system.",
+    title: "From shadcn/ui to a theme defined in DESIGN.md.",
     description:
-      "Choose only what the product needs, apply the shared design contract, then verify the states people will experience.",
+      "Use trusted shadcn/ui as the baseline, define the design details in DESIGN.md, then verify every state people will experience.",
     steps: [
       {
         number: "01",
-        title: "Choose the shadcn components",
+        title: "Use shadcn/ui as the baseline",
         description:
-          "Copy the accessible component source your product needs and keep ownership in the repository.",
+          "Start with shadcn/ui components whose accessibility and interaction behavior have already been tested.",
       },
       {
         number: "02",
-        title: "Apply DESIGN.md roles",
+        title: "Define design details in DESIGN.md",
         description:
-          "Connect semantic tokens, states, content, motion, and accessibility rules to the owned components.",
+          "Connect semantic tokens, states, content, motion, and accessibility guidance to the components you added.",
       },
       {
         number: "03",
@@ -122,15 +126,15 @@ const en = {
     eyebrow: "Proof in the product",
     title: "The reference uses the workflow it documents.",
     description:
-      "This site begins with repository-owned shadcn components, applies DESIGN.md semantic roles, and exposes the resulting Foundations, component states, and verification checks for review.",
+      "This site also starts with shadcn components and applies the semantic roles in DESIGN.md. You can inspect the resulting Foundations, component states, and review checks.",
     action: "Inspect the component references",
     panelTitle: "Live reference",
     reviewed: "August 2026",
     metrics: [
-      { value: "87", label: "static routes" },
+      { value: "336", label: "static routes" },
       { value: "15", label: "semantic Foundations" },
       { value: "63", label: "component references" },
-      { value: "4", label: "aligned DESIGN.md editions" },
+      { value: "4", label: "supported languages" },
     ],
     verification:
       "Route, content, type, lint, and production build checks are part of the repository.",
@@ -139,7 +143,7 @@ const en = {
     eyebrow: "Questions before you start",
     title: "Know what shadcn provides and what DESIGN.md changes.",
     description:
-      "The component source stays familiar. The product contract makes its visual language, behavior, and release criteria specific.",
+      "The component code stays familiar. DESIGN.md adapts its visual language, behavior, and release checks to the product.",
     items: [
       {
         question: "How do shadcn/ui and DESIGN.md work together?",
@@ -147,9 +151,9 @@ const en = {
           "shadcn/ui provides the baseline component source and interaction primitives. DESIGN.md defines the product-specific tokens, states, motion, content, accessibility, and verification applied to that source.",
       },
       {
-        question: "Do we own the component code?",
+        question: "Can we adapt the component code?",
         answer:
-          "Yes. Copy only the shadcn components the product needs into its repository, then evolve them under the same DESIGN.md contract.",
+          "Yes. Add only the shadcn components the product needs, then keep improving them with the guidance in DESIGN.md.",
       },
       {
         question: "Does DESIGN.md replace our brand?",
@@ -157,7 +161,7 @@ const en = {
           "No. It records your brand roles and product behavior so color, typography, shape, voice, and interaction stay coherent across contributors.",
       },
       {
-        question: "Can coding agents use the contract?",
+        question: "Can coding agents use DESIGN.md?",
         answer:
           "Yes. Give an agent DESIGN.md before UI work so implementation and review use the same semantic roles and acceptance checks.",
       },
@@ -167,22 +171,22 @@ const en = {
           "Keep the proven semantics and keyboard behavior of the underlying primitives, then define contrast, focus, motion, content, and recovery requirements in DESIGN.md.",
       },
       {
-        question: "How do the language editions stay aligned?",
+        question: "Can we adopt it gradually in an existing product?",
         answer:
-          "Korean, English, Japanese, and Simplified Chinese editions preserve the same token names, section order, component inventory, and requirement strength.",
+          "Yes. Start with one screen or a frequently used component, document its tokens and states in DESIGN.md, then expand the scope.",
       },
     ],
   },
   cta: {
-    eyebrow: "A clear contract for every interface decision",
-    title: "Own the components. Define the system in DESIGN.md.",
+    eyebrow: "Clear guidance for every interface decision",
+    title: "Start with shadcn. Shape the product in DESIGN.md.",
     description:
-      "Choose the shadcn components your product needs, then apply one shared contract for brand, behavior, accessibility, and release checks.",
+      "Choose the shadcn components your product needs, then capture brand, behavior, accessibility, and release checks in DESIGN.md.",
     action: "Read DESIGN.md",
   },
   footer: {
     description:
-      "A practical DESIGN.md for customizing owned shadcn components into a clear, accessible, and product-specific interface system.",
+      "A practical DESIGN.md for shaping shadcn color, type, spacing, states, and motion around your product.",
     navigationLabel: "Footer navigation",
     groups: {
       system: "System",
@@ -200,7 +204,7 @@ const en = {
       terms: "Terms",
     },
     signatureLabel:
-      "Comfort Design System, customized with shadcn and documented in DESIGN.md",
+      "Comfort DESIGN.md for defining a product theme with shadcn components",
   },
 } satisfies HomeContent;
 
