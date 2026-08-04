@@ -100,9 +100,9 @@ const faqs = [
       "Nothing. Open DESIGN.md in the browser, then map only the roles your product needs.",
   },
   {
-    question: "Which language edition is authoritative?",
+    question: "How do the language editions stay aligned?",
     answer:
-      "Korean DESIGN.md is the default source of truth. English, Japanese, and Simplified Chinese editions preserve the same token structure and guidance.",
+      "Korean, English, Japanese, and Simplified Chinese editions use the same token names, section order, and verification checks, so teams can move between them without relearning the system.",
   },
 ];
 

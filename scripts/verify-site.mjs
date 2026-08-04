@@ -28,6 +28,52 @@ const siteData = await readFile(
   new URL("../src/data/site.ts", import.meta.url),
   "utf8",
 );
+const shellSource = await readFile(
+  new URL("../src/components/site-shell.tsx", import.meta.url),
+  "utf8",
+);
+const footerSignatureSource = await readFile(
+  new URL("../src/components/footer-signature.tsx", import.meta.url),
+  "utf8",
+);
+const cssSource = await readFile(
+  new URL("../src/index.css", import.meta.url),
+  "utf8",
+);
+
+for (const group of [
+  "System",
+  "Foundations",
+  "Components",
+  "Resources",
+  "Legal",
+]) {
+  assert(
+    shellSource.includes(`title: "${group}"`),
+    `Footer sitemap group is missing: ${group}`,
+  );
+}
+assert(
+  shellSource.includes('aria-label="Comfort Design System home"'),
+  "The footer must retain an accessible home link",
+);
+assert(
+  footerSignatureSource.includes('aria-hidden="true"'),
+  "The decorative footer signature must be hidden from assistive technology",
+);
+assert(
+  footerSignatureSource.includes("IntersectionObserver"),
+  "The footer signature must enter when it reaches the viewport",
+);
+const reducedMotionSource = cssSource.split(
+  "@media (prefers-reduced-motion: reduce)",
+)[1];
+assert(
+  reducedMotionSource?.includes(".footer-signature-text") &&
+    reducedMotionSource.includes("transform: translateY(0)") &&
+    reducedMotionSource.includes("opacity: 1"),
+  "Reduced motion must show the footer signature without animation travel",
+);
 const internalLinks = [...siteData.matchAll(/href:\s*"(\/[^"]+)"/g)].map(
   ([, href]) => href,
 );

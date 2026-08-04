@@ -7,6 +7,7 @@ import {
   PanelLeftIcon,
 } from "lucide-react";
 
+import { FooterSignature } from "@/components/footer-signature";
 import { Button } from "@/components/ui/button";
 import {
   Breadcrumb,
@@ -39,8 +40,12 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import {
+  componentCatalog,
+  componentFamilies,
+  foundationCatalog,
+} from "@/data/catalog";
+import {
   designEditions,
-  docsNavigation,
   primaryNav,
   siteHref,
   type NavItem,
@@ -78,6 +83,76 @@ function Brand({
     </a>
   );
 }
+
+const documentationGroups = [
+  {
+    title: "Overview",
+    items: [
+      { href: "/principles", title: "Principles" },
+      { href: "/foundations", title: "Foundations" },
+      { href: "/components", title: "Components" },
+    ],
+  },
+  {
+    title: "Foundations",
+    items: foundationCatalog.map(({ slug, title }) => ({
+      href: `/foundations/${slug}`,
+      title,
+    })),
+  },
+  ...componentFamilies.map((family) => ({
+    title: `Components / ${family.replace("-", " ")}`,
+    items: componentCatalog
+      .filter((component) => component.family === family)
+      .map(({ slug, title }) => ({
+        href: `/components/${slug}`,
+        title,
+      })),
+  })),
+];
+
+const footerGroups = [
+  {
+    title: "System",
+    links: [
+      { href: "/", title: "Overview" },
+      { href: "/principles", title: "Principles" },
+      { href: "/foundations", title: "Foundation catalog" },
+      { href: "/components", title: "Component catalog" },
+    ],
+  },
+  {
+    title: "Foundations",
+    links: foundationCatalog.map(({ slug, title }) => ({
+      href: `/foundations/${slug}`,
+      title,
+    })),
+  },
+  {
+    title: "Components",
+    links: componentCatalog.map(({ slug, title }) => ({
+      href: `/components/${slug}`,
+      title,
+    })),
+  },
+  {
+    title: "Resources",
+    links: [
+      ...designEditions.map(({ href, label }) => ({
+        href,
+        title: `DESIGN.md · ${label}`,
+      })),
+      { href: "https://github.com/chann/design", title: "GitHub source" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { href: "/privacy", title: "Privacy" },
+      { href: "/terms", title: "Terms" },
+    ],
+  },
+];
 
 function ThemeMenu() {
   const [theme, setTheme] = useState<Theme>(() => {
@@ -141,7 +216,7 @@ function LanguageMenu() {
         <Button
           variant="ghost"
           size="sm"
-          aria-label="DESIGN.md language editions. Korean is the default source of truth."
+          aria-label="DESIGN.md language editions"
           className="gap-2"
         >
           <span className="text-muted-foreground">DESIGN.md</span>
@@ -311,54 +386,59 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t">
-      <div className="mx-auto grid max-w-[96rem] gap-8 px-4 py-12 sm:px-6 md:grid-cols-[1fr_auto] lg:px-8">
-        <div className="flex max-w-md flex-col gap-3">
+    <footer className="site-footer overflow-hidden border-t">
+      <div className="mx-auto max-w-[96rem] px-4 pb-16 pt-12 sm:px-6 lg:px-8 lg:pt-16">
+        <div className="flex max-w-xl flex-col gap-3">
           <Brand />
           <p className="text-sm leading-6 text-muted-foreground">
             A practical DESIGN.md for comfortable, clear, and trustworthy
-            product interfaces, with Korean as the default source of truth.
+            product interfaces—from semantic foundations to complete component
+            states.
           </p>
         </div>
         <nav
           aria-label="Footer navigation"
-          className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm"
+          className="mt-12 grid gap-x-8 gap-y-10 text-sm sm:grid-cols-2 lg:grid-cols-12"
         >
-          {primaryNav.map((item) => (
-            <a
-              className="site-footer-link text-muted-foreground hover:text-foreground"
-              href={siteHref(item.href)}
-              key={item.href}
+          {footerGroups.map((group) => (
+            <section
+              className={cn(
+                group.title === "System" && "lg:col-span-2",
+                group.title === "Foundations" && "sm:col-span-2 lg:col-span-3",
+                group.title === "Components" && "sm:col-span-2 lg:col-span-4",
+                group.title === "Resources" && "lg:col-span-2",
+                group.title === "Legal" && "lg:col-span-1",
+              )}
+              key={group.title}
             >
-              {item.title}
-            </a>
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-foreground">
+                {group.title}
+              </h2>
+              <ul
+                className={cn(
+                  "flex flex-col gap-2.5",
+                  group.title === "Foundations" &&
+                    "sm:block sm:columns-2 sm:[&>li]:mb-2.5",
+                  group.title === "Components" &&
+                    "sm:block sm:columns-2 sm:[&>li]:mb-2.5 xl:columns-3",
+                )}
+              >
+                {group.links.map((link) => (
+                  <li className="break-inside-avoid" key={link.href}>
+                    <a
+                      className="site-footer-link text-muted-foreground hover:text-foreground"
+                      href={siteHref(link.href)}
+                    >
+                      {link.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
-          <a
-            className="site-footer-link text-muted-foreground hover:text-foreground"
-            href={siteHref("/DESIGN.md")}
-          >
-            DESIGN.md
-          </a>
-          <a
-            className="site-footer-link text-muted-foreground hover:text-foreground"
-            href="https://github.com/chann/design"
-          >
-            GitHub
-          </a>
-          <a
-            className="site-footer-link text-muted-foreground hover:text-foreground"
-            href={siteHref("/privacy")}
-          >
-            Privacy
-          </a>
-          <a
-            className="site-footer-link text-muted-foreground hover:text-foreground"
-            href={siteHref("/terms")}
-          >
-            Terms
-          </a>
         </nav>
       </div>
+      <FooterSignature />
     </footer>
   );
 }
@@ -374,7 +454,7 @@ function DocsNavigationList({
 }) {
   return (
     <div className="flex flex-col gap-7">
-      {docsNavigation.map((group) => (
+      {documentationGroups.map((group) => (
         <div className="flex flex-col gap-2" key={group.title}>
           <p className="px-2.5 text-xs font-medium text-foreground">
             {group.title}
