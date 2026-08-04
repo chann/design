@@ -75,7 +75,6 @@ assert(
 for (const group of [
   "System",
   "Foundations",
-  "Components",
   "Resources",
   "Legal",
 ]) {
@@ -84,6 +83,11 @@ for (const group of [
     `Footer sitemap group is missing: ${group}`,
   );
 }
+assert(
+  !shellSource.includes('kind: "components"') &&
+    !shellSource.includes("links: componentCatalog.map"),
+  "The footer must link to the component catalog without listing every component",
+);
 assert(
   shellSource.includes("aria-label={homeLabel}") &&
     englishHomeContent.includes(

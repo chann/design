@@ -148,14 +148,6 @@ function footerGroups(content: HomeContent) {
       })),
     },
     {
-      kind: "components",
-      title: content.shell.nav.components,
-      links: componentCatalog.map(({ slug, title }) => ({
-        href: `/components/${slug}`,
-        title,
-      })),
-    },
-    {
       kind: "resources",
       title: content.footer.groups.resources,
       links: [
@@ -499,13 +491,11 @@ export function SiteFooter({
           {groups.map((group) => (
             <section
               className={cn(
-                group.kind === "system" && "lg:col-span-2",
+                group.kind === "system" && "lg:col-span-3",
                 group.kind === "foundations" &&
-                  "sm:col-span-2 lg:col-span-3",
-                group.kind === "components" &&
                   "sm:col-span-2 lg:col-span-4",
-                group.kind === "resources" && "lg:col-span-2",
-                group.kind === "legal" && "lg:col-span-1",
+                group.kind === "resources" && "lg:col-span-3",
+                group.kind === "legal" && "lg:col-span-2",
               )}
               key={group.title}
             >
@@ -517,8 +507,6 @@ export function SiteFooter({
                   "flex flex-col gap-2.5",
                   group.kind === "foundations" &&
                     "sm:block sm:columns-2 sm:[&>li]:mb-2.5",
-                  group.kind === "components" &&
-                    "sm:block sm:columns-2 sm:[&>li]:mb-2.5 xl:columns-3",
                 )}
               >
                 {group.links.map((link) => (
