@@ -9,7 +9,11 @@ import { cn } from "@/lib/utils";
 
 const signatureText = "Comfort / DESIGN.md";
 
-export function FooterSignature() {
+export function FooterSignature({
+  accessibleLabel = "Comfort Design System, documented in DESIGN.md",
+}: {
+  accessibleLabel?: string;
+}) {
   const signatureRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -35,9 +39,7 @@ export function FooterSignature() {
       className={cn("footer-signature", visible && "is-visible")}
       ref={signatureRef}
     >
-      <span className="sr-only">
-        Comfort Design System, documented in DESIGN.md
-      </span>
+      <span className="sr-only">{accessibleLabel}</span>
       <span aria-hidden="true" className="footer-signature-text">
         {Array.from(signatureText).map((character, index) => (
           <span

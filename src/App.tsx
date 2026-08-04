@@ -14,6 +14,7 @@ import { HomePage } from "@/pages/home-page";
 import { LegalPage } from "@/pages/legal-page";
 import { PrinciplesPage } from "@/pages/principles-page";
 import { currentRoute, siteHref } from "@/data/site";
+import { homeContents } from "@/content/home";
 
 const SITE_ORIGIN = "https://chann.github.io";
 const HOME_TITLE = "Comfort Design System | Design clear interfaces";
@@ -186,7 +187,9 @@ export default function App() {
     return () => window.cancelAnimationFrame(frame);
   }, [route]);
 
-  if (route === "/") return <HomePage currentPath={route} />;
+  if (route === "/") {
+    return <HomePage currentPath={route} content={homeContents.en} />;
+  }
   if (route === "/principles") return <PrinciplesPage currentPath={route} />;
   if (route === "/foundations") return <FoundationsPage currentPath={route} />;
   if (route === "/components") return <ComponentsPage currentPath={route} />;

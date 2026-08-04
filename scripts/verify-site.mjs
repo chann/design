@@ -36,6 +36,14 @@ const footerSignatureSource = await readFile(
   new URL("../src/components/footer-signature.tsx", import.meta.url),
   "utf8",
 );
+const homePageSource = await readFile(
+  new URL("../src/pages/home-page.tsx", import.meta.url),
+  "utf8",
+);
+const englishHomeContent = await readFile(
+  new URL("../src/content/home/en.ts", import.meta.url),
+  "utf8",
+);
 const cssSource = await readFile(
   new URL("../src/index.css", import.meta.url),
   "utf8",
@@ -68,12 +76,15 @@ for (const group of [
   "Legal",
 ]) {
   assert(
-    shellSource.includes(`title: "${group}"`),
+    englishHomeContent.includes(`: "${group}"`),
     `Footer sitemap group is missing: ${group}`,
   );
 }
 assert(
-  shellSource.includes('aria-label="Comfort Design System home"'),
+  shellSource.includes("aria-label={homeLabel}") &&
+    englishHomeContent.includes(
+      'homeLabel: "Comfort Design System home"',
+    ),
   "The footer must retain an accessible home link",
 );
 assert(
@@ -83,6 +94,16 @@ assert(
 assert(
   footerSignatureSource.includes("IntersectionObserver"),
   "The footer signature must enter when it reaches the viewport",
+);
+assert(
+  !homePageSource.includes("Ship interfaces people trust") &&
+    !homePageSource.includes("What is DESIGN.md?"),
+  "Homepage prose must live outside the presentation component",
+);
+assert(
+  englishHomeContent.includes("shadcn/ui") &&
+    englishHomeContent.includes("DESIGN.md"),
+  "English homepage content must explain the shadcn and DESIGN.md model",
 );
 assert(
   footerSignatureSource.includes("--footer-signature-index") &&

@@ -39,6 +39,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import en from "@/content/home/en";
+import type { HomeContent } from "@/content/home";
 import {
   componentCatalog,
   componentFamilies,
@@ -64,9 +66,13 @@ function applyTheme(theme: Theme) {
 function Brand({
   className,
   current = false,
+  homeHref = "/",
+  homeLabel = "Comfort Design System home",
 }: {
   className?: string;
   current?: boolean;
+  homeHref?: string;
+  homeLabel?: string;
 }) {
   return (
     <a
@@ -74,8 +80,8 @@ function Brand({
         "flex shrink-0 items-center font-semibold tracking-[-0.02em]",
         className,
       )}
-      href={siteHref("/")}
-      aria-label="Comfort Design System home"
+      href={siteHref(homeHref)}
+      aria-label={homeLabel}
       aria-current={current ? "page" : undefined}
     >
       <span className="hidden sm:inline">Comfort Design System</span>
@@ -111,50 +117,75 @@ const documentationGroups = [
   })),
 ];
 
-const footerGroups = [
-  {
-    title: "System",
-    links: [
-      { href: "/", title: "Overview" },
-      { href: "/principles", title: "Principles" },
-      { href: "/foundations", title: "Foundation catalog" },
-      { href: "/components", title: "Component catalog" },
-    ],
-  },
-  {
-    title: "Foundations",
-    links: foundationCatalog.map(({ slug, title }) => ({
-      href: `/foundations/${slug}`,
-      title,
-    })),
-  },
-  {
-    title: "Components",
-    links: componentCatalog.map(({ slug, title }) => ({
-      href: `/components/${slug}`,
-      title,
-    })),
-  },
-  {
-    title: "Resources",
-    links: [
-      ...designEditions.map(({ href, label }) => ({
-        href,
-        title: `DESIGN.md · ${label}`,
+function footerGroups(content: HomeContent) {
+  return [
+    {
+      kind: "system",
+      title: content.footer.groups.system,
+      links: [
+        { href: content.path, title: content.footer.links.overview },
+        { href: "/principles", title: content.footer.links.principles },
+        {
+          href: "/foundations",
+          title: content.footer.links.foundationCatalog,
+        },
+        {
+          href: "/components",
+          title: content.footer.links.componentCatalog,
+        },
+      ],
+    },
+    {
+      kind: "foundations",
+      title: content.footer.groups.foundations,
+      links: foundationCatalog.map(({ slug, title }) => ({
+        href: `/foundations/${slug}`,
+        title,
       })),
-      { href: "https://github.com/chann/design", title: "GitHub source" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { href: "/privacy", title: "Privacy" },
-      { href: "/terms", title: "Terms" },
-    ],
-  },
-];
+    },
+    {
+      kind: "components",
+      title: content.shell.nav.components,
+      links: componentCatalog.map(({ slug, title }) => ({
+        href: `/components/${slug}`,
+        title,
+      })),
+    },
+    {
+      kind: "resources",
+      title: content.footer.groups.resources,
+      links: [
+        ...designEditions.map(({ href, label }) => ({
+          href,
+          title: `DESIGN.md · ${label}`,
+        })),
+        {
+          href: "https://github.com/chann/design",
+          title: content.footer.links.github,
+        },
+      ],
+    },
+    {
+      kind: "legal",
+      title: content.footer.groups.legal,
+      links: [
+        { href: "/privacy", title: content.footer.links.privacy },
+        { href: "/terms", title: content.footer.links.terms },
+      ],
+    },
+  ];
+}
 
-function ThemeMenu() {
+function primaryNavTitle(
+  href: string,
+  shell: HomeContent["shell"],
+) {
+  if (href === "/principles") return shell.nav.principles;
+  if (href === "/foundations") return shell.nav.foundations;
+  return shell.nav.components;
+}
+
+function ThemeMenu({ content = en }: { content?: HomeContent }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
       const saved = localStorage.getItem("comfort-theme");
@@ -179,30 +210,36 @@ function ThemeMenu() {
     return () => media.removeEventListener("change", sync);
   }, [theme]);
 
-  const labels = { light: "Light", dark: "Dark", system: "System" };
+  const labels = content.shell.themes;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           size="sm"
-          aria-label={`Theme: ${labels[theme]}`}
+          aria-label={`${content.shell.theme}: ${labels[theme]}`}
           className="gap-2"
         >
-          <span className="text-muted-foreground">Theme</span>
+          <span className="text-muted-foreground">{content.shell.theme}</span>
           <span>{labels[theme]}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        <DropdownMenuLabel>{content.shell.appearance}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
           value={theme}
           onValueChange={(value) => setTheme(value as Theme)}
         >
-          <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="light">
+            {labels.light}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">
+            {labels.dark}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">
+            {labels.system}
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -248,7 +285,13 @@ function LanguageMenu() {
   );
 }
 
-function MobileNavigation({ currentPath }: { currentPath: string }) {
+function MobileNavigation({
+  currentPath,
+  content = en,
+}: {
+  currentPath: string;
+  content?: HomeContent;
+}) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -261,7 +304,7 @@ function MobileNavigation({ currentPath }: { currentPath: string }) {
             <i />
             <i />
           </span>
-          <span className="sr-only">Open navigation</span>
+          <span className="sr-only">{content.shell.openNavigation}</span>
         </Button>
       </SheetTrigger>
       <SheetContent
@@ -270,10 +313,16 @@ function MobileNavigation({ currentPath }: { currentPath: string }) {
         className="mobile-menu-content inset-0 h-dvh w-full max-w-none border-0 p-0 shadow-none"
       >
         <SheetHeader className="flex-row items-center justify-between p-4">
-          <Brand current={currentPath === "/"} />
-          <SheetTitle className="sr-only">Comfort navigation</SheetTitle>
+          <Brand
+            current={currentPath === content.path}
+            homeHref={content.path}
+            homeLabel={content.shell.homeLabel}
+          />
+          <SheetTitle className="sr-only">
+            {content.shell.mobileNavigationTitle}
+          </SheetTitle>
           <SheetDescription className="sr-only">
-            Principles, foundations, and components.
+            {content.shell.mobileNavigationDescription}
           </SheetDescription>
           <SheetClose asChild>
             <Button
@@ -285,7 +334,7 @@ function MobileNavigation({ currentPath }: { currentPath: string }) {
                 <i />
                 <i />
               </span>
-              <span className="sr-only">Close navigation</span>
+              <span className="sr-only">{content.shell.closeNavigation}</span>
             </Button>
           </SheetClose>
         </SheetHeader>
@@ -303,14 +352,14 @@ function MobileNavigation({ currentPath }: { currentPath: string }) {
                   )}
                   href={siteHref(item.href)}
                 >
-                  {item.title}
+                  {primaryNavTitle(item.href, content.shell)}
                 </a>
               </SheetClose>
             ))}
           </nav>
           <div className="mobile-menu-utilities flex flex-col gap-6">
             <LanguageMenu />
-            <ThemeMenu />
+            <ThemeMenu content={content} />
             <div className="flex flex-wrap gap-6 text-sm">
               <a href={siteHref("/DESIGN.md")}>DESIGN.md</a>
               <a href="https://github.com/chann/design">GitHub</a>
@@ -322,18 +371,31 @@ function MobileNavigation({ currentPath }: { currentPath: string }) {
   );
 }
 
-export function SiteHeader({ currentPath }: { currentPath: string }) {
+export function SiteHeader({
+  currentPath,
+  homeContent,
+}: {
+  currentPath: string;
+  homeContent?: HomeContent;
+}) {
+  const content = homeContent ?? en;
+
   return (
     <>
       <a className="skip-link" href="#main-content">
-        Skip to content
+        {content.shell.skipToContent}
       </a>
       <header className="site-header pointer-events-none sticky top-0 z-40 h-24 pt-6">
         <div className="site-nav pointer-events-auto mx-auto flex w-[calc(100%-2rem)] items-center gap-2 rounded-full border bg-background/80 px-3 py-2 shadow-lg backdrop-blur-3xl md:w-max">
-          <Brand className="px-2" current={currentPath === "/"} />
+          <Brand
+            className="px-2"
+            current={currentPath === content.path}
+            homeHref={homeContent ? content.path : "/"}
+            homeLabel={content.shell.homeLabel}
+          />
           <nav
             className="ml-2 hidden items-center gap-1 md:flex"
-            aria-label="Primary navigation"
+            aria-label={content.shell.primaryNavigationLabel}
           >
             {primaryNav.map((item) => (
               <Button
@@ -350,7 +412,7 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
                   }
                   href={siteHref(item.href)}
                 >
-                  {item.title}
+                  {primaryNavTitle(item.href, content.shell)}
                 </a>
               </Button>
             ))}
@@ -374,9 +436,9 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
               <LanguageMenu />
             </div>
             <div className="hidden lg:block">
-              <ThemeMenu />
+              <ThemeMenu content={content} />
             </div>
-            <MobileNavigation currentPath={currentPath} />
+            <MobileNavigation currentPath={currentPath} content={content} />
           </div>
         </div>
       </header>
@@ -384,30 +446,40 @@ export function SiteHeader({ currentPath }: { currentPath: string }) {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({
+  homeContent,
+}: {
+  homeContent?: HomeContent;
+} = {}) {
+  const content = homeContent ?? en;
+  const groups = footerGroups(content);
+
   return (
     <footer className="site-footer overflow-hidden border-t">
       <div className="mx-auto max-w-[96rem] px-4 pb-16 pt-12 sm:px-6 lg:px-8 lg:pt-16">
         <div className="flex max-w-xl flex-col gap-3">
-          <Brand />
+          <Brand
+            homeHref={homeContent ? content.path : "/"}
+            homeLabel={content.shell.homeLabel}
+          />
           <p className="text-sm leading-6 text-muted-foreground">
-            A practical DESIGN.md for comfortable, clear, and trustworthy
-            product interfaces—from semantic foundations to complete component
-            states.
+            {content.footer.description}
           </p>
         </div>
         <nav
-          aria-label="Footer navigation"
+          aria-label={content.footer.navigationLabel}
           className="mt-12 grid gap-x-8 gap-y-10 text-sm sm:grid-cols-2 lg:grid-cols-12"
         >
-          {footerGroups.map((group) => (
+          {groups.map((group) => (
             <section
               className={cn(
-                group.title === "System" && "lg:col-span-2",
-                group.title === "Foundations" && "sm:col-span-2 lg:col-span-3",
-                group.title === "Components" && "sm:col-span-2 lg:col-span-4",
-                group.title === "Resources" && "lg:col-span-2",
-                group.title === "Legal" && "lg:col-span-1",
+                group.kind === "system" && "lg:col-span-2",
+                group.kind === "foundations" &&
+                  "sm:col-span-2 lg:col-span-3",
+                group.kind === "components" &&
+                  "sm:col-span-2 lg:col-span-4",
+                group.kind === "resources" && "lg:col-span-2",
+                group.kind === "legal" && "lg:col-span-1",
               )}
               key={group.title}
             >
@@ -417,9 +489,9 @@ export function SiteFooter() {
               <ul
                 className={cn(
                   "flex flex-col gap-2.5",
-                  group.title === "Foundations" &&
+                  group.kind === "foundations" &&
                     "sm:block sm:columns-2 sm:[&>li]:mb-2.5",
-                  group.title === "Components" &&
+                  group.kind === "components" &&
                     "sm:block sm:columns-2 sm:[&>li]:mb-2.5 xl:columns-3",
                 )}
               >
@@ -438,7 +510,7 @@ export function SiteFooter() {
           ))}
         </nav>
       </div>
-      <FooterSignature />
+      <FooterSignature accessibleLabel={content.footer.signatureLabel} />
     </footer>
   );
 }
