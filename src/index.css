@@ -358,6 +358,127 @@
   transform: translateY(0);
 }
 
+.foundation-card-art {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--primary);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.foundation-card-art i {
+  position: absolute;
+  right: -1rem;
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid currentColor;
+  border-radius: 1.5rem;
+  transition: transform 900ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.foundation-card-art i:nth-child(1) {
+  top: -2rem;
+}
+
+.foundation-card-art i:nth-child(2) {
+  top: 2.5rem;
+  right: 3rem;
+}
+
+.foundation-card-art i:nth-child(3) {
+  top: 7rem;
+  right: -1rem;
+}
+
+.group:hover .foundation-card-art i {
+  transform: translate3d(-0.35rem, 0.35rem, 0) rotate(-2deg);
+}
+
+.foundation-card-art-1 i {
+  border-radius: 999px;
+}
+
+.foundation-card-art-2 {
+  background-image: linear-gradient(
+    135deg,
+    transparent 35%,
+    currentColor 35%,
+    currentColor 36%,
+    transparent 36%
+  );
+  background-size: 1.5rem 1.5rem;
+}
+
+.foundation-card-art-3 i:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.foundation-card-art-4 i {
+  width: 11rem;
+  height: 3rem;
+  border-radius: 999px;
+}
+
+.foundation-data-gradient {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--primary) 6%, var(--background)),
+    color-mix(in oklch, var(--primary) 32%, var(--background)) 36%,
+    color-mix(in oklch, var(--primary) 72%, var(--background)) 72%,
+    var(--primary)
+  );
+  mask-image: linear-gradient(90deg, transparent, black 10%, black);
+}
+
+.foundation-motion-track {
+  position: relative;
+  height: 4rem;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--primary) 8%, var(--muted));
+}
+
+.foundation-motion-track::before,
+.foundation-motion-track::after {
+  position: absolute;
+  top: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: var(--primary);
+  content: "";
+  opacity: 0.35;
+}
+
+.foundation-motion-track::before {
+  left: 1.75rem;
+}
+
+.foundation-motion-track::after {
+  right: 1.75rem;
+}
+
+.foundation-motion-dot {
+  position: absolute;
+  top: 50%;
+  left: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 0 0.5rem color-mix(in oklch, var(--primary) 12%, transparent);
+  animation: foundation-motion 2.4s cubic-bezier(0.32, 0.72, 0, 1) infinite
+    alternate;
+}
+
+@keyframes foundation-motion {
+  to {
+    left: calc(100% - 2.75rem);
+  }
+}
+
 .eyebrow {
   color: var(--primary);
   font-size: 0.75rem;
@@ -1305,5 +1426,10 @@
   .footer-signature-text {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .foundation-motion-dot {
+    left: calc(100% - 2.75rem);
+    animation: none;
   }
 }

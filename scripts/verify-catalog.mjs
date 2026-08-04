@@ -9,6 +9,10 @@ function assert(condition, message) {
 }
 
 const catalog = await readCatalog();
+const foundationSpecimens = await readFile(
+  new URL("src/components/foundation-specimens.tsx", root),
+  "utf8",
+);
 const componentSlugs = catalog.components.map(({ slug }) => slug);
 const foundationSlugs = catalog.foundations.map(({ slug }) => slug);
 
@@ -17,6 +21,30 @@ assert(catalog.foundations.length === 15, "Expected 15 Foundations");
 assert(new Set(componentSlugs).size === 63, "Component slugs must be unique");
 assert(new Set(foundationSlugs).size === 15, "Foundation slugs must be unique");
 assert(catalogRoutes(catalog).length === 84, "Expected 84 static routes");
+
+for (const specimen of [
+  "design-token",
+  "color",
+  "typography",
+  "iconography",
+  "elevation",
+  "gradient",
+  "inclusive-design",
+  "international-design",
+  "layout",
+  "motion",
+  "radius",
+  "spacing",
+  "state",
+  "voice-and-tone",
+  "writing",
+]) {
+  assert(
+    foundationSpecimens.includes(`"${specimen}":`) ||
+      foundationSpecimens.includes(`  ${specimen}:`),
+    `Foundation specimen is missing: ${specimen}`,
+  );
+}
 
 for (const record of [...catalog.components, ...catalog.foundations]) {
   assert(record.title.trim().length > 0, `Missing title for ${record.slug}`);

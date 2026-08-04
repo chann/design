@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   AccessibilityIcon,
   ArrowRightIcon,
@@ -8,6 +9,7 @@ import {
   PaletteIcon,
 } from "lucide-react";
 
+import { CatalogSearch } from "@/components/catalog-search";
 import { DocsLayout } from "@/components/site-shell";
 import { Badge } from "@/components/ui/badge";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
@@ -19,6 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { foundationCatalog } from "@/data/catalog";
 import { foundationItems, siteHref } from "@/data/site";
 
 const icons = [
@@ -39,6 +42,10 @@ const bentoSpans = [
 ];
 
 export function FoundationsPage({ currentPath }: { currentPath: string }) {
+  const [query, setQuery] = useState("");
+  const [family, setFamily] = useState("all");
+  const [results, setResults] = useState(foundationCatalog);
+
   return (
     <DocsLayout
       currentPath={currentPath}
@@ -48,6 +55,7 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
       description="Foundations translate Comfort’s principles into a reusable visual and behavioral language. Start with semantic roles, then compose with restraint."
       outline={[
         { id: "catalog", title: "Foundation catalog" },
+        { id: "directory", title: "Complete directory" },
         { id: "layers", title: "System layers" },
       ]}
       previous={{
@@ -57,65 +65,111 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
       }}
       next={foundationItems[0]}
     >
-      <section className="scroll-mt-24" id="catalog">
-        <BentoGrid>
-          {foundationItems.map((item, index) => {
-            const Icon = icons[index % icons.length];
-            return (
-              <a
-                className={cn(
-                  "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                  bentoSpans[index % bentoSpans.length],
-                )}
-                href={siteHref(item.href)}
-                key={item.href}
-              >
-                <BentoCard
+      <section className="scroll-mt-24 flex flex-col gap-5" id="catalog">
+        <CatalogSearch
+          family={family}
+          items={foundationCatalog}
+          onFamilyChange={setFamily}
+          onResultsChange={setResults}
+          onValueChange={setQuery}
+          value={query}
+        />
+        {results.length > 0 ? (
+          <BentoGrid>
+            {results.map((record) => {
+              const index = foundationCatalog.findIndex(
+                (foundation) => foundation.slug === record.slug,
+              );
+              const item = foundationItems[index];
+              const Icon = icons[index % icons.length];
+              return (
+                <a
                   className={cn(
-                    index === 0 &&
-                      "min-h-80 bg-primary/10 group-hover:bg-primary/15 md:min-h-0",
+                    "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    bentoSpans[index % bentoSpans.length],
                   )}
+                  href={siteHref(item.href)}
+                  key={item.href}
                 >
-                  <Icon
-                    aria-hidden="true"
+                  <BentoCard
                     className={cn(
-                      "absolute -right-4 -top-4 size-32 text-primary opacity-[0.07] transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-rotate-3 group-hover:scale-105",
-                      index === 0 && "size-48 opacity-10",
+                      index === 0 &&
+                        "min-h-80 bg-primary/10 group-hover:bg-primary/15 md:min-h-0",
                     )}
-                    strokeWidth={1}
-                  />
-                  <div className="relative z-10 flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
-                      <Icon aria-hidden="true" className="size-5" />
-                    </span>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      0{index + 1}
-                    </span>
-                  </div>
-                  <div className="relative z-10 mt-auto flex max-w-lg flex-col gap-2 pt-6">
-                    <h2 className="text-xl font-semibold">{item.title}</h2>
-                    <p
-                      className={cn(
-                        "text-pretty text-sm leading-6 text-muted-foreground",
-                        index === 0 && "text-foreground/80",
-                      )}
+                  >
+                    <div
+                      aria-hidden="true"
+                      className={`foundation-card-art foundation-card-art-${index % 5}`}
                     >
-                      {item.description}
-                    </p>
-                  </div>
-                  {index === 0 ? (
-                    <footer className="relative z-10 mt-6 flex items-center justify-between">
-                      <span className="text-xs font-medium text-foreground/80">
-                        Reference + guidance
+                      <i />
+                      <i />
+                      <i />
+                    </div>
+                    <div className="relative z-10 flex items-center justify-between">
+                      <span className="flex size-11 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
+                        <Icon aria-hidden="true" className="size-5" />
                       </span>
-                      <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
-                    </footer>
-                  ) : null}
-                </BentoCard>
-              </a>
-            );
-          })}
-        </BentoGrid>
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <div className="relative z-10 mt-auto flex max-w-lg flex-col gap-2 pt-6">
+                      <h2 className="text-xl font-semibold">{item.title}</h2>
+                      <p
+                        className={cn(
+                          "text-pretty text-sm leading-6 text-muted-foreground",
+                          index === 0 && "text-foreground/80",
+                        )}
+                      >
+                        {item.description}
+                      </p>
+                    </div>
+                    {index === 0 ? (
+                      <footer className="relative z-10 mt-6 flex items-center justify-between">
+                        <span className="text-xs font-medium text-foreground/80">
+                          Reference + guidance
+                        </span>
+                        <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
+                      </footer>
+                    ) : null}
+                  </BentoCard>
+                </a>
+              );
+            })}
+          </BentoGrid>
+        ) : (
+          <div className="grid min-h-56 place-items-center rounded-2xl border border-dashed bg-muted/25 p-8 text-center">
+            <div>
+              <h2 className="font-semibold">No Foundations found</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Try a broader name or purpose.
+              </p>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <section className="scroll-mt-24 flex flex-col gap-5" id="directory">
+        <div className="flex flex-col gap-2">
+          <p className="eyebrow">All 15 Foundations</p>
+          <h2 className="text-2xl font-semibold tracking-[-0.03em]">
+            Complete directory
+          </h2>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {foundationItems.map((item, index) => (
+            <a
+              className="group flex items-center justify-between rounded-xl border bg-card px-4 py-3 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              href={siteHref(item.href)}
+              key={item.href}
+            >
+              <span>{item.title}</span>
+              <span className="font-mono text-xs text-muted-foreground">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </a>
+          ))}
+        </div>
       </section>
 
       <section className="scroll-mt-24" id="layers">
