@@ -22,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getFoundation, type FoundationRecord } from "@/data/catalog";
 import { foundationItems } from "@/data/site";
 
 type FoundationKey =
@@ -31,6 +32,19 @@ type FoundationKey =
   | "layout"
   | "motion"
   | "accessibility";
+
+const legacyFoundationKeys = new Set<string>([
+  "design-tokens",
+  "color",
+  "typography",
+  "layout",
+  "motion",
+  "accessibility",
+]);
+
+function isFoundationKey(slug: string): slug is FoundationKey {
+  return legacyFoundationKeys.has(slug);
+}
 
 const details: Record<
   FoundationKey,
@@ -237,16 +251,55 @@ function FoundationSpecimen({ type }: { type: FoundationKey }) {
   );
 }
 
+function FoundationContractSpecimen({
+  foundation,
+}: {
+  foundation: FoundationRecord;
+}) {
+  return (
+    <div className="grid min-h-72 gap-3 rounded-2xl border bg-muted/25 p-5 sm:grid-cols-3 sm:p-8">
+      {foundation.values.slice(0, 6).map(([role, use, value], index) => (
+        <div
+          className="flex min-h-28 flex-col justify-between rounded-xl border bg-card p-4"
+          key={role}
+        >
+          <span className="font-mono text-xs text-primary">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <div>
+            <strong className="block text-sm">{role}</strong>
+            <span className="block text-xs leading-5 text-muted-foreground">
+              {use} · {value}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function FoundationDetailPage({
   currentPath,
   slug,
 }: {
   currentPath: string;
-  slug: FoundationKey;
+  slug: string;
 }) {
-  const detail = details[slug];
+  const record = getFoundation(slug);
+  if (!record) return null;
+
+  const hasSpecializedSpecimen = isFoundationKey(slug);
+  const detail = hasSpecializedSpecimen
+    ? details[slug]
+    : {
+        title: record.title,
+        description: record.description,
+        why: record.intent,
+        rules: record.rules,
+        roles: record.values,
+      };
   const index = foundationItems.findIndex((item) => item.href.endsWith(slug));
-  const Icon = icons[slug];
+  const Icon = hasSpecializedSpecimen ? icons[slug] : CircleDotDashedIcon;
   const previous =
     index === 0
       ? {
@@ -278,7 +331,11 @@ export function FoundationDetailPage({
       next={next}
     >
       <section className="scroll-mt-24" id="overview">
-        <FoundationSpecimen type={slug} />
+        {hasSpecializedSpecimen ? (
+          <FoundationSpecimen type={slug} />
+        ) : (
+          <FoundationContractSpecimen foundation={record} />
+        )}
       </section>
       <section
         className="scroll-mt-24 grid gap-5 md:grid-cols-[auto_1fr]"

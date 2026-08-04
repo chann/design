@@ -1,0 +1,22 @@
+import { readFile } from "node:fs/promises";
+
+const catalogUrl = new URL("../src/data/catalog.json", import.meta.url);
+
+export async function readCatalog() {
+  return JSON.parse(await readFile(catalogUrl, "utf8"));
+}
+
+export function catalogRoutes(catalog) {
+  return [
+    "/",
+    "/principles",
+    "/foundations",
+    ...catalog.foundations.map(
+      (foundation) => `/foundations/${foundation.slug}`,
+    ),
+    "/components",
+    ...catalog.components.map((component) => `/components/${component.slug}`),
+    "/privacy",
+    "/terms",
+  ];
+}

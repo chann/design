@@ -24,6 +24,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { componentCatalog, foundationCatalog } from "@/data/catalog";
 import { componentItems, siteHref } from "@/data/site";
 
 const icons = [
@@ -39,20 +40,6 @@ const icons = [
   ToggleLeftIcon,
   LayoutListIcon,
   RectangleHorizontalIcon,
-];
-const categories = [
-  "Action",
-  "Layout",
-  "Overlay",
-  "Form",
-  "Navigation",
-  "Feedback",
-  "Metadata",
-  "Form",
-  "Form",
-  "Form",
-  "Data",
-  "Feedback",
 ];
 const bentoSpans = [
   "md:col-span-4 md:row-span-2",
@@ -82,21 +69,26 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
         { id: "contract", title: "Composition contract" },
       ]}
       previous={{
-        href: "/foundations/accessibility",
-        title: "Accessibility",
-        description: "Accessibility foundation",
+        href: `/foundations/${foundationCatalog.at(-1)?.slug}`,
+        title: foundationCatalog.at(-1)?.title ?? "Foundations",
+        description:
+          foundationCatalog.at(-1)?.description ?? "Foundation catalog",
       }}
       next={componentItems[0]}
     >
       <section className="scroll-mt-24" id="catalog">
         <BentoGrid>
           {componentItems.map((item, index) => {
-            const Icon = icons[index];
+            const Icon = icons[index % icons.length];
+            const category = componentCatalog[index].family
+              .split("-")
+              .map((word) => word[0].toUpperCase() + word.slice(1))
+              .join(" ");
             return (
               <a
                 className={cn(
                   "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                  bentoSpans[index],
+                  bentoSpans[index % bentoSpans.length],
                 )}
                 href={siteHref(item.href)}
                 key={item.href}
@@ -121,7 +113,7 @@ export function ComponentsPage({ currentPath }: { currentPath: string }) {
                     <span className="flex size-10 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
                       <Icon aria-hidden="true" className="size-5" />
                     </span>
-                    <Badge variant="outline">{categories[index]}</Badge>
+                    <Badge variant="outline">{category}</Badge>
                   </div>
                   <div className="relative z-10 mt-auto flex max-w-lg flex-col gap-2 pt-6">
                     <h2 className="text-xl font-semibold">{item.title}</h2>

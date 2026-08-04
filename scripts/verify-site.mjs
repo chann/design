@@ -1,10 +1,11 @@
 import { access, readFile } from "node:fs/promises";
 
+import { catalogRoutes, readCatalog } from "./catalog-contract.mjs";
+
 const root = new URL("../", import.meta.url);
 const dist = new URL("../dist/", import.meta.url);
-const routes = JSON.parse(
-  await readFile(new URL("../routes.json", import.meta.url), "utf8"),
-);
+const catalog = await readCatalog();
+const routes = catalogRoutes(catalog);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -21,6 +22,7 @@ assert(
 );
 assert(routes.includes("/privacy"), "The privacy route must be published");
 assert(routes.includes("/terms"), "The terms route must be published");
+assert(routes.length === 84, "The complete catalog must publish 84 routes");
 
 const siteData = await readFile(
   new URL("../src/data/site.ts", import.meta.url),
@@ -29,12 +31,35 @@ const siteData = await readFile(
 const internalLinks = [...siteData.matchAll(/href:\s*"(\/[^"]+)"/g)].map(
   ([, href]) => href,
 );
-const { siteHref } = await import("../src/data/site.ts");
+function siteHref(path, basePath) {
+  if (/^(https?:|#)/.test(path)) return path;
+  const suffixIndex = path.search(/[?#]/);
+  const pathname = suffixIndex === -1 ? path : path.slice(0, suffixIndex);
+  const suffix = suffixIndex === -1 ? "" : path.slice(suffixIndex);
+  const base = basePath.replace(/\/$/, "");
+  if (/\.[a-z]+$/i.test(pathname)) return `${base}${pathname}${suffix}`;
+  const route = pathname === "/" ? `${base}/` : `${base}${pathname}/`;
+  return `${route}${suffix}`;
+}
 
 for (const href of internalLinks.filter((href) => !href.endsWith(".md"))) {
   assert(
     routes.includes(href),
     `Navigation target is missing from routes.json: ${href}`,
+  );
+}
+
+for (const foundation of catalog.foundations) {
+  assert(
+    routes.includes(`/foundations/${foundation.slug}`),
+    `Foundation route is missing: ${foundation.slug}`,
+  );
+}
+
+for (const component of catalog.components) {
+  assert(
+    routes.includes(`/components/${component.slug}`),
+    `Component route is missing: ${component.slug}`,
   );
 }
 

@@ -12,8 +12,8 @@ import { designEditions, siteHref } from "@/data/site";
 
 const proofPoints = [
   { value: "4", label: "language editions" },
-  { value: "6", label: "semantic foundations" },
-  { value: "12", label: "component references" },
+  { value: "15", label: "semantic Foundations" },
+  { value: "63", label: "component references" },
 ];
 
 const benefits: Array<{

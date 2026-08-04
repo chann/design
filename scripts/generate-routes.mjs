@@ -1,11 +1,11 @@
-import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
+
+import { catalogRoutes, readCatalog } from "./catalog-contract.mjs";
 
 const root = new URL("../", import.meta.url);
 const dist = new URL("../dist/", import.meta.url);
-const routes = JSON.parse(
-  await readFile(new URL("../routes.json", import.meta.url), "utf8"),
-);
+const routes = catalogRoutes(await readCatalog());
 
 for (const route of routes) {
   if (route === "/") continue;

@@ -8,8 +8,9 @@
     "build": "tsc -b && vite build && node scripts/generate-routes.mjs && node scripts/verify-site.mjs",
     "check": "tsc -b",
     "lint": "eslint .",
+    "verify:catalog": "node scripts/verify-catalog.mjs",
     "verify:site": "node scripts/verify-site.mjs",
-    "validate": "npm run lint && npm run check && npm run build",
+    "validate": "npm run verify:catalog && npm run lint && npm run check && npm run build",
     "preview": "vite preview"
   },
   "engines": {

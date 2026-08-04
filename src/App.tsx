@@ -1,7 +1,12 @@
 import { lazy, Suspense, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
-import type { ComponentKey } from "@/pages/component-detail-page";
+import {
+  componentCatalog,
+  foundationCatalog,
+  getComponent,
+  getFoundation,
+} from "@/data/catalog";
 import { ComponentsPage } from "@/pages/components-page";
 import { FoundationDetailPage } from "@/pages/foundation-detail-page";
 import { FoundationsPage } from "@/pages/foundations-page";
@@ -13,7 +18,7 @@ import { currentRoute, siteHref } from "@/data/site";
 const SITE_ORIGIN = "https://chann.github.io";
 const HOME_TITLE = "Comfort Design System | Design clear interfaces";
 const HOME_DESCRIPTION =
-  "Comfort gives product teams and coding agents one DESIGN.md for semantic foundations, complete states, and 12 production ready component references, with Korean as the default source of truth.";
+  "Comfort gives product teams and coding agents one DESIGN.md for 15 semantic Foundations, complete states, and 63 production-ready component references.";
 
 type RouteMetadata = {
   title: string;
@@ -75,13 +80,16 @@ function routeMetadata(route: string): RouteMetadata {
     };
   }
 
+  const record = getFoundation(slug) ?? getComponent(slug);
   const section = route.split("/").filter(Boolean).at(-1);
-  const label = section
-    ? section
-        .split("-")
-        .map((word) => word[0].toUpperCase() + word.slice(1))
-        .join(" ")
-    : "Reference";
+  const label =
+    record?.title ??
+    (section
+      ? section
+          .split("-")
+          .map((word) => word[0].toUpperCase() + word.slice(1))
+          .join(" ")
+      : "Reference");
   return {
     title: `${label} | Comfort Design System`,
     description: `Read the Comfort guidance for ${label.toLowerCase()}, including behavior, states, accessibility, and implementation checks.`,
@@ -90,28 +98,12 @@ function routeMetadata(route: string): RouteMetadata {
   };
 }
 
-const foundationSlugs = new Set([
-  "design-tokens",
-  "color",
-  "typography",
-  "layout",
-  "motion",
-  "accessibility",
-]);
-const componentSlugs = new Set([
-  "button",
-  "card",
-  "dialog",
-  "input",
-  "tabs",
-  "alert",
-  "badge",
-  "checkbox",
-  "select",
-  "switch",
-  "table",
-  "skeleton",
-]);
+const foundationSlugs = new Set(
+  foundationCatalog.map((foundation) => foundation.slug),
+);
+const componentSlugs = new Set(
+  componentCatalog.map((component) => component.slug),
+);
 
 const ComponentDetailPage = lazy(() =>
   import("@/pages/component-detail-page").then((module) => ({
@@ -207,25 +199,12 @@ export default function App() {
 
   const [, section, slug] = route.split("/");
   if (section === "foundations" && foundationSlugs.has(slug)) {
-    return (
-      <FoundationDetailPage
-        currentPath={route}
-        slug={
-          slug as
-            | "design-tokens"
-            | "color"
-            | "typography"
-            | "layout"
-            | "motion"
-            | "accessibility"
-        }
-      />
-    );
+    return <FoundationDetailPage currentPath={route} slug={slug} />;
   }
   if (section === "components" && componentSlugs.has(slug)) {
     return (
       <Suspense fallback={<RouteSkeleton />}>
-        <ComponentDetailPage currentPath={route} slug={slug as ComponentKey} />
+        <ComponentDetailPage currentPath={route} slug={slug} />
       </Suspense>
     );
   }

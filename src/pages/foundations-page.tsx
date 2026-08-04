@@ -60,12 +60,12 @@ export function FoundationsPage({ currentPath }: { currentPath: string }) {
       <section className="scroll-mt-24" id="catalog">
         <BentoGrid>
           {foundationItems.map((item, index) => {
-            const Icon = icons[index];
+            const Icon = icons[index % icons.length];
             return (
               <a
                 className={cn(
                   "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                  bentoSpans[index],
+                  bentoSpans[index % bentoSpans.length],
                 )}
                 href={siteHref(item.href)}
                 key={item.href}

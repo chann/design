@@ -9,6 +9,7 @@ import {
   SaveIcon,
 } from "lucide-react";
 
+import { CatalogContractSpecimen } from "@/components/specimens/catalog-contract-specimen";
 import { CheckList, DocsLayout } from "@/components/site-shell";
 import { SyntaxCode, type SyntaxLanguage } from "@/components/syntax-code";
 import {
@@ -67,6 +68,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getComponent } from "@/data/catalog";
 import { componentItems } from "@/data/site";
 
 type ComponentKey =
@@ -82,6 +84,25 @@ type ComponentKey =
   | "switch"
   | "table"
   | "skeleton";
+
+const legacyComponentKeys = new Set<string>([
+  "button",
+  "card",
+  "dialog",
+  "input",
+  "tabs",
+  "alert",
+  "badge",
+  "checkbox",
+  "select",
+  "switch",
+  "table",
+  "skeleton",
+]);
+
+function isComponentKey(slug: string): slug is ComponentKey {
+  return legacyComponentKeys.has(slug);
+}
 
 type ComponentDetail = {
   title: string;
@@ -1077,7 +1098,7 @@ function ComponentPreview({ type }: { type: ComponentKey }) {
   );
 }
 
-function Installation({ type }: { type: ComponentKey }) {
+function Installation({ type }: { type: string }) {
   const command = `npx shadcn@latest add ${type}`;
 
   return (
@@ -1148,9 +1169,38 @@ export function ComponentDetailPage({
   slug,
 }: {
   currentPath: string;
-  slug: ComponentKey;
+  slug: string;
 }) {
-  const detail = details[slug];
+  const record = getComponent(slug);
+  if (!record) return null;
+
+  const hasInteractiveSpecimen = isComponentKey(slug);
+  const detail: ComponentDetail = hasInteractiveSpecimen
+    ? details[slug]
+    : {
+        title: record.title,
+        category: record.family
+          .split("-")
+          .map((word) => word[0].toUpperCase() + word.slice(1))
+          .join(" "),
+        description: record.description,
+        usage: record.usage,
+        anatomy: record.anatomy,
+        doItems: record.accessibility,
+        avoidItems: [
+          "Do not publish an interaction before its keyboard and focus behavior is verified.",
+          "Do not replace semantic structure with a purely visual imitation.",
+          "Do not omit loading, empty, error, or disabled states that apply to the task.",
+        ],
+        properties: [
+          ["state", record.states.join(" | "), "default"],
+          ["className", "semantic styling extension", "—"],
+          ["children", "composed content", "contextual"],
+        ],
+      };
+  const snippet = hasInteractiveSpecimen
+    ? snippets[slug]
+    : `import { ${record.title.replace(/\s+/g, "")} } from "@/components/ui/${record.module}"\n\n// Compose the verified local source with Comfort semantic tokens.`;
   const index = componentItems.findIndex((item) => item.href.endsWith(slug));
   const previous =
     index === 0
@@ -1181,7 +1231,15 @@ export function ComponentDetailPage({
       next={next}
     >
       <section className="scroll-mt-24" id="preview">
-        <ComponentPreview type={slug} />
+        {hasInteractiveSpecimen ? (
+          <ComponentPreview type={slug} />
+        ) : (
+          <CatalogContractSpecimen
+            anatomy={record.anatomy}
+            states={record.states}
+            title={record.title}
+          />
+        )}
       </section>
       <section className="scroll-mt-24 flex flex-col gap-5" id="installation">
         <div className="flex flex-col gap-2">
@@ -1200,7 +1258,7 @@ export function ComponentDetailPage({
           <h2 className="text-2xl font-semibold tracking-[-0.03em]">Usage</h2>
           <p className="leading-7 text-muted-foreground">{detail.usage}</p>
         </div>
-        <CodeBlock label={`${detail.title} usage`} value={snippets[slug]} />
+        <CodeBlock label={`${detail.title} usage`} value={snippet} />
       </section>
       <section className="scroll-mt-24 flex flex-col gap-5" id="anatomy">
         <h2 className="text-2xl font-semibold tracking-[-0.03em]">Anatomy</h2>
@@ -1280,5 +1338,3 @@ export function ComponentDetailPage({
     </DocsLayout>
   );
 }
-
-export type { ComponentKey };
