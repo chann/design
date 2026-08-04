@@ -242,7 +242,6 @@ export function HeroLetterGlitch() {
       <div aria-hidden="true" className="hero-letter-content">
         <div className="hero-letter-meta">
           <span>Comfort / system 01</span>
-          <span className="hero-letter-status">Living spec</span>
         </div>
         <div className="hero-letter-lockup">
           <span>Shared interface language</span>
