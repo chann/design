@@ -326,34 +326,43 @@
 
 .footer-signature {
   display: flex;
-  height: clamp(4.25rem, 9.5vw, 9rem);
+  height: clamp(3rem, 9.5vw, 9rem);
   align-items: flex-end;
+  justify-content: center;
   overflow: hidden;
   padding-inline: clamp(1rem, 3vw, 2rem);
   color: var(--primary);
+  text-align: center;
 }
 
 .footer-signature-text {
   position: relative;
   bottom: -0.12em;
-  display: block;
+  display: inline-flex;
+  justify-content: center;
   width: max-content;
   max-width: none;
   flex: none;
-  font-size: clamp(4.5rem, 13vw, 12rem);
+  font-size: clamp(1.75rem, 9.8vw, 9.5rem);
   font-weight: 680;
   letter-spacing: -0.085em;
   line-height: 0.72;
-  opacity: 0;
-  transform: translateY(0.38em);
-  transform-origin: bottom left;
+  text-align: center;
   white-space: nowrap;
-  transition:
-    opacity 900ms cubic-bezier(0.32, 0.72, 0, 1),
-    transform 1200ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.footer-signature.is-visible .footer-signature-text {
+.footer-signature-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.42em);
+  transform-origin: bottom center;
+  transition:
+    opacity 900ms cubic-bezier(0.32, 0.72, 0, 1),
+    transform 900ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition-delay: calc(var(--footer-signature-index) * 34ms);
+}
+
+.footer-signature.is-visible .footer-signature-letter {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1491,9 +1500,10 @@
     transition-delay: 0ms !important;
   }
 
-  .footer-signature-text {
+  .footer-signature-letter {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    transition-delay: 0ms;
   }
 
   .foundation-motion-dot {

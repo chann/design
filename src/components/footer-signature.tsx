@@ -1,6 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { cn } from "@/lib/utils";
+
+const signatureText = "Comfort / DESIGN.md";
 
 export function FooterSignature() {
   const signatureRef = useRef<HTMLDivElement>(null);
@@ -32,7 +39,17 @@ export function FooterSignature() {
         Comfort Design System, documented in DESIGN.md
       </span>
       <span aria-hidden="true" className="footer-signature-text">
-        Comfort / DESIGN.md
+        {Array.from(signatureText).map((character, index) => (
+          <span
+            className="footer-signature-letter"
+            key={`${character}-${index}`}
+            style={
+              { "--footer-signature-index": index } as CSSProperties
+            }
+          >
+            {character === " " ? "\u00a0" : character}
+          </span>
+        ))}
       </span>
     </div>
   );

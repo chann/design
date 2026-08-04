@@ -84,12 +84,22 @@ assert(
   footerSignatureSource.includes("IntersectionObserver"),
   "The footer signature must enter when it reaches the viewport",
 );
+assert(
+  footerSignatureSource.includes("--footer-signature-index") &&
+    footerSignatureSource.includes("footer-signature-letter"),
+  "The footer signature must reveal its letters in sequence",
+);
+assert(
+  /\.footer-signature\s*\{[^}]*justify-content:\s*center/s.test(cssSource) &&
+    /\.footer-signature-text\s*\{[^}]*text-align:\s*center/s.test(cssSource),
+  "The footer signature must remain centered",
+);
 const reducedMotionSource = cssSource.split(
   "@media (prefers-reduced-motion: reduce)",
 )[1];
 assert(
-  reducedMotionSource?.includes(".footer-signature-text") &&
-    reducedMotionSource.includes("transform: translateY(0)") &&
+  reducedMotionSource?.includes(".footer-signature-letter") &&
+    reducedMotionSource.includes("transform: none") &&
     reducedMotionSource.includes("opacity: 1"),
   "Reduced motion must show the footer signature without animation travel",
 );
