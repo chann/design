@@ -9,6 +9,9 @@ export async function readCatalog() {
 export function catalogRoutes(catalog) {
   return [
     "/",
+    "/en",
+    "/jp",
+    "/cn",
     "/principles",
     "/foundations",
     ...catalog.foundations.map(

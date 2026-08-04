@@ -1,15 +1,26 @@
+import cn from "./cn";
 import en from "./en";
-import type { HomeLocale } from "./types";
+import jp from "./jp";
+import ko from "./ko";
+import type { HomeContent, HomeLocale } from "./types";
 
 export { homeLocales, type HomeContent, type HomeLocale } from "./types";
 
-export const homeContents = { en } as const;
+export const homeContents = {
+  ko,
+  en,
+  jp,
+  cn,
+} as const satisfies Record<HomeLocale, HomeContent>;
+
+const localeByRoute = new Map<string, HomeLocale>(
+  Object.values(homeContents).map((content) => [content.path, content.locale]),
+);
 
 export function homeLocaleFromRoute(route: string): HomeLocale | null {
-  if (route === "/") return "en";
-  return null;
+  return localeByRoute.get(route) ?? null;
 }
 
 export function homePathForLocale(locale: HomeLocale) {
-  return locale === "ko" ? "/" : `/${locale}`;
+  return homeContents[locale].path;
 }

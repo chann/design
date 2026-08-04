@@ -7,7 +7,11 @@ import {
 } from "@/components/phosphor-icon";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
-import type { HomeContent } from "@/content/home";
+import {
+  homeContents,
+  homePathForLocale,
+  type HomeContent,
+} from "@/content/home";
 import { cn } from "@/lib/utils";
 import { designEditions, siteHref } from "@/data/site";
 
@@ -169,11 +173,14 @@ export function HomePage({
               >
                 {designEditions.map((edition) => (
                   <a
+                    aria-current={
+                      edition.code === content.locale ? "page" : undefined
+                    }
                     className="landing-text-link text-muted-foreground"
-                    href={siteHref(edition.href)}
-                    hrefLang={edition.languageTag}
+                    href={siteHref(homePathForLocale(edition.code))}
+                    hrefLang={homeContents[edition.code].languageTag}
                     key={edition.code}
-                    lang={edition.languageTag}
+                    lang={homeContents[edition.code].languageTag}
                   >
                     {edition.label}
                   </a>

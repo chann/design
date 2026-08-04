@@ -40,7 +40,11 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import en from "@/content/home/en";
-import type { HomeContent } from "@/content/home";
+import {
+  homeContents,
+  homePathForLocale,
+  type HomeContent,
+} from "@/content/home";
 import {
   componentCatalog,
   componentFamilies,
@@ -246,27 +250,43 @@ function ThemeMenu({ content = en }: { content?: HomeContent }) {
   );
 }
 
-function LanguageMenu() {
+function LanguageMenu({ homeContent }: { homeContent?: HomeContent }) {
+  const items = designEditions.map((edition) => ({
+    ...edition,
+    href: homeContent ? homePathForLocale(edition.code) : edition.href,
+    languageTag: homeContents[edition.code].languageTag,
+  }));
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           size="sm"
-          aria-label="DESIGN.md language editions"
+          aria-label={
+            homeContent?.shell.languageMenuLabel ??
+            "DESIGN.md language editions"
+          }
           className="gap-2"
         >
-          <span className="text-muted-foreground">DESIGN.md</span>
-          <span>KO</span>
+          <span className="text-muted-foreground">
+            {homeContent?.shell.language ?? "DESIGN.md"}
+          </span>
+          <span>{homeContent?.locale.toUpperCase() ?? "KO"}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-52">
-        <DropdownMenuLabel>Language editions</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {homeContent?.shell.languageMenuLabel ?? "Language editions"}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {designEditions.map((edition) => (
+          {items.map((edition) => (
             <DropdownMenuItem asChild key={edition.code}>
               <a
+                aria-current={
+                  homeContent?.locale === edition.code ? "page" : undefined
+                }
                 className="justify-between gap-4"
                 href={siteHref(edition.href)}
                 hrefLang={edition.languageTag}
@@ -274,7 +294,7 @@ function LanguageMenu() {
               >
                 <span>{edition.label}</span>
                 <span className="text-xs text-muted-foreground">
-                  {edition.note}
+                  {homeContent ? edition.code.toUpperCase() : edition.note}
                 </span>
               </a>
             </DropdownMenuItem>
@@ -288,9 +308,11 @@ function LanguageMenu() {
 function MobileNavigation({
   currentPath,
   content = en,
+  homeContent,
 }: {
   currentPath: string;
   content?: HomeContent;
+  homeContent?: HomeContent;
 }) {
   return (
     <Sheet>
@@ -314,8 +336,8 @@ function MobileNavigation({
       >
         <SheetHeader className="flex-row items-center justify-between p-4">
           <Brand
-            current={currentPath === content.path}
-            homeHref={content.path}
+            current={Boolean(homeContent) && currentPath === content.path}
+            homeHref={homeContent ? content.path : "/"}
             homeLabel={content.shell.homeLabel}
           />
           <SheetTitle className="sr-only">
@@ -358,7 +380,7 @@ function MobileNavigation({
             ))}
           </nav>
           <div className="mobile-menu-utilities flex flex-col gap-6">
-            <LanguageMenu />
+            <LanguageMenu homeContent={homeContent} />
             <ThemeMenu content={content} />
             <div className="flex flex-wrap gap-6 text-sm">
               <a href={siteHref("/DESIGN.md")}>DESIGN.md</a>
@@ -433,12 +455,16 @@ export function SiteHeader({
               </a>
             </Button>
             <div className="hidden md:block">
-              <LanguageMenu />
+              <LanguageMenu homeContent={homeContent} />
             </div>
             <div className="hidden lg:block">
               <ThemeMenu content={content} />
             </div>
-            <MobileNavigation currentPath={currentPath} content={content} />
+            <MobileNavigation
+              currentPath={currentPath}
+              content={content}
+              homeContent={homeContent}
+            />
           </div>
         </div>
       </header>

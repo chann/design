@@ -32,7 +32,7 @@ assert(catalog.components.length === 63, "Expected 63 components");
 assert(catalog.foundations.length === 15, "Expected 15 Foundations");
 assert(new Set(componentSlugs).size === 63, "Component slugs must be unique");
 assert(new Set(foundationSlugs).size === 15, "Foundation slugs must be unique");
-assert(catalogRoutes(catalog).length === 84, "Expected 84 static routes");
+assert(catalogRoutes(catalog).length === 87, "Expected 87 static routes");
 
 for (const component of catalog.components) {
   await access(new URL(`src/components/ui/${component.module}`, root));
@@ -163,4 +163,4 @@ const css = await readFile(new URL("src/index.css", root), "utf8");
 assert(css.includes("#0066cc"), "Light primary must remain #0066CC");
 assert(css.includes("#78b7ff"), "Dark primary must remain #78B7FF");
 
-console.log("Verified 63 components, 15 Foundations, and 84 routes.");
+console.log("Verified 63 components, 15 Foundations, and 87 routes.");

@@ -14,18 +14,26 @@ import { HomePage } from "@/pages/home-page";
 import { LegalPage } from "@/pages/legal-page";
 import { PrinciplesPage } from "@/pages/principles-page";
 import { currentRoute, siteHref } from "@/data/site";
-import { homeContents } from "@/content/home";
+import {
+  homeContents,
+  homeLocaleFromRoute,
+  homeLocales,
+} from "@/content/home";
 
 const SITE_ORIGIN = "https://chann.github.io";
-const HOME_TITLE = "Comfort Design System | Design clear interfaces";
-const HOME_DESCRIPTION =
-  "Comfort gives product teams and coding agents one DESIGN.md for 15 semantic Foundations, complete states, and 63 production-ready component references.";
+
+type LocaleAlternate = {
+  hrefLang: string;
+  route: string;
+};
 
 type RouteMetadata = {
   title: string;
   description: string;
   canonicalRoute: string;
   robots: "index,follow" | "noindex,follow";
+  languageTag: string;
+  alternates?: readonly LocaleAlternate[];
 };
 
 function upsertMeta(selector: string, attribute: string, value: string) {
@@ -34,12 +42,21 @@ function upsertMeta(selector: string, attribute: string, value: string) {
 }
 
 function routeMetadata(route: string): RouteMetadata {
-  if (route === "/") {
+  const homeLocale = homeLocaleFromRoute(route);
+  if (homeLocale) {
+    const content = homeContents[homeLocale];
     return {
-      title: HOME_TITLE,
-      description: HOME_DESCRIPTION,
-      canonicalRoute: route,
+      ...content.metadata,
+      canonicalRoute: content.path,
       robots: "index,follow",
+      languageTag: content.languageTag,
+      alternates: [
+        ...homeLocales.map((locale) => ({
+          hrefLang: homeContents[locale].languageTag,
+          route: homeContents[locale].path,
+        })),
+        { hrefLang: "x-default", route: homeContents.ko.path },
+      ],
     };
   }
 
@@ -50,6 +67,7 @@ function routeMetadata(route: string): RouteMetadata {
         "How the static Comfort reference handles theme preferences, hosting requests, and external links.",
       canonicalRoute: route,
       robots: "index,follow",
+      languageTag: "en",
     };
   }
 
@@ -60,6 +78,7 @@ function routeMetadata(route: string): RouteMetadata {
         "Terms for using Comfort DESIGN.md, reference examples, source, and third party assets.",
       canonicalRoute: route,
       robots: "index,follow",
+      languageTag: "en",
     };
   }
 
@@ -78,6 +97,7 @@ function routeMetadata(route: string): RouteMetadata {
         "Return to the Comfort Design System overview to find a current principle, foundation, or component reference.",
       canonicalRoute: "/",
       robots: "noindex,follow",
+      languageTag: "en",
     };
   }
 
@@ -96,7 +116,23 @@ function routeMetadata(route: string): RouteMetadata {
     description: `Read the Comfort guidance for ${label.toLowerCase()}, including behavior, states, accessibility, and implementation checks.`,
     canonicalRoute: route,
     robots: "index,follow",
+    languageTag: "en",
   };
+}
+
+function syncAlternates(alternates: readonly LocaleAlternate[] = []) {
+  document
+    .querySelectorAll('link[data-home-alternate="true"]')
+    .forEach((element) => element.remove());
+
+  for (const alternate of alternates) {
+    const link = document.createElement("link");
+    link.rel = "alternate";
+    link.hreflang = alternate.hrefLang;
+    link.href = new URL(siteHref(alternate.route, "/design/"), SITE_ORIGIN).href;
+    link.dataset.homeAlternate = "true";
+    document.head.append(link);
+  }
 }
 
 const foundationSlugs = new Set(
@@ -158,6 +194,7 @@ export default function App() {
       SITE_ORIGIN,
     ).href;
 
+    document.documentElement.lang = metadata.languageTag;
     document.title = metadata.title;
     upsertMeta('meta[name="description"]', "content", metadata.description);
     upsertMeta('meta[name="robots"]', "content", metadata.robots);
@@ -177,6 +214,7 @@ export default function App() {
     document
       .querySelector<HTMLLinkElement>('link[rel="canonical"]')
       ?.setAttribute("href", canonicalUrl);
+    syncAlternates(metadata.alternates);
 
     const hash = decodeURIComponent(window.location.hash.slice(1));
     if (!hash) return;
@@ -187,8 +225,9 @@ export default function App() {
     return () => window.cancelAnimationFrame(frame);
   }, [route]);
 
-  if (route === "/") {
-    return <HomePage currentPath={route} content={homeContents.en} />;
+  const homeLocale = homeLocaleFromRoute(route);
+  if (homeLocale) {
+    return <HomePage currentPath={route} content={homeContents[homeLocale]} />;
   }
   if (route === "/principles") return <PrinciplesPage currentPath={route} />;
   if (route === "/foundations") return <FoundationsPage currentPath={route} />;

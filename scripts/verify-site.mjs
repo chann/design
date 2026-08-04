@@ -22,7 +22,10 @@ assert(
 );
 assert(routes.includes("/privacy"), "The privacy route must be published");
 assert(routes.includes("/terms"), "The terms route must be published");
-assert(routes.length === 84, "The complete catalog must publish 84 routes");
+for (const route of ["/", "/en", "/jp", "/cn"]) {
+  assert(routes.includes(route), `Localized homepage route missing: ${route}`);
+}
+assert(routes.length === 87, "The complete site must publish 87 routes");
 
 const siteData = await readFile(
   new URL("../src/data/site.ts", import.meta.url),
@@ -58,9 +61,10 @@ const readmeSource = await readFile(
 );
 
 assert(
-  indexTemplate.includes("15 semantic Foundations") &&
-    indexTemplate.includes("63 production-ready component references"),
-  "Static metadata must describe the complete 15/63 catalog",
+  indexTemplate.includes('lang="ko"') &&
+    indexTemplate.includes("shadcn/ui") &&
+    indexTemplate.includes("DESIGN.md"),
+  "Static metadata must use the Korean shadcn and DESIGN.md positioning",
 );
 assert(
   !indexTemplate.includes("default source of truth") &&
@@ -123,6 +127,10 @@ assert(
     reducedMotionSource.includes("transform: none") &&
     reducedMotionSource.includes("opacity: 1"),
   "Reduced motion must show the footer signature without animation travel",
+);
+assert(
+  /body\s*\{[^}]*overflow-wrap:\s*anywhere/s.test(cssSource),
+  "Keep-all text must retain an emergency wrap for long localized strings",
 );
 const internalLinks = [...siteData.matchAll(/href:\s*"(\/[^"]+)"/g)].map(
   ([, href]) => href,
@@ -197,6 +205,42 @@ for (const route of routes) {
   await access(new URL(builtPage, dist));
 }
 
+const localizedHomes = [
+  ["index.html", 'lang="ko"', "/design/"],
+  ["en/index.html", 'lang="en"', "/design/en/"],
+  ["jp/index.html", 'lang="ja"', "/design/jp/"],
+  ["cn/index.html", 'lang="zh-CN"', "/design/cn/"],
+];
+
+for (const [file, lang, canonicalPath] of localizedHomes) {
+  const html = await readFile(new URL(file, dist), "utf8");
+  assert(html.includes(lang), `${file} has the wrong language`);
+  assert(
+    html.includes(`href="https://chann.github.io${canonicalPath}"`),
+    `${file} has the wrong canonical`,
+  );
+  assert(
+    html.includes('hreflang="x-default"'),
+    `${file} must publish homepage alternates`,
+  );
+}
+
+const builtDocumentation = await readFile(
+  new URL("principles/index.html", dist),
+  "utf8",
+);
+assert(
+  builtDocumentation.includes('lang="en"') &&
+    builtDocumentation.includes(
+      'href="https://chann.github.io/design/principles/"',
+    ),
+  "English documentation routes must retain their own static language and canonical",
+);
+assert(
+  !builtDocumentation.includes('data-home-alternate="true"'),
+  "Documentation routes must not inherit homepage language alternates",
+);
+
 for (const file of [
   ".nojekyll",
   "404.html",
@@ -246,7 +290,9 @@ assert(
   "Production assets must retain the GitHub Pages base path",
 );
 assert(
-  builtHtml.includes('rel="canonical" href="https://chann.github.io/design/"'),
+  /<link(?=[^>]*rel="canonical")(?=[^>]*href="https:\/\/chann\.github\.io\/design\/")[^>]*>/s.test(
+    builtHtml,
+  ),
   "The production home page must have a canonical URL",
 );
 assert(
