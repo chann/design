@@ -49,6 +49,9 @@ export type FoundationRecord = {
   specimen: string;
 };
 
+export type ComponentSlug = (typeof manifest.components)[number]["slug"];
+export type FoundationSlug = (typeof manifest.foundations)[number]["slug"];
+
 export const componentFamilies: ComponentFamily[] = [
   "actions",
   "forms",

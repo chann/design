@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import { Highlight, Prism } from "prism-react-renderer";
 
 import { cn } from "@/lib/utils";
@@ -41,14 +42,34 @@ export function SyntaxCode({
   language,
   showLineNumbers,
   value,
+  focusable = true,
 }: {
   className?: string;
+  focusable?: boolean | "auto";
   label: string;
   language: SyntaxLanguage;
   showLineNumbers?: boolean;
   value: string;
 }) {
   const shouldShowLineNumbers = showLineNumbers ?? language === "tsx";
+  const codeRef = useRef<HTMLPreElement>(null);
+  const [overflows, setOverflows] = useState(false);
+
+  useLayoutEffect(() => {
+    const code = codeRef.current;
+    if (!code || focusable !== "auto") return;
+    const measure = () =>
+      setOverflows(
+        code.scrollHeight > code.clientHeight ||
+          code.scrollWidth > code.clientWidth,
+      );
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(code);
+    return () => observer.disconnect();
+  }, [focusable, value]);
+
+  const isRegion = focusable === "auto" ? overflows : focusable;
 
   return (
     <Highlight code={value.trimEnd()} language={language}>
@@ -59,12 +80,17 @@ export function SyntaxCode({
         tokens,
       }) => (
         <pre
-          aria-label={`${label} ${language === "bash" ? "shell" : language.toUpperCase()} code`}
+          aria-label={
+            isRegion
+              ? `${label} ${language === "bash" ? "shell" : language.toUpperCase()} code`
+              : undefined
+          }
           className={cn("syntax-code", languageClassName, className)}
           data-language={language}
           data-line-numbers={shouldShowLineNumbers ? "true" : "false"}
-          role="region"
-          tabIndex={0}
+          ref={codeRef}
+          role={isRegion ? "region" : undefined}
+          tabIndex={isRegion ? 0 : undefined}
         >
           <code>
             {tokens.map((line, lineIndex) => {

@@ -1,46 +1,64 @@
+import * as React from "react";
 import {
-  BellRingIcon,
-  CheckSquareIcon,
-  ChevronsUpDownIcon,
-  CircleAlertIcon,
-  CreditCardIcon,
-  LayoutListIcon,
+  BlocksIcon,
+  BotMessageSquareIcon,
+  ChartNoAxesCombinedIcon,
+  FormInputIcon,
+  LayoutGridIcon,
+  MenuIcon,
   MousePointerClickIcon,
-  PanelTopIcon,
-  RectangleHorizontalIcon,
-  Rows3Icon,
-  TextCursorInputIcon,
-  ToggleLeftIcon,
+  PanelsTopLeftIcon,
+  SearchXIcon,
 } from "lucide-react";
 
+import { CatalogSearch } from "@/components/catalog-search";
 import { DocsLayout } from "@/components/site-shell";
 import { Badge } from "@/components/ui/badge";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
+import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { componentCatalog, foundationCatalog } from "@/data/catalog";
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import {
+  componentCatalog,
+  componentFamilies,
+  foundationCatalog,
+  type ComponentFamily,
+} from "@/data/catalog";
 import { componentItems, siteHref } from "@/data/site";
+import { cn } from "@/lib/utils";
 
-const icons = [
-  MousePointerClickIcon,
-  CreditCardIcon,
-  PanelTopIcon,
-  TextCursorInputIcon,
-  Rows3Icon,
-  CircleAlertIcon,
-  BellRingIcon,
-  CheckSquareIcon,
-  ChevronsUpDownIcon,
-  ToggleLeftIcon,
-  LayoutListIcon,
-  RectangleHorizontalIcon,
+const familyIcons: Record<ComponentFamily, typeof BlocksIcon> = {
+  actions: MousePointerClickIcon,
+  forms: FormInputIcon,
+  navigation: MenuIcon,
+  overlays: PanelsTopLeftIcon,
+  "data-display": ChartNoAxesCombinedIcon,
+  feedback: BlocksIcon,
+  layout: LayoutGridIcon,
+  conversation: BotMessageSquareIcon,
+};
+
+const featuredSlugs = [
+  "button",
+  "calendar",
+  "navigation-menu",
+  "dialog",
+  "chart",
+  "toast",
+  "resizable",
+  "message-scroller",
+  "data-table",
+  "input-otp",
+  "carousel",
+  "sidebar",
 ];
+
 const bentoSpans = [
   "md:col-span-4 md:row-span-2",
   "md:col-span-2",
@@ -48,125 +66,197 @@ const bentoSpans = [
   "md:col-span-3",
   "md:col-span-3",
   "md:col-span-2",
-  "md:col-span-2",
-  "md:col-span-2",
-  "md:col-span-2",
-  "md:col-span-2",
-  "md:col-span-4",
-  "md:col-span-2",
 ];
 
+function familyLabel(family: string) {
+  return family
+    .split("-")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function ComponentsPage({ currentPath }: { currentPath: string }) {
+  const [query, setQuery] = React.useState("");
+  const [family, setFamily] = React.useState("all");
+  const [results, setResults] = React.useState(componentCatalog);
+  const hasFilters = query.trim().length > 0 || family !== "all";
+  const displayed = hasFilters
+    ? results
+    : featuredSlugs.flatMap((slug) =>
+        componentCatalog.filter((component) => component.slug === slug),
+      );
+
+  function resetFilters() {
+    setQuery("");
+    setFamily("all");
+  }
+
+  const lastFoundation = foundationCatalog.at(-1);
+
   return (
     <DocsLayout
       currentPath={currentPath}
       section="components"
       eyebrow="Components"
       title="Predictable parts for product work"
-      description="Comfort components are composed from shadcn primitives, themed with semantic tokens, and documented as interaction contracts rather than screenshots."
+      description="Comfort documents every current shadcn component as an interaction contract: real behavior, complete states, accessible structure, and implementation guidance in one coherent system."
       outline={[
-        { id: "catalog", title: "Component catalog" },
-        { id: "contract", title: "Composition contract" },
+        { id: "catalog", title: "Find a component" },
+        { id: "featured", title: "Component specimens" },
+        { id: "directory", title: "Complete family list" },
       ]}
-      previous={{
-        href: `/foundations/${foundationCatalog.at(-1)?.slug}`,
-        title: foundationCatalog.at(-1)?.title ?? "Foundations",
-        description:
-          foundationCatalog.at(-1)?.description ?? "Foundation catalog",
-      }}
+      previous={
+        lastFoundation
+          ? {
+              href: `/foundations/${lastFoundation.slug}`,
+              title: lastFoundation.title,
+              description: lastFoundation.description,
+            }
+          : undefined
+      }
       next={componentItems[0]}
     >
-      <section className="scroll-mt-24" id="catalog">
-        <BentoGrid>
-          {componentItems.map((item, index) => {
-            const Icon = icons[index % icons.length];
-            const category = componentCatalog[index].family
-              .split("-")
-              .map((word) => word[0].toUpperCase() + word.slice(1))
-              .join(" ");
-            return (
-              <a
-                className={cn(
-                  "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                  bentoSpans[index % bentoSpans.length],
-                )}
-                href={siteHref(item.href)}
-                key={item.href}
-              >
-                <BentoCard
-                  className={cn(
-                    index === 0 &&
-                      "min-h-80 bg-primary/10 group-hover:bg-primary/15 md:min-h-0",
-                    index === 10 && "bg-card shadow-sm",
-                  )}
-                >
-                  <Icon
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute -right-4 -top-4 size-32 text-primary opacity-[0.07] transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-rotate-3 group-hover:scale-105",
-                      index === 0 && "size-48 opacity-10",
-                      index === 10 && "right-6 top-6 size-36",
-                    )}
-                    strokeWidth={1}
-                  />
-                  <div className="relative z-10 flex items-center justify-between">
-                    <span className="flex size-10 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
-                      <Icon aria-hidden="true" className="size-5" />
-                    </span>
-                    <Badge variant="outline">{category}</Badge>
-                  </div>
-                  <div className="relative z-10 mt-auto flex max-w-lg flex-col gap-2 pt-6">
-                    <h2 className="text-xl font-semibold">{item.title}</h2>
-                    <p
-                      className={cn(
-                        "text-pretty text-sm leading-6 text-muted-foreground",
-                        index === 0 && "text-foreground/80",
-                      )}
-                    >
-                      {item.description}
-                    </p>
-                  </div>
-                  {index === 0 ? (
-                    <footer className="relative z-10 mt-6 flex items-center justify-between">
-                      <span className="text-xs font-medium text-foreground/80">
-                        Interactive reference
-                      </span>
-                      <span aria-hidden="true">↗</span>
-                    </footer>
-                  ) : null}
-                </BentoCard>
-              </a>
-            );
-          })}
-        </BentoGrid>
+      <section className="scroll-mt-24 flex flex-col gap-5" id="catalog">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Complete coverage</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
+              63 components across 8 families
+            </h2>
+          </div>
+          <Badge variant="outline">shadcn · radix-nova</Badge>
+        </div>
+        <CatalogSearch
+          family={family}
+          items={componentCatalog}
+          onFamilyChange={setFamily}
+          onResultsChange={setResults}
+          onValueChange={setQuery}
+          value={query}
+        />
       </section>
 
-      <section className="scroll-mt-24" id="contract">
-        <Card className="overflow-hidden bg-muted/35">
-          <CardHeader>
-            <CardTitle className="text-2xl">Composition contract</CardTitle>
-            <CardDescription>
-              Every Comfort component keeps three layers visible.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-3 md:grid-cols-3">
-            {[
-              ["Primitive", "Radix behavior and accessible interaction"],
-              ["Component", "shadcn composition and variant API"],
-              ["Comfort", "Semantic tokens, guidance, and product voice"],
-            ].map(([title, description], index) => (
-              <div className="rounded-xl border bg-background p-5" key={title}>
-                <span className="font-mono text-xs text-primary">
-                  0{index + 1}
-                </span>
-                <h3 className="mt-8 font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {description}
-                </p>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+      <section className="scroll-mt-24 flex flex-col gap-5" id="featured">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <p className="eyebrow">
+              {hasFilters ? "Filtered results" : "Representative specimens"}
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
+              {hasFilters
+                ? `${results.length} matching components`
+                : "Start from a real behavior"}
+            </h2>
+          </div>
+        </div>
+        {displayed.length > 0 ? (
+          <BentoGrid>
+            {displayed.map((record, index) => {
+              const Icon = familyIcons[record.family];
+              return (
+                <a
+                  className={cn(
+                    "group rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    bentoSpans[index % bentoSpans.length],
+                  )}
+                  href={siteHref(`/components/${record.slug}`)}
+                  key={record.slug}
+                >
+                  <BentoCard
+                    className={cn(
+                      index === 0 &&
+                        "min-h-80 bg-primary/10 group-hover:bg-primary/15 md:min-h-0",
+                    )}
+                  >
+                    <div
+                      aria-hidden="true"
+                      className={`component-card-art component-card-art-${index % 4}`}
+                    >
+                      <i />
+                      <i />
+                    </div>
+                    <div className="relative z-10 flex items-center justify-between">
+                      <span className="grid size-10 place-items-center rounded-xl bg-background text-primary shadow-sm">
+                        <Icon className="size-5" />
+                      </span>
+                      <Badge variant="outline">
+                        {familyLabel(record.family)}
+                      </Badge>
+                    </div>
+                    <div className="relative z-10 mt-auto max-w-lg pt-8">
+                      <h3 className="text-xl font-semibold">{record.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-foreground">
+                        {record.description}
+                      </p>
+                    </div>
+                  </BentoCard>
+                </a>
+              );
+            })}
+          </BentoGrid>
+        ) : (
+          <Empty className="min-h-64 border border-dashed">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <SearchXIcon />
+              </EmptyMedia>
+              <EmptyTitle>No components match “{query}”</EmptyTitle>
+              <EmptyDescription>
+                Search a broader purpose or clear the active family filter.
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button onClick={resetFilters} size="sm" variant="outline">
+                Reset filters
+              </Button>
+            </EmptyContent>
+          </Empty>
+        )}
+      </section>
+
+      <section className="scroll-mt-24 flex flex-col gap-6" id="directory">
+        <div>
+          <p className="eyebrow">Always available</p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">
+            Complete family list
+          </h2>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2">
+          {componentFamilies.map((componentFamily) => {
+            const Icon = familyIcons[componentFamily];
+            const components = componentCatalog.filter(
+              (component) => component.family === componentFamily,
+            );
+            return (
+              <section
+                className="rounded-2xl border bg-card p-5"
+                key={componentFamily}
+              >
+                <div className="mb-4 flex items-center justify-between gap-4">
+                  <h3 className="flex items-center gap-2 font-semibold">
+                    <Icon className="size-4 text-primary" />
+                    {familyLabel(componentFamily)}
+                  </h3>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {components.length}
+                  </span>
+                </div>
+                <ul className="grid gap-1 sm:grid-cols-2">
+                  {components.map((component) => (
+                    <li key={component.slug}>
+                      <a
+                        className="block rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        href={siteHref(`/components/${component.slug}`)}
+                      >
+                        {component.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
+        </div>
       </section>
     </DocsLayout>
   );

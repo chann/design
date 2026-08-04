@@ -1179,6 +1179,74 @@
   align-self: center;
 }
 
+.specimen-stage {
+  display: flex;
+  min-height: 22rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--card);
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+.specimen-stage.flex-col {
+  flex-direction: column;
+}
+
+.specimen-stage.items-stretch {
+  align-items: stretch;
+}
+
+.specimen-stage.items-start {
+  align-items: flex-start;
+}
+
+.specimen-stage-flush {
+  padding: 0;
+}
+
+.component-card-art {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--primary);
+  opacity: 0.11;
+  pointer-events: none;
+}
+
+.component-card-art i {
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid currentColor;
+  border-radius: 2rem;
+  transition: transform 900ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.component-card-art i:nth-child(2) {
+  top: 5rem;
+  right: 4rem;
+}
+
+.component-card-art-1 i {
+  border-radius: 999px;
+}
+
+.component-card-art-2 {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+}
+
+.component-card-art-3 i:first-child {
+  transform: rotate(45deg);
+}
+
+.group:hover .component-card-art i {
+  transform: translate3d(-0.35rem, 0.35rem, 0) rotate(-2deg);
+}
+
 .component-preview .specimen-panel {
   border: 0;
   border-radius: 0;

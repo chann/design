@@ -13,6 +13,18 @@ const foundationSpecimens = await readFile(
   new URL("src/components/foundation-specimens.tsx", root),
   "utf8",
 );
+const componentSpecimenSources = await Promise.all(
+  [
+    "action-feedback-specimens.tsx",
+    "form-specimens.tsx",
+    "navigation-overlay-specimens.tsx",
+    "data-layout-specimens.tsx",
+    "conversation-specimens.tsx",
+  ].map((file) =>
+    readFile(new URL(`src/components/specimens/${file}`, root), "utf8"),
+  ),
+);
+const componentSpecimens = componentSpecimenSources.join("\n");
 const componentSlugs = catalog.components.map(({ slug }) => slug);
 const foundationSlugs = catalog.foundations.map(({ slug }) => slug);
 
@@ -24,6 +36,11 @@ assert(catalogRoutes(catalog).length === 84, "Expected 84 static routes");
 
 for (const component of catalog.components) {
   await access(new URL(`src/components/ui/${component.module}`, root));
+  assert(
+    componentSpecimens.includes(`"${component.specimen}":`) ||
+      componentSpecimens.includes(`  ${component.specimen}:`),
+    `Component specimen is missing: ${component.specimen}`,
+  );
 }
 
 for (const specimen of [

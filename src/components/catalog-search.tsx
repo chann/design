@@ -97,7 +97,11 @@ export function CatalogSearch<T extends CatalogSearchItem>({
           ) : null}
         </div>
         {families.length > 0 ? (
-          <div aria-label="Filter by family" className="flex flex-wrap gap-2">
+          <div
+            aria-label="Filter by family"
+            className="flex flex-wrap gap-2"
+            role="group"
+          >
             {["all", ...families].map((option) => (
               <button
                 aria-pressed={family === option}
