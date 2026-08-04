@@ -191,8 +191,8 @@ const jp = {
     links: {
       overview: "概要",
       principles: "原則",
-      foundationCatalog: "ファウンデーション一覧",
-      componentCatalog: "コンポーネント一覧",
+      foundationCatalog: "ファウンデーションを見る",
+      componentCatalog: "コンポーネントを見る",
       github: "GitHubソース",
       privacy: "プライバシー",
       terms: "利用規約",

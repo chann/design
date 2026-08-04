@@ -197,8 +197,8 @@ const en = {
     links: {
       overview: "Overview",
       principles: "Principles",
-      foundationCatalog: "Foundation catalog",
-      componentCatalog: "Component catalog",
+      foundationCatalog: "Explore foundations",
+      componentCatalog: "Explore components",
       github: "GitHub source",
       privacy: "Privacy",
       terms: "Terms",

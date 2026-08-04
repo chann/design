@@ -172,8 +172,8 @@ const cn = {
     links: {
       overview: "概览",
       principles: "原则",
-      foundationCatalog: "基础目录",
-      componentCatalog: "组件目录",
+      foundationCatalog: "查看基础",
+      componentCatalog: "查看组件",
       github: "GitHub源码",
       privacy: "隐私",
       terms: "条款",

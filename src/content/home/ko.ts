@@ -194,8 +194,8 @@ const ko = {
     links: {
       overview: "개요",
       principles: "원칙",
-      foundationCatalog: "파운데이션 카탈로그",
-      componentCatalog: "컴포넌트 카탈로그",
+      foundationCatalog: "파운데이션 살펴보기",
+      componentCatalog: "컴포넌트 살펴보기",
       github: "GitHub 소스",
       privacy: "개인정보 처리방침",
       terms: "이용약관",
