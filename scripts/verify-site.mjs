@@ -40,6 +40,25 @@ const cssSource = await readFile(
   new URL("../src/index.css", import.meta.url),
   "utf8",
 );
+const indexTemplate = await readFile(
+  new URL("../index.html", import.meta.url),
+  "utf8",
+);
+const readmeSource = await readFile(
+  new URL("../README.md", import.meta.url),
+  "utf8",
+);
+
+assert(
+  indexTemplate.includes("15 semantic Foundations") &&
+    indexTemplate.includes("63 production-ready component references"),
+  "Static metadata must describe the complete 15/63 catalog",
+);
+assert(
+  !indexTemplate.includes("default source of truth") &&
+    !readmeSource.includes("SSOT"),
+  "Public metadata and documentation must avoid internal source-of-truth jargon",
+);
 
 for (const group of [
   "System",
