@@ -22,39 +22,7 @@ assert(new Set(componentSlugs).size === 63, "Component slugs must be unique");
 assert(new Set(foundationSlugs).size === 15, "Foundation slugs must be unique");
 assert(catalogRoutes(catalog).length === 84, "Expected 84 static routes");
 
-const coreModuleSlugs = new Set([
-  "alert-dialog",
-  "aspect-ratio",
-  "avatar",
-  "button-group",
-  "calendar",
-  "collapsible",
-  "combobox",
-  "command",
-  "data-table",
-  "date-picker",
-  "empty",
-  "input-group",
-  "input-otp",
-  "item",
-  "kbd",
-  "native-select",
-  "pagination",
-  "popover",
-  "progress",
-  "radio-group",
-  "slider",
-  "spinner",
-  "textarea",
-  "toast",
-  "toggle",
-  "toggle-group",
-  "typography",
-]);
-
-for (const component of catalog.components.filter(({ slug }) =>
-  coreModuleSlugs.has(slug),
-)) {
+for (const component of catalog.components) {
   await access(new URL(`src/components/ui/${component.module}`, root));
 }
 
