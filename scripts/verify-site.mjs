@@ -39,6 +39,10 @@ const footerSignatureSource = await readFile(
   new URL("../src/components/footer-signature.tsx", import.meta.url),
   "utf8",
 );
+const dropdownMenuSource = await readFile(
+  new URL("../src/components/ui/dropdown-menu.tsx", import.meta.url),
+  "utf8",
+);
 const homePageSource = await readFile(
   new URL("../src/pages/home-page.tsx", import.meta.url),
   "utf8",
@@ -87,6 +91,12 @@ assert(
   !shellSource.includes('kind: "components"') &&
     !shellSource.includes("links: componentCatalog.map"),
   "The footer must link to the component catalog without listing every component",
+);
+assert(
+  dropdownMenuSource.includes("duration-150") &&
+    dropdownMenuSource.includes("data-closed:duration-100") &&
+    !dropdownMenuSource.includes("duration-700"),
+  "Header dropdowns must use short open and close transitions",
 );
 assert(
   shellSource.includes("aria-label={homeLabel}") &&
