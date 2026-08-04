@@ -1,13 +1,6 @@
-import {
-  ArrowUpRightIcon,
-  CompassIcon,
-  EyeIcon,
-  RouteIcon,
-  SproutIcon,
-} from "lucide-react";
+import { CompassIcon, EyeIcon, RouteIcon, SproutIcon } from "lucide-react";
 
 import { CheckList, DocsLayout } from "@/components/site-shell";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -117,23 +110,6 @@ export function PrinciplesPage({
           ))}
         </div>
       </section>
-
-      <Alert>
-        <CompassIcon />
-        <AlertTitle>{content.referenceTitle}</AlertTitle>
-        <AlertDescription>
-          {content.referenceDescription}{" "}
-          <a
-            className="font-medium underline underline-offset-4"
-            href="https://ant.design/docs/spec/values/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {content.referenceAction}{" "}
-            <ArrowUpRightIcon className="inline size-3.5" />
-          </a>
-        </AlertDescription>
-      </Alert>
 
       <div className="flex flex-col gap-5">
         {principles.map((principle, index) => (

@@ -43,10 +43,6 @@ const en = {
     practice: "How to apply it",
     modelLabel: "Four Comfort principles arranged as one continuous loop",
     modelCenter: "Trust through clarity",
-    referenceTitle: "Reference model",
-    referenceDescription:
-      "This model adapts Ant Design’s Natural, Certain, Meaningful, and Growing values to Comfort’s product language and implementation. It is an interpretation rather than a reproduction.",
-    referenceAction: "Read the original values",
     reviewBadge: "Release review",
     reviewTitle: "Check these points before a pattern ships",
     reviewItems: [

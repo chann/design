@@ -56,9 +56,6 @@ export type DocsContent = {
     practice: string;
     modelLabel: string;
     modelCenter: string;
-    referenceTitle: string;
-    referenceDescription: string;
-    referenceAction: string;
     reviewBadge: string;
     reviewTitle: string;
     reviewItems: readonly string[];

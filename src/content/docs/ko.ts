@@ -43,10 +43,6 @@ const ko = {
     practice: "이렇게 적용해요",
     modelLabel: "네 가지 Comfort 원칙이 이어지는 흐름",
     modelCenter: "명확함에서 오는 신뢰",
-    referenceTitle: "참고한 모델",
-    referenceDescription:
-      "Ant Design의 Natural, Certain, Meaningful, Growing을 Comfort의 제품 문장과 구현 방식에 맞게 다시 정리했어요. 원문을 그대로 옮긴 것은 아니에요.",
-    referenceAction: "원문 원칙 보기",
     reviewBadge: "출시 전 점검",
     reviewTitle: "새 패턴을 내보내기 전에 확인하세요",
     reviewItems: [

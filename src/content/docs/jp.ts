@@ -43,10 +43,6 @@ const jp = {
     practice: "どう使うか",
     modelLabel: "4つのComfort原則がつながる流れ",
     modelCenter: "明確さが生む信頼",
-    referenceTitle: "参考モデル",
-    referenceDescription:
-      "Ant DesignのNatural、Certain、Meaningful、Growingを、Comfortの言葉と実装に合わせて整理しました。原文をそのまま再現したものではありません。",
-    referenceAction: "元の原則を見る",
     reviewBadge: "公開前チェック",
     reviewTitle: "新しいパターンを公開する前に確認しましょう",
     reviewItems: [

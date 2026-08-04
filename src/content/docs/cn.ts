@@ -39,10 +39,6 @@ const cn = {
     practice: "如何应用",
     modelLabel: "四项Comfort原则组成的连续流程",
     modelCenter: "清晰带来信任",
-    referenceTitle: "参考模型",
-    referenceDescription:
-      "我们参考Ant Design的Natural、Certain、Meaningful和Growing，并按照Comfort的产品语言与实现方式重新整理。这不是对原文的复刻。",
-    referenceAction: "查看原始原则",
     reviewBadge: "发布前检查",
     reviewTitle: "发布新模式前请确认这些事项",
     reviewItems: [
