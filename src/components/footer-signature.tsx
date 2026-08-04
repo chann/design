@@ -18,9 +18,7 @@ export function FooterSignature({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setVisible(true);
-        observer.unobserve(signature);
+        setVisible(entry.isIntersecting);
       },
       { rootMargin: "0px 0px -5%", threshold: 0.08 },
     );
