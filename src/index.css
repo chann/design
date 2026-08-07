@@ -698,60 +698,7 @@
 
 .tagline-word {
   display: inline-block;
-  filter: opacity(0.3);
-  transition: filter 700ms cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.tagline-copy.is-visible .tagline-word {
-  filter: opacity(1);
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(2) {
-  transition-delay: 80ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(3) {
-  transition-delay: 160ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(4) {
-  transition-delay: 240ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(5) {
-  transition-delay: 320ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(6) {
-  transition-delay: 400ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(7) {
-  transition-delay: 480ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(8) {
-  transition-delay: 560ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(9) {
-  transition-delay: 640ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(10) {
-  transition-delay: 720ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(11) {
-  transition-delay: 800ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(12) {
-  transition-delay: 880ms;
-}
-
-.tagline-copy.is-visible .tagline-word:nth-child(13) {
-  transition-delay: 960ms;
+  will-change: opacity;
 }
 
 .benefit-grid {
@@ -1483,8 +1430,8 @@
   }
 
   .tagline-word {
-    filter: opacity(1);
-    transition-delay: 0ms !important;
+    opacity: 1 !important;
+    will-change: auto;
   }
 
   .footer-signature-letter {

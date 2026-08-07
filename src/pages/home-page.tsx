@@ -14,9 +14,11 @@ import {
   type HomeContent,
 } from "@/content/home";
 import { cn } from "@/lib/utils";
+import { calculateWordOpacity } from "@/lib/scroll-scrub";
 import { designEditions, siteHref } from "@/data/site";
 import { localizedRoute } from "@/data/site";
 import { designDocumentForLocale } from "@/content/docs";
+import { useScrollScrubProgress } from "@/hooks/use-scroll-scrub-progress";
 
 const benefitIcons: readonly PhosphorIconName[] = [
   "brackets-curly",
@@ -63,40 +65,24 @@ function Reveal({
 }
 
 function TaglineReveal({ accessibleLabel, segments }: HomeContent["tagline"]) {
-  const containerRef = useRef<HTMLHeadingElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setVisible(true);
-        observer.unobserve(container);
-      },
-      { rootMargin: "0px 0px -30%", threshold: 0.15 },
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
+  const { elementRef, progress } = useScrollScrubProgress<HTMLHeadingElement>();
 
   return (
     <h2
       aria-label={accessibleLabel}
-      className={cn(
-        "tagline-copy max-w-[680px] text-balance text-4xl font-semibold sm:text-5xl lg:text-6xl",
-        visible && "is-visible",
-      )}
-      ref={containerRef}
+      className="tagline-copy max-w-[680px] text-balance text-4xl font-semibold sm:text-5xl lg:text-6xl"
+      data-scroll-progress={progress.toFixed(4)}
+      data-scroll-tagline
+      ref={elementRef}
     >
       {segments.map((segment, index) => (
         <span
           aria-hidden="true"
           className="tagline-word"
           key={`${segment}-${index}`}
+          style={{
+            opacity: calculateWordOpacity(progress, index, segments.length),
+          }}
         >
           {segment}
           {"\u00a0"}

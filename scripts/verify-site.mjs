@@ -56,6 +56,10 @@ const homePageSource = await readFile(
   new URL("../src/pages/home-page.tsx", import.meta.url),
   "utf8",
 );
+const scrollScrubHookSource = await readFile(
+  new URL("../src/hooks/use-scroll-scrub-progress.ts", import.meta.url),
+  "utf8",
+);
 const englishHomeContent = await readFile(
   new URL("../src/content/home/en.ts", import.meta.url),
   "utf8",
@@ -195,6 +199,26 @@ assert(
   "Korean homepage must use the requested theme-focused headline",
 );
 assert(
+  homePageSource.includes("data-scroll-tagline") &&
+    homePageSource.includes("data-scroll-progress") &&
+    homePageSource.includes(
+      "calculateWordOpacity(progress, index, segments.length)",
+    ),
+  "Homepage tagline must highlight each segment from viewport scroll progress",
+);
+assert(
+  scrollScrubHookSource.includes(
+    'window.addEventListener("scroll", scheduleMeasure, { passive: true })',
+  ) &&
+    scrollScrubHookSource.includes(
+      'window.addEventListener("resize", scheduleMeasure)',
+    ) &&
+    scrollScrubHookSource.includes("requestAnimationFrame") &&
+    scrollScrubHookSource.includes("cancelAnimationFrame") &&
+    scrollScrubHookSource.includes("prefers-reduced-motion: reduce"),
+  "Scroll-linked highlighting must be frame-limited, responsive, and motion-safe",
+);
+assert(
   homePageSource.includes('from "lucide-react"') &&
     homePageSource.includes("<ArrowRightIcon") &&
     !phosphorIconSource.includes("M245.66,74.34"),
@@ -213,6 +237,12 @@ assert(
 const reducedMotionSource = cssSource.split(
   "@media (prefers-reduced-motion: reduce)",
 )[1];
+assert(
+  /\.tagline-word\s*\{[^}]*will-change:\s*opacity/s.test(cssSource) &&
+    reducedMotionSource?.includes(".tagline-word") &&
+    reducedMotionSource.includes("opacity: 1 !important"),
+  "Tagline highlighting must retain an immediate reduced-motion state",
+);
 assert(
   reducedMotionSource?.includes(".footer-signature-letter") &&
     reducedMotionSource.includes("transform: none") &&
