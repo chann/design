@@ -238,6 +238,13 @@ assert(
   "Homepage arrows must use Lucide and omit the previous flow-arrow path",
 );
 assert(
+  !cssSource.includes(".hero-letter-glitch::before") &&
+    /\.hero-letter-glitch\s*\{[^}]*border:\s*1px solid var\(--border\)/s.test(
+      cssSource,
+    ),
+  "Hero letter canvas must omit the inset border and retain its outer boundary",
+);
+assert(
   footerSignatureSource.includes("--footer-signature-index") &&
     footerSignatureSource.includes("footer-signature-letter"),
   "The footer signature must reveal its letters in sequence",

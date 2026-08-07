@@ -604,16 +604,6 @@
   box-shadow: 0 32px 80px rgb(0 0 0 / 28%);
 }
 
-.hero-letter-glitch::before {
-  position: absolute;
-  z-index: 1;
-  inset: 0.75rem;
-  border: 1px solid var(--hero-glitch-line);
-  border-radius: 0.75rem;
-  content: "";
-  pointer-events: none;
-}
-
 .hero-letter-canvas {
   position: absolute;
   inset: 0;
