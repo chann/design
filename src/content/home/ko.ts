@@ -39,7 +39,7 @@ const ko = {
       "테마를 정의하세요.",
     ],
     description:
-      "접근 가능한 shadcn/ui를 그대로 활용하고, 색상과 글자, 간격, 상태, 모션을 DESIGN.md에서 제품에 맞게 정리하세요.",
+      "shadcn/ui를 그대로 활용하고, 색상과 글자, 간격, 상태, 모션을 DESIGN.md에서 제품에 맞게 정리하세요.",
     primaryAction: "DESIGN.md 읽기",
     languageNavigationLabel: "홈페이지 언어",
   },
@@ -66,7 +66,8 @@ const ko = {
   },
   benefits: {
     eyebrow: "제품답게 바꿀 수 있는 기반",
-    title: "접근 가능한 컴포넌트는 지키고, 일반적인 결정은 바꾸세요.",
+    title:
+      "신뢰할 수 있는 컴포넌트를 바탕으로, DESIGN.md에서 제품에 맞는 테마를 정의하세요.",
     description:
       "신뢰도 높은 shadcn/ui를 베이스로 사용합니다. DESIGN.md로 색상, 글자, 간격, 상태, 모션 등 세부 디자인을 정의하세요.",
     items: [

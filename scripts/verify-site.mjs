@@ -199,6 +199,19 @@ assert(
   "Korean homepage must use the requested theme-focused headline",
 );
 assert(
+  koreanHomeContent.includes(
+    "신뢰할 수 있는 컴포넌트를 바탕으로, DESIGN.md에서 제품에 맞는 테마를 정의하세요.",
+  ) &&
+    koreanHomeContent.includes(
+      "shadcn/ui를 그대로 활용하고, 색상과 글자, 간격, 상태, 모션을 DESIGN.md에서 제품에 맞게 정리하세요.",
+    ) &&
+    !koreanHomeContent.includes(
+      "접근 가능한 컴포넌트는 지키고, 일반적인 결정은 바꾸세요.",
+    ) &&
+    !koreanHomeContent.includes("접근 가능한 shadcn/ui를 그대로 활용하고"),
+  "Korean homepage must use the revised component and theme copy",
+);
+assert(
   homePageSource.includes("data-scroll-tagline") &&
     homePageSource.includes("data-scroll-progress") &&
     homePageSource.includes(
