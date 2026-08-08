@@ -56,6 +56,10 @@ const homePageSource = await readFile(
   new URL("../src/pages/home-page.tsx", import.meta.url),
   "utf8",
 );
+const workbenchSource = await readFile(
+  new URL("../src/components/theme-workbench.tsx", import.meta.url),
+  "utf8",
+);
 const scrollScrubHookSource = await readFile(
   new URL("../src/hooks/use-scroll-scrub-progress.ts", import.meta.url),
   "utf8",
@@ -92,6 +96,24 @@ const indexTemplate = await readFile(
 const readmeSource = await readFile(
   new URL("../README.md", import.meta.url),
   "utf8",
+);
+
+for (const primitive of [
+  "@/components/ui/badge",
+  "@/components/ui/button",
+  "@/components/ui/card",
+  "@/components/ui/field",
+  "@/components/ui/input",
+  "@/components/ui/separator",
+  "@/components/ui/switch",
+  "@/components/ui/tabs",
+]) {
+  assert(workbenchSource.includes(primitive), `ThemeWorkbench must use ${primitive}`);
+}
+assert(homePageSource.includes("<ThemeWorkbench"), "HomePage must render ThemeWorkbench");
+assert(
+  !homePageSource.includes(["Hero", "LetterGlitch"].join("")),
+  "The abstract hero canvas must be removed",
 );
 
 for (const field of ["summary:", "principles:", "systemPreview:", "workbench:"]) {
@@ -328,11 +350,10 @@ assert(
   "Homepage arrows must use Lucide and omit the previous flow-arrow path",
 );
 assert(
-  !cssSource.includes(".hero-letter-glitch::before") &&
-    /\.hero-letter-glitch\s*\{[^}]*border:\s*1px solid var\(--border\)/s.test(
-      cssSource,
-    ),
-  "Hero letter canvas must omit the inset border and retain its outer boundary",
+  cssSource.includes(".theme-workbench") &&
+    cssSource.includes(".theme-token-row") &&
+    cssSource.includes(".theme-token-swatch"),
+  "Theme Workbench layout styles must be present",
 );
 assert(
   footerSignatureSource.includes("--footer-signature-index") &&

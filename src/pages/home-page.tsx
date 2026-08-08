@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRightIcon } from "lucide-react";
 
-import { HeroLetterGlitch } from "@/components/hero-letter-glitch";
+import { ThemeWorkbench } from "@/components/theme-workbench";
 import {
   PhosphorIcon,
   type PhosphorIconName,
@@ -169,7 +169,10 @@ export function HomePage({
               </nav>
             </div>
           </div>
-          <HeroLetterGlitch />
+          <ThemeWorkbench
+            content={content.hero.workbench}
+            locale={content.locale}
+          />
         </section>
 
         <section
