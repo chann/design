@@ -247,6 +247,12 @@ for (const token of [
 }
 
 assert(
+  cssSource.includes("background: color-mix(in oklch, #f7f8fa 88%, #eef1f5)") &&
+    cssSource.includes("background: color-mix(in oklch, #181818 88%, #272727)"),
+  "Footer must preserve its original cool light and dark backgrounds",
+);
+
+assert(
   readmeSource.includes("336") &&
     readmeSource.includes("Start with shadcn/ui components"),
   "README must describe the shadcn theme workflow and 336-route build",

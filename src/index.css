@@ -326,7 +326,11 @@
 }
 
 .site-footer {
-  background: color-mix(in oklch, var(--background) 88%, var(--muted));
+  background: color-mix(in oklch, #f7f8fa 88%, #eef1f5);
+}
+
+.dark .site-footer {
+  background: color-mix(in oklch, #181818 88%, #272727);
 }
 
 .footer-signature {
