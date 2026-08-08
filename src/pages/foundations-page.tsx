@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   AccessibilityIcon,
   ArrowRightIcon,
@@ -51,8 +51,10 @@ export function FoundationsPage({
   locale: HomeLocale;
 }) {
   const content = docsContents[locale].foundations;
-  const foundations = foundationCatalog.map((record) =>
-    localizedFoundation(record, locale),
+  const foundations = useMemo(
+    () =>
+      foundationCatalog.map((record) => localizedFoundation(record, locale)),
+    [locale],
   );
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(foundations);
