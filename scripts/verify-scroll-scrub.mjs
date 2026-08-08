@@ -58,9 +58,13 @@ const [cssSource, homePageSource, footerSignatureSource] = await Promise.all([
   ),
 ]);
 
-assert.match(cssSource, /\.landing-reveal\s*\{[^}]*translateY\(16px\)/s);
-assert.match(cssSource, /\.landing-reveal\s*\{[^}]*480ms/s);
-assert.doesNotMatch(cssSource, /^\s*filter:\s*blur/m);
+assert.match(cssSource, /\.landing-reveal\s*\{[^}]*translateY\(4rem\)/s);
+assert.match(cssSource, /\.landing-reveal\s*\{[^}]*800ms/s);
+assert.match(cssSource, /\.landing-reveal\s*\{[^}]*filter:\s*blur\(12px\)/s);
+assert.match(
+  cssSource,
+  /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.landing-enter,[\s\S]*?filter:\s*none/s,
+);
 const landingEnterKeyframes = cssSource.match(
   /@keyframes landing-enter\s*\{([\s\S]*?)\n\}/,
 )?.[1];

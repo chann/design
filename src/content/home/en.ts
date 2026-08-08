@@ -14,14 +14,12 @@ const en = {
     homeLabel: "Comfort DESIGN.md home",
     primaryNavigationLabel: "Primary navigation",
     mobileNavigationTitle: "Comfort navigation",
-    mobileNavigationDescription:
-      "Browse principles, Foundations, and components.",
+    mobileNavigationDescription: "Browse principles and Foundations.",
     openNavigation: "Open navigation",
     closeNavigation: "Close navigation",
     nav: {
       principles: "Principles",
       foundations: "Foundations",
-      components: "Components",
     },
     language: "Language",
     languageMenuLabel: "Homepage languages",
@@ -43,14 +41,6 @@ const en = {
     primaryAction: "Read DESIGN.md",
     languageNavigationLabel: "Homepage languages",
   },
-  summary: {
-    accessibleLabel: "What Comfort includes",
-    items: [
-      { value: "4", label: "languages" },
-      { value: "15", label: "Foundations" },
-      { value: "63", label: "Components" },
-    ],
-  },
   tagline: {
     accessibleLabel:
       "The same components feel entirely different once they speak your product's language.",
@@ -65,8 +55,6 @@ const en = {
     ],
   },
   principles: {
-    eyebrow: "Design principles",
-    title: "Keep familiar behavior. Give the product a distinct character.",
     description:
       "You do not need to rebuild the basics. Clear choices for color, type, spacing, and states are enough to change how the product feels.",
     items: [
@@ -171,7 +159,6 @@ const en = {
       overview: "Overview",
       principles: "Principles",
       foundationCatalog: "Explore foundations",
-      componentCatalog: "Explore components",
       github: "GitHub source",
       privacy: "Privacy",
       terms: "Terms",

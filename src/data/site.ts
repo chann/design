@@ -1,4 +1,4 @@
-import { componentCatalog, foundationCatalog } from "./catalog";
+import { foundationCatalog } from "./catalog";
 import { homeContents, type HomeLocale } from "@/content/home";
 
 export type NavItem = {
@@ -54,7 +54,6 @@ export const designEditions: DesignEdition[] = [
 export const primaryNav = [
   { href: "/principles", title: "Principles" },
   { href: "/foundations", title: "Foundations" },
-  { href: "/components", title: "Components" },
 ];
 
 export const principles: Principle[] = [
@@ -112,23 +111,11 @@ export const foundationItems: NavItem[] = foundationCatalog.map(
   }),
 );
 
-export const componentItems: NavItem[] = componentCatalog.map(
-  ({ slug, title, description }) => ({
-    href: `/components/${slug}`,
-    title,
-    description,
-  }),
-);
-
 export const docsNavigation = [
   { title: "Overview", items: [{ href: "/principles", title: "Principles" }] },
   {
     title: "Foundations",
     items: [{ href: "/foundations", title: "Overview" }, ...foundationItems],
-  },
-  {
-    title: "Components",
-    items: [{ href: "/components", title: "Overview" }, ...componentItems],
   },
 ];
 

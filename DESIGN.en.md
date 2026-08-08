@@ -302,10 +302,10 @@ Start with shadcn/ui components. Keep their accessible, familiar behavior, then
 use `DESIGN.md` to shape color, type, spacing, states, motion, and content around
 the product. Review the result in real screens and generated static pages.
 
-The reference site covers 15 Foundations, 63 components across eight families,
-and 336 static routes. Every detail route follows the same sequence: real
-specimen, segmented Preview and View code control, usage, anatomy, states,
-accessibility, internationalization, and implementation guidance.
+The reference site publishes 15 Foundations and four language editions across
+80 static routes. The public component catalog and specimen routes are withheld
+until their information architecture and examples can be rebuilt after the
+broader product improvements.
 
 The intended experience has three qualities:
 
@@ -456,8 +456,8 @@ The documentation header remains a floating surface 24px from the viewport top
 both initially and after scroll. Left and right documentation rails have no
 vertical separators; whitespace alone distinguishes them from the reading
 column. The footer keeps a compact System, Foundations, Resources, and Legal
-sitemap. It links to the Components catalog once instead of repeating all 63
-component detail links, then closes with a partially clipped,
+sitemap. It withholds the component catalog link until the replacement is ready,
+then closes with a partially clipped,
 intersection-driven `Comfort DESIGN.md` text signature. Reduced motion shows
 its final state without travel.
 
@@ -548,26 +548,11 @@ For new interface work, first use an installed shadcn/ui component. Next, make a
 page-level composition from existing pieces. Promote it to a shared component
 only after the same composition serves more than one real screen.
 
-The 63 components are maintained in eight families:
-
-- **Actions (4):** Button, Button Group, Toggle, Toggle Group
-- **Forms (15):** Calendar, Checkbox, Combobox, Date Picker, Field, Input,
-  Input Group, Input OTP, Label, Native Select, Radio Group, Select, Slider,
-  Switch, Textarea
-- **Navigation (7):** Breadcrumb, Command, Menubar, Navigation Menu, Pagination,
-  Sidebar, Tabs
-- **Overlays (9):** Alert Dialog, Context Menu, Dialog, Drawer, Dropdown Menu,
-  Hover Card, Popover, Sheet, Tooltip
-- **Data display (10):** Avatar, Badge, Card, Carousel, Chart, Data Table, Item,
-  Kbd, Table, Typography
-- **Feedback (8):** Accordion, Alert, Collapsible, Empty, Progress, Skeleton,
-  Spinner, Toast
-- **Layout (5):** Aspect Ratio, Direction, Resizable, Scroll Area, Separator
-- **Conversation (5):** Attachment, Bubble, Marker, Message, Message Scroller
-
-Every route provides a real interactive specimen rather than a placeholder and
-lazy-loads its family bundle. Preview and View code form one contiguous segmented
-control, and the code panel exposes an in-context copy result.
+The public component catalog and detail specimen routes are intentionally
+excluded for now. Rebuild them from first principles after the broader product
+work defines a stronger information architecture, example quality bar, and
+state verification model. Until then, `src/components/ui` remains an internal
+implementation layer for the reference site.
 
 ### Navigation and shell
 
@@ -808,7 +793,7 @@ Table, Recharts, and Embla. It uses shadcn/ui as the baseline component source
 and `DESIGN.md` as the product theme guide. These libraries are replaceable, but
 visual, interaction, accessibility, and verification quality must not decline.
 
-- Vite builds a static site under the `/design/` base and generates 336 route
+- Vite builds a static site under the `/design/` base and generates 80 route
   artifacts from the catalog manifest.
 - Map YAML roles to CSS variables or theme tokens once. Components consume role
   tokens and MUST NOT duplicate raw values.
@@ -823,8 +808,8 @@ visual, interaction, accessibility, and verification quality must not decline.
 ## Verification
 
 Completion requires `npm run verify:catalog`, `npm run lint`, `npm run check`,
-and `npm run build` to pass. Catalog verification checks exactly 63 components,
-15 Foundations, 336 static routes, identical inventory across four language
+and `npm run build` to pass. Catalog verification checks exactly 15 Foundations,
+80 static routes, identical Foundation inventory across four language
 editions, and light `#0066CC` plus dark `#78B7FF` primary values.
 
 Static output MUST include English `dist/index.html`, Korean
@@ -832,10 +817,9 @@ Static output MUST include English `dist/index.html`, Korean
 `dist/cn/index.html`. Verify the `lang`, canonical, and `hreflang` set for each
 artifact, with English as `x-default`.
 
-Browser QA exercises representative specimens from every family at 390px and
-1440px, including search, empty/reset, overlay focus return, form input, table
-sorting, chart, carousel, message anchoring, Preview and View code, and copy
-feedback. Checks also cover the scrolled header top gap, absence of page
+Browser QA covers the home, principles, Foundation catalog, and Foundation detail
+routes at 390px and 1440px, including search, empty/reset, specimens, and previous
+or next navigation. Checks also cover the scrolled header top gap, absence of page
 overflow and rail separators, light/dark themes, and reduced motion. Axe
 violations MUST be zero; untestable `incomplete` findings are reported separately.
 After deployment, confirm a successful GitHub Pages job, live routes, a clean

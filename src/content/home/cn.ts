@@ -14,10 +14,10 @@ const cn = {
     homeLabel: "Comfort DESIGN.md 首页",
     primaryNavigationLabel: "主导航",
     mobileNavigationTitle: "Comfort 导航",
-    mobileNavigationDescription: "浏览原则、基础和组件文档。",
+    mobileNavigationDescription: "浏览原则和基础文档。",
     openNavigation: "打开导航",
     closeNavigation: "关闭导航",
-    nav: { principles: "原则", foundations: "基础", components: "组件" },
+    nav: { principles: "原则", foundations: "基础" },
     language: "语言",
     languageMenuLabel: "主页语言",
     theme: "主题",
@@ -33,14 +33,6 @@ const cn = {
     primaryAction: "阅读DESIGN.md",
     languageNavigationLabel: "主页语言",
   },
-  summary: {
-    accessibleLabel: "Comfort构成",
-    items: [
-      { value: "4", label: "语言" },
-      { value: "15", label: "Foundation" },
-      { value: "63", label: "Component" },
-    ],
-  },
   tagline: {
     accessibleLabel: "同一套组件，换上产品自己的语言后，感受会完全不同。",
     segments: [
@@ -52,8 +44,6 @@ const cn = {
     ],
   },
   principles: {
-    eyebrow: "设计原则",
-    title: "保留熟悉的用法，也让产品拥有清晰的风格。",
     description:
       "无需重做基本交互。只要梳理颜色、字体、间距和状态，产品的整体感受就会不同。",
     items: [
@@ -153,7 +143,6 @@ const cn = {
       overview: "概览",
       principles: "原则",
       foundationCatalog: "查看基础",
-      componentCatalog: "查看组件",
       github: "GitHub源码",
       privacy: "隐私",
       terms: "条款",

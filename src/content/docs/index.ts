@@ -3,7 +3,7 @@ import en from "./en";
 import jp from "./jp";
 import ko from "./ko";
 
-import type { ComponentRecord, FoundationRecord } from "@/data/catalog";
+import type { FoundationRecord } from "@/data/catalog";
 import type { HomeLocale } from "@/content/home";
 import type { DocsContent } from "./types";
 
@@ -22,53 +22,6 @@ export const designDocumentForLocale: Record<HomeLocale, string> = {
   jp: "/DESIGN.jp.md",
   cn: "/DESIGN.cn.md",
 };
-
-const componentGuidance = {
-  ko: {
-    description: (title: string, family: string) =>
-      `${title}의 실제 동작과 상태를 확인하고 ${family} 흐름에 맞게 적용해 보세요.`,
-    usage: (title: string) =>
-      `${title}가 사용자의 다음 행동을 더 분명하게 만들 때 사용합니다. 주요 과업과 결과를 가까이 두고, 불필요한 선택은 덜어내세요.`,
-    accessibility: [
-      "키보드만으로 모든 동작을 사용할 수 있는지 확인하세요.",
-      "이름, 역할, 현재 상태를 보조 기술이 이해할 수 있어야 해요.",
-      "색만으로 상태를 구분하지 말고 문구나 형태를 함께 사용하세요.",
-    ],
-  },
-  en: {
-    description: (title: string, family: string) =>
-      `Review ${title} behavior and states, then adapt it to the ${family} flow.`,
-    usage: (title: string) =>
-      `Use ${title} when it makes the next action clearer. Keep the main task and result close together, and remove choices the task does not need.`,
-    accessibility: [
-      "Make every action available from the keyboard.",
-      "Expose a clear name, role, and current state to assistive technology.",
-      "Pair color with language or shape when communicating state.",
-    ],
-  },
-  jp: {
-    description: (title: string, family: string) =>
-      `${title}の動きと状態を確認し、${family}の流れに合わせて使えます。`,
-    usage: (title: string) =>
-      `${title}によって次の操作がわかりやすくなる場面で使います。主な作業と結果を近くに置き、不要な選択肢を減らしてください。`,
-    accessibility: [
-      "すべての操作をキーボードだけでも利用できるようにします。",
-      "名前、役割、現在の状態を支援技術に伝えます。",
-      "状態は色だけで区別せず、文言や形も使います。",
-    ],
-  },
-  cn: {
-    description: (title: string, family: string) =>
-      `查看${title}的行为与状态，再根据${family}流程进行调整。`,
-    usage: (title: string) =>
-      `当${title}能让下一步更清楚时使用它。把主要任务和结果放在一起，减少任务不需要的选项。`,
-    accessibility: [
-      "确保只使用键盘也能完成全部操作。",
-      "向辅助技术提供清晰的名称、角色和当前状态。",
-      "表达状态时不要只依赖颜色，同时使用文案或形状。",
-    ],
-  },
-} as const;
 
 const foundationGuidance = {
   ko: {
@@ -140,20 +93,6 @@ const foundationGuidance = {
     use: (role: string) => `用于需要${role}角色的界面。`,
   },
 } as const;
-
-export function localizedComponent(
-  record: ComponentRecord,
-  locale: HomeLocale,
-): ComponentRecord {
-  const copy = componentGuidance[locale];
-  const family = docsContents[locale].families[record.family];
-  return {
-    ...record,
-    description: copy.description(record.title, family),
-    usage: copy.usage(record.title),
-    accessibility: [...copy.accessibility],
-  };
-}
 
 export function localizedFoundation(
   record: FoundationRecord,

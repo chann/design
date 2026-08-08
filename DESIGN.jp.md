@@ -301,10 +301,9 @@ shadcn/uiコンポーネントから始めます。アクセシビリティと�
 色、文字、余白、状態、動き、文言を`DESIGN.md`でプロダクトに合わせます。最後に
 実際の画面と生成した静的ページで確認します。
 
-参照サイトは 15 の Foundation、8 family・63 component、336 static route を
-収録します。各 detail route は real specimen、Preview・View code の segmented
-control、usage、anatomy、state、accessibility、internationalization、実装ガイドを
-同じ順序で示します。
+参照サイトは 15 の Foundation と4言語版を 80 static route で公開します。
+公開 component catalog と specimen route は、プロダクト全体の改善後に情報設計と
+例を作り直すため、現在は提供しません。
 
 | 品質            | ユーザーが感じること                 | 画面での表れ方                                                            |
 | --------------- | ------------------------------------ | ------------------------------------------------------------------------- |
@@ -430,8 +429,8 @@ decorative card で埋めません。Card はまとまりや操作上の境界�
 document shell の header は初期状態と scroll 後の両方で viewport 上端から 24px
 離れた floating surface として維持します。左右の documentation rail と本文の
 間に vertical separator を置かず、余白だけで領域を分けます。footer は System、
-Foundations、Resources、Legal の compact sitemap のみを配置します。63 component
-を繰り返さず Components catalog への link を一つだけ置き、交差時に一部が現れる
+Foundations、Resources、Legal の compact sitemap のみを配置します。新しい構造が
+準備できるまで component catalog の link は表示せず、交差時に一部が現れる
 大きな `Comfort DESIGN.md` text signature で閉じます。reduced motion では
 移動せず最終状態を即時表示します。
 
@@ -508,26 +507,10 @@ Foundation の選択と適用を説明するガイドです。件数と title �
 実装は shadcn/ui primitive を選び、semantic token を適用し、必要な composition
 だけを加える順序で進めます。見た目の都合だけで独自 primitive を増やしません。
 
-63 component は次の 8 family で管理します。
-
-- **Actions (4):** Button, Button Group, Toggle, Toggle Group
-- **Forms (15):** Calendar, Checkbox, Combobox, Date Picker, Field, Input,
-  Input Group, Input OTP, Label, Native Select, Radio Group, Select, Slider,
-  Switch, Textarea
-- **Navigation (7):** Breadcrumb, Command, Menubar, Navigation Menu, Pagination,
-  Sidebar, Tabs
-- **Overlays (9):** Alert Dialog, Context Menu, Dialog, Drawer, Dropdown Menu,
-  Hover Card, Popover, Sheet, Tooltip
-- **Data display (10):** Avatar, Badge, Card, Carousel, Chart, Data Table, Item,
-  Kbd, Table, Typography
-- **Feedback (8):** Accordion, Alert, Collapsible, Empty, Progress, Skeleton,
-  Spinner, Toast
-- **Layout (5):** Aspect Ratio, Direction, Resizable, Scroll Area, Separator
-- **Conversation (5):** Attachment, Bubble, Marker, Message, Message Scroller
-
-各 route は placeholder ではなく実際の interactive specimen を提供し、family
-bundle 単位で lazy-load します。Preview と View code は隙間のない一つの
-segmented control とし、code panel 内で copy 結果を確認できるようにします。
+公開 component catalog と詳細 specimen route は現在除外します。プロダクト全体の
+改善後に information architecture、example quality、state verification の基準を
+定め直して最初から構成します。それまでは `src/components/ui` を参照サイト内部の
+implementation layer として維持します。
 
 ### Navigation と shell
 
@@ -740,7 +723,7 @@ Recharts、Embla を使います。shadcn/uiを基本コンポーネントソー
 visual、interaction、accessibility、verification の品質は低下させません。
 
 - Vite は `/design/` base 下の static site を build し、catalog manifest から
-  336 route artifact を生成します。
+  80 route artifact を生成します。
 - YAML role を CSS variable または theme token に一度 map し、component は raw
   value を重複させません。
 - application primitive に domain logic を入れません。
@@ -753,17 +736,17 @@ visual、interaction、accessibility、verification の品質は低下させま�
 ## Verification
 
 完了前に `npm run verify:catalog`、`npm run lint`、`npm run check`、
-`npm run build` をすべて通過させます。catalog verification は正確に 63
-component、15 Foundation、336 static route、4言語版の同一 inventory、light
+`npm run build` をすべて通過させます。catalog verification は正確に 15
+Foundation、80 static route、4言語版の同一 Foundation inventory、light
 `#0066CC` と dark `#78B7FF` primary を確認します。
 
 static output は英語 `dist/index.html`、韓国語 `dist/ko/index.html`、日本語
 `dist/jp/index.html`、中国語 `dist/cn/index.html` をすべて含めます。各 artifact
 の `lang`、canonical、`hreflang` set と英語 `x-default` を検証します。
 
-browser QA は 390px と 1440px で全 family の代表 specimen を実行し、search、
-empty/reset、overlay focus 復帰、form input、table sort、chart、carousel、message
-anchor、Preview・View code、copy feedback を確認します。scroll 後の header top
+browser QA は 390px と 1440px で home、principles、Foundation 一覧と詳細 route を
+確認し、search、empty/reset、Foundation specimen、前後 navigation を実行します。
+scroll 後の header top
 gap、page overflow と rail separator の不在、light/dark、reduced motion も合わせて
 確認します。Axe violation は 0 とし、判定不能な `incomplete` は別に報告します。
 deployment では GitHub Pages job、live route、clean worktree、local・upstream・

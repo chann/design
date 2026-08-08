@@ -1,13 +1,7 @@
-import { lazy, Suspense, useEffect } from "react";
+import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  componentCatalog,
-  foundationCatalog,
-  getComponent,
-  getFoundation,
-} from "@/data/catalog";
-import { ComponentsPage } from "@/pages/components-page";
+import { foundationCatalog, getFoundation } from "@/data/catalog";
 import { FoundationDetailPage } from "@/pages/foundation-detail-page";
 import { FoundationsPage } from "@/pages/foundations-page";
 import { HomePage } from "@/pages/home-page";
@@ -56,7 +50,7 @@ function localizedMetadata(locale: HomeLocale) {
       terms: "이용 안내",
       notFound: "페이지를 찾을 수 없습니다",
       description:
-        "Comfort의 원칙, 파운데이션, 컴포넌트 예시와 접근성·구현 가이드를 살펴보세요.",
+        "Comfort의 원칙, 파운데이션, 접근성·구현 가이드를 살펴보세요.",
     },
     en: {
       guides: "Guides",
@@ -64,7 +58,7 @@ function localizedMetadata(locale: HomeLocale) {
       terms: "Terms",
       notFound: "Page not found",
       description:
-        "Browse Comfort principles, foundations, component examples, accessibility notes, and implementation guidance.",
+        "Browse Comfort principles, foundations, accessibility notes, and implementation guidance.",
     },
     jp: {
       guides: "ガイド",
@@ -72,14 +66,14 @@ function localizedMetadata(locale: HomeLocale) {
       terms: "利用案内",
       notFound: "ページが見つかりません",
       description:
-        "Comfortの原則、ファウンデーション、コンポーネント例、アクセシビリティと実装ガイドを確認できます。",
+        "Comfortの原則、ファウンデーション、アクセシビリティと実装ガイドを確認できます。",
     },
     cn: {
       guides: "指南",
       privacy: "隐私说明",
       terms: "使用说明",
       notFound: "找不到页面",
-      description: "查看Comfort的原则、基础、组件示例、无障碍说明与实现指南。",
+      description: "查看Comfort的原则、基础、无障碍说明与实现指南。",
     },
   }[locale];
 }
@@ -132,9 +126,7 @@ function routeMetadata(route: string): RouteMetadata {
   const documentedRoute =
     contentRoute === "/principles" ||
     contentRoute === "/foundations" ||
-    contentRoute === "/components" ||
-    (group === "foundations" && foundationSlugs.has(slug)) ||
-    (group === "components" && componentSlugs.has(slug));
+    (group === "foundations" && foundationSlugs.has(slug));
 
   if (!documentedRoute) {
     return {
@@ -146,7 +138,7 @@ function routeMetadata(route: string): RouteMetadata {
     };
   }
 
-  const record = getFoundation(slug) ?? getComponent(slug);
+  const record = getFoundation(slug);
   const section = contentRoute.split("/").filter(Boolean).at(-1);
   const label =
     record?.title ??
@@ -187,32 +179,6 @@ function syncAlternates(alternates: readonly LocaleAlternate[] = []) {
 const foundationSlugs = new Set(
   foundationCatalog.map((foundation) => foundation.slug),
 );
-const componentSlugs = new Set(
-  componentCatalog.map((component) => component.slug),
-);
-
-const ComponentDetailPage = lazy(() =>
-  import("@/pages/component-detail-page").then((module) => ({
-    default: module.ComponentDetailPage,
-  })),
-);
-
-function RouteSkeleton({ locale }: { locale: HomeLocale }) {
-  return (
-    <main
-      aria-busy="true"
-      aria-label={docsContents[locale].componentDetail.loading}
-      className="mx-auto flex min-h-dvh max-w-4xl flex-col gap-8 px-4 py-24 sm:px-8"
-      id="main-content"
-    >
-      <div className="route-skeleton h-4 w-24 rounded-md bg-muted" />
-      <div className="route-skeleton h-12 w-3/4 rounded-lg bg-muted" />
-      <div className="route-skeleton h-24 w-full rounded-xl bg-muted" />
-      <div className="route-skeleton h-80 w-full rounded-2xl bg-muted" />
-    </main>
-  );
-}
-
 function NotFoundPage({ locale }: { locale: HomeLocale }) {
   const content = docsContents[locale].notFound;
   return (
@@ -281,9 +247,6 @@ export default function App() {
   if (contentRoute === "/foundations") {
     return <FoundationsPage currentPath={route} locale={locale} />;
   }
-  if (contentRoute === "/components") {
-    return <ComponentsPage currentPath={route} locale={locale} />;
-  }
   if (contentRoute === "/privacy") {
     return <LegalPage currentPath={route} kind="privacy" locale={locale} />;
   }
@@ -297,13 +260,5 @@ export default function App() {
       <FoundationDetailPage currentPath={route} locale={locale} slug={slug} />
     );
   }
-  if (section === "components" && componentSlugs.has(slug)) {
-    return (
-      <Suspense fallback={<RouteSkeleton locale={locale} />}>
-        <ComponentDetailPage currentPath={route} locale={locale} slug={slug} />
-      </Suspense>
-    );
-  }
-
   return <NotFoundPage locale={locale} />;
 }

@@ -14,14 +14,12 @@ const ko = {
     homeLabel: "Comfort DESIGN.md 홈",
     primaryNavigationLabel: "주요 탐색",
     mobileNavigationTitle: "Comfort 탐색",
-    mobileNavigationDescription:
-      "원칙, 파운데이션, 컴포넌트 문서를 탐색합니다.",
+    mobileNavigationDescription: "원칙과 파운데이션 문서를 탐색합니다.",
     openNavigation: "탐색 메뉴 열기",
     closeNavigation: "탐색 메뉴 닫기",
     nav: {
       principles: "원칙",
       foundations: "파운데이션",
-      components: "컴포넌트",
     },
     language: "언어",
     languageMenuLabel: "홈페이지 언어",
@@ -38,14 +36,6 @@ const ko = {
     primaryAction: "DESIGN.md 읽기",
     languageNavigationLabel: "홈페이지 언어",
   },
-  summary: {
-    accessibleLabel: "Comfort 구성",
-    items: [
-      { value: "4", label: "언어" },
-      { value: "15", label: "Foundation" },
-      { value: "63", label: "Component" },
-    ],
-  },
   tagline: {
     accessibleLabel:
       "같은 컴포넌트도 제품의 언어를 입으면 전혀 다르게 느껴집니다.",
@@ -61,8 +51,6 @@ const ko = {
     ],
   },
   principles: {
-    eyebrow: "디자인 원칙",
-    title: "익숙한 사용법은 지키고, 제품의 인상은 분명하게 만듭니다.",
     description:
       "기본 동작을 다시 만들지 않아도 색, 글꼴, 간격, 상태를 정리하면 제품의 분위기는 달라집니다.",
     items: [
@@ -164,7 +152,6 @@ const ko = {
       overview: "개요",
       principles: "원칙",
       foundationCatalog: "파운데이션 살펴보기",
-      componentCatalog: "컴포넌트 살펴보기",
       github: "GitHub 소스",
       privacy: "개인정보 처리방침",
       terms: "이용약관",

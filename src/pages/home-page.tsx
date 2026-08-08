@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRightIcon } from "lucide-react";
 
 import { HeroLetterGlitch } from "@/components/hero-letter-glitch";
+import { PhosphorIcon } from "@/components/phosphor-icon";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import {
   Accordion,
@@ -141,7 +141,11 @@ export function HomePage({
               <Button asChild size="lg">
                 <a href={siteHref(designDocumentForLocale[content.locale])}>
                   {content.hero.primaryAction}
-                  <ArrowRightIcon aria-hidden="true" data-icon="inline-end" />
+                  <PhosphorIcon
+                    aria-hidden="true"
+                    data-icon="inline-end"
+                    name="arrow-right"
+                  />
                 </a>
               </Button>
               <nav
@@ -168,34 +172,18 @@ export function HomePage({
           <HeroLetterGlitch />
         </section>
 
-        <section
-          aria-label={content.summary.accessibleLabel}
-          className="landing-section-tight mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-        >
-          <dl className="summary-row">
-            {content.summary.items.map((item) => (
-              <div key={item.label}>
-                <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section className="landing-section mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section className="landing-tagline landing-section mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <TaglineReveal {...content.tagline} />
         </section>
 
         <section
-          className="landing-section mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+          className="landing-principles landing-section mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
           id="principles"
         >
           <Reveal className="landing-split">
-            <header className="landing-section-header">
-              <p className="eyebrow">{content.principles.eyebrow}</p>
-              <h2>{content.principles.title}</h2>
+            <div className="landing-section-header">
               <p>{content.principles.description}</p>
-            </header>
+            </div>
             <div className="principles-list">
               {content.principles.items.map((item, index) => (
                 <Fragment key={item.title}>
@@ -204,7 +192,7 @@ export function HomePage({
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div>
-                      <h3>{item.title}</h3>
+                      <h2>{item.title}</h2>
                       <p>{item.description}</p>
                     </div>
                   </article>
@@ -216,7 +204,7 @@ export function HomePage({
         </section>
 
         <section className="landing-section mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="landing-split">
+          <Reveal className="landing-workflow landing-split">
             <header className="landing-section-header">
               <p className="eyebrow">{content.workflow.eyebrow}</p>
               <h2>{content.workflow.title}</h2>
@@ -260,8 +248,7 @@ export function HomePage({
         </section>
 
         <section className="landing-section-tight mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-          <Separator />
-          <Reveal className="final-cta">
+          <Reveal className="final-cta landing-cta-surface">
             <div className="landing-section-header">
               <p className="eyebrow">{content.cta.eyebrow}</p>
               <h2>{content.cta.title}</h2>
@@ -270,7 +257,11 @@ export function HomePage({
             <Button asChild size="lg">
               <a href={siteHref(designDocumentForLocale[content.locale])}>
                 {content.cta.action}
-                <ArrowRightIcon aria-hidden="true" data-icon="inline-end" />
+                <PhosphorIcon
+                  aria-hidden="true"
+                  data-icon="inline-end"
+                  name="arrow-right"
+                />
               </a>
             </Button>
           </Reveal>

@@ -15,7 +15,7 @@ export type HomeContent = {
     mobileNavigationDescription: string;
     openNavigation: string;
     closeNavigation: string;
-    nav: { principles: string; foundations: string; components: string };
+    nav: { principles: string; foundations: string };
     language: string;
     languageMenuLabel: string;
     theme: string;
@@ -30,14 +30,8 @@ export type HomeContent = {
     primaryAction: string;
     languageNavigationLabel: string;
   };
-  summary: {
-    accessibleLabel: string;
-    items: readonly { value: string; label: string }[];
-  };
   tagline: { accessibleLabel: string; segments: readonly string[] };
   principles: {
-    eyebrow: string;
-    title: string;
     description: string;
     items: readonly { title: string; description: string }[];
   };
@@ -72,7 +66,6 @@ export type HomeContent = {
       overview: string;
       principles: string;
       foundationCatalog: string;
-      componentCatalog: string;
       github: string;
       privacy: string;
       terms: string;

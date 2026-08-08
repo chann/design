@@ -14,14 +14,12 @@ const jp = {
     homeLabel: "Comfort DESIGN.md ホーム",
     primaryNavigationLabel: "メインナビゲーション",
     mobileNavigationTitle: "Comfort ナビゲーション",
-    mobileNavigationDescription:
-      "原則、ファウンデーション、コンポーネントのドキュメントを閲覧します。",
+    mobileNavigationDescription: "原則とファウンデーションを閲覧します。",
     openNavigation: "ナビゲーションを開く",
     closeNavigation: "ナビゲーションを閉じる",
     nav: {
       principles: "原則",
       foundations: "ファウンデーション",
-      components: "コンポーネント",
     },
     language: "言語",
     languageMenuLabel: "ホームページの言語",
@@ -43,14 +41,6 @@ const jp = {
     primaryAction: "DESIGN.mdを読む",
     languageNavigationLabel: "ホームページの言語",
   },
-  summary: {
-    accessibleLabel: "Comfortの構成",
-    items: [
-      { value: "4", label: "言語" },
-      { value: "15", label: "Foundation" },
-      { value: "63", label: "Component" },
-    ],
-  },
   tagline: {
     accessibleLabel:
       "同じコンポーネントでも、プロダクトの言葉をまとえば印象は大きく変わります。",
@@ -65,8 +55,6 @@ const jp = {
     ],
   },
   principles: {
-    eyebrow: "デザイン原則",
-    title: "使い慣れた動作は保ち、プロダクトの印象は明確にします。",
     description:
       "基本動作を作り直さなくても、色、文字、余白、状態を整えればプロダクトの雰囲気は変わります。",
     items: [
@@ -168,7 +156,6 @@ const jp = {
       overview: "概要",
       principles: "原則",
       foundationCatalog: "ファウンデーションを見る",
-      componentCatalog: "コンポーネントを見る",
       github: "GitHubソース",
       privacy: "プライバシー",
       terms: "利用規約",

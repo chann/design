@@ -1,4 +1,3 @@
-import type { ComponentFamily, ComponentState } from "@/data/catalog";
 import type { Principle } from "@/data/site";
 import type { HomeLocale } from "@/content/home";
 
@@ -32,11 +31,9 @@ export type DocsContent = {
     outlineLabel: string;
     outlineTitle: string;
     overviewGroup: string;
-    familyGroup: string;
     sections: {
       principles: string;
       foundations: string;
-      components: string;
     };
   };
   search: {
@@ -44,8 +41,6 @@ export type DocsContent = {
     label: string;
     placeholder: string;
     reset: string;
-    familyLabel: string;
-    all: string;
     result: string;
     results: string;
   };
@@ -97,63 +92,6 @@ export type DocsContent = {
     sourceDescription: string;
     overviewDescription: string;
   };
-  components: PageSection & {
-    outlineFind: string;
-    outlineExamples: string;
-    outlineDirectory: string;
-    coverageEyebrow: string;
-    coverageTitle: string;
-    filtered: string;
-    featured: string;
-    matching: (count: number) => string;
-    startTitle: string;
-    emptyTitle: (query: string) => string;
-    emptyDescription: string;
-    reset: string;
-    directoryEyebrow: string;
-    directoryTitle: string;
-  };
-  componentDetail: {
-    componentEyebrow: (family: string) => string;
-    preview: string;
-    usage: string;
-    anatomy: string;
-    variants: string;
-    states: string;
-    accessibility: string;
-    internationalization: string;
-    implementation: string;
-    related: string;
-    usageEyebrow: string;
-    usageTitle: string;
-    variantsEyebrow: string;
-    variantsTitle: string;
-    variantDefault: string;
-    variantDefaultDescription: string;
-    variantFamilyDescription: (family: string) => string;
-    variantComfortDescription: string;
-    statesEyebrow: string;
-    statesTitle: string;
-    accessibilityEyebrow: string;
-    accessibilityTitle: string;
-    i18nEyebrow: string;
-    i18nItems: readonly string[];
-    implementationEyebrow: string;
-    implementationTitle: string;
-    verifiedModule: string;
-    sourceAvailable: string;
-    implementationDescription: string;
-    snippetComment: string;
-    relatedEyebrow: string;
-    relatedTitle: string;
-    copy: string;
-    copied: string;
-    previewTab: string;
-    codeTab: string;
-    previewLabel: string;
-    loading: string;
-    codeLabel: (title: string) => string;
-  };
   legal: {
     reviewed: string;
     issue: string;
@@ -165,6 +103,4 @@ export type DocsContent = {
     description: string;
     action: string;
   };
-  families: Record<ComponentFamily, string>;
-  states: Record<ComponentState, string>;
 };

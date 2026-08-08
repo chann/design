@@ -24,8 +24,8 @@ assert(routes.includes("/privacy"), "The privacy route must be published");
 assert(routes.includes("/terms"), "The terms route must be published");
 for (const route of [
   "/",
-  "/components/button",
-  "/ko/components/button",
+  "/foundations/color",
+  "/ko/foundations/color",
   "/jp/foundations/color",
   "/cn/principles",
 ]) {
@@ -34,7 +34,12 @@ for (const route of [
     `Localized documentation route missing: ${route}`,
   );
 }
-assert(routes.length === 336, "The complete site must publish 336 routes");
+assert(routes.length === 80, "The complete site must publish 80 routes");
+assert(
+  !routes.some((route) => route.includes("/components")) &&
+    !("components" in catalog),
+  "The retired component catalog must not publish data or routes",
+);
 
 const siteData = await readFile(
   new URL("../src/data/site.ts", import.meta.url),
@@ -108,7 +113,7 @@ assert(
   "HomePage must render the motion-safe hero animation",
 );
 
-for (const field of ["summary:", "principles:"]) {
+for (const field of ["principles:"]) {
   assert(homeContentTypes.includes(field), `HomeContent is missing ${field}`);
 }
 for (const field of [
@@ -120,6 +125,7 @@ for (const field of [
   "reviewed:",
   "verification:",
   "tokenFlow:",
+  "summary:",
 ]) {
   assert(
     !homeContentTypes.includes(field),
@@ -253,9 +259,9 @@ assert(
 );
 
 assert(
-  readmeSource.includes("336") &&
+  readmeSource.includes("80") &&
     readmeSource.includes("Start with shadcn/ui components"),
-  "README must describe the shadcn theme workflow and 336-route build",
+  "README must describe the shadcn theme workflow and 80-route build",
 );
 
 assert(
@@ -277,9 +283,10 @@ for (const group of ["System", "Foundations", "Resources", "Legal"]) {
   );
 }
 assert(
-  !shellSource.includes('kind: "components"') &&
-    !shellSource.includes("links: componentCatalog.map"),
-  "The footer must link to the component catalog without listing every component",
+  !siteData.includes('href: "/components"') &&
+    !shellSource.includes("componentCatalog") &&
+    !englishHomeContent.includes("componentCatalog"),
+  "Navigation and footer content must omit the retired component catalog",
 );
 assert(
   dropdownMenuSource.includes("duration-150") &&
@@ -317,9 +324,10 @@ assert(
   "Korean homepage must use the requested theme-focused headline",
 );
 assert(
-  koreanHomeContent.includes(
-    "익숙한 사용법은 지키고, 제품의 인상은 분명하게 만듭니다.",
-  ) &&
+  !koreanHomeContent.includes('eyebrow: "디자인 원칙"') &&
+    !koreanHomeContent.includes(
+      "익숙한 사용법은 지키고, 제품의 인상은 분명하게 만듭니다.",
+    ) &&
     koreanHomeContent.includes(
       "접근 가능한 컴포넌트는 그대로 두고, 색·글꼴·간격·상태·움직임을 DESIGN.md에 맞춰 다듬습니다.",
     ) &&
@@ -327,7 +335,7 @@ assert(
       "접근 가능한 컴포넌트는 지키고, 일반적인 결정은 바꾸세요.",
     ) &&
     !koreanHomeContent.includes("접근 가능한 shadcn/ui를 그대로 활용하고"),
-  "Korean homepage must use the revised component and theme copy",
+  "Korean homepage must omit the retired principles heading and keep the revised theme copy",
 );
 assert(
   homePageSource.includes("data-scroll-tagline") &&
@@ -350,10 +358,10 @@ assert(
   "Scroll-linked highlighting must be frame-limited, responsive, and motion-safe",
 );
 assert(
-  homePageSource.includes('from "lucide-react"') &&
-    homePageSource.includes("<ArrowRightIcon") &&
-    !phosphorIconSource.includes("M245.66,74.34"),
-  "Homepage arrows must use Lucide and omit the previous flow-arrow path",
+  !homePageSource.includes('from "lucide-react"') &&
+    homePageSource.includes('<PhosphorIcon') &&
+    phosphorIconSource.includes('"arrow-right"'),
+  "Homepage calls to action must use the licensed Phosphor arrow",
 );
 assert(
   cssSource.includes(".hero-letter-glitch") &&
@@ -363,7 +371,6 @@ assert(
 );
 
 for (const marker of [
-  "summary-row",
   "principles-list",
   "workflow-list",
   "<Accordion",
@@ -380,6 +387,7 @@ for (const retired of [
   "benefit-grid",
   "benefit-item-featured",
   "implementation-proof",
+  "summary-row",
 ]) {
   assert(!homePageSource.includes(retired), `Homepage still uses ${retired}`);
 }
@@ -392,8 +400,9 @@ assert(
   "Footer signature needs a no-observer fallback",
 );
 assert(
-  cssSource.includes("480ms") && !cssSource.includes("filter: blur"),
-  "Landing motion must use the short no-blur behavior",
+  cssSource.includes("800ms cubic-bezier(0.32, 0.72, 0, 1)") &&
+    cssSource.includes("filter: blur(12px)"),
+  "Landing motion must use the fluid fade and blur choreography",
 );
 assert(
   /\.mobile-menu-button\s*\{[^}]*overflow:\s*hidden/s.test(cssSource),
@@ -461,13 +470,6 @@ for (const foundation of catalog.foundations) {
   );
 }
 
-for (const component of catalog.components) {
-  assert(
-    routes.includes(`/components/${component.slug}`),
-    `Component route is missing: ${component.slug}`,
-  );
-}
-
 const designEditions = [
   "DESIGN.md",
   "DESIGN.en.md",
@@ -496,8 +498,8 @@ assert(
   "Static paths must place the trailing slash before the fragment",
 );
 assert(
-  siteHref("/components/button?density=compact", "/design/") ===
-    "/design/components/button/?density=compact",
+  siteHref("/foundations/color?density=compact", "/design/") ===
+    "/design/foundations/color/?density=compact",
   "Static paths must place the trailing slash before the query",
 );
 

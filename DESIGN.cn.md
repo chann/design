@@ -298,10 +298,9 @@ Comfort DESIGN.md 面向需要专注完成任务的 dashboard、创作工具、�
 从 shadcn/ui 组件开始。保留成熟的可访问性与交互习惯，再通过`DESIGN.md`调整颜色、
 字体、间距、状态、动效与文案，最后在真实界面和生成的静态页面中检查结果。
 
-参考站点覆盖 15 个 Foundation、8 个 family 中的 63 个 component，以及 336 条
-static route。每个 detail route 都按相同顺序提供真实 specimen、Preview 与
-View code segmented control、usage、anatomy、state、accessibility、
-internationalization 与实现指南。
+参考站点通过 80 条 static route 发布 15 个 Foundation 与四种语言版本。公开的
+component catalog 与 specimen route 暂不提供，待整体产品改进完成后重新设计信息
+结构与示例。
 
 | 品质            | 用户应当感受到                       | 界面中的表现                                 |
 | --------------- | ------------------------------------ | -------------------------------------------- |
@@ -414,8 +413,8 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 
 文档 shell 的 header 在初始状态与滚动后都保持为距 viewport 顶部 24px 的
 floating surface。左右 documentation rail 与正文之间不设置 vertical separator，
-只用留白区分。footer 分布 System、Foundations、Components、Resources、Legal
-sitemap 分组，并以滚动进入时部分露出的大型 `Comfort DESIGN.md` text signature
+只用留白区分。footer 分布 System、Foundations、Resources、Legal sitemap 分组，
+在新结构准备好之前不显示 component catalog link，并以滚动进入时部分露出的大型 `Comfort DESIGN.md` text signature
 收尾。reduced motion 下不产生位移，直接显示最终状态。
 
 从 320 CSS px 起不得出现页面级横向滚动。只有边界和操作提示明确的数据区域
@@ -487,26 +486,10 @@ Layout、Motion、Radius、Spacing、State、Voice and Tone、Writing**。
 实现时先选择合适的 shadcn/ui primitive，再映射 semantic token，最后只添加必要的
 composition。不要仅为视觉效果另建一套 primitive。
 
-63 个 component 按以下 8 个 family 维护：
-
-- **Actions (4)：**Button、Button Group、Toggle、Toggle Group
-- **Forms (15)：**Calendar、Checkbox、Combobox、Date Picker、Field、Input、
-  Input Group、Input OTP、Label、Native Select、Radio Group、Select、Slider、
-  Switch、Textarea
-- **Navigation (7)：**Breadcrumb、Command、Menubar、Navigation Menu、
-  Pagination、Sidebar、Tabs
-- **Overlays (9)：**Alert Dialog、Context Menu、Dialog、Drawer、Dropdown Menu、
-  Hover Card、Popover、Sheet、Tooltip
-- **Data display (10)：**Avatar、Badge、Card、Carousel、Chart、Data Table、Item、
-  Kbd、Table、Typography
-- **Feedback (8)：**Accordion、Alert、Collapsible、Empty、Progress、Skeleton、
-  Spinner、Toast
-- **Layout (5)：**Aspect Ratio、Direction、Resizable、Scroll Area、Separator
-- **Conversation (5)：**Attachment、Bubble、Marker、Message、Message Scroller
-
-每条 route 都提供真实 interactive specimen，而不是 placeholder，并按 family
-bundle lazy-load。Preview 与 View code 组成一个连续 segmented control，code
-panel 内必须显示 copy 操作结果。
+公开 component catalog 与详细 specimen route 目前不纳入发布范围。整体产品改进
+完成后，重新定义 information architecture、example quality 与 state verification
+标准，再从头构建。在此之前，`src/components/ui` 只作为参考站点内部的
+implementation layer 保留。
 
 ### Navigation 与 shell
 
@@ -692,7 +675,7 @@ inventory，以及 MUST、SHOULD、MAY 的强度。翻译保留含义，同时�
 4.3、shadcn/ui source、Radix UI 与 Base UI primitive、Lucide、TanStack Table、
 Recharts、Embla。库可以替换，但视觉、交互、可访问性与验证质量不能降低。
 
-- Vite 在 `/design/` base 下构建 static site，并从 catalog manifest 生成 336 个
+- Vite 在 `/design/` base 下构建 static site，并从 catalog manifest 生成 80 个
   route artifact。
 - 将 YAML role 一次映射为 CSS variable 或 theme token，component 不重复 raw
   value。
@@ -706,17 +689,16 @@ Recharts、Embla。库可以替换，但视觉、交互、可访问性与验证�
 ## Verification
 
 完成前必须通过 `npm run verify:catalog`、`npm run lint`、`npm run check` 与
-`npm run build`。catalog verification 必须确认正好 63 个 component、15 个
-Foundation、336 条 static route、四种语言版本具有相同 inventory，以及 light
+`npm run build`。catalog verification 必须确认正好 15 个 Foundation、80 条
+static route、四种语言版本具有相同 Foundation inventory，以及 light
 `#0066CC` 与 dark `#78B7FF` primary。
 
 static output 必须包含英文 `dist/index.html`、韩文 `dist/ko/index.html`、日文
 `dist/jp/index.html` 与中文 `dist/cn/index.html`。逐项检查 `lang`、canonical、
 `hreflang`，并将英文设为 `x-default`。
 
-browser QA 在 390px 与 1440px 执行每个 family 的代表 specimen，覆盖 search、
-empty/reset、overlay focus 恢复、form input、table sort、chart、carousel、message
-anchor、Preview 与 View code、copy feedback，并检查滚动后的 header top gap、
+browser QA 在 390px 与 1440px 检查首页、原则、Foundation 列表与详情 route，覆盖
+search、empty/reset、Foundation specimen 与前后 navigation，并检查滚动后的 header top gap、
 page overflow 与 rail separator 是否消失，以及 light/dark 和 reduced motion。
 Axe violation 必须为 0；无法判定的 `incomplete` 单独记录。deployment 需确认
 GitHub Pages job、live route、clean worktree，以及 local、upstream、live remote

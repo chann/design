@@ -1,4 +1,4 @@
-import { access, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 
 import { catalogRoutes, readCatalog } from "./catalog-contract.mjs";
 
@@ -13,35 +13,11 @@ const foundationSpecimens = await readFile(
   new URL("src/components/foundation-specimens.tsx", root),
   "utf8",
 );
-const componentSpecimenSources = await Promise.all(
-  [
-    "action-feedback-specimens.tsx",
-    "form-specimens.tsx",
-    "navigation-overlay-specimens.tsx",
-    "data-layout-specimens.tsx",
-    "conversation-specimens.tsx",
-  ].map((file) =>
-    readFile(new URL(`src/components/specimens/${file}`, root), "utf8"),
-  ),
-);
-const componentSpecimens = componentSpecimenSources.join("\n");
-const componentSlugs = catalog.components.map(({ slug }) => slug);
 const foundationSlugs = catalog.foundations.map(({ slug }) => slug);
 
-assert(catalog.components.length === 63, "Expected 63 components");
 assert(catalog.foundations.length === 15, "Expected 15 Foundations");
-assert(new Set(componentSlugs).size === 63, "Component slugs must be unique");
 assert(new Set(foundationSlugs).size === 15, "Foundation slugs must be unique");
-assert(catalogRoutes(catalog).length === 336, "Expected 336 static routes");
-
-for (const component of catalog.components) {
-  await access(new URL(`src/components/ui/${component.module}`, root));
-  assert(
-    componentSpecimens.includes(`"${component.specimen}":`) ||
-      componentSpecimens.includes(`  ${component.specimen}:`),
-    `Component specimen is missing: ${component.specimen}`,
-  );
-}
+assert(catalogRoutes(catalog).length === 80, "Expected 80 static routes");
 
 for (const specimen of [
   "design-token",
@@ -67,20 +43,11 @@ for (const specimen of [
   );
 }
 
-for (const record of [...catalog.components, ...catalog.foundations]) {
+for (const record of catalog.foundations) {
   assert(record.title.trim().length > 0, `Missing title for ${record.slug}`);
   assert(
     record.description.trim().length > 0,
     `Missing description for ${record.slug}`,
-  );
-}
-
-for (const record of catalog.components) {
-  assert(record.usage.trim().length > 0, `Missing usage for ${record.slug}`);
-  assert(record.anatomy.length > 0, `Missing anatomy for ${record.slug}`);
-  assert(
-    record.accessibility.length > 0,
-    `Missing accessibility for ${record.slug}`,
   );
 }
 
@@ -147,14 +114,13 @@ for (const { file, source } of designDocuments) {
     frontMatter === canonicalFrontMatter,
     `${file} token front matter drifted`,
   );
-  assert(source.includes("63"), `${file} must document 63 components`);
   assert(source.includes("15"), `${file} must document 15 Foundations`);
   assert(
     source.includes("Comfort DESIGN.md"),
     `${file} must document the footer signature`,
   );
   assert(!source.includes("SSOT"), `${file} must avoid the SSOT abbreviation`);
-  for (const record of [...catalog.components, ...catalog.foundations]) {
+  for (const record of catalog.foundations) {
     assert(source.includes(record.title), `${file} is missing ${record.title}`);
   }
 }
@@ -163,4 +129,4 @@ const css = await readFile(new URL("src/index.css", root), "utf8");
 assert(css.includes("#0066cc"), "Light primary must remain #0066CC");
 assert(css.includes("#78b7ff"), "Dark primary must remain #78B7FF");
 
-console.log("Verified 63 components, 15 Foundations, and 336 routes.");
+console.log("Verified 15 Foundations and 80 routes.");

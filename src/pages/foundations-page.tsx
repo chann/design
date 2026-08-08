@@ -55,7 +55,6 @@ export function FoundationsPage({
     localizedFoundation(record, locale),
   );
   const [query, setQuery] = useState("");
-  const [family, setFamily] = useState("all");
   const [results, setResults] = useState(foundations);
 
   return (
@@ -84,10 +83,8 @@ export function FoundationsPage({
     >
       <section className="scroll-mt-24 flex flex-col gap-5" id="catalog">
         <CatalogSearch
-          family={family}
           items={foundations}
           locale={locale}
-          onFamilyChange={setFamily}
           onResultsChange={setResults}
           onValueChange={setQuery}
           value={query}
@@ -128,18 +125,13 @@ export function FoundationsPage({
                       <span className="flex size-11 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
                         <Icon aria-hidden="true" className="size-5" />
                       </span>
-                      <span className="font-mono text-xs text-muted-foreground">
+                      <span className="font-mono text-xs text-foreground/80">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
                     <div className="relative z-10 mt-auto flex max-w-lg flex-col gap-2 pt-6">
                       <h2 className="text-xl font-semibold">{item.title}</h2>
-                      <p
-                        className={cn(
-                          "text-pretty text-sm leading-6 text-muted-foreground",
-                          index === 0 && "text-foreground/80",
-                        )}
-                      >
+                      <p className="text-pretty text-sm leading-6 text-foreground/80">
                         {item.description}
                       </p>
                     </div>

@@ -25,8 +25,10 @@ specimens, and detailed reference pages:
   Comfort's product language.
 - **Foundations:** all 15 SEED-inspired semantic Foundations, adapted to
   Comfort's tokens and product language.
-- **Components:** 63 interactive references across eight families, each with a
-  real specimen, usage, anatomy, states, accessibility, and code view.
+
+The component catalog is intentionally not published while its structure and
+examples are being redesigned. The shadcn source components remain available
+to the site itself without presenting the previous catalog as finished guidance.
 
 The documentation shell uses a floating header with a persistent 24px top gap,
 contextual rails without vertical separators, an on-page outline, previous/next
@@ -38,9 +40,8 @@ to Comfort.
 
 The reference site uses Vite 8, React 19, TypeScript 6, Tailwind CSS 4, and
 shadcn components with Radix UI and Base UI primitives.
-TanStack Table, Recharts, Embla, and focused companion libraries support the
-advanced specimens. Component source lives in `src/components/ui`;
-Comfort-specific composition and guidance live in the page and shell layers.
+Component source lives in `src/components/ui`; Comfort-specific composition
+and guidance live in the page and shell layers.
 
 Static route copies are generated at build time so every documentation URL
 loads directly on GitHub Pages without a client-side redirect.
@@ -60,9 +61,9 @@ Run the full local gate before publishing:
 npm run validate
 ```
 
-The command verifies the 63/15 catalog and four DESIGN.md editions, then runs
-ESLint, TypeScript, the production Vite build, 336-route generation, and static
-site verification.
+The command verifies the 15-Foundation catalog and four DESIGN.md editions,
+then runs ESLint, TypeScript, the production Vite build, 80-route generation,
+and static site verification.
 
 ## Documentation
 
@@ -72,8 +73,8 @@ site verification.
 - **日本語:** [DESIGN.jp.md](./DESIGN.jp.md)
 
 All four files carry the same machine-readable YAML tokens, section order, and
-63-component and 15-Foundation inventory. The live site defaults to English at
-`/`; Korean is available at `/ko/`, Japanese at `/jp/`, and Chinese at `/cn/`.
+15-Foundation inventory. The live site defaults to English at `/`; Korean is
+available at `/ko/`, Japanese at `/jp/`, and Chinese at `/cn/`.
 
 ## Format
 

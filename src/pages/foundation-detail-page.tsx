@@ -46,11 +46,7 @@ export function FoundationDetailPage({
           description: content.overviewDescription,
         }
       : foundationItems[index - 1];
-  const next = foundationItems[index + 1] ?? {
-    href: "/components",
-    title: docsContents[locale].shell.sections.components,
-    description: docsContents[locale].components.title,
-  };
+  const next = foundationItems[index + 1];
 
   return (
     <DocsLayout

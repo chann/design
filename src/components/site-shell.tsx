@@ -46,11 +46,7 @@ import {
   type HomeLocale,
 } from "@/content/home";
 import { designDocumentForLocale, docsContents } from "@/content/docs";
-import {
-  componentCatalog,
-  componentFamilies,
-  foundationCatalog,
-} from "@/data/catalog";
+import { foundationCatalog } from "@/data/catalog";
 import {
   designEditions,
   localizedRoute,
@@ -106,7 +102,6 @@ function documentationGroups(locale: HomeLocale) {
       items: [
         { href: "/principles", title: docs.shell.sections.principles },
         { href: "/foundations", title: docs.shell.sections.foundations },
-        { href: "/components", title: docs.shell.sections.components },
       ],
     },
     {
@@ -116,15 +111,6 @@ function documentationGroups(locale: HomeLocale) {
         title,
       })),
     },
-    ...componentFamilies.map((family) => ({
-      title: `${docs.shell.familyGroup} / ${docs.families[family]}`,
-      items: componentCatalog
-        .filter((component) => component.family === family)
-        .map(({ slug, title }) => ({
-          href: `/components/${slug}`,
-          title,
-        })),
-    })),
   ];
 }
 
@@ -142,10 +128,6 @@ function footerGroups(content: HomeContent) {
         {
           href: localizedRoute("/foundations", content.locale),
           title: content.footer.links.foundationCatalog,
-        },
-        {
-          href: localizedRoute("/components", content.locale),
-          title: content.footer.links.componentCatalog,
         },
       ],
     },
@@ -190,8 +172,7 @@ function footerGroups(content: HomeContent) {
 
 function primaryNavTitle(href: string, shell: HomeContent["shell"]) {
   if (href === "/principles") return shell.nav.principles;
-  if (href === "/foundations") return shell.nav.foundations;
-  return shell.nav.components;
+  return shell.nav.foundations;
 }
 
 function ThemeMenu({ content = en }: { content?: HomeContent }) {
@@ -641,7 +622,7 @@ export function DocsLayout({
 }: {
   currentPath: string;
   locale: HomeLocale;
-  section: "principles" | "foundations" | "components";
+  section: "principles" | "foundations";
   eyebrow: string;
   title: string;
   description: string;

@@ -1,1265 +1,4 @@
 {
-  "components": [
-    {
-      "slug": "accordion",
-      "title": "Accordion",
-      "description": "Reveals related sections without leaving the current context.",
-      "usage": "Use for optional supporting content when several sections share the same hierarchy.",
-      "anatomy": ["Item", "Trigger", "Content region"],
-      "accessibility": [
-        "Triggers are buttons",
-        "Expanded state is programmatic",
-        "Focus order follows reading order"
-      ],
-      "family": "feedback",
-      "keywords": ["disclosure", "expand", "collapse"],
-      "states": ["default", "hover", "focus-visible", "expanded", "disabled"],
-      "specimen": "accordion",
-      "module": "accordion.tsx"
-    },
-    {
-      "slug": "alert",
-      "title": "Alert",
-      "description": "Places persistent contextual information beside the work it affects.",
-      "usage": "Use for information, warnings, success, or errors that must remain visible in context.",
-      "anatomy": ["Status icon", "Title", "Description"],
-      "accessibility": [
-        "Status is not color only",
-        "Urgent alerts use the correct live-region role",
-        "Copy names the recovery path"
-      ],
-      "family": "feedback",
-      "keywords": ["callout", "status", "notice"],
-      "states": ["default", "error", "destructive"],
-      "specimen": "alert",
-      "module": "alert.tsx"
-    },
-    {
-      "slug": "alert-dialog",
-      "title": "Alert Dialog",
-      "description": "Interrupts the flow for a decision with significant consequences.",
-      "usage": "Use only when the person must explicitly confirm or cancel a consequential action.",
-      "anatomy": [
-        "Trigger",
-        "Title and consequence",
-        "Cancel and confirm actions"
-      ],
-      "accessibility": [
-        "Focus is trapped while open",
-        "Cancel receives a safe path",
-        "Focus returns to the trigger"
-      ],
-      "family": "overlays",
-      "keywords": ["confirm", "destructive", "modal"],
-      "states": ["default", "focus-visible", "expanded", "destructive"],
-      "specimen": "alert-dialog",
-      "module": "alert-dialog.tsx"
-    },
-    {
-      "slug": "aspect-ratio",
-      "title": "Aspect Ratio",
-      "description": "Keeps media and visual previews within a predictable proportion.",
-      "usage": "Use when layout stability depends on media dimensions before the asset loads.",
-      "anatomy": ["Ratio container", "Sized content"],
-      "accessibility": [
-        "Meaningful media keeps alt text",
-        "The ratio does not crop essential content",
-        "Dimensions prevent layout shift"
-      ],
-      "family": "layout",
-      "keywords": ["media", "ratio", "responsive"],
-      "states": ["default", "loading", "error"],
-      "specimen": "aspect-ratio",
-      "module": "aspect-ratio.tsx"
-    },
-    {
-      "slug": "attachment",
-      "title": "Attachment",
-      "description": "Shows a file or image with metadata, transfer state, and actions.",
-      "usage": "Use in upload and conversation flows where file identity and progress must stay clear.",
-      "anatomy": ["Preview", "Filename and metadata", "Progress and actions"],
-      "accessibility": [
-        "Progress has a text equivalent",
-        "Remove actions name the file",
-        "Errors preserve retry context"
-      ],
-      "family": "conversation",
-      "keywords": ["file", "upload", "media"],
-      "states": ["default", "hover", "focus-visible", "loading", "error"],
-      "specimen": "attachment",
-      "module": "attachment.tsx"
-    },
-    {
-      "slug": "avatar",
-      "title": "Avatar",
-      "description": "Represents a person or entity with an image and resilient fallback.",
-      "usage": "Use when identity supports scanning, responsibility, or conversation context.",
-      "anatomy": ["Image", "Text fallback", "Optional status"],
-      "accessibility": [
-        "Decorative duplicates are hidden",
-        "Fallback preserves identity",
-        "Status is labelled outside color"
-      ],
-      "family": "data-display",
-      "keywords": ["identity", "profile", "fallback"],
-      "states": ["default", "loading", "error"],
-      "specimen": "avatar",
-      "module": "avatar.tsx"
-    },
-    {
-      "slug": "badge",
-      "title": "Badge",
-      "description": "Adds concise classification or status metadata to nearby content.",
-      "usage": "Use for short labels that supplement a primary title rather than replacing it.",
-      "anatomy": ["Label", "Optional icon", "Compact container"],
-      "accessibility": [
-        "Meaning is not color only",
-        "Labels remain concise",
-        "Interactive badges use button or link semantics"
-      ],
-      "family": "data-display",
-      "keywords": ["status", "label", "metadata"],
-      "states": ["default", "hover", "focus-visible", "selected"],
-      "specimen": "badge",
-      "module": "badge.tsx"
-    },
-    {
-      "slug": "breadcrumb",
-      "title": "Breadcrumb",
-      "description": "Explains a resource's location through a hierarchy of destinations.",
-      "usage": "Use for nested information architecture when returning to parent levels is useful.",
-      "anatomy": ["Navigation landmark", "Parent links", "Current page"],
-      "accessibility": [
-        "Landmark has a name",
-        "Current page uses aria-current",
-        "Collapsed items remain reachable"
-      ],
-      "family": "navigation",
-      "keywords": ["hierarchy", "path", "navigation"],
-      "states": ["default", "hover", "focus-visible"],
-      "specimen": "breadcrumb",
-      "module": "breadcrumb.tsx"
-    },
-    {
-      "slug": "bubble",
-      "title": "Bubble",
-      "description": "Frames conversational content with alignment, grouping, and reactions.",
-      "usage": "Use when message direction or grouping helps distinguish turns in a conversation.",
-      "anatomy": [
-        "Content",
-        "Alignment and grouping",
-        "Reactions or disclosure"
-      ],
-      "accessibility": [
-        "DOM order stays chronological",
-        "Alignment is not the only speaker cue",
-        "Collapsed content announces its state"
-      ],
-      "family": "conversation",
-      "keywords": ["chat", "message", "reaction"],
-      "states": ["default", "hover", "focus-visible", "expanded", "selected"],
-      "specimen": "bubble",
-      "module": "bubble.tsx"
-    },
-    {
-      "slug": "button",
-      "title": "Button",
-      "description": "Initiates an immediate action with clear hierarchy and feedback.",
-      "usage": "Use for operations that change state, submit data, or open an interaction layer.",
-      "anatomy": [
-        "Accessible label",
-        "Optional icon",
-        "Container and focus ring"
-      ],
-      "accessibility": [
-        "Labels name the result",
-        "Loading preserves an accessible name",
-        "Disabled state is not an explanation"
-      ],
-      "family": "actions",
-      "keywords": ["action", "submit", "control"],
-      "states": [
-        "default",
-        "hover",
-        "active",
-        "focus-visible",
-        "disabled",
-        "loading",
-        "destructive"
-      ],
-      "specimen": "button",
-      "module": "button.tsx"
-    },
-    {
-      "slug": "button-group",
-      "title": "Button Group",
-      "description": "Aligns closely related actions within one shared silhouette.",
-      "usage": "Use when actions operate on the same object and benefit from compact adjacency.",
-      "anatomy": ["Shared container", "Grouped buttons", "Optional separator"],
-      "accessibility": [
-        "The group has a name",
-        "Each button remains independently focusable",
-        "Visual joining does not merge semantics"
-      ],
-      "family": "actions",
-      "keywords": ["actions", "toolbar", "segmented"],
-      "states": ["default", "hover", "active", "focus-visible", "disabled"],
-      "specimen": "button-group",
-      "module": "button-group.tsx"
-    },
-    {
-      "slug": "calendar",
-      "title": "Calendar",
-      "description": "Supports date and range selection in a navigable calendar grid.",
-      "usage": "Use when seeing weekday and month context improves date selection accuracy.",
-      "anatomy": ["Month navigation", "Weekday grid", "Date cells"],
-      "accessibility": [
-        "Arrow keys move within the grid",
-        "Selected and today states are announced",
-        "Disabled dates expose their state"
-      ],
-      "family": "forms",
-      "keywords": ["date", "range", "month"],
-      "states": ["default", "hover", "focus-visible", "disabled", "selected"],
-      "specimen": "calendar",
-      "module": "calendar.tsx"
-    },
-    {
-      "slug": "card",
-      "title": "Card",
-      "description": "Groups related content and actions into one bounded surface.",
-      "usage": "Use when independent grouping clarifies a subject or task; prefer spacing when a boundary adds no meaning.",
-      "anatomy": ["Header", "Content", "Optional footer and action"],
-      "accessibility": [
-        "Heading level follows page structure",
-        "Clickable cards expose one primary target",
-        "Nested controls remain valid"
-      ],
-      "family": "data-display",
-      "keywords": ["surface", "container", "content"],
-      "states": ["default", "hover", "focus-visible", "selected"],
-      "specimen": "card",
-      "module": "card.tsx"
-    },
-    {
-      "slug": "carousel",
-      "title": "Carousel",
-      "description": "Moves through a bounded sequence with swipe and explicit controls.",
-      "usage": "Use for a small ordered set when showing every item at once would weaken focus.",
-      "anatomy": ["Viewport", "Slides", "Previous and next controls"],
-      "accessibility": [
-        "Region and controls are named",
-        "Keyboard controls do not trap focus",
-        "Autoplay is not required"
-      ],
-      "family": "data-display",
-      "keywords": ["slides", "swipe", "gallery"],
-      "states": ["default", "hover", "focus-visible", "disabled"],
-      "specimen": "carousel",
-      "module": "carousel.tsx"
-    },
-    {
-      "slug": "chart",
-      "title": "Chart",
-      "description": "Visualizes quantitative relationships with token-aware series and labels.",
-      "usage": "Use when shape and trend communicate a relationship faster than a table alone.",
-      "anatomy": ["Plot", "Axes and labels", "Legend and text summary"],
-      "accessibility": [
-        "A text or table summary is available",
-        "Series differ beyond color",
-        "Tooltips are keyboard reachable"
-      ],
-      "family": "data-display",
-      "keywords": ["data", "visualization", "graph"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "loading",
-        "empty",
-        "error",
-        "selected"
-      ],
-      "specimen": "chart",
-      "module": "chart.tsx"
-    },
-    {
-      "slug": "checkbox",
-      "title": "Checkbox",
-      "description": "Selects one or more independent options.",
-      "usage": "Use when each option can be chosen separately and an indeterminate group state may apply.",
-      "anatomy": ["Control", "Indicator", "Persistent label"],
-      "accessibility": [
-        "The label activates the control",
-        "Checked state is programmatic",
-        "Errors are associated with the group"
-      ],
-      "family": "forms",
-      "keywords": ["choice", "boolean", "selection"],
-      "states": [
-        "default",
-        "hover",
-        "active",
-        "focus-visible",
-        "disabled",
-        "selected",
-        "error"
-      ],
-      "specimen": "checkbox",
-      "module": "checkbox.tsx"
-    },
-    {
-      "slug": "collapsible",
-      "title": "Collapsible",
-      "description": "Expands or collapses one supporting panel from a single trigger.",
-      "usage": "Use for progressive disclosure when only one independent region needs control.",
-      "anatomy": ["Trigger", "Collapsible content"],
-      "accessibility": [
-        "Trigger state is announced",
-        "Content remains after the trigger in reading order",
-        "Reduced motion removes travel"
-      ],
-      "family": "feedback",
-      "keywords": ["disclosure", "panel", "expand"],
-      "states": ["default", "hover", "focus-visible", "expanded", "disabled"],
-      "specimen": "collapsible",
-      "module": "collapsible.tsx"
-    },
-    {
-      "slug": "combobox",
-      "title": "Combobox",
-      "description": "Combines text input with a searchable suggestion list.",
-      "usage": "Use when the option set is too large for a select and typed filtering helps.",
-      "anatomy": ["Input or trigger", "Suggestion list", "Selected value"],
-      "accessibility": [
-        "Active option is announced",
-        "Keyboard selection follows combobox patterns",
-        "No-result state has a recovery path"
-      ],
-      "family": "forms",
-      "keywords": ["autocomplete", "search", "select"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "empty",
-        "error",
-        "selected",
-        "expanded"
-      ],
-      "specimen": "combobox",
-      "module": "combobox.tsx"
-    },
-    {
-      "slug": "command",
-      "title": "Command",
-      "description": "Searches and invokes a compact set of destinations and actions.",
-      "usage": "Use for expert navigation or action discovery when labels and shortcuts are known.",
-      "anatomy": ["Search input", "Grouped results", "Shortcut hints"],
-      "accessibility": [
-        "Listbox focus is managed",
-        "Shortcuts are supplemental",
-        "Empty search results are announced"
-      ],
-      "family": "navigation",
-      "keywords": ["palette", "search", "shortcut"],
-      "states": ["default", "focus-visible", "empty", "selected", "expanded"],
-      "specimen": "command",
-      "module": "command.tsx"
-    },
-    {
-      "slug": "context-menu",
-      "title": "Context Menu",
-      "description": "Shows actions related to a target through a secondary pointer gesture.",
-      "usage": "Use only as an acceleration path; essential actions remain available elsewhere.",
-      "anatomy": ["Target", "Menu surface", "Items and submenus"],
-      "accessibility": [
-        "Keyboard users have an equivalent path",
-        "Menu items expose roles",
-        "Focus returns to the target"
-      ],
-      "family": "overlays",
-      "keywords": ["right click", "menu", "actions"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "expanded",
-        "selected"
-      ],
-      "specimen": "context-menu",
-      "module": "context-menu.tsx"
-    },
-    {
-      "slug": "data-table",
-      "title": "Data Table",
-      "description": "Adds sorting, filtering, selection, and pagination to structured rows.",
-      "usage": "Use for task-oriented datasets whose controls need to remain tied to tabular semantics.",
-      "anatomy": [
-        "Table toolbar",
-        "Headers and rows",
-        "Pagination and empty state"
-      ],
-      "accessibility": [
-        "Sortable headers are buttons",
-        "Selection is announced",
-        "Overflow lives in a named region"
-      ],
-      "family": "data-display",
-      "keywords": ["grid", "sorting", "filtering"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "loading",
-        "empty",
-        "error",
-        "selected"
-      ],
-      "specimen": "data-table",
-      "module": "data-table.tsx"
-    },
-    {
-      "slug": "date-picker",
-      "title": "Date Picker",
-      "description": "Combines a formatted date field with calendar selection and presets.",
-      "usage": "Use when a compact form needs both typed clarity and visual date context.",
-      "anatomy": ["Label and trigger", "Calendar popover", "Formatted value"],
-      "accessibility": [
-        "The selected date is readable as text",
-        "Popover focus is managed",
-        "Locale formats do not alter stored meaning"
-      ],
-      "family": "forms",
-      "keywords": ["date", "calendar", "preset"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "error",
-        "selected",
-        "expanded"
-      ],
-      "specimen": "date-picker",
-      "module": "date-picker.tsx"
-    },
-    {
-      "slug": "dialog",
-      "title": "Dialog",
-      "description": "Focuses attention on a contained decision or short task.",
-      "usage": "Use when work must resolve or dismiss before returning to the underlying context.",
-      "anatomy": ["Trigger", "Title and description", "Content and actions"],
-      "accessibility": [
-        "Focus is trapped and restored",
-        "Title and description label the dialog",
-        "Escape follows the task behavior"
-      ],
-      "family": "overlays",
-      "keywords": ["modal", "overlay", "focus"],
-      "states": ["default", "focus-visible", "expanded"],
-      "specimen": "dialog",
-      "module": "dialog.tsx"
-    },
-    {
-      "slug": "direction",
-      "title": "Direction",
-      "description": "Provides left-to-right or right-to-left reading direction to descendants.",
-      "usage": "Use at a locale or content boundary when direction differs from the surrounding page.",
-      "anatomy": ["Direction provider", "Logical-layout descendants"],
-      "accessibility": [
-        "The HTML direction matches reading order",
-        "Logical properties replace physical offsets",
-        "Mixed-direction text remains isolated"
-      ],
-      "family": "layout",
-      "keywords": ["rtl", "ltr", "internationalization"],
-      "states": ["default"],
-      "specimen": "direction",
-      "module": "direction.tsx"
-    },
-    {
-      "slug": "drawer",
-      "title": "Drawer",
-      "description": "Presents a task surface that enters from a viewport edge with drag behavior.",
-      "usage": "Use for compact or mobile workflows that benefit from a spatially connected sheet.",
-      "anatomy": ["Trigger", "Drag handle", "Title, content, and actions"],
-      "accessibility": [
-        "Focus is contained and restored",
-        "Drag has button alternatives",
-        "Reduced motion keeps state immediate"
-      ],
-      "family": "overlays",
-      "keywords": ["sheet", "mobile", "drag"],
-      "states": ["default", "active", "focus-visible", "expanded"],
-      "specimen": "drawer",
-      "module": "drawer.tsx"
-    },
-    {
-      "slug": "dropdown-menu",
-      "title": "Dropdown Menu",
-      "description": "Opens a compact list of actions or choices from a trigger.",
-      "usage": "Use for secondary actions that share context and do not need persistent visibility.",
-      "anatomy": ["Trigger", "Menu surface", "Items, groups, and submenus"],
-      "accessibility": [
-        "Arrow keys move through items",
-        "Disabled items are programmatic",
-        "Focus returns to the trigger"
-      ],
-      "family": "overlays",
-      "keywords": ["menu", "actions", "popover"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "expanded",
-        "selected"
-      ],
-      "specimen": "dropdown-menu",
-      "module": "dropdown-menu.tsx"
-    },
-    {
-      "slug": "empty",
-      "title": "Empty",
-      "description": "Explains why a collection has no content and what to do next.",
-      "usage": "Use for initial, filtered, or permission-based absence with a specific recovery path.",
-      "anatomy": [
-        "Optional visual",
-        "Title and explanation",
-        "Primary recovery action"
-      ],
-      "accessibility": [
-        "Absence is stated in text",
-        "The next action is keyboard reachable",
-        "Filtered emptiness offers reset"
-      ],
-      "family": "feedback",
-      "keywords": ["zero state", "no results", "recovery"],
-      "states": ["empty"],
-      "specimen": "empty",
-      "module": "empty.tsx"
-    },
-    {
-      "slug": "field",
-      "title": "Field",
-      "description": "Composes a persistent label, control, help text, and validation message.",
-      "usage": "Use as the standard boundary for collecting one value or a related control group.",
-      "anatomy": ["Label", "Control", "Description and error"],
-      "accessibility": [
-        "Label and descriptions are associated",
-        "Errors identify a correction",
-        "Required state is programmatic"
-      ],
-      "family": "forms",
-      "keywords": ["form", "label", "validation"],
-      "states": ["default", "focus-visible", "disabled", "error"],
-      "specimen": "field",
-      "module": "field.tsx"
-    },
-    {
-      "slug": "hover-card",
-      "title": "Hover Card",
-      "description": "Previews supporting content behind a link without changing destination.",
-      "usage": "Use when a short preview helps decide whether to follow a link.",
-      "anatomy": ["Link trigger", "Preview surface", "Supporting content"],
-      "accessibility": [
-        "The link works without the preview",
-        "Keyboard focus opens equivalent content",
-        "Pointer travel tolerates the gap"
-      ],
-      "family": "overlays",
-      "keywords": ["preview", "hover", "link"],
-      "states": ["default", "hover", "focus-visible", "expanded"],
-      "specimen": "hover-card",
-      "module": "hover-card.tsx"
-    },
-    {
-      "slug": "input",
-      "title": "Input",
-      "description": "Collects a short text value with persistent labelling and validation.",
-      "usage": "Use for a single line of text, number, date string, or other concise value.",
-      "anatomy": ["Persistent label", "Input control", "Help or error text"],
-      "accessibility": [
-        "Placeholder is not the label",
-        "Autocomplete and input mode are intentional",
-        "Errors preserve the entered value"
-      ],
-      "family": "forms",
-      "keywords": ["text field", "form", "entry"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "loading",
-        "error"
-      ],
-      "specimen": "input",
-      "module": "input.tsx"
-    },
-    {
-      "slug": "input-group",
-      "title": "Input Group",
-      "description": "Combines an input with closely related prefixes, suffixes, or actions.",
-      "usage": "Use when an addon clarifies units, scope, or an action intrinsic to the entered value.",
-      "anatomy": ["Shared container", "Input", "Addon or action"],
-      "accessibility": [
-        "Addons contribute an accessible description",
-        "Icon actions have names",
-        "Focus remains visually clear across the group"
-      ],
-      "family": "forms",
-      "keywords": ["addon", "prefix", "suffix"],
-      "states": ["default", "hover", "focus-visible", "disabled", "error"],
-      "specimen": "input-group",
-      "module": "input-group.tsx"
-    },
-    {
-      "slug": "input-otp",
-      "title": "Input OTP",
-      "description": "Collects a fixed-length verification code with paste support.",
-      "usage": "Use for short one-time codes while preserving ordinary keyboard and clipboard behavior.",
-      "anatomy": ["Hidden input", "Visual slots", "Group separators"],
-      "accessibility": [
-        "The code is one labelled input",
-        "Paste remains available",
-        "Errors do not clear the value"
-      ],
-      "family": "forms",
-      "keywords": ["verification", "code", "pin"],
-      "states": ["default", "focus-visible", "disabled", "error", "selected"],
-      "specimen": "input-otp",
-      "module": "input-otp.tsx"
-    },
-    {
-      "slug": "item",
-      "title": "Item",
-      "description": "Aligns media, primary content, metadata, and actions in a reusable row.",
-      "usage": "Use for list content whose internal alignment repeats across several records.",
-      "anatomy": ["Media", "Title and description", "Metadata or action"],
-      "accessibility": [
-        "Source order matches reading order",
-        "The primary target is unambiguous",
-        "Secondary actions remain separately labelled"
-      ],
-      "family": "data-display",
-      "keywords": ["row", "list", "media"],
-      "states": ["default", "hover", "focus-visible", "selected", "disabled"],
-      "specimen": "item",
-      "module": "item.tsx"
-    },
-    {
-      "slug": "kbd",
-      "title": "Kbd",
-      "description": "Displays a keyboard key or shortcut as supplemental input guidance.",
-      "usage": "Use beside an available action; never make the shortcut the only discoverable label.",
-      "anatomy": ["Key label", "Optional shortcut group"],
-      "accessibility": [
-        "Readable text names the key",
-        "Platform-specific modifiers are localized",
-        "Shortcuts remain supplemental"
-      ],
-      "family": "data-display",
-      "keywords": ["keyboard", "shortcut", "key"],
-      "states": ["default"],
-      "specimen": "kbd",
-      "module": "kbd.tsx"
-    },
-    {
-      "slug": "label",
-      "title": "Label",
-      "description": "Names a form control with a persistent, clickable association.",
-      "usage": "Use for every form control unless the native element already supplies a visible name.",
-      "anatomy": [
-        "Label text",
-        "Control association",
-        "Optional requirement cue"
-      ],
-      "accessibility": [
-        "The for and id association is valid",
-        "Required meaning is not visual only",
-        "Disabled styling remains readable"
-      ],
-      "family": "forms",
-      "keywords": ["form", "name", "caption"],
-      "states": ["default", "disabled", "error"],
-      "specimen": "label",
-      "module": "label.tsx"
-    },
-    {
-      "slug": "marker",
-      "title": "Marker",
-      "description": "Marks an inline status, system note, bordered row, or labelled separator.",
-      "usage": "Use to distinguish system context inside a conversation without resembling a person message.",
-      "anatomy": [
-        "Marker line or container",
-        "Status label",
-        "Optional supporting text"
-      ],
-      "accessibility": [
-        "System authorship is stated in text",
-        "Decorative lines are hidden",
-        "Status does not rely on color"
-      ],
-      "family": "conversation",
-      "keywords": ["system note", "status", "separator"],
-      "states": ["default", "selected"],
-      "specimen": "marker",
-      "module": "marker.tsx"
-    },
-    {
-      "slug": "menubar",
-      "title": "Menubar",
-      "description": "Provides persistent access to a stable set of application commands.",
-      "usage": "Use in desktop-like workspaces where command groups stay consistent across tasks.",
-      "anatomy": ["Menu triggers", "Menu surfaces", "Items and shortcuts"],
-      "accessibility": [
-        "Arrow keys traverse menus",
-        "Shortcuts are supplemental",
-        "Focus returns predictably"
-      ],
-      "family": "navigation",
-      "keywords": ["desktop", "commands", "menu"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "expanded",
-        "selected"
-      ],
-      "specimen": "menubar",
-      "module": "menubar.tsx"
-    },
-    {
-      "slug": "message",
-      "title": "Message",
-      "description": "Composes a conversational turn with identity, content, metadata, and actions.",
-      "usage": "Use for one authored turn while keeping chronological order independent of visual alignment.",
-      "anatomy": [
-        "Avatar and author",
-        "Message content",
-        "Metadata and actions"
-      ],
-      "accessibility": [
-        "Author is stated in text",
-        "DOM order is chronological",
-        "Streaming updates avoid repetitive announcements"
-      ],
-      "family": "conversation",
-      "keywords": ["chat", "turn", "author"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "loading",
-        "error",
-        "selected"
-      ],
-      "specimen": "message",
-      "module": "message.tsx"
-    },
-    {
-      "slug": "message-scroller",
-      "title": "Message Scroller",
-      "description": "Anchors conversation turns, preserves history position, and jumps to any message.",
-      "usage": "Use for long or streamed conversations where reading position must survive updates.",
-      "anatomy": [
-        "Scrollable transcript",
-        "Anchored messages",
-        "Jump controls"
-      ],
-      "accessibility": [
-        "The transcript is a named region",
-        "Jump controls move focus intentionally",
-        "Streaming announcements are throttled"
-      ],
-      "family": "conversation",
-      "keywords": ["chat", "scroll", "streaming"],
-      "states": ["default", "loading", "empty", "error", "selected"],
-      "specimen": "message-scroller",
-      "module": "message-scroller.tsx"
-    },
-    {
-      "slug": "native-select",
-      "title": "Native Select",
-      "description": "Uses the platform select control with Comfort styling and semantics.",
-      "usage": "Use for a short option list when native mobile and keyboard behavior is preferable.",
-      "anatomy": ["Persistent label", "Native select", "Optional description"],
-      "accessibility": [
-        "The native element keeps its label",
-        "The selected option is programmatic",
-        "Errors are associated"
-      ],
-      "family": "forms",
-      "keywords": ["select", "native", "options"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "error",
-        "selected"
-      ],
-      "specimen": "native-select",
-      "module": "native-select.tsx"
-    },
-    {
-      "slug": "navigation-menu",
-      "title": "Navigation Menu",
-      "description": "Organizes primary destinations and optional grouped previews.",
-      "usage": "Use for site-level navigation whose groups need more context than a single link row.",
-      "anatomy": [
-        "Navigation landmark",
-        "Triggers and links",
-        "Viewport panel"
-      ],
-      "accessibility": [
-        "Current destination is announced",
-        "Links work without pointer hover",
-        "Keyboard order matches layout"
-      ],
-      "family": "navigation",
-      "keywords": ["site navigation", "mega menu", "links"],
-      "states": ["default", "hover", "focus-visible", "expanded", "selected"],
-      "specimen": "navigation-menu",
-      "module": "navigation-menu.tsx"
-    },
-    {
-      "slug": "pagination",
-      "title": "Pagination",
-      "description": "Moves between stable pages of a larger result set.",
-      "usage": "Use when page boundaries are meaningful and shareable navigation matters.",
-      "anatomy": ["Navigation landmark", "Page links", "Previous and next"],
-      "accessibility": [
-        "The landmark is named",
-        "Current page uses aria-current",
-        "Unavailable directions are disabled or absent"
-      ],
-      "family": "navigation",
-      "keywords": ["pages", "results", "navigation"],
-      "states": ["default", "hover", "focus-visible", "disabled", "selected"],
-      "specimen": "pagination",
-      "module": "pagination.tsx"
-    },
-    {
-      "slug": "popover",
-      "title": "Popover",
-      "description": "Displays focused rich content next to a trigger without blocking the page.",
-      "usage": "Use for compact controls or information that belongs spatially to its trigger.",
-      "anatomy": [
-        "Trigger",
-        "Positioned surface",
-        "Content and optional close"
-      ],
-      "accessibility": [
-        "Trigger state is announced",
-        "Focus movement matches interaction",
-        "Outside dismissal does not lose work"
-      ],
-      "family": "overlays",
-      "keywords": ["floating", "panel", "trigger"],
-      "states": ["default", "focus-visible", "expanded"],
-      "specimen": "popover",
-      "module": "popover.tsx"
-    },
-    {
-      "slug": "progress",
-      "title": "Progress",
-      "description": "Communicates known completion for a bounded task.",
-      "usage": "Use when a meaningful minimum and maximum let the person understand remaining work.",
-      "anatomy": ["Track", "Indicator", "Text value"],
-      "accessibility": [
-        "Value, minimum, and maximum are programmatic",
-        "A text label names the task",
-        "Indeterminate work uses a different pattern"
-      ],
-      "family": "feedback",
-      "keywords": ["completion", "loading", "status"],
-      "states": ["default", "loading", "error"],
-      "specimen": "progress",
-      "module": "progress.tsx"
-    },
-    {
-      "slug": "radio-group",
-      "title": "Radio Group",
-      "description": "Selects exactly one option from a visible set.",
-      "usage": "Use when all choices should remain visible for comparison and one is required at most.",
-      "anatomy": [
-        "Group label",
-        "Radio controls",
-        "Option labels and description"
-      ],
-      "accessibility": [
-        "Arrow keys move within the group",
-        "Group errors are associated",
-        "Selection is programmatic"
-      ],
-      "family": "forms",
-      "keywords": ["choice", "single select", "options"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "error",
-        "selected"
-      ],
-      "specimen": "radio-group",
-      "module": "radio-group.tsx"
-    },
-    {
-      "slug": "resizable",
-      "title": "Resizable",
-      "description": "Lets people adjust adjacent panel proportions with pointer or keyboard.",
-      "usage": "Use in workspaces where panel size changes the usefulness of simultaneous content.",
-      "anatomy": ["Panel group", "Panels", "Resize handles"],
-      "accessibility": [
-        "Handles are keyboard adjustable",
-        "Each handle has a name",
-        "Minimum sizes preserve core tasks"
-      ],
-      "family": "layout",
-      "keywords": ["panels", "split", "resize"],
-      "states": ["default", "hover", "active", "focus-visible", "disabled"],
-      "specimen": "resizable",
-      "module": "resizable.tsx"
-    },
-    {
-      "slug": "scroll-area",
-      "title": "Scroll Area",
-      "description": "Adds consistent scroll affordances to a bounded overflow region.",
-      "usage": "Use only where regional overflow is necessary and the boundary remains visible.",
-      "anatomy": ["Viewport", "Content", "Scrollbars"],
-      "accessibility": [
-        "The region is named when meaningful",
-        "Keyboard scrolling remains native",
-        "Page-level overflow is not hidden"
-      ],
-      "family": "layout",
-      "keywords": ["overflow", "scrollbar", "viewport"],
-      "states": ["default", "hover", "focus-visible"],
-      "specimen": "scroll-area",
-      "module": "scroll-area.tsx"
-    },
-    {
-      "slug": "select",
-      "title": "Select",
-      "description": "Chooses one option from a compact custom menu.",
-      "usage": "Use when a custom option surface is needed and the choices remain concise.",
-      "anatomy": ["Label and trigger", "Value", "Option list"],
-      "accessibility": [
-        "Keyboard selection follows listbox behavior",
-        "The trigger keeps a visible label",
-        "Disabled options are announced"
-      ],
-      "family": "forms",
-      "keywords": ["dropdown", "options", "choice"],
-      "states": [
-        "default",
-        "hover",
-        "focus-visible",
-        "disabled",
-        "error",
-        "selected",
-        "expanded"
-      ],
-      "specimen": "select",
-      "module": "select.tsx"
-    },
-    {
-      "slug": "separator",
-      "title": "Separator",
-      "description": "Creates a quiet visual or semantic boundary between related groups.",
-      "usage": "Use sparingly when spacing alone cannot explain the grouping transition.",
-      "anatomy": ["Horizontal or vertical rule"],
-      "accessibility": [
-        "Decorative separators are hidden",
-        "Semantic separators expose orientation",
-        "Contrast remains subtle but visible"
-      ],
-      "family": "layout",
-      "keywords": ["divider", "rule", "group"],
-      "states": ["default"],
-      "specimen": "separator",
-      "module": "separator.tsx"
-    },
-    {
-      "slug": "sheet",
-      "title": "Sheet",
-      "description": "Extends a dialog from an edge for complementary work or navigation.",
-      "usage": "Use when preserving the relationship to the underlying page matters more than a centered modal.",
-      "anatomy": [
-        "Trigger",
-        "Edge-aligned surface",
-        "Title, content, and close"
-      ],
-      "accessibility": [
-        "Focus is trapped and restored",
-        "The sheet is labelled",
-        "Reduced motion removes long travel"
-      ],
-      "family": "overlays",
-      "keywords": ["panel", "drawer", "overlay"],
-      "states": ["default", "focus-visible", "expanded"],
-      "specimen": "sheet",
-      "module": "sheet.tsx"
-    },
-    {
-      "slug": "sidebar",
-      "title": "Sidebar",
-      "description": "Provides persistent or collapsible secondary navigation for a workspace.",
-      "usage": "Use when destinations or tools remain stable across several related screens.",
-      "anatomy": [
-        "Sidebar container",
-        "Grouped navigation",
-        "Collapse or mobile trigger"
-      ],
-      "accessibility": [
-        "Navigation landmark is named",
-        "Current destination is announced",
-        "Mobile fallback preserves all items"
-      ],
-      "family": "navigation",
-      "keywords": ["rail", "workspace", "navigation"],
-      "states": ["default", "hover", "focus-visible", "expanded", "selected"],
-      "specimen": "sidebar",
-      "module": "sidebar.tsx"
-    },
-    {
-      "slug": "skeleton",
-      "title": "Skeleton",
-      "description": "Reserves the final content geometry while predictable data loads.",
-      "usage": "Use only when the result shape is known and no usable previous content exists.",
-      "anatomy": ["Layout-shaped placeholders", "Accessible loading container"],
-      "accessibility": [
-        "The region exposes busy state",
-        "Placeholders are hidden from reading order",
-        "Animation respects reduced motion"
-      ],
-      "family": "feedback",
-      "keywords": ["loading", "placeholder", "pending"],
-      "states": ["loading"],
-      "specimen": "skeleton",
-      "module": "skeleton.tsx"
-    },
-    {
-      "slug": "slider",
-      "title": "Slider",
-      "description": "Selects a value or range from a bounded numeric scale.",
-      "usage": "Use when relative adjustment is more important than entering an exact number.",
-      "anatomy": ["Track", "Range", "Thumb and value label"],
-      "accessibility": [
-        "Keyboard arrows adjust values",
-        "Minimum, maximum, and value are named",
-        "Exact entry is offered when precision matters"
-      ],
-      "family": "forms",
-      "keywords": ["range", "value", "drag"],
-      "states": ["default", "hover", "active", "focus-visible", "disabled"],
-      "specimen": "slider",
-      "module": "slider.tsx"
-    },
-    {
-      "slug": "spinner",
-      "title": "Spinner",
-      "description": "Indicates short indeterminate work inside a compact action or region.",
-      "usage": "Use when progress cannot be measured and the expected wait is brief.",
-      "anatomy": ["Animated indicator", "Persistent accessible label"],
-      "accessibility": [
-        "A text status names the work",
-        "Reduced motion uses a static indicator",
-        "Long waits provide more context"
-      ],
-      "family": "feedback",
-      "keywords": ["loading", "pending", "activity"],
-      "states": ["loading"],
-      "specimen": "spinner",
-      "module": "spinner.tsx"
-    },
-    {
-      "slug": "switch",
-      "title": "Switch",
-      "description": "Changes a setting that takes effect immediately.",
-      "usage": "Use for a reversible on or off setting whose result applies without a separate submit.",
-      "anatomy": ["Track", "Thumb", "Persistent label"],
-      "accessibility": [
-        "Checked state is announced",
-        "The label names the setting",
-        "Pending changes remain clear"
-      ],
-      "family": "forms",
-      "keywords": ["toggle", "setting", "boolean"],
-      "states": [
-        "default",
-        "hover",
-        "active",
-        "focus-visible",
-        "disabled",
-        "loading",
-        "selected"
-      ],
-      "specimen": "switch",
-      "module": "switch.tsx"
-    },
-    {
-      "slug": "table",
-      "title": "Table",
-      "description": "Compares structured information across rows and columns.",
-      "usage": "Use when values need consistent alignment and cross-row comparison.",
-      "anatomy": ["Caption or label", "Header", "Body rows and cells"],
-      "accessibility": [
-        "Headers use correct scope",
-        "Overflow is a named focusable region only when needed",
-        "Responsive changes preserve labels"
-      ],
-      "family": "data-display",
-      "keywords": ["rows", "columns", "comparison"],
-      "states": ["default", "hover", "focus-visible", "empty", "selected"],
-      "specimen": "table",
-      "module": "table.tsx"
-    },
-    {
-      "slug": "tabs",
-      "title": "Tabs",
-      "description": "Switches between peer views without changing the surrounding context.",
-      "usage": "Use when a small set of related panels share one level of hierarchy.",
-      "anatomy": ["Tab list", "Tabs", "Tab panels"],
-      "accessibility": [
-        "Arrow keys move between tabs",
-        "Selected tab controls its panel",
-        "Panels preserve a logical reading order"
-      ],
-      "family": "navigation",
-      "keywords": ["views", "panels", "segmented"],
-      "states": ["default", "hover", "focus-visible", "disabled", "selected"],
-      "specimen": "tabs",
-      "module": "tabs.tsx"
-    },
-    {
-      "slug": "textarea",
-      "title": "Textarea",
-      "description": "Collects longer free-form text while preserving labels and validation.",
-      "usage": "Use when the expected answer needs multiple lines or benefits from visible editing space.",
-      "anatomy": [
-        "Persistent label",
-        "Multiline control",
-        "Help, count, or error"
-      ],
-      "accessibility": [
-        "Resize does not break layout",
-        "Errors preserve the value",
-        "Character limits are announced before blocking"
-      ],
-      "family": "forms",
-      "keywords": ["multiline", "form", "text"],
-      "states": ["default", "hover", "focus-visible", "disabled", "error"],
-      "specimen": "textarea",
-      "module": "textarea.tsx"
-    },
-    {
-      "slug": "toast",
-      "title": "Toast",
-      "description": "Confirms a short result whose source may be outside the visible area.",
-      "usage": "Use for brief nonblocking outcomes; keep persistent errors and required actions inline.",
-      "anatomy": ["Message", "Optional action", "Dismiss control"],
-      "accessibility": [
-        "Live-region urgency matches the result",
-        "Time limits allow reading",
-        "Errors include an inline recovery path"
-      ],
-      "family": "feedback",
-      "keywords": ["notification", "confirmation", "status"],
-      "states": ["default", "focus-visible", "error", "destructive"],
-      "specimen": "toast",
-      "module": "toast.tsx"
-    },
-    {
-      "slug": "toggle",
-      "title": "Toggle",
-      "description": "Switches one contextual command between pressed and unpressed states.",
-      "usage": "Use for a reversible mode or formatting choice inside a toolbar.",
-      "anatomy": ["Button container", "Icon or label", "Pressed state"],
-      "accessibility": [
-        "Pressed state uses aria-pressed",
-        "Icon-only controls have names",
-        "The mode remains visible without color"
-      ],
-      "family": "actions",
-      "keywords": ["pressed", "mode", "toolbar"],
-      "states": [
-        "default",
-        "hover",
-        "active",
-        "focus-visible",
-        "disabled",
-        "selected"
-      ],
-      "specimen": "toggle",
-      "module": "toggle.tsx"
-    },
-    {
-      "slug": "toggle-group",
-      "title": "Toggle Group",
-      "description": "Groups related pressed controls for single or multiple selection.",
-      "usage": "Use for a compact set of peer modes that benefit from visible comparison.",
-      "anatomy": ["Named group", "Toggle items", "Shared silhouette"],
-      "accessibility": [
-        "Selection mode is programmatic",
-        "Arrow behavior matches the group pattern",
-        "Each item has a clear name"
-      ],
-      "family": "actions",
-      "keywords": ["segmented", "toolbar", "selection"],
-      "states": [
-        "default",
-        "hover",
-        "active",
-        "focus-visible",
-        "disabled",
-        "selected"
-      ],
-      "specimen": "toggle-group",
-      "module": "toggle-group.tsx"
-    },
-    {
-      "slug": "tooltip",
-      "title": "Tooltip",
-      "description": "Provides a short supplemental label or explanation for a focused control.",
-      "usage": "Use for concise clarification; essential instructions remain visible in the interface.",
-      "anatomy": ["Trigger", "Tooltip surface", "Short text"],
-      "accessibility": [
-        "Keyboard focus opens equivalent content",
-        "The trigger works without the tooltip",
-        "Content is concise and noninteractive"
-      ],
-      "family": "overlays",
-      "keywords": ["hint", "label", "hover"],
-      "states": ["default", "hover", "focus-visible", "expanded"],
-      "specimen": "tooltip",
-      "module": "tooltip.tsx"
-    },
-    {
-      "slug": "typography",
-      "title": "Typography",
-      "description": "Applies readable semantic styles to headings, prose, lists, and code.",
-      "usage": "Use semantic elements first, then apply the Comfort type scale without changing document structure.",
-      "anatomy": ["Semantic element", "Type role", "Readable measure"],
-      "accessibility": [
-        "Heading levels follow hierarchy",
-        "Text reflows at zoom",
-        "Code and links wrap safely"
-      ],
-      "family": "data-display",
-      "keywords": ["prose", "heading", "text"],
-      "states": ["default"],
-      "specimen": "typography",
-      "module": "typography.tsx"
-    }
-  ],
   "foundations": [
     {
       "slug": "design-token",
@@ -1272,15 +11,31 @@
         "Keep light and dark roles parallel"
       ],
       "values": [
-        ["primary", "Action and focus", "#0066CC"],
-        ["canvas", "Page ground", "#F7F8FA"],
-        ["surface", "Content surface", "#FFFFFF"]
+        [
+          "primary",
+          "Action and focus",
+          "#0066CC"
+        ],
+        [
+          "canvas",
+          "Page ground",
+          "#F7F8FA"
+        ],
+        [
+          "surface",
+          "Content surface",
+          "#FFFFFF"
+        ]
       ],
       "accessibility": [
         "Token changes preserve contrast",
         "Status roles are not color only"
       ],
-      "related": ["color", "spacing", "state"],
+      "related": [
+        "color",
+        "spacing",
+        "state"
+      ],
       "specimen": "design-token"
     },
     {
@@ -1294,15 +49,31 @@
         "Verify both themes"
       ],
       "values": [
-        ["primary", "Light action", "#0066CC"],
-        ["dark-primary", "Dark action", "#78B7FF"],
-        ["ink", "Primary content", "#17181A"]
+        [
+          "primary",
+          "Light action",
+          "#0066CC"
+        ],
+        [
+          "dark-primary",
+          "Dark action",
+          "#78B7FF"
+        ],
+        [
+          "ink",
+          "Primary content",
+          "#17181A"
+        ]
       ],
       "accessibility": [
         "Body text reaches 4.5 to 1",
         "Non-text controls reach 3 to 1"
       ],
-      "related": ["design-token", "state", "inclusive-design"],
+      "related": [
+        "design-token",
+        "state",
+        "inclusive-design"
+      ],
       "specimen": "color"
     },
     {
@@ -1316,15 +87,31 @@
         "Reserve mono for functional data"
       ],
       "values": [
-        ["display", "Hero statement", "64 / 1.02"],
-        ["body-md", "Product copy", "16 / 1.55"],
-        ["caption", "Metadata", "12 / 1.4"]
+        [
+          "display",
+          "Hero statement",
+          "64 / 1.02"
+        ],
+        [
+          "body-md",
+          "Product copy",
+          "16 / 1.55"
+        ],
+        [
+          "caption",
+          "Metadata",
+          "12 / 1.4"
+        ]
       ],
       "accessibility": [
         "Text reflows at 200 percent",
         "CJK keeps semantic word groups"
       ],
-      "related": ["writing", "international-design", "layout"],
+      "related": [
+        "writing",
+        "international-design",
+        "layout"
+      ],
       "specimen": "typography"
     },
     {
@@ -1338,15 +125,31 @@
         "Avoid metaphor clichés"
       ],
       "values": [
-        ["small", "Inline support", "16 px"],
-        ["control", "Standard control", "20 px"],
-        ["feature", "Illustrative use", "24 px"]
+        [
+          "small",
+          "Inline support",
+          "16 px"
+        ],
+        [
+          "control",
+          "Standard control",
+          "20 px"
+        ],
+        [
+          "feature",
+          "Illustrative use",
+          "24 px"
+        ]
       ],
       "accessibility": [
         "Decorative icons are hidden",
         "Icon-only controls have accessible names"
       ],
-      "related": ["typography", "inclusive-design", "components"],
+      "related": [
+        "typography",
+        "inclusive-design",
+        "components"
+      ],
       "specimen": "iconography"
     },
     {
@@ -1360,16 +163,36 @@
         "Keep one lighting direction"
       ],
       "values": [
-        ["flat", "Page content", "0"],
-        ["contained", "Cards and bars", "1"],
-        ["floating", "Menus and popovers", "2"],
-        ["modal", "Dialogs", "3"]
+        [
+          "flat",
+          "Page content",
+          "0"
+        ],
+        [
+          "contained",
+          "Cards and bars",
+          "1"
+        ],
+        [
+          "floating",
+          "Menus and popovers",
+          "2"
+        ],
+        [
+          "modal",
+          "Dialogs",
+          "3"
+        ]
       ],
       "accessibility": [
         "Selection does not rely on elevation",
         "High contrast preserves boundaries"
       ],
-      "related": ["color", "radius", "state"],
+      "related": [
+        "color",
+        "radius",
+        "state"
+      ],
       "specimen": "elevation"
     },
     {
@@ -1383,15 +206,31 @@
         "Avoid decorative AI gradients"
       ],
       "values": [
-        ["data-ramp", "Ordered magnitude", "5 stops"],
-        ["mask", "Edge continuity", "alpha"],
-        ["hero-text", "Heading emphasis", "one exception"]
+        [
+          "data-ramp",
+          "Ordered magnitude",
+          "5 stops"
+        ],
+        [
+          "mask",
+          "Edge continuity",
+          "alpha"
+        ],
+        [
+          "hero-text",
+          "Heading emphasis",
+          "one exception"
+        ]
       ],
       "accessibility": [
         "Ramp endpoints meet contrast",
         "Data has a non-color equivalent"
       ],
-      "related": ["color", "chart", "inclusive-design"],
+      "related": [
+        "color",
+        "chart",
+        "inclusive-design"
+      ],
       "specimen": "gradient"
     },
     {
@@ -1405,15 +244,31 @@
         "Design recovery beside failure"
       ],
       "values": [
-        ["target", "Touch target", "44 × 44 px"],
-        ["focus", "Visible ring", "2 px + offset"],
-        ["reflow", "Minimum width", "320 CSS px"]
+        [
+          "target",
+          "Touch target",
+          "44 × 44 px"
+        ],
+        [
+          "focus",
+          "Visible ring",
+          "2 px + offset"
+        ],
+        [
+          "reflow",
+          "Minimum width",
+          "320 CSS px"
+        ]
       ],
       "accessibility": [
         "WCAG 2.2 AA is the baseline",
         "Assistive technology follows the same task order"
       ],
-      "related": ["state", "motion", "international-design"],
+      "related": [
+        "state",
+        "motion",
+        "international-design"
+      ],
       "specimen": "inclusive-design"
     },
     {
@@ -1427,15 +282,31 @@
         "Format dates and numbers by locale"
       ],
       "values": [
-        ["expansion", "Copy allowance", "30%"],
-        ["direction", "Layout logic", "LTR and RTL"],
-        ["locale", "Formatting", "Intl APIs"]
+        [
+          "expansion",
+          "Copy allowance",
+          "30%"
+        ],
+        [
+          "direction",
+          "Layout logic",
+          "LTR and RTL"
+        ],
+        [
+          "locale",
+          "Formatting",
+          "Intl APIs"
+        ]
       ],
       "accessibility": [
         "Language and direction attributes are correct",
         "Translated labels remain complete"
       ],
-      "related": ["typography", "layout", "writing"],
+      "related": [
+        "typography",
+        "layout",
+        "writing"
+      ],
       "specimen": "international-design"
     },
     {
@@ -1449,15 +320,31 @@
         "Cap readable measures"
       ],
       "values": [
-        ["gutter", "Compact page", "16 px"],
-        ["content", "Reading measure", "65 characters"],
-        ["workspace", "Maximum shell", "1440 px"]
+        [
+          "gutter",
+          "Compact page",
+          "16 px"
+        ],
+        [
+          "content",
+          "Reading measure",
+          "65 characters"
+        ],
+        [
+          "workspace",
+          "Maximum shell",
+          "1440 px"
+        ]
       ],
       "accessibility": [
         "No page overflow at 320 CSS pixels",
         "Zoom preserves task order"
       ],
-      "related": ["spacing", "radius", "international-design"],
+      "related": [
+        "spacing",
+        "radius",
+        "international-design"
+      ],
       "specimen": "layout"
     },
     {
@@ -1471,15 +358,31 @@
         "Provide reduced-motion parity"
       ],
       "values": [
-        ["instant", "Press feedback", "100 ms"],
-        ["standard", "State change", "180–240 ms"],
-        ["spatial", "Panel travel", "240–360 ms"]
+        [
+          "instant",
+          "Press feedback",
+          "100 ms"
+        ],
+        [
+          "standard",
+          "State change",
+          "180–240 ms"
+        ],
+        [
+          "spatial",
+          "Panel travel",
+          "240–360 ms"
+        ]
       ],
       "accessibility": [
         "Reduced motion removes travel",
         "State remains visible without animation"
       ],
-      "related": ["state", "elevation", "inclusive-design"],
+      "related": [
+        "state",
+        "elevation",
+        "inclusive-design"
+      ],
       "specimen": "motion"
     },
     {
@@ -1493,16 +396,36 @@
         "Keep seams square"
       ],
       "values": [
-        ["sm", "Tags and fragments", "6 px"],
-        ["md", "Controls", "10 px"],
-        ["lg", "Cards", "14 px"],
-        ["xl", "Dialogs", "20 px"]
+        [
+          "sm",
+          "Tags and fragments",
+          "6 px"
+        ],
+        [
+          "md",
+          "Controls",
+          "10 px"
+        ],
+        [
+          "lg",
+          "Cards",
+          "14 px"
+        ],
+        [
+          "xl",
+          "Dialogs",
+          "20 px"
+        ]
       ],
       "accessibility": [
         "Shape is not the only state cue",
         "Focus rings follow the visible contour"
       ],
-      "related": ["elevation", "spacing", "components"],
+      "related": [
+        "elevation",
+        "spacing",
+        "components"
+      ],
       "specimen": "radius"
     },
     {
@@ -1516,16 +439,36 @@
         "Adjust section rhythm optically"
       ],
       "values": [
-        ["xs", "Tight labels", "4 px"],
-        ["sm", "Control internals", "8 px"],
-        ["md", "Related content", "16 px"],
-        ["section", "Major separation", "80 px"]
+        [
+          "xs",
+          "Tight labels",
+          "4 px"
+        ],
+        [
+          "sm",
+          "Control internals",
+          "8 px"
+        ],
+        [
+          "md",
+          "Related content",
+          "16 px"
+        ],
+        [
+          "section",
+          "Major separation",
+          "80 px"
+        ]
       ],
       "accessibility": [
         "Touch targets keep adequate separation",
         "Text expansion does not collapse gaps"
       ],
-      "related": ["layout", "radius", "typography"],
+      "related": [
+        "layout",
+        "radius",
+        "typography"
+      ],
       "specimen": "spacing"
     },
     {
@@ -1539,15 +482,31 @@
         "Place errors near recovery"
       ],
       "values": [
-        ["pending", "No usable data", "skeleton"],
-        ["refreshing", "Previous data remains", "inline status"],
-        ["error", "Recovery available", "retry"]
+        [
+          "pending",
+          "No usable data",
+          "skeleton"
+        ],
+        [
+          "refreshing",
+          "Previous data remains",
+          "inline status"
+        ],
+        [
+          "error",
+          "Recovery available",
+          "retry"
+        ]
       ],
       "accessibility": [
         "Status changes are announced appropriately",
         "Focus does not jump without intent"
       ],
-      "related": ["motion", "inclusive-design", "writing"],
+      "related": [
+        "motion",
+        "inclusive-design",
+        "writing"
+      ],
       "specimen": "state"
     },
     {
@@ -1561,15 +520,31 @@
         "Match urgency to actual risk"
       ],
       "values": [
-        ["default", "Routine guidance", "calm"],
-        ["success", "Confirmed outcome", "concise"],
-        ["error", "Recovery", "specific"]
+        [
+          "default",
+          "Routine guidance",
+          "calm"
+        ],
+        [
+          "success",
+          "Confirmed outcome",
+          "concise"
+        ],
+        [
+          "error",
+          "Recovery",
+          "specific"
+        ]
       ],
       "accessibility": [
         "Messages avoid idioms",
         "Urgent copy remains understandable without punctuation tricks"
       ],
-      "related": ["writing", "state", "international-design"],
+      "related": [
+        "writing",
+        "state",
+        "international-design"
+      ],
       "specimen": "voice-and-tone"
     },
     {
@@ -1583,15 +558,31 @@
         "Keep error recovery inline"
       ],
       "values": [
-        ["button", "Action label", "verb + result"],
-        ["error", "Recovery copy", "cause + next step"],
-        ["empty", "Next action", "context + path"]
+        [
+          "button",
+          "Action label",
+          "verb + result"
+        ],
+        [
+          "error",
+          "Recovery copy",
+          "cause + next step"
+        ],
+        [
+          "empty",
+          "Next action",
+          "context + path"
+        ]
       ],
       "accessibility": [
         "Labels make sense out of visual context",
         "Translation does not concatenate fragments"
       ],
-      "related": ["voice-and-tone", "state", "typography"],
+      "related": [
+        "voice-and-tone",
+        "state",
+        "typography"
+      ],
       "specimen": "writing"
     }
   ]

@@ -14,8 +14,6 @@ export function catalogRoutes(catalog) {
     ...catalog.foundations.map(
       (foundation) => `/foundations/${foundation.slug}`,
     ),
-    "/components",
-    ...catalog.components.map((component) => `/components/${component.slug}`),
     "/privacy",
     "/terms",
   ];

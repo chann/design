@@ -135,21 +135,21 @@ function documentationHtml(route) {
     ko: {
       title: "Comfort DESIGN.md | 가이드",
       description:
-        "Comfort의 원칙, 파운데이션, 컴포넌트 예시와 접근성·구현 가이드를 살펴보세요.",
+        "Comfort의 원칙, 파운데이션, 접근성·구현 가이드를 살펴보세요.",
     },
     en: {
       title: "Comfort DESIGN.md | Guides",
       description:
-        "Browse Comfort principles, foundations, component examples, accessibility notes, and implementation guidance.",
+        "Browse Comfort principles, foundations, accessibility notes, and implementation guidance.",
     },
     jp: {
       title: "Comfort DESIGN.md | ガイド",
       description:
-        "Comfortの原則、ファウンデーション、コンポーネント例、アクセシビリティと実装ガイドを確認できます。",
+        "Comfortの原則、ファウンデーション、アクセシビリティと実装ガイドを確認できます。",
     },
     cn: {
       title: "Comfort DESIGN.md | 指南",
-      description: "查看Comfort的原则、基础、组件示例、无障碍说明与实现指南。",
+      description: "查看Comfort的原则、基础、无障碍说明与实现指南。",
     },
   }[content.locale];
   const { title, description } = metadata;
