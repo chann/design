@@ -68,6 +68,15 @@ const koreanHomeContent = await readFile(
   new URL("../src/content/home/ko.ts", import.meta.url),
   "utf8",
 );
+const homeContentTypes = await readFile(
+  new URL("../src/content/home/types.ts", import.meta.url),
+  "utf8",
+);
+const localizedHomeSources = await Promise.all(
+  ["ko", "en", "jp", "cn"].map((locale) =>
+    readFile(new URL(`../src/content/home/${locale}.ts`, import.meta.url), "utf8"),
+  ),
+);
 const phosphorIconSource = await readFile(
   new URL("../src/components/phosphor-icon.tsx", import.meta.url),
   "utf8",
@@ -84,6 +93,27 @@ const readmeSource = await readFile(
   new URL("../README.md", import.meta.url),
   "utf8",
 );
+
+for (const field of ["summary:", "principles:", "systemPreview:", "workbench:"]) {
+  assert(homeContentTypes.includes(field), `HomeContent is missing ${field}`);
+}
+for (const field of [
+  "proof:",
+  "benefits:",
+  "productProof:",
+  "reviewed:",
+  "verification:",
+  "tokenFlow:",
+]) {
+  assert(!homeContentTypes.includes(field), `HomeContent still contains ${field}`);
+}
+for (const source of localizedHomeSources) {
+  assert(!source.includes("productProof"), "Localized content still uses productProof");
+  assert(
+    !source.includes(["검증", "가능한"].join(" ")),
+    "Public copy uses an exaggerated guarantee",
+  );
+}
 const requiredDesignGuidance = [
   [
     "DESIGN.md",
@@ -254,16 +284,16 @@ assert(
 );
 assert(
   koreanHomeContent.includes(
-    "shadcn 컴포넌트로 시작하고 DESIGN.md로 테마를 정의하세요.",
+    "shadcn/ui로 시작하고, 제품의 디자인을 완성하세요.",
   ),
   "Korean homepage must use the requested theme-focused headline",
 );
 assert(
   koreanHomeContent.includes(
-    "신뢰할 수 있는 컴포넌트를 바탕으로, DESIGN.md에서 제품에 맞는 테마를 정의하세요.",
+    "익숙한 사용법은 지키고, 제품의 인상은 분명하게 만듭니다.",
   ) &&
     koreanHomeContent.includes(
-      "shadcn/ui를 그대로 활용하고, 색상과 글자, 간격, 상태, 모션을 DESIGN.md에서 제품에 맞게 정리하세요.",
+      "접근 가능한 컴포넌트는 그대로 두고, 색·글꼴·간격·상태·움직임을 DESIGN.md에 맞춰 다듬습니다.",
     ) &&
     !koreanHomeContent.includes(
       "접근 가능한 컴포넌트는 지키고, 일반적인 결정은 바꾸세요.",

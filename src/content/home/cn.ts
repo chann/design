@@ -5,9 +5,9 @@ const cn = {
   languageTag: "zh-CN",
   path: "/cn",
   metadata: {
-    title: "Comfort DESIGN.md | 定义shadcn主题",
+    title: "Comfort DESIGN.md | 用shadcn/ui完成产品设计",
     description:
-      "从无障碍的shadcn/ui组件开始，再用DESIGN.md定义产品的令牌、状态、动效、内容和验证规则。",
+      "保留shadcn/ui组件原有的无障碍能力，再用DESIGN.md调整颜色、字体、间距、状态和动效。",
   },
   shell: {
     skipToContent: "跳到正文",
@@ -26,93 +26,104 @@ const cn = {
   },
   hero: {
     eyebrow: "shadcn/ui + DESIGN.md",
-    accessibleTitle: "从shadcn组件开始，用DESIGN.md定义主题。",
-    titleLines: ["从shadcn组件开始，", "用DESIGN.md", "定义产品主题。"],
+    accessibleTitle: "从shadcn/ui开始，完成属于产品的设计。",
+    titleLines: ["从shadcn/ui开始，", "完成属于产品的", "设计。"],
     description:
-      "保留shadcn/ui的无障碍行为，再在DESIGN.md中定义产品的颜色、字体、间距、状态和动效。",
+      "保留组件原有的无障碍能力，再按照DESIGN.md调整颜色、字体、间距、状态和动效。",
     primaryAction: "阅读DESIGN.md",
     languageNavigationLabel: "主页语言",
+    workbench: {
+      accessibleLabel: "Comfort主题工作台",
+      title: "Theme Workbench",
+      description: "看看同一组token如何贯穿不同组件。",
+      tabsLabel: "主题工作台视图",
+      tokensTab: "Tokens",
+      componentsTab: "Components",
+      sampleFieldLabel: "项目名称",
+      sampleFieldPlaceholder: "Comfort",
+      sampleSwitchLabel: "变更通知",
+      sampleReadyBadge: "已就绪",
+      sampleSavedBadge: "已保存",
+      samplePrimaryAction: "保存",
+      sampleSecondaryAction: "查看组件",
+    },
   },
-  proof: {
-    accessibleLabel: "Comfort关键数据",
+  summary: {
+    accessibleLabel: "Comfort构成",
     items: [
-      { value: "4", label: "语言版本" },
-      { value: "15", label: "语义基础" },
-      { value: "63", label: "组件参考" },
+      { value: "4", label: "语言" },
+      { value: "15", label: "Foundation" },
+      { value: "63", label: "Component" },
     ],
   },
   tagline: {
-    accessibleLabel: "从shadcn组件开始，用DESIGN.md定义产品主题。",
-    segments: ["从shadcn组件开始，", "用DESIGN.md", "定义产品主题。"],
+    accessibleLabel: "同一套组件，换上产品自己的语言后，感受会完全不同。",
+    segments: [
+      "同一套组件，",
+      "换上产品",
+      "自己的语言后，",
+      "感受会",
+      "完全不同。",
+    ],
   },
-  benefits: {
-    eyebrow: "可塑造成产品风格的基础",
-    title: "保留无障碍组件，替换千篇一律的设计决策。",
+  principles: {
+    eyebrow: "设计原则",
+    title: "保留熟悉的用法，也让产品拥有清晰的风格。",
     description:
-      "以可靠的shadcn/ui作为基础，再在DESIGN.md中定义颜色、字体、间距、状态与动效。",
+      "无需重做基本交互。只要梳理颜色、字体、间距和状态，产品的整体感受就会不同。",
     items: [
       {
-        title: "以可靠的shadcn/ui为基础",
+        title: "保留熟悉的用法。",
         description:
-          "直接采用shadcn和Radix的基础能力，无需重做键盘、焦点和浮层机制。",
+          "键盘、焦点和浮层沿用shadcn/ui中熟悉的交互方式。",
       },
       {
-        title: "在DESIGN.md中定义细节",
-        description:
-          "在装饰组件之前，把颜色、字体、间距、形状、状态和动效映射到DESIGN.md的语义角色。",
+        title: "加入产品自己的风格。",
+        description: "把颜色、字体、间距和形状连接到DESIGN.md中的角色。",
       },
       {
-        title: "让团队参考同一份文档",
+        title: "在真实状态中查看结果。",
         description:
-          "设计师、工程师和编码智能体使用相同规则，不再反复翻译零散偏好。",
-      },
-      {
-        title: "验证完整体验",
-        description:
-          "让响应式、无障碍、多语言、反馈和恢复流程始终属于系统的一部分。",
+          "在小屏、深色主题、长文案和键盘操作中保持相同流程。",
       },
     ],
-    tokenFlow: ["shadcn源码", "DESIGN.md角色", "产品界面"],
   },
   workflow: {
-    eyebrow: "使用流程",
-    title: "从shadcn/ui到DESIGN.md中的产品主题。",
+    eyebrow: "工作流程",
+    title: "组件来自shadcn/ui，产品风格来自DESIGN.md。",
     description:
-      "以可靠的shadcn/ui作为基础，用DESIGN.md定义设计细节，再检查用户会经历的每一种状态。",
+      "选择需要的组件，写下产品规则，再到真实界面中看看它们是否自然好用。",
     steps: [
       {
         number: "01",
-        title: "以shadcn/ui为基础",
-        description: "从已经验证无障碍与交互行为的shadcn/ui组件开始。",
+        title: "选择组件。",
+        description: "先加入产品需要的shadcn/ui组件。",
       },
       {
         number: "02",
-        title: "用DESIGN.md定义设计细节",
-        description:
-          "把语义令牌、状态、内容、动效和无障碍要求连接到已加入的组件。",
+        title: "写下产品规则。",
+        description: "在DESIGN.md中整理token、状态、文案和动效。",
       },
       {
         number: "03",
-        title: "验证每一种状态",
-        description: "发布前检查响应式、主题、键盘、反馈、多语言和恢复流程。",
+        title: "查看真实界面。",
+        description: "切换屏幕尺寸、输入方式、主题和语言查看结果。",
       },
     ],
   },
-  productProof: {
-    eyebrow: "在产品中验证",
-    title: "这份参考本身就遵循它所记录的流程。",
+  systemPreview: {
+    eyebrow: "真实界面",
+    title: "看看应用Comfort token后的shadcn/ui。",
     description:
-      "本网站也从shadcn组件开始，并应用DESIGN.md中的语义角色。你可以直接查看基础、组件状态和检查项。",
-    action: "查看组件参考",
-    panelTitle: "在线参考",
-    reviewed: "2026年8月",
+      "在Preview与Code之间切换，查看组件如何使用文档中的颜色、字体、间距和状态。",
+    action: "查看组件",
+    panelTitle: "Button预览",
     metrics: [
       { value: "336", label: "静态路由" },
-      { value: "15", label: "语义基础" },
-      { value: "63", label: "组件参考" },
+      { value: "15", label: "Foundation" },
+      { value: "63", label: "Component" },
       { value: "4", label: "支持语言" },
     ],
-    verification: "路由、内容、类型、lint和生产构建检查都在仓库中执行。",
   },
   faq: {
     eyebrow: "开始前的问题",

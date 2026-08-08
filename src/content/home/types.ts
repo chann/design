@@ -29,18 +29,32 @@ export type HomeContent = {
     description: string;
     primaryAction: string;
     languageNavigationLabel: string;
+    workbench: {
+      accessibleLabel: string;
+      title: string;
+      description: string;
+      tabsLabel: string;
+      tokensTab: string;
+      componentsTab: string;
+      sampleFieldLabel: string;
+      sampleFieldPlaceholder: string;
+      sampleSwitchLabel: string;
+      sampleReadyBadge: string;
+      sampleSavedBadge: string;
+      samplePrimaryAction: string;
+      sampleSecondaryAction: string;
+    };
   };
-  proof: {
+  summary: {
     accessibleLabel: string;
     items: readonly { value: string; label: string }[];
   };
   tagline: { accessibleLabel: string; segments: readonly string[] };
-  benefits: {
+  principles: {
     eyebrow: string;
     title: string;
     description: string;
     items: readonly { title: string; description: string }[];
-    tokenFlow: readonly [string, string, string];
   };
   workflow: {
     eyebrow: string;
@@ -48,15 +62,13 @@ export type HomeContent = {
     description: string;
     steps: readonly { number: string; title: string; description: string }[];
   };
-  productProof: {
+  systemPreview: {
     eyebrow: string;
     title: string;
     description: string;
     action: string;
     panelTitle: string;
-    reviewed: string;
     metrics: readonly { value: string; label: string }[];
-    verification: string;
   };
   faq: {
     eyebrow: string;

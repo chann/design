@@ -24,7 +24,6 @@ const benefitIcons: readonly PhosphorIconName[] = [
   "brackets-curly",
   "circles-three-plus",
   "check-circle",
-  "stack",
 ];
 
 function Reveal({
@@ -174,11 +173,11 @@ export function HomePage({
         </section>
 
         <section
-          aria-label={content.proof.accessibleLabel}
+          aria-label={content.summary.accessibleLabel}
           className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8"
         >
           <div className="proof-strip grid gap-6 rounded-2xl bg-secondary px-6 py-6 sm:grid-cols-3 lg:px-8">
-            {content.proof.items.map((item) => (
+            {content.summary.items.map((item) => (
               <div className="flex items-baseline gap-3" key={item.label}>
                 <strong className="font-mono text-3xl font-semibold text-primary">
                   {item.value}
@@ -195,22 +194,22 @@ export function HomePage({
           <TaglineReveal {...content.tagline} />
         </section>
 
-        <section className="bg-secondary" id="benefits">
+        <section className="bg-secondary" id="principles">
           <Reveal className="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-24 sm:px-6 lg:px-8">
             <header className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
               <div className="flex flex-col gap-4">
-                <p className="eyebrow">{content.benefits.eyebrow}</p>
+                <p className="eyebrow">{content.principles.eyebrow}</p>
                 <h2 className="max-w-[680px] text-balance text-4xl font-semibold sm:text-5xl">
-                  {content.benefits.title}
+                  {content.principles.title}
                 </h2>
               </div>
               <p className="max-w-2xl text-pretty text-lg text-muted-foreground lg:justify-self-end">
-                {content.benefits.description}
+                {content.principles.description}
               </p>
             </header>
 
             <div className="benefit-grid">
-              {content.benefits.items.map(({ title, description }, index) => (
+              {content.principles.items.map(({ title, description }, index) => (
                 <article
                   className={cn(
                     "benefit-item",
@@ -227,15 +226,6 @@ export function HomePage({
                       {description}
                     </p>
                   </div>
-                  {index === 0 && (
-                    <div className="benefit-token-map" aria-hidden="true">
-                      <span>{content.benefits.tokenFlow[0]}</span>
-                      <ArrowRightIcon />
-                      <span>{content.benefits.tokenFlow[1]}</span>
-                      <ArrowRightIcon />
-                      <strong>{content.benefits.tokenFlow[2]}</strong>
-                    </div>
-                  )}
                 </article>
               ))}
             </div>
@@ -274,18 +264,18 @@ export function HomePage({
         <section className="bg-card">
           <Reveal className="mx-auto grid max-w-7xl gap-12 px-4 py-24 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
             <div className="flex max-w-xl flex-col gap-6">
-              <p className="eyebrow">{content.productProof.eyebrow}</p>
+              <p className="eyebrow">{content.systemPreview.eyebrow}</p>
               <h2 className="text-balance text-4xl font-semibold sm:text-5xl">
-                {content.productProof.title}
+                {content.systemPreview.title}
               </h2>
               <p className="text-pretty text-lg text-muted-foreground">
-                {content.productProof.description}
+                {content.systemPreview.description}
               </p>
               <a
                 className="landing-text-link w-fit text-base font-semibold text-primary"
                 href={siteHref(localizedRoute("/components", content.locale))}
               >
-                {content.productProof.action}
+                {content.systemPreview.action}
                 <ArrowRightIcon aria-hidden="true" className="size-5" />
               </a>
             </div>
@@ -297,14 +287,11 @@ export function HomePage({
                     className="size-5 text-primary"
                     name="globe"
                   />
-                  {content.productProof.panelTitle}
-                </span>
-                <span className="font-mono text-xs text-muted-foreground">
-                  {content.productProof.reviewed}
+                  {content.systemPreview.panelTitle}
                 </span>
               </div>
               <div className="implementation-proof-grid">
-                {content.productProof.metrics.map(({ value, label }) => (
+                {content.systemPreview.metrics.map(({ value, label }) => (
                   <div key={label}>
                     <strong className="font-mono text-3xl font-semibold">
                       {value}
@@ -315,14 +302,6 @@ export function HomePage({
                   </div>
                 ))}
               </div>
-              <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                <PhosphorIcon
-                  aria-hidden="true"
-                  className="size-5 text-primary"
-                  name="check-circle"
-                />
-                {content.productProof.verification}
-              </p>
             </div>
           </Reveal>
         </section>

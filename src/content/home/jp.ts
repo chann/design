@@ -5,9 +5,9 @@ const jp = {
   languageTag: "ja",
   path: "/jp",
   metadata: {
-    title: "Comfort DESIGN.md | shadcnのテーマを定義",
+    title: "Comfort DESIGN.md | shadcn/uiでプロダクトらしいデザインへ",
     description:
-      "アクセシブルなshadcn/uiコンポーネントから始め、DESIGN.mdでプロダクトのトークン、状態、モーション、コンテンツ、検証ルールを定義します。",
+      "shadcn/uiのアクセシブルなコンポーネントを生かし、色、文字、余白、状態、動きをDESIGN.mdでプロダクトに合わせます。",
   },
   shell: {
     skipToContent: "本文へ移動",
@@ -32,106 +32,111 @@ const jp = {
   hero: {
     eyebrow: "shadcn/ui + DESIGN.md",
     accessibleTitle:
-      "shadcnコンポーネントから始め、DESIGN.mdでテーマを定義します。",
-    titleLines: [
-      "shadcnコンポーネントから始め、",
-      "DESIGN.mdで",
-      "テーマを定義します。",
-    ],
+      "shadcn/uiから始めて、プロダクトのデザインを仕上げましょう。",
+    titleLines: ["shadcn/uiから始めて、", "プロダクトのデザインを", "仕上げましょう。"],
     description:
-      "shadcn/uiのアクセシブルな動きを保ち、色、文字、余白、状態、モーションをDESIGN.mdでプロダクトに合わせます。",
+      "アクセシブルなコンポーネントはそのままに、色、文字、余白、状態、動きをDESIGN.mdに合わせて整えます。",
     primaryAction: "DESIGN.mdを読む",
     languageNavigationLabel: "ホームページの言語",
+    workbench: {
+      accessibleLabel: "Comfortテーマワークベンチ",
+      title: "Theme Workbench",
+      description:
+        "同じトークンが複数のコンポーネントへどうつながるかを確認できます。",
+      tabsLabel: "テーマワークベンチの表示",
+      tokensTab: "Tokens",
+      componentsTab: "Components",
+      sampleFieldLabel: "プロジェクト名",
+      sampleFieldPlaceholder: "Comfort",
+      sampleSwitchLabel: "変更通知",
+      sampleReadyBadge: "準備完了",
+      sampleSavedBadge: "保存済み",
+      samplePrimaryAction: "保存",
+      sampleSecondaryAction: "コンポーネントを見る",
+    },
   },
-  proof: {
-    accessibleLabel: "Comfortの主な数値",
+  summary: {
+    accessibleLabel: "Comfortの構成",
     items: [
-      { value: "4", label: "言語版" },
-      { value: "15", label: "セマンティックファウンデーション" },
-      { value: "63", label: "コンポーネントリファレンス" },
+      { value: "4", label: "言語" },
+      { value: "15", label: "Foundation" },
+      { value: "63", label: "Component" },
     ],
   },
   tagline: {
     accessibleLabel:
-      "shadcnコンポーネントから始め、DESIGN.mdでプロダクトのテーマをつくります。",
+      "同じコンポーネントでも、プロダクトの言葉をまとえば印象は大きく変わります。",
     segments: [
-      "shadcnコンポーネントから始め、",
-      "DESIGN.mdで",
-      "プロダクトのテーマを",
-      "つくります。",
+      "同じ",
+      "コンポーネントでも、",
+      "プロダクトの",
+      "言葉をまとえば",
+      "印象は",
+      "大きく",
+      "変わります。",
     ],
   },
-  benefits: {
-    eyebrow: "自分たちらしく変えられる基盤",
-    title: "アクセシブルなコンポーネントを保ち、一般的な判断を置き換えます。",
+  principles: {
+    eyebrow: "デザイン原則",
+    title: "使い慣れた動作は保ち、プロダクトの印象は明確にします。",
     description:
-      "信頼性の高いshadcn/uiをベースにします。色、文字、余白、状態、モーションの詳細をDESIGN.mdで定義します。",
+      "基本動作を作り直さなくても、色、文字、余白、状態を整えればプロダクトの雰囲気は変わります。",
     items: [
       {
-        title: "信頼性の高いshadcn/uiをベースに",
+        title: "使い慣れた動作を保ちます。",
         description:
-          "キーボード、フォーカス、オーバーレイの仕組みを作り直さず、shadcnとRadixの基盤を利用します。",
+          "キーボード、フォーカス、オーバーレイはshadcn/uiの慣れた動作に沿います。",
       },
       {
-        title: "DESIGN.mdで詳細を定義",
+        title: "プロダクトらしさを加えます。",
         description:
-          "コンポーネントを装飾する前に、色、書体、余白、形、状態、モーションをDESIGN.mdのセマンティックロールへ接続します。",
+          "色、文字、余白、形をDESIGN.mdの役割へつなげます。",
       },
       {
-        title: "チームで同じ文書を参照",
+        title: "実際の状態で確認します。",
         description:
-          "デザイナー、エンジニア、コーディングエージェントが、散在する好みを翻訳せず同じルールで作業します。",
-      },
-      {
-        title: "体験全体を検証する",
-        description:
-          "レスポンシブ、アクセシビリティ、多言語、フィードバック、復旧をリリースまでシステムの一部として保ちます。",
+          "小さな画面、ダークテーマ、長い文章、キーボード操作でも同じ流れを保ちます。",
       },
     ],
-    tokenFlow: ["shadcnソース", "DESIGN.mdロール", "プロダクトUI"],
   },
   workflow: {
-    eyebrow: "使い方",
-    title: "shadcn/uiからDESIGN.mdで定義するテーマへ。",
+    eyebrow: "ワークフロー",
+    title: "コンポーネントはshadcn/uiから、プロダクトらしさはDESIGN.mdから。",
     description:
-      "信頼性の高いshadcn/uiをベースにし、DESIGN.mdで細部を定義して、利用者が触れるすべての状態を確認します。",
+      "必要なコンポーネントを選び、プロダクトの基準を記し、実際の画面で自然に動くかを確かめます。",
     steps: [
       {
         number: "01",
-        title: "shadcn/uiをベースに使う",
-        description:
-          "アクセシビリティとインタラクションが確認されたshadcn/uiコンポーネントから始めます。",
+        title: "コンポーネントを選びます。",
+        description: "必要なshadcn/uiコンポーネントから始めます。",
       },
       {
         number: "02",
-        title: "DESIGN.mdで詳細を定義する",
+        title: "プロダクトの基準を記します。",
         description:
-          "追加したコンポーネントへセマンティックトークン、状態、コンテンツ、モーション、アクセシビリティを接続します。",
+          "トークン、状態、文言、動きをDESIGN.mdにまとめます。",
       },
       {
         number: "03",
-        title: "すべての状態を検証する",
+        title: "実際の画面で確かめます。",
         description:
-          "リリース前にレスポンシブ、テーマ、キーボード、フィードバック、多言語、復旧を確認します。",
+          "画面サイズ、入力方法、テーマ、言語を変えて確認します。",
       },
     ],
   },
-  productProof: {
-    eyebrow: "プロダクトで実証",
-    title: "このリファレンス自体が、記載した手順で作られています。",
+  systemPreview: {
+    eyebrow: "実際の画面",
+    title: "Comfortのトークンを使ったshadcn/uiを見てみましょう。",
     description:
-      "このサイトもshadcnコンポーネントから始め、DESIGN.mdのセマンティックロールを適用しています。ファウンデーション、状態、確認項目を実際に見られます。",
-    action: "コンポーネントリファレンスを見る",
-    panelTitle: "ライブリファレンス",
-    reviewed: "2026年8月",
+      "PreviewとCodeを切り替えながら、コンポーネントが文書の色、文字、余白、状態をどう使うか確認できます。",
+    action: "コンポーネントを見る",
+    panelTitle: "Buttonプレビュー",
     metrics: [
       { value: "336", label: "静的ルート" },
-      { value: "15", label: "セマンティックファウンデーション" },
-      { value: "63", label: "コンポーネントリファレンス" },
+      { value: "15", label: "Foundation" },
+      { value: "63", label: "Component" },
       { value: "4", label: "対応言語" },
     ],
-    verification:
-      "ルート、コンテンツ、型、lint、本番ビルドの検証をリポジトリで実行します。",
   },
   faq: {
     eyebrow: "始める前の質問",

@@ -5,9 +5,9 @@ const en = {
   languageTag: "en",
   path: "/",
   metadata: {
-    title: "Comfort DESIGN.md | Define your shadcn theme",
+    title: "Comfort DESIGN.md | Shape shadcn/ui for your product",
     description:
-      "Start with accessible shadcn/ui components, then use DESIGN.md to define your product’s tokens, states, motion, content, and verification rules.",
+      "Start with accessible shadcn/ui components, then shape color, type, spacing, states, and motion around your DESIGN.md.",
   },
   shell: {
     skipToContent: "Skip to content",
@@ -32,112 +32,111 @@ const en = {
   hero: {
     eyebrow: "shadcn/ui + DESIGN.md",
     accessibleTitle:
-      "Start with shadcn components. Define your theme in DESIGN.md.",
-    titleLines: [
-      "Start with shadcn components.",
-      "Define your theme",
-      "in DESIGN.md.",
-    ],
+      "Start with shadcn/ui. Finish the design for your product.",
+    titleLines: ["Start with shadcn/ui.", "Finish the design", "for your product."],
     description:
-      "Keep shadcn/ui’s accessible behavior, then define product color, type, spacing, states, and motion in DESIGN.md.",
+      "Keep the accessible components, then shape color, type, spacing, states, and motion around your DESIGN.md.",
     primaryAction: "Read DESIGN.md",
     languageNavigationLabel: "Homepage languages",
+    workbench: {
+      accessibleLabel: "Comfort theme workbench",
+      title: "Theme Workbench",
+      description:
+        "See how the same tokens carry across different components.",
+      tabsLabel: "Theme workbench views",
+      tokensTab: "Tokens",
+      componentsTab: "Components",
+      sampleFieldLabel: "Project name",
+      sampleFieldPlaceholder: "Comfort",
+      sampleSwitchLabel: "Change notifications",
+      sampleReadyBadge: "Ready",
+      sampleSavedBadge: "Saved",
+      samplePrimaryAction: "Save",
+      sampleSecondaryAction: "View components",
+    },
   },
-  proof: {
-    accessibleLabel: "Comfort in numbers",
+  summary: {
+    accessibleLabel: "What Comfort includes",
     items: [
-      { value: "4", label: "language editions" },
-      { value: "15", label: "semantic Foundations" },
-      { value: "63", label: "component references" },
+      { value: "4", label: "languages" },
+      { value: "15", label: "Foundations" },
+      { value: "63", label: "Components" },
     ],
   },
   tagline: {
     accessibleLabel:
-      "Start with shadcn components. Define your product theme in DESIGN.md.",
+      "The same components feel entirely different once they speak your product's language.",
     segments: [
-      "Start",
-      "with",
-      "shadcn",
-      "components.",
-      "Define",
-      "your",
-      "product",
-      "theme",
-      "with",
-      "DESIGN.md.",
+      "The same",
+      "components",
+      "feel entirely",
+      "different",
+      "once they speak",
+      "your product's",
+      "language.",
     ],
   },
-  benefits: {
-    eyebrow: "A baseline you can make your own",
-    title: "Keep accessible components. Replace generic decisions.",
+  principles: {
+    eyebrow: "Design principles",
+    title: "Keep familiar behavior. Give the product a distinct character.",
     description:
-      "Use trusted shadcn/ui components as the baseline. Define color, type, spacing, states, and motion in DESIGN.md.",
+      "You do not need to rebuild the basics. Clear choices for color, type, spacing, and states are enough to change how the product feels.",
     items: [
       {
-        title: "Use trusted shadcn/ui as the baseline",
+        title: "Keep familiar behavior.",
         description:
-          "Use shadcn and Radix behavior as the foundation instead of rebuilding keyboard, focus, and overlay mechanics.",
+          "Follow shadcn/ui conventions for keyboard, focus, and overlay behavior.",
       },
       {
-        title: "Define the details in DESIGN.md",
+        title: "Add product character.",
         description:
-          "Map color, type, spacing, radius, state, and motion to semantic roles in DESIGN.md before styling components.",
+          "Connect color, type, spacing, and shape to the roles in DESIGN.md.",
       },
       {
-        title: "Keep the team on one document",
+        title: "Review real states.",
         description:
-          "Designers, engineers, and coding agents work from the same rules rather than translating scattered preferences.",
-      },
-      {
-        title: "Verify the complete experience",
-        description:
-          "Responsive behavior, accessibility, localization, feedback, and recovery remain part of the system through release.",
+          "Keep the same flow on small screens, in dark themes, with long copy, and from the keyboard.",
       },
     ],
-    tokenFlow: ["shadcn source", "DESIGN.md role", "product interface"],
   },
   workflow: {
-    eyebrow: "How it works",
-    title: "From shadcn/ui to a theme defined in DESIGN.md.",
+    eyebrow: "Workflow",
+    title: "Components from shadcn/ui. Product character from DESIGN.md.",
     description:
-      "Use trusted shadcn/ui as the baseline, define the design details in DESIGN.md, then verify every state people will experience.",
+      "Choose the components, write down the product rules, then review how they work in real screens.",
     steps: [
       {
         number: "01",
-        title: "Use shadcn/ui as the baseline",
-        description:
-          "Start with shadcn/ui components whose accessibility and interaction behavior have already been tested.",
+        title: "Choose the components.",
+        description: "Bring in the shadcn/ui components the product needs.",
       },
       {
         number: "02",
-        title: "Define design details in DESIGN.md",
+        title: "Write down the product rules.",
         description:
-          "Connect semantic tokens, states, content, motion, and accessibility guidance to the components you added.",
+          "Capture tokens, states, content, and motion in DESIGN.md.",
       },
       {
         number: "03",
-        title: "Verify every state",
+        title: "Review real screens.",
         description:
-          "Check responsive behavior, themes, keyboard use, feedback, localization, and recovery before release.",
+          "Check different screen sizes, input methods, themes, and languages.",
       },
     ],
   },
-  productProof: {
-    eyebrow: "Proof in the product",
-    title: "The reference uses the workflow it documents.",
+  systemPreview: {
+    eyebrow: "In the interface",
+    title: "Explore shadcn/ui with Comfort tokens applied.",
     description:
-      "This site also starts with shadcn components and applies the semantic roles in DESIGN.md. You can inspect the resulting Foundations, component states, and review checks.",
-    action: "Inspect the component references",
-    panelTitle: "Live reference",
-    reviewed: "August 2026",
+      "Switch between Preview and Code to see how a component uses the document's color, type, spacing, and states.",
+    action: "View components",
+    panelTitle: "Button preview",
     metrics: [
       { value: "336", label: "static routes" },
-      { value: "15", label: "semantic Foundations" },
-      { value: "63", label: "component references" },
+      { value: "15", label: "Foundations" },
+      { value: "63", label: "Components" },
       { value: "4", label: "supported languages" },
     ],
-    verification:
-      "Route, content, type, lint, and production build checks are part of the repository.",
   },
   faq: {
     eyebrow: "Questions before you start",
