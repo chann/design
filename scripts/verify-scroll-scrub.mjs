@@ -61,6 +61,11 @@ const [cssSource, homePageSource, footerSignatureSource] = await Promise.all([
 assert.match(cssSource, /\.landing-reveal\s*\{[^}]*translateY\(16px\)/s);
 assert.match(cssSource, /\.landing-reveal\s*\{[^}]*480ms/s);
 assert.doesNotMatch(cssSource, /^\s*filter:\s*blur/m);
+const landingEnterKeyframes = cssSource.match(
+  /@keyframes landing-enter\s*\{([\s\S]*?)\n\}/,
+)?.[1];
+assert.ok(landingEnterKeyframes);
+assert.doesNotMatch(landingEnterKeyframes, /opacity/);
 assert.ok(
   homePageSource.includes('typeof IntersectionObserver === "undefined"'),
 );

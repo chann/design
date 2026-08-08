@@ -240,16 +240,16 @@ export function HomePage({
             </header>
             <ol className="workflow-list">
               {content.workflow.steps.map((step, index) => (
-                <Fragment key={step.number}>
-                  <li>
+                <li key={step.number}>
+                  <div className="workflow-list-row">
                     <span className="section-index">{step.number}</span>
                     <div>
                       <h3>{step.title}</h3>
                       <p>{step.description}</p>
                     </div>
-                  </li>
+                  </div>
                   {index < content.workflow.steps.length - 1 && <Separator />}
-                </Fragment>
+                </li>
               ))}
             </ol>
           </Reveal>

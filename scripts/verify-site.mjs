@@ -391,6 +391,15 @@ assert(
   "Landing motion must use the short no-blur behavior",
 );
 assert(
+  /\.mobile-menu-button\s*\{[^}]*overflow:\s*hidden/s.test(cssSource),
+  "The mobile menu button must contain expanded accessible labels",
+);
+assert(
+  homePageSource.includes("<li key={step.number}>") &&
+    !homePageSource.includes("<Fragment key={step.number}>"),
+  "Workflow separators must remain inside valid list items",
+);
+assert(
   footerSignatureSource.includes("--footer-signature-index") &&
     footerSignatureSource.includes("footer-signature-letter"),
   "The footer signature must reveal its letters in sequence",
