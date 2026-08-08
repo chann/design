@@ -33,27 +33,15 @@ const jp = {
     eyebrow: "shadcn/ui + DESIGN.md",
     accessibleTitle:
       "shadcn/uiから始めて、プロダクトのデザインを仕上げましょう。",
-    titleLines: ["shadcn/uiから始めて、", "プロダクトのデザインを", "仕上げましょう。"],
+    titleLines: [
+      "shadcn/uiから始めて、",
+      "プロダクトのデザインを",
+      "仕上げましょう。",
+    ],
     description:
       "アクセシブルなコンポーネントはそのままに、色、文字、余白、状態、動きをDESIGN.mdに合わせて整えます。",
     primaryAction: "DESIGN.mdを読む",
     languageNavigationLabel: "ホームページの言語",
-    workbench: {
-      accessibleLabel: "Comfortテーマワークベンチ",
-      title: "Theme Workbench",
-      description:
-        "同じトークンが複数のコンポーネントへどうつながるかを確認できます。",
-      tabsLabel: "テーマワークベンチの表示",
-      tokensTab: "Tokens",
-      componentsTab: "Components",
-      sampleFieldLabel: "プロジェクト名",
-      sampleFieldPlaceholder: "Comfort",
-      sampleSwitchLabel: "変更通知",
-      sampleReadyBadge: "準備完了",
-      sampleSavedBadge: "保存済み",
-      samplePrimaryAction: "保存",
-      sampleSecondaryAction: "コンポーネントを見る",
-    },
   },
   summary: {
     accessibleLabel: "Comfortの構成",
@@ -89,8 +77,7 @@ const jp = {
       },
       {
         title: "プロダクトらしさを加えます。",
-        description:
-          "色、文字、余白、形をDESIGN.mdの役割へつなげます。",
+        description: "色、文字、余白、形をDESIGN.mdの役割へつなげます。",
       },
       {
         title: "実際の状態で確認します。",
@@ -113,29 +100,13 @@ const jp = {
       {
         number: "02",
         title: "プロダクトの基準を記します。",
-        description:
-          "トークン、状態、文言、動きをDESIGN.mdにまとめます。",
+        description: "トークン、状態、文言、動きをDESIGN.mdにまとめます。",
       },
       {
         number: "03",
         title: "実際の画面で確かめます。",
-        description:
-          "画面サイズ、入力方法、テーマ、言語を変えて確認します。",
+        description: "画面サイズ、入力方法、テーマ、言語を変えて確認します。",
       },
-    ],
-  },
-  systemPreview: {
-    eyebrow: "実際の画面",
-    title: "Comfortのトークンを使ったshadcn/uiを見てみましょう。",
-    description:
-      "PreviewとCodeを切り替えながら、コンポーネントが文書の色、文字、余白、状態をどう使うか確認できます。",
-    action: "コンポーネントを見る",
-    panelTitle: "Buttonプレビュー",
-    metrics: [
-      { value: "336", label: "静的ルート" },
-      { value: "15", label: "Foundation" },
-      { value: "63", label: "Component" },
-      { value: "4", label: "対応言語" },
     ],
   },
   faq: {

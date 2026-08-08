@@ -29,21 +29,6 @@ export type HomeContent = {
     description: string;
     primaryAction: string;
     languageNavigationLabel: string;
-    workbench: {
-      accessibleLabel: string;
-      title: string;
-      description: string;
-      tabsLabel: string;
-      tokensTab: string;
-      componentsTab: string;
-      sampleFieldLabel: string;
-      sampleFieldPlaceholder: string;
-      sampleSwitchLabel: string;
-      sampleReadyBadge: string;
-      sampleSavedBadge: string;
-      samplePrimaryAction: string;
-      sampleSecondaryAction: string;
-    };
   };
   summary: {
     accessibleLabel: string;
@@ -61,14 +46,6 @@ export type HomeContent = {
     title: string;
     description: string;
     steps: readonly { number: string; title: string; description: string }[];
-  };
-  systemPreview: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    action: string;
-    panelTitle: string;
-    metrics: readonly { value: string; label: string }[];
   };
   faq: {
     eyebrow: string;

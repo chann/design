@@ -1,9 +1,8 @@
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRightIcon } from "lucide-react";
 
-import { ComponentPreview } from "@/components/specimens/component-preview";
+import { HeroLetterGlitch } from "@/components/hero-letter-glitch";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
-import { ThemeWorkbench } from "@/components/theme-workbench";
 import {
   Accordion,
   AccordionContent,
@@ -18,22 +17,10 @@ import {
   homePathForLocale,
   type HomeContent,
 } from "@/content/home";
-import { getComponent } from "@/data/catalog";
-import { designEditions, localizedRoute, siteHref } from "@/data/site";
+import { designEditions, siteHref } from "@/data/site";
 import { useScrollScrubProgress } from "@/hooks/use-scroll-scrub-progress";
 import { cn } from "@/lib/utils";
 import { calculateWordOpacity } from "@/lib/scroll-scrub";
-
-function getFeaturedComponent() {
-  const component = getComponent("button");
-  if (!component) {
-    throw new Error("The Button component is required for the homepage preview");
-  }
-  return component;
-}
-
-const featuredComponent = getFeaturedComponent();
-const featuredCode = `<Button>Continue</Button>`;
 
 function Reveal({
   children,
@@ -178,10 +165,7 @@ export function HomePage({
               </nav>
             </div>
           </div>
-          <ThemeWorkbench
-            content={content.hero.workbench}
-            locale={content.locale}
-          />
+          <HeroLetterGlitch />
         </section>
 
         <section
@@ -252,40 +236,6 @@ export function HomePage({
                 </li>
               ))}
             </ol>
-          </Reveal>
-        </section>
-
-        <section className="landing-section mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="system-preview">
-            <header className="system-preview-header">
-              <div className="landing-section-header">
-                <p className="eyebrow">{content.systemPreview.eyebrow}</p>
-                <h2>{content.systemPreview.title}</h2>
-                <p>{content.systemPreview.description}</p>
-              </div>
-              <Button asChild variant="outline">
-                <a href={siteHref(localizedRoute("/components", content.locale))}>
-                  {content.systemPreview.action}
-                  <ArrowRightIcon aria-hidden="true" data-icon="inline-end" />
-                </a>
-              </Button>
-            </header>
-            <div className="system-preview-demo">
-              <h3>{content.systemPreview.panelTitle}</h3>
-              <ComponentPreview
-                code={featuredCode}
-                locale={content.locale}
-                record={featuredComponent}
-              />
-            </div>
-            <dl className="system-preview-metrics">
-              {content.systemPreview.metrics.map(({ value, label }) => (
-                <div key={label}>
-                  <dt>{label}</dt>
-                  <dd>{value}</dd>
-                </div>
-              ))}
-            </dl>
           </Reveal>
         </section>
 

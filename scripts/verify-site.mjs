@@ -56,8 +56,8 @@ const homePageSource = await readFile(
   new URL("../src/pages/home-page.tsx", import.meta.url),
   "utf8",
 );
-const workbenchSource = await readFile(
-  new URL("../src/components/theme-workbench.tsx", import.meta.url),
+const heroAnimationSource = await readFile(
+  new URL("../src/components/hero-letter-glitch.tsx", import.meta.url),
   "utf8",
 );
 const scrollScrubHookSource = await readFile(
@@ -78,7 +78,10 @@ const homeContentTypes = await readFile(
 );
 const localizedHomeSources = await Promise.all(
   ["ko", "en", "jp", "cn"].map((locale) =>
-    readFile(new URL(`../src/content/home/${locale}.ts`, import.meta.url), "utf8"),
+    readFile(
+      new URL(`../src/content/home/${locale}.ts`, import.meta.url),
+      "utf8",
+    ),
   ),
 );
 const phosphorIconSource = await readFile(
@@ -98,28 +101,19 @@ const readmeSource = await readFile(
   "utf8",
 );
 
-for (const primitive of [
-  "@/components/ui/badge",
-  "@/components/ui/button",
-  "@/components/ui/card",
-  "@/components/ui/field",
-  "@/components/ui/input",
-  "@/components/ui/separator",
-  "@/components/ui/switch",
-  "@/components/ui/tabs",
-]) {
-  assert(workbenchSource.includes(primitive), `ThemeWorkbench must use ${primitive}`);
-}
-assert(homePageSource.includes("<ThemeWorkbench"), "HomePage must render ThemeWorkbench");
 assert(
-  !homePageSource.includes(["Hero", "LetterGlitch"].join("")),
-  "The abstract hero canvas must be removed",
+  homePageSource.includes("<HeroLetterGlitch") &&
+    heroAnimationSource.includes("requestAnimationFrame") &&
+    heroAnimationSource.includes("prefers-reduced-motion: reduce"),
+  "HomePage must render the motion-safe hero animation",
 );
 
-for (const field of ["summary:", "principles:", "systemPreview:", "workbench:"]) {
+for (const field of ["summary:", "principles:"]) {
   assert(homeContentTypes.includes(field), `HomeContent is missing ${field}`);
 }
 for (const field of [
+  "systemPreview:",
+  "workbench:",
   "proof:",
   "benefits:",
   "productProof:",
@@ -127,10 +121,16 @@ for (const field of [
   "verification:",
   "tokenFlow:",
 ]) {
-  assert(!homeContentTypes.includes(field), `HomeContent still contains ${field}`);
+  assert(
+    !homeContentTypes.includes(field),
+    `HomeContent still contains ${field}`,
+  );
 }
 for (const source of localizedHomeSources) {
-  assert(!source.includes("productProof"), "Localized content still uses productProof");
+  assert(
+    !source.includes("productProof"),
+    "Localized content still uses productProof",
+  );
   assert(
     !source.includes(["검증", "가능한"].join(" ")),
     "Public copy uses an exaggerated guarantee",
@@ -350,18 +350,16 @@ assert(
   "Homepage arrows must use Lucide and omit the previous flow-arrow path",
 );
 assert(
-  cssSource.includes(".theme-workbench") &&
-    cssSource.includes(".theme-token-row") &&
-    cssSource.includes(".theme-token-swatch"),
-  "Theme Workbench layout styles must be present",
+  cssSource.includes(".hero-letter-glitch") &&
+    cssSource.includes(".hero-letter-canvas") &&
+    cssSource.includes(".hero-letter-lockup"),
+  "Hero animation layout styles must be present",
 );
 
 for (const marker of [
   "summary-row",
   "principles-list",
   "workflow-list",
-  "system-preview",
-  "<ComponentPreview",
   "<Accordion",
   "<AccordionItem",
   "<Separator",
@@ -369,6 +367,9 @@ for (const marker of [
   assert(homePageSource.includes(marker), `Homepage is missing ${marker}`);
 }
 for (const retired of [
+  "ThemeWorkbench",
+  "system-preview",
+  "<ComponentPreview",
   "proof-strip",
   "benefit-grid",
   "benefit-item-featured",
@@ -381,9 +382,7 @@ assert(
   "Landing sections need a no-observer fallback",
 );
 assert(
-  footerSignatureSource.includes(
-    'typeof IntersectionObserver === "undefined"',
-  ),
+  footerSignatureSource.includes('typeof IntersectionObserver === "undefined"'),
   "Footer signature needs a no-observer fallback",
 );
 assert(

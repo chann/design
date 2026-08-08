@@ -37,22 +37,6 @@ const ko = {
       "접근 가능한 컴포넌트는 그대로 두고, 색·글꼴·간격·상태·움직임을 DESIGN.md에 맞춰 다듬습니다.",
     primaryAction: "DESIGN.md 읽기",
     languageNavigationLabel: "홈페이지 언어",
-    workbench: {
-      accessibleLabel: "Comfort 테마 작업대",
-      title: "Theme Workbench",
-      description:
-        "같은 토큰이 여러 컴포넌트에 어떻게 이어지는지 살펴보세요.",
-      tabsLabel: "테마 작업대 보기",
-      tokensTab: "Tokens",
-      componentsTab: "Components",
-      sampleFieldLabel: "프로젝트 이름",
-      sampleFieldPlaceholder: "Comfort",
-      sampleSwitchLabel: "변경 알림",
-      sampleReadyBadge: "준비됨",
-      sampleSavedBadge: "저장됨",
-      samplePrimaryAction: "저장",
-      sampleSecondaryAction: "컴포넌트 보기",
-    },
   },
   summary: {
     accessibleLabel: "Comfort 구성",
@@ -89,8 +73,7 @@ const ko = {
       },
       {
         title: "제품에 맞는 인상을 더합니다.",
-        description:
-          "색, 글꼴, 간격, 형태를 DESIGN.md의 역할에 연결합니다.",
+        description: "색, 글꼴, 간격, 형태를 DESIGN.md의 역할에 연결합니다.",
       },
       {
         title: "실제 상태에서 결과를 확인합니다.",
@@ -113,29 +96,13 @@ const ko = {
       {
         number: "02",
         title: "제품의 기준을 적습니다.",
-        description:
-          "토큰과 상태, 문구, 움직임을 DESIGN.md에 정리합니다.",
+        description: "토큰과 상태, 문구, 움직임을 DESIGN.md에 정리합니다.",
       },
       {
         number: "03",
         title: "실제 화면에서 살핍니다.",
-        description:
-          "여러 화면 크기와 입력 방식, 테마에서 결과를 확인합니다.",
+        description: "여러 화면 크기와 입력 방식, 테마에서 결과를 확인합니다.",
       },
-    ],
-  },
-  systemPreview: {
-    eyebrow: "실제 화면",
-    title: "Comfort 토큰을 입힌 shadcn/ui를 직접 살펴보세요.",
-    description:
-      "Preview와 Code를 오가며 같은 컴포넌트가 문서의 색, 글꼴, 간격, 상태를 어떻게 쓰는지 볼 수 있습니다.",
-    action: "컴포넌트 보기",
-    panelTitle: "Button 미리보기",
-    metrics: [
-      { value: "336", label: "정적 경로" },
-      { value: "15", label: "Foundation" },
-      { value: "63", label: "Component" },
-      { value: "4", label: "지원 언어" },
     ],
   },
   faq: {

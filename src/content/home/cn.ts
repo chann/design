@@ -32,21 +32,6 @@ const cn = {
       "保留组件原有的无障碍能力，再按照DESIGN.md调整颜色、字体、间距、状态和动效。",
     primaryAction: "阅读DESIGN.md",
     languageNavigationLabel: "主页语言",
-    workbench: {
-      accessibleLabel: "Comfort主题工作台",
-      title: "Theme Workbench",
-      description: "看看同一组token如何贯穿不同组件。",
-      tabsLabel: "主题工作台视图",
-      tokensTab: "Tokens",
-      componentsTab: "Components",
-      sampleFieldLabel: "项目名称",
-      sampleFieldPlaceholder: "Comfort",
-      sampleSwitchLabel: "变更通知",
-      sampleReadyBadge: "已就绪",
-      sampleSavedBadge: "已保存",
-      samplePrimaryAction: "保存",
-      sampleSecondaryAction: "查看组件",
-    },
   },
   summary: {
     accessibleLabel: "Comfort构成",
@@ -74,8 +59,7 @@ const cn = {
     items: [
       {
         title: "保留熟悉的用法。",
-        description:
-          "键盘、焦点和浮层沿用shadcn/ui中熟悉的交互方式。",
+        description: "键盘、焦点和浮层沿用shadcn/ui中熟悉的交互方式。",
       },
       {
         title: "加入产品自己的风格。",
@@ -83,8 +67,7 @@ const cn = {
       },
       {
         title: "在真实状态中查看结果。",
-        description:
-          "在小屏、深色主题、长文案和键盘操作中保持相同流程。",
+        description: "在小屏、深色主题、长文案和键盘操作中保持相同流程。",
       },
     ],
   },
@@ -109,20 +92,6 @@ const cn = {
         title: "查看真实界面。",
         description: "切换屏幕尺寸、输入方式、主题和语言查看结果。",
       },
-    ],
-  },
-  systemPreview: {
-    eyebrow: "真实界面",
-    title: "看看应用Comfort token后的shadcn/ui。",
-    description:
-      "在Preview与Code之间切换，查看组件如何使用文档中的颜色、字体、间距和状态。",
-    action: "查看组件",
-    panelTitle: "Button预览",
-    metrics: [
-      { value: "336", label: "静态路由" },
-      { value: "15", label: "Foundation" },
-      { value: "63", label: "Component" },
-      { value: "4", label: "支持语言" },
     ],
   },
   faq: {

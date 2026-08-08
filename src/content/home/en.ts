@@ -33,27 +33,15 @@ const en = {
     eyebrow: "shadcn/ui + DESIGN.md",
     accessibleTitle:
       "Start with shadcn/ui. Finish the design for your product.",
-    titleLines: ["Start with shadcn/ui.", "Finish the design", "for your product."],
+    titleLines: [
+      "Start with shadcn/ui.",
+      "Finish the design",
+      "for your product.",
+    ],
     description:
       "Keep the accessible components, then shape color, type, spacing, states, and motion around your DESIGN.md.",
     primaryAction: "Read DESIGN.md",
     languageNavigationLabel: "Homepage languages",
-    workbench: {
-      accessibleLabel: "Comfort theme workbench",
-      title: "Theme Workbench",
-      description:
-        "See how the same tokens carry across different components.",
-      tabsLabel: "Theme workbench views",
-      tokensTab: "Tokens",
-      componentsTab: "Components",
-      sampleFieldLabel: "Project name",
-      sampleFieldPlaceholder: "Comfort",
-      sampleSwitchLabel: "Change notifications",
-      sampleReadyBadge: "Ready",
-      sampleSavedBadge: "Saved",
-      samplePrimaryAction: "Save",
-      sampleSecondaryAction: "View components",
-    },
   },
   summary: {
     accessibleLabel: "What Comfort includes",
@@ -122,20 +110,6 @@ const en = {
         description:
           "Check different screen sizes, input methods, themes, and languages.",
       },
-    ],
-  },
-  systemPreview: {
-    eyebrow: "In the interface",
-    title: "Explore shadcn/ui with Comfort tokens applied.",
-    description:
-      "Switch between Preview and Code to see how a component uses the document's color, type, spacing, and states.",
-    action: "View components",
-    panelTitle: "Button preview",
-    metrics: [
-      { value: "336", label: "static routes" },
-      { value: "15", label: "Foundations" },
-      { value: "63", label: "Components" },
-      { value: "4", label: "supported languages" },
     ],
   },
   faq: {
