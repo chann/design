@@ -5,7 +5,6 @@ import { foundationCatalog, getFoundation } from "@/data/catalog";
 import { FoundationDetailPage } from "@/pages/foundation-detail-page";
 import { FoundationsPage } from "@/pages/foundations-page";
 import { HomePage } from "@/pages/home-page";
-import { LegalPage } from "@/pages/legal-page";
 import { PrinciplesPage } from "@/pages/principles-page";
 import {
   currentRoute,
@@ -46,32 +45,24 @@ function localizedMetadata(locale: HomeLocale) {
   return {
     ko: {
       guides: "가이드",
-      privacy: "개인정보 안내",
-      terms: "이용 안내",
       notFound: "페이지를 찾을 수 없습니다",
       description:
         "Comfort의 원칙, 파운데이션, 접근성·구현 가이드를 살펴보세요.",
     },
     en: {
       guides: "Guides",
-      privacy: "Privacy",
-      terms: "Terms",
       notFound: "Page not found",
       description:
         "Browse Comfort principles, foundations, accessibility notes, and implementation guidance.",
     },
     jp: {
       guides: "ガイド",
-      privacy: "プライバシー",
-      terms: "利用案内",
       notFound: "ページが見つかりません",
       description:
         "Comfortの原則、ファウンデーション、アクセシビリティと実装ガイドを確認できます。",
     },
     cn: {
       guides: "指南",
-      privacy: "隐私说明",
-      terms: "使用说明",
       notFound: "找不到页面",
       description: "查看Comfort的原则、基础、无障碍说明与实现指南。",
     },
@@ -96,28 +87,6 @@ function routeMetadata(route: string): RouteMetadata {
       canonicalRoute: content.path,
       robots: "index,follow",
       languageTag: content.languageTag,
-      alternates,
-    };
-  }
-
-  if (contentRoute === "/privacy") {
-    return {
-      title: `${localeMetadata.privacy} | Comfort DESIGN.md`,
-      description: localeMetadata.description,
-      canonicalRoute: route,
-      robots: "index,follow",
-      languageTag: homeContents[locale].languageTag,
-      alternates,
-    };
-  }
-
-  if (contentRoute === "/terms") {
-    return {
-      title: `${localeMetadata.terms} | Comfort DESIGN.md`,
-      description: localeMetadata.description,
-      canonicalRoute: route,
-      robots: "index,follow",
-      languageTag: homeContents[locale].languageTag,
       alternates,
     };
   }
@@ -247,13 +216,6 @@ export default function App() {
   if (contentRoute === "/foundations") {
     return <FoundationsPage currentPath={route} locale={locale} />;
   }
-  if (contentRoute === "/privacy") {
-    return <LegalPage currentPath={route} kind="privacy" locale={locale} />;
-  }
-  if (contentRoute === "/terms") {
-    return <LegalPage currentPath={route} kind="terms" locale={locale} />;
-  }
-
   const [, section, slug] = contentRoute.split("/");
   if (section === "foundations" && foundationSlugs.has(slug)) {
     return (

@@ -153,15 +153,12 @@ const en = {
       system: "System",
       foundations: "Foundations",
       resources: "Resources",
-      legal: "Legal",
     },
     links: {
       overview: "Overview",
       principles: "Principles",
       foundationCatalog: "Explore foundations",
       github: "GitHub source",
-      privacy: "Privacy",
-      terms: "Terms",
     },
     signatureLabel:
       "Comfort DESIGN.md for defining a product theme with shadcn components",

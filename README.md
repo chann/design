@@ -62,7 +62,7 @@ npm run validate
 ```
 
 The command verifies the 15-Foundation catalog and four DESIGN.md editions,
-then runs ESLint, TypeScript, the production Vite build, 80-route generation,
+then runs ESLint, TypeScript, the production Vite build, 72-route generation,
 and static site verification.
 
 ## Documentation

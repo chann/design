@@ -17,7 +17,7 @@ const foundationSlugs = catalog.foundations.map(({ slug }) => slug);
 
 assert(catalog.foundations.length === 15, "Expected 15 Foundations");
 assert(new Set(foundationSlugs).size === 15, "Foundation slugs must be unique");
-assert(catalogRoutes(catalog).length === 80, "Expected 80 static routes");
+assert(catalogRoutes(catalog).length === 72, "Expected 72 static routes");
 
 for (const specimen of [
   "design-token",
@@ -129,4 +129,4 @@ const css = await readFile(new URL("src/index.css", root), "utf8");
 assert(css.includes("#0066cc"), "Light primary must remain #0066CC");
 assert(css.includes("#78b7ff"), "Dark primary must remain #78B7FF");
 
-console.log("Verified 15 Foundations and 80 routes.");
+console.log("Verified 15 Foundations and 72 routes.");

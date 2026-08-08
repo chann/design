@@ -153,20 +153,6 @@ function footerGroups(content: HomeContent) {
         },
       ],
     },
-    {
-      kind: "legal",
-      title: content.footer.groups.legal,
-      links: [
-        {
-          href: localizedRoute("/privacy", content.locale),
-          title: content.footer.links.privacy,
-        },
-        {
-          href: localizedRoute("/terms", content.locale),
-          title: content.footer.links.terms,
-        },
-      ],
-    },
   ];
 }
 
@@ -483,9 +469,8 @@ export function SiteFooter({
             <section
               className={cn(
                 group.kind === "system" && "lg:col-span-3",
-                group.kind === "foundations" && "sm:col-span-2 lg:col-span-4",
-                group.kind === "resources" && "lg:col-span-3",
-                group.kind === "legal" && "lg:col-span-2",
+                group.kind === "foundations" && "sm:col-span-2 lg:col-span-5",
+                group.kind === "resources" && "lg:col-span-4",
               )}
               key={group.title}
             >

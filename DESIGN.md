@@ -301,7 +301,7 @@ shadcn/ui 컴포넌트에서 시작합니다. 접근성과 익숙한 동작은 �
 `DESIGN.md`에 색, 글꼴, 간격, 상태, 움직임, 문구를 제품에 맞게 정리합니다.
 마지막에는 실제 화면과 생성된 정적 페이지에서 결과를 살핍니다.
 
-현재 참조 사이트는 15개 Foundation과 네 언어판을 80개 정적 route로 제공합니다.
+현재 참조 사이트는 15개 Foundation과 네 언어판을 72개 정적 route로 제공합니다.
 공개 component catalog와 상세 specimen route는 전반적인 구조 개선 후 새로 만들기
 위해 현재 제공하지 않습니다.
 
@@ -430,7 +430,7 @@ badge, 장식 카드로 채우지 않습니다. 내용에 테두리가 꼭 필�
 문서 shell의 header는 첫 화면과 스크롤 상태 모두 viewport 상단에서 24px 떨어진
 floating surface로 유지합니다. 왼쪽·오른쪽 documentation rail과 본문 사이에는
 세로 구분선을 두지 않고 여백만으로 영역을 나눕니다. footer는 System,
-Foundations, Resources, Legal의 compact sitemap만 배치합니다. component catalog
+Foundations, Resources의 compact sitemap만 배치합니다. component catalog
 링크는 새 구조가 준비될 때까지 노출하지 않습니다. 교차 시점에 부분적으로
 드러나는 대형 `Comfort DESIGN.md` text signature로 문서를
 닫고, reduced motion에서는 이동 없이 최종 상태를 즉시 표시합니다.
@@ -721,7 +721,7 @@ inventory, MUST·SHOULD·MAY 강도를 유지합니다. 단어를 그대로 옮�
 Recharts, Embla를 사용합니다. 라이브러리를 바꾸더라도 화면의 의미와 동작,
 접근성, 출시 전 확인 수준은 낮추지 않습니다.
 
-- Vite는 `/design/` base 아래 정적 site를 만들고 catalog manifest에서 80개 route
+- Vite는 `/design/` base 아래 정적 site를 만들고 catalog manifest에서 72개 route
   artifact를 생성합니다.
 - YAML role을 CSS variable 또는 theme token에 한 번 매핑하고 component는
   raw value를 중복하지 않습니다.
@@ -735,7 +735,7 @@ Recharts, Embla를 사용합니다. 라이브러리를 바꾸더라도 화면의
 ## Verification
 
 완료 전 `npm run verify:catalog`, `npm run lint`, `npm run check`, `npm run build`를
-모두 통과해야 합니다. catalog 검증은 정확히 15 Foundation, 80 static route,
+모두 통과해야 합니다. catalog 검증은 정확히 15 Foundation, 72 static route,
 네 언어 문서의 동일 Foundation inventory, light `#0066CC`와 dark `#78B7FF`
 primary를 확인합니다.
 

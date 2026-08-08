@@ -20,8 +20,8 @@ assert(
   routes.every((route) => route.startsWith("/")),
   "Every route must be absolute",
 );
-assert(routes.includes("/privacy"), "The privacy route must be published");
-assert(routes.includes("/terms"), "The terms route must be published");
+assert(!routes.includes("/privacy"), "The privacy route must not be published");
+assert(!routes.includes("/terms"), "The terms route must not be published");
 for (const route of [
   "/",
   "/foundations/color",
@@ -34,7 +34,7 @@ for (const route of [
     `Localized documentation route missing: ${route}`,
   );
 }
-assert(routes.length === 80, "The complete site must publish 80 routes");
+assert(routes.length === 72, "The complete site must publish 72 routes");
 assert(
   !routes.some((route) => route.includes("/components")) &&
     !("components" in catalog),
@@ -259,9 +259,9 @@ assert(
 );
 
 assert(
-  readmeSource.includes("80") &&
+  readmeSource.includes("72") &&
     readmeSource.includes("Start with shadcn/ui components"),
-  "README must describe the shadcn theme workflow and 80-route build",
+  "README must describe the shadcn theme workflow and 72-route build",
 );
 
 assert(
@@ -276,12 +276,19 @@ assert(
   "Public metadata and documentation must avoid internal source-of-truth jargon",
 );
 
-for (const group of ["System", "Foundations", "Resources", "Legal"]) {
+for (const group of ["System", "Foundations", "Resources"]) {
   assert(
     englishHomeContent.includes(`: "${group}"`),
     `Footer sitemap group is missing: ${group}`,
   );
 }
+assert(
+  !shellSource.includes('kind: "legal"') &&
+    !englishHomeContent.includes('legal: "Legal"') &&
+    !englishHomeContent.includes('privacy: "Privacy"') &&
+    !englishHomeContent.includes('terms: "Terms"'),
+  "Footer content must omit the retired legal notice group",
+);
 assert(
   !siteData.includes('href: "/components"') &&
     !shellSource.includes("componentCatalog") &&

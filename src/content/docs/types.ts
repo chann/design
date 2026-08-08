@@ -7,15 +7,6 @@ type PageSection = {
   description: string;
 };
 
-type LegalSection = {
-  title: string;
-  paragraphs: readonly string[];
-};
-
-type LegalPageContent = PageSection & {
-  sections: readonly LegalSection[];
-};
-
 export type DocsContent = {
   locale: HomeLocale;
   shell: {
@@ -91,12 +82,6 @@ export type DocsContent = {
     sourceTitle: string;
     sourceDescription: string;
     overviewDescription: string;
-  };
-  legal: {
-    reviewed: string;
-    issue: string;
-    privacy: LegalPageContent;
-    terms: LegalPageContent;
   };
   notFound: {
     title: string;

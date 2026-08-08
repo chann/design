@@ -14,8 +14,6 @@ export function catalogRoutes(catalog) {
     ...catalog.foundations.map(
       (foundation) => `/foundations/${foundation.slug}`,
     ),
-    "/privacy",
-    "/terms",
   ];
 
   return ["", "/ko", "/jp", "/cn"].flatMap((prefix) =>

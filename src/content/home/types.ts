@@ -60,15 +60,12 @@ export type HomeContent = {
       system: string;
       foundations: string;
       resources: string;
-      legal: string;
     };
     links: {
       overview: string;
       principles: string;
       foundationCatalog: string;
       github: string;
-      privacy: string;
-      terms: string;
     };
     signatureLabel: string;
   };

@@ -145,65 +145,6 @@ const en = {
       "DESIGN.md keeps the values and review points used by the product. This page makes the result easy to inspect.",
     overviewDescription: "Foundation overview",
   },
-  legal: {
-    reviewed: "Reviewed August 3, 2026",
-    issue: "Open a GitHub issue",
-    privacy: {
-      eyebrow: "Privacy",
-      title: "A static guide that handles very little data",
-      description:
-        "You do not need an account, form submission, or analytics profile to browse Comfort.",
-      sections: [
-        {
-          title: "What your browser stores",
-          paragraphs: [
-            "The theme menu can save a light or dark preference in your browser. Clearing site data removes it.",
-            "This repository has no accounts, forms, analytics, advertising, or tracking pixels.",
-          ],
-        },
-        {
-          title: "Hosting and external links",
-          paragraphs: [
-            "The hosting provider may process standard request information needed to deliver static files.",
-            "GitHub and other external links use their own privacy practices after you leave Comfort.",
-          ],
-        },
-        {
-          title: "Questions",
-          paragraphs: [
-            "This notice should change when site behavior changes. Open a GitHub issue if the implementation and this page differ.",
-          ],
-        },
-      ],
-    },
-    terms: {
-      eyebrow: "Terms",
-      title: "Review the guide in your product context",
-      description:
-        "Comfort provides design direction and working examples. Your product, users, and operating environment still need their own review.",
-      sections: [
-        {
-          title: "Purpose of this guide",
-          paragraphs: [
-            "The site and DESIGN.md include principles, tokens, patterns, and implementation examples. Check them against your needs before adopting them.",
-            "The guide does not promise support, uptime, compatibility, or a particular product result.",
-          ],
-        },
-        {
-          title: "Source and asset notices",
-          paragraphs: [
-            "Third-party assets retain their license notices. Review the repository and applicable notices before reusing code or assets.",
-          ],
-        },
-        {
-          title: "Changes",
-          paragraphs: [
-            "Guidance and examples can change as the system improves. Git history records those changes.",
-          ],
-        },
-      ],
-    },
-  },
   notFound: {
     title: "We couldn’t find that page",
     description: "Return home and continue from principles or Foundations.",

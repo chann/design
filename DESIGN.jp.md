@@ -301,7 +301,7 @@ shadcn/uiコンポーネントから始めます。アクセシビリティと�
 色、文字、余白、状態、動き、文言を`DESIGN.md`でプロダクトに合わせます。最後に
 実際の画面と生成した静的ページで確認します。
 
-参照サイトは 15 の Foundation と4言語版を 80 static route で公開します。
+参照サイトは 15 の Foundation と4言語版を 72 static route で公開します。
 公開 component catalog と specimen route は、プロダクト全体の改善後に情報設計と
 例を作り直すため、現在は提供しません。
 
@@ -429,7 +429,7 @@ decorative card で埋めません。Card はまとまりや操作上の境界�
 document shell の header は初期状態と scroll 後の両方で viewport 上端から 24px
 離れた floating surface として維持します。左右の documentation rail と本文の
 間に vertical separator を置かず、余白だけで領域を分けます。footer は System、
-Foundations、Resources、Legal の compact sitemap のみを配置します。新しい構造が
+Foundations、Resources の compact sitemap のみを配置します。新しい構造が
 準備できるまで component catalog の link は表示せず、交差時に一部が現れる
 大きな `Comfort DESIGN.md` text signature で閉じます。reduced motion では
 移動せず最終状態を即時表示します。
@@ -723,7 +723,7 @@ Recharts、Embla を使います。shadcn/uiを基本コンポーネントソー
 visual、interaction、accessibility、verification の品質は低下させません。
 
 - Vite は `/design/` base 下の static site を build し、catalog manifest から
-  80 route artifact を生成します。
+  72 route artifact を生成します。
 - YAML role を CSS variable または theme token に一度 map し、component は raw
   value を重複させません。
 - application primitive に domain logic を入れません。
@@ -737,7 +737,7 @@ visual、interaction、accessibility、verification の品質は低下させま�
 
 完了前に `npm run verify:catalog`、`npm run lint`、`npm run check`、
 `npm run build` をすべて通過させます。catalog verification は正確に 15
-Foundation、80 static route、4言語版の同一 Foundation inventory、light
+Foundation、72 static route、4言語版の同一 Foundation inventory、light
 `#0066CC` と dark `#78B7FF` primary を確認します。
 
 static output は英語 `dist/index.html`、韓国語 `dist/ko/index.html`、日本語

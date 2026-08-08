@@ -298,7 +298,7 @@ Comfort DESIGN.md 面向需要专注完成任务的 dashboard、创作工具、�
 从 shadcn/ui 组件开始。保留成熟的可访问性与交互习惯，再通过`DESIGN.md`调整颜色、
 字体、间距、状态、动效与文案，最后在真实界面和生成的静态页面中检查结果。
 
-参考站点通过 80 条 static route 发布 15 个 Foundation 与四种语言版本。公开的
+参考站点通过 72 条 static route 发布 15 个 Foundation 与四种语言版本。公开的
 component catalog 与 specimen route 暂不提供，待整体产品改进完成后重新设计信息
 结构与示例。
 
@@ -413,7 +413,7 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 
 文档 shell 的 header 在初始状态与滚动后都保持为距 viewport 顶部 24px 的
 floating surface。左右 documentation rail 与正文之间不设置 vertical separator，
-只用留白区分。footer 分布 System、Foundations、Resources、Legal sitemap 分组，
+只用留白区分。footer 分布 System、Foundations、Resources sitemap 分组，
 在新结构准备好之前不显示 component catalog link，并以滚动进入时部分露出的大型 `Comfort DESIGN.md` text signature
 收尾。reduced motion 下不产生位移，直接显示最终状态。
 
@@ -675,7 +675,7 @@ inventory，以及 MUST、SHOULD、MAY 的强度。翻译保留含义，同时�
 4.3、shadcn/ui source、Radix UI 与 Base UI primitive、Lucide、TanStack Table、
 Recharts、Embla。库可以替换，但视觉、交互、可访问性与验证质量不能降低。
 
-- Vite 在 `/design/` base 下构建 static site，并从 catalog manifest 生成 80 个
+- Vite 在 `/design/` base 下构建 static site，并从 catalog manifest 生成 72 个
   route artifact。
 - 将 YAML role 一次映射为 CSS variable 或 theme token，component 不重复 raw
   value。
@@ -689,7 +689,7 @@ Recharts、Embla。库可以替换，但视觉、交互、可访问性与验证�
 ## Verification
 
 完成前必须通过 `npm run verify:catalog`、`npm run lint`、`npm run check` 与
-`npm run build`。catalog verification 必须确认正好 15 个 Foundation、80 条
+`npm run build`。catalog verification 必须确认正好 15 个 Foundation、72 条
 static route、四种语言版本具有相同 Foundation inventory，以及 light
 `#0066CC` 与 dark `#78B7FF` primary。
 

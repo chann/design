@@ -303,7 +303,7 @@ use `DESIGN.md` to shape color, type, spacing, states, motion, and content aroun
 the product. Review the result in real screens and generated static pages.
 
 The reference site publishes 15 Foundations and four language editions across
-80 static routes. The public component catalog and specimen routes are withheld
+72 static routes. The public component catalog and specimen routes are withheld
 until their information architecture and examples can be rebuilt after the
 broader product improvements.
 
@@ -455,8 +455,8 @@ common path visible and advanced controls one level deeper.
 The documentation header remains a floating surface 24px from the viewport top
 both initially and after scroll. Left and right documentation rails have no
 vertical separators; whitespace alone distinguishes them from the reading
-column. The footer keeps a compact System, Foundations, Resources, and Legal
-sitemap. It withholds the component catalog link until the replacement is ready,
+column. The footer keeps a compact System, Foundations, and Resources sitemap.
+It withholds the component catalog link until the replacement is ready,
 then closes with a partially clipped,
 intersection-driven `Comfort DESIGN.md` text signature. Reduced motion shows
 its final state without travel.
@@ -793,7 +793,7 @@ Table, Recharts, and Embla. It uses shadcn/ui as the baseline component source
 and `DESIGN.md` as the product theme guide. These libraries are replaceable, but
 visual, interaction, accessibility, and verification quality must not decline.
 
-- Vite builds a static site under the `/design/` base and generates 80 route
+- Vite builds a static site under the `/design/` base and generates 72 route
   artifacts from the catalog manifest.
 - Map YAML roles to CSS variables or theme tokens once. Components consume role
   tokens and MUST NOT duplicate raw values.
@@ -809,7 +809,7 @@ visual, interaction, accessibility, and verification quality must not decline.
 
 Completion requires `npm run verify:catalog`, `npm run lint`, `npm run check`,
 and `npm run build` to pass. Catalog verification checks exactly 15 Foundations,
-80 static routes, identical Foundation inventory across four language
+72 static routes, identical Foundation inventory across four language
 editions, and light `#0066CC` plus dark `#78B7FF` primary values.
 
 Static output MUST include English `dist/index.html`, Korean
