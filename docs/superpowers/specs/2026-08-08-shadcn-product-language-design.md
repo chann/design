@@ -1,7 +1,7 @@
 # Comfort shadcn/ui 제품 언어 정리
 
 - 날짜: 2026-08-08
-- 상태: 설계 승인, 문서 검토 대기
+- 상태: 설계 승인 완료
 - 기준 문서: `DESIGN.md` 한국어판
 
 ## 목적
@@ -27,7 +27,7 @@ Comfort를 shadcn/ui로 만든 제품 디자인 안내서로 더 분명하게 �
 ## 바꾸지 않는 것
 
 - `#0066CC`와 `#78B7FF`를 중심으로 한 Comfort의 블루 계열
-- `/`, `/en/`, `/jp/`, `/cn/` 홈페이지 경로
+- `/`, `/ko/`, `/jp/`, `/cn/` 홈페이지 경로
 - Principles, Foundations, Components, Legal 문서 경로
 - 한국어 `DESIGN.md`를 먼저 고치고 나머지 세 판본을 맞추는 순서
 - URL을 기준으로 언어를 고르는 방식
