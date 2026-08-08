@@ -2,16 +2,15 @@
 
 # Comfort DESIGN.md
 
-Start with shadcn components. Define your theme in `DESIGN.md`. This repository
-contains a Google Stitch-compatible guide for comfortable, clear, and
-trustworthy product interfaces. Update Korean `DESIGN.md` first, then keep the
-English, Japanese, and Simplified Chinese editions aligned.
+Start with shadcn/ui components, then shape them into your product in
+`DESIGN.md`. This repository contains a Google Stitch-compatible guide for
+clear, comfortable product interfaces. Update Korean `DESIGN.md` first, then
+keep the English, Japanese, and Simplified Chinese editions aligned.
 
-The system combines cool neutral surfaces, one restrained blue action color,
-Geist typography, clear containment, spatially continuous motion, and
-inclusive defaults. It borrows the discipline of high-quality native
-interfaces while remaining distinctly web-native; it does not reproduce an
-Apple interface.
+The system combines warm neutral surfaces, one restrained blue action color,
+Geist and Geist Mono typography, open spacing, clear containment, natural
+motion, and inclusive defaults. The components remain familiar while the
+tokens, states, and page composition give the interface its own character.
 
 ## Reference site
 

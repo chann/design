@@ -88,7 +88,7 @@ const requiredDesignGuidance = [
   [
     "DESIGN.md",
     [
-      "shadcn 컴포넌트로 시작하고 DESIGN.md로 테마를 정의하세요",
+      "shadcn/ui 컴포넌트에서 시작합니다",
       "## Implementation Guide",
       "/ko/",
       "/jp/",
@@ -98,7 +98,7 @@ const requiredDesignGuidance = [
   [
     "DESIGN.en.md",
     [
-      "Start with shadcn components. Define your theme in DESIGN.md",
+      "Start with shadcn/ui components",
       "## Implementation Guide",
       "/ko/",
       "/jp/",
@@ -108,7 +108,7 @@ const requiredDesignGuidance = [
   [
     "DESIGN.jp.md",
     [
-      "shadcnコンポーネントから始め、DESIGN.mdでテーマを定義します",
+      "shadcn/uiコンポーネントから始めます",
       "## Implementation Guide",
       "/ko/",
       "/jp/",
@@ -118,7 +118,7 @@ const requiredDesignGuidance = [
   [
     "DESIGN.cn.md",
     [
-      "从shadcn组件开始，用DESIGN.md定义主题",
+      "从 shadcn/ui 组件开始",
       "## Implementation Guide",
       "/ko/",
       "/jp/",
@@ -134,9 +134,69 @@ for (const [file, requiredPhrases] of requiredDesignGuidance) {
   }
 }
 
+const sharedDesignTokens = [
+  'canvas: "#F7F7F2"',
+  'surface: "#FFFFFF"',
+  'surface-soft: "#EFEFE9"',
+  'surface-raised: "#FFFFFF"',
+  'ink: "#171714"',
+  'body: "#46463F"',
+  'muted: "#6F7068"',
+  'hairline: "#D8D8D0"',
+  'dark-canvas: "#131209"',
+  'dark-surface: "#1C1B16"',
+  'dark-surface-soft: "#24231D"',
+  'dark-surface-raised: "#2B2922"',
+  'dark-ink: "#F4F4EF"',
+  'dark-body: "#B8B6AC"',
+  'dark-muted: "#8E8C82"',
+  'dark-hairline: "#3B3931"',
+  'primary: "#0066CC"',
+  'dark-primary: "#78B7FF"',
+  "fontSize: 72px",
+  "lineHeight: 0.98",
+  "letterSpacing: -0.045em",
+  "section: 96px",
+];
+
+for (const file of [
+  "DESIGN.md",
+  "DESIGN.en.md",
+  "DESIGN.jp.md",
+  "DESIGN.cn.md",
+]) {
+  const source = await readFile(new URL(`../${file}`, import.meta.url), "utf8");
+  for (const token of sharedDesignTokens) {
+    assert(
+      source.includes(token),
+      `${file} is missing the shared token: ${token}`,
+    );
+  }
+}
+
+for (const token of [
+  "--background: #f7f7f2",
+  "--foreground: #171714",
+  "--card: #ffffff",
+  "--secondary: #efefe9",
+  "--muted-foreground: #6f7068",
+  "--border: #d8d8d0",
+  "--background: #131209",
+  "--foreground: #f4f4ef",
+  "--card: #1c1b16",
+  "--secondary: #24231d",
+  "--muted-foreground: #8e8c82",
+  "--border: #3b3931",
+]) {
+  assert(
+    cssSource.includes(token),
+    `CSS is missing the shared token: ${token}`,
+  );
+}
+
 assert(
   readmeSource.includes("336") &&
-    readmeSource.includes("Start with shadcn components"),
+    readmeSource.includes("Start with shadcn/ui components"),
   "README must describe the shadcn theme workflow and 336-route build",
 );
 
@@ -327,9 +387,7 @@ const designSource = await readFile(
   "utf8",
 );
 assert(
-  designSource.includes(
-    "shadcn 컴포넌트로 시작하고 DESIGN.md로 테마를 정의하세요.",
-  ),
+  designSource.includes("shadcn/ui 컴포넌트에서 시작합니다."),
   "Korean DESIGN.md must include the theme-focused positioning",
 );
 

@@ -1,91 +1,93 @@
 ---
 version: alpha
 name: Comfort DESIGN.md
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A shadcn/ui-first interface guide shaped with warm neutral color, restrained blue actions, Geist type, open spacing, and natural motion.
 
 colors:
   primary: "#0066CC"
   primary-strong: "#004F9E"
   on-primary: "#FFFFFF"
-  ink: "#17181A"
-  body: "#3F4650"
-  muted: "#6B7280"
-  canvas: "#F7F8FA"
+  ink: "#171714"
+  body: "#46463F"
+  muted: "#6F7068"
+  canvas: "#F7F7F2"
   surface: "#FFFFFF"
-  surface-soft: "#EEF1F5"
+  surface-soft: "#EFEFE9"
   surface-raised: "#FFFFFF"
-  hairline: "#D7DCE2"
+  hairline: "#D8D8D0"
   destructive: "#B42318"
   on-destructive: "#FFFFFF"
   success: "#137333"
   warning: "#8A4B00"
   info: "#005EA8"
-  dark-canvas: "#101317"
-  dark-surface: "#1A1D23"
-  dark-surface-raised: "#242832"
-  dark-ink: "#F4F6F8"
-  dark-body: "#BCC2CA"
-  dark-hairline: "#39404B"
+  dark-canvas: "#131209"
+  dark-surface: "#1C1B16"
+  dark-surface-soft: "#24231D"
+  dark-surface-raised: "#2B2922"
+  dark-ink: "#F4F4EF"
+  dark-body: "#B8B6AC"
+  dark-muted: "#8E8C82"
+  dark-hairline: "#3B3931"
   dark-primary: "#78B7FF"
   dark-on-primary: "#0A243D"
 
 typography:
   display:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 64px
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 72px
+    fontWeight: 700
+    lineHeight: 0.98
+    letterSpacing: -0.045em
+  headline-lg:
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 52px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
-  headline-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 48px
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
-    lineHeight: 1.15
+    lineHeight: 1.12
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-sm:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
@@ -113,7 +115,7 @@ spacing:
   lg: 24px
   xl: 32px
   xxl: 48px
-  section: 80px
+  section: 96px
   page-gutter: 24px
 
 components:
@@ -126,9 +128,9 @@ components:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.ink}"
     typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: 0 24px
-    height: 56px
+    rounded: "{rounded.full}"
+    padding: 8px 12px
+    height: 48px
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
@@ -240,6 +242,12 @@ components:
     typography: "{typography.body-md}"
     rounded: "{rounded.lg}"
     padding: 24px
+  dark-card-muted:
+    backgroundColor: "{colors.dark-surface-soft}"
+    textColor: "{colors.dark-muted}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
   dark-card-raised:
     backgroundColor: "{colors.dark-surface-raised}"
     textColor: "{colors.dark-ink}"
@@ -284,22 +292,21 @@ YAML front matter は機械可読の token 一覧であり、本文はその値�
 
 ## Overview
 
-Comfort DESIGN.md は dashboard、制作ツール、設定、commerce、運用 workflow など、
-集中を必要とする product interface のテーマを定義します。クールな neutral
-surface、節度ある単一の青い action color、system-first typography、明確な
-containment、内容の出所と移動先を説明する motion を組み合わせます。
+Comfort DESIGN.md は、集中が必要な dashboard、制作ツール、設定、commerce、
+運用 workflow のためのインターフェースガイドです。温かみのあるニュートラル
+カラー、控えめなブルーのアクション、Geist、ゆとりある余白、分かりやすい動きで、
+落ち着きのあるプロダクトらしさをつくります。
 
-shadcnコンポーネントから始め、DESIGN.mdでテーマを定義します。信頼性の高い
-shadcn/uiをベースに、`DESIGN.md`でsemantic token、state、motion、content、
-accessibilityなどの詳細を製品に合わせます。real specimenとstatic artifactで
-結果を確認します。
+shadcn/uiコンポーネントから始めます。アクセシビリティと使い慣れた動作は保ち、
+色、文字、余白、状態、動き、文言を`DESIGN.md`でプロダクトに合わせます。最後に
+実際の画面と生成した静的ページで確認します。
 
 参照サイトは 15 の Foundation、8 family・63 component、336 static route を
 収録します。各 detail route は real specimen、Preview・View code の segmented
 control、usage、anatomy、state、accessibility、internationalization、実装ガイドを
 同じ順序で示します。
 
-| 品質            | ユーザーが感じること                 | 確認できる設計根拠                                                        |
+| 品質            | ユーザーが感じること                 | 画面での表れ方                                                            |
 | --------------- | ------------------------------------ | ------------------------------------------------------------------------- |
 | **Comfort**     | 「タスクに集中できる」               | 一つの明確な主 action、節度ある色、段階的開示、安定した layout            |
 | **Direct**      | 「interface が操作についてくる」     | 押下時の即時 feedback、1:1 drag、中断・反転可能な motion                  |
@@ -330,9 +337,9 @@ interface を複製しません。
   主 action、link、focus ring、active navigation、selected state に使います。
 - **Primary Strong** (`{colors.primary-strong}` — #004F9E): pressed または
   強調された primary state。別の accent 系列には展開しません。
-- **Canvas** (`{colors.canvas}` — #F7F8FA): 標準の page floor。
+- **Canvas** (`{colors.canvas}` — #F7F7F2): 標準の page floor。
 - **Surface** (`{colors.surface}` — #FFFFFF): card、control、主要 content。
-- **Surface Soft** (`{colors.surface-soft}` — #EEF1F5): grouped control、静かな
+- **Surface Soft** (`{colors.surface-soft}` — #EFEFE9): grouped control、静かな
   band、skeleton、補助 containment。
 - **Surface Raised** (`{colors.surface-raised}` — #FFFFFF): elevation と一緒に
   使う floating content。
@@ -366,20 +373,19 @@ theme が変わっても semantic role、contrast、component hierarchy を保�
 
 ## Typography
 
-標準は system-first sans stack です。Inter を cross-platform の優先書体とし、
-Apple platform では fallback を通して system font を使えます。custom font は
-brand 上の理由、適切な license delivery、metric-compatible fallback がある場合
-のみ導入します。
+基本書体は Geist Variable です。英数字と日本語が混ざる場面では、読みやすさを
+保てる system sans を fallback に使います。code、command、token、数値には
+Geist Mono を使います。
 
 | Token                      | サイズ | Weight | Line height | Tracking | 用途                         |
 | -------------------------- | ------ | ------ | ----------- | -------- | ---------------------------- |
-| `{typography.display}`     | 64px   | 700    | 1.02        | -0.035em | 単一の hero statement        |
-| `{typography.headline-lg}` | 48px   | 700    | 1.08        | -0.03em  | page title                   |
-| `{typography.headline-md}` | 32px   | 680    | 1.15        | -0.022em | major section                |
+| `{typography.display}`     | 72px   | 700    | 0.98        | -0.045em | 単一の hero statement        |
+| `{typography.headline-lg}` | 52px   | 700    | 1.02        | -0.035em | page title                   |
+| `{typography.headline-md}` | 32px   | 680    | 1.12        | -0.025em | major section                |
 | `{typography.title-lg}`    | 24px   | 650    | 1.25        | -0.015em | panel・feature title         |
 | `{typography.title-md}`    | 20px   | 620    | 1.3         | -0.01em  | card・dialog title           |
 | `{typography.body-lg}`     | 18px   | 400    | 1.55        | 0        | lead copy                    |
-| `{typography.body-md}`     | 16px   | 400    | 1.55        | 0        | 標準本文と control           |
+| `{typography.body-md}`     | 16px   | 400    | 1.6         | 0        | 標準本文と control           |
 | `{typography.body-sm}`     | 14px   | 400    | 1.5         | 0.005em  | secondary UI copy            |
 | `{typography.label}`       | 14px   | 600    | 1.3         | 0.005em  | button・tab・field label     |
 | `{typography.caption}`     | 12px   | 500    | 1.4         | 0.01em   | metadata・compact status     |
@@ -402,7 +408,8 @@ brand 上の理由、適切な license delivery、metric-compatible fallback が
 
 基準単位は 4px です。匿名の一時値ではなく YAML scale を使います。`xxs/xs` は
 icon と label、`sm/md` は control と関連 content、`lg/xl` は card と group、
-`xxl/section` は大きな領域の分離に使います。標準 page gutter は 24px で、
+`xxl/section` は大きな領域の分離に使います。標準の section 間隔は 96px、
+page gutter は 24px で、
 狭い画面では 16px、広い画面では 32px まで調整できます。
 
 ### Grid と containment
@@ -417,8 +424,8 @@ icon と label、`sm/md` は control と関連 content、`lg/xl` は card と gr
 - 高密度 workspace でも反復 action と navigation の位置は安定させます。
 
 余白は判断単位を分け hierarchy を作るものです。空きを gradient、badge、
-decorative card で埋めません。関連項目は近く、無関係な領域は明確な section
-gap で分離します。
+decorative card で埋めません。Card はまとまりや操作上の境界が必要な場所だけに
+使い、通常の section は heading、余白、Separator で区切ります。
 
 document shell の header は初期状態と scroll 後の両方で viewport 上端から 24px
 離れた floating surface として維持します。左右の documentation rail と本文の
@@ -494,12 +501,12 @@ Foundation の選択と適用を説明するガイドです。件数と title �
 
 ## Components
 
-YAML component entry は再利用可能な visual atom を定義します。application
-component は組み合わせられますが semantic role を変えてはいけません。
+`src/components/ui` の shadcn/ui コンポーネントを唯一の基本 UI レイヤーとして
+使います。application component はそれらを組み合わせられますが、semantic role
+を変えてはいけません。
 
-信頼性の高いshadcn/uiを基本コンポーネントとして使います。`DESIGN.md`でsemantic
-color、typography、spacing、shape、state、motionなどの詳細を定義し、accessible
-primitiveの動作を保ちながらプロダクトに合う表現へ整えます。
+実装は shadcn/ui primitive を選び、semantic token を適用し、必要な composition
+だけを加える順序で進めます。見た目の都合だけで独自 primitive を増やしません。
 
 63 component は次の 8 family で管理します。
 
@@ -647,6 +654,8 @@ motion は原因と連続性を説明します。
 - gesture-critical path では `transform` と `opacity` を優先します。
 - `prefers-reduced-motion` では travel、parallax、decorative loop を除きつつ
   即時 state feedback と論理的連続性を保ちます。
+- landing section は opacity と 16px 以下の translate だけを使い、480ms 以内に
+  表示します。blur や装飾目的の移動は加えません。
 
 spring は direct manipulation と spatial settling、timed easing は opacity、
 color、小さな non-spatial transition に適します。
@@ -755,12 +764,12 @@ static output は英語 `dist/index.html`、韓国語 `dist/ko/index.html`、日
 browser QA は 390px と 1440px で全 family の代表 specimen を実行し、search、
 empty/reset、overlay focus 復帰、form input、table sort、chart、carousel、message
 anchor、Preview・View code、copy feedback を確認します。scroll 後の header top
-gap、page overflow と rail separator の不在、light/dark、reduced motion も証拠に
-含めます。Axe violation は 0 とし、判定不能な `incomplete` は別に報告します。
-deployment は GitHub Pages job 成功、live route、clean worktree、local・upstream・
-live remote の `0 0` parity で証明します。
+gap、page overflow と rail separator の不在、light/dark、reduced motion も合わせて
+確認します。Axe violation は 0 とし、判定不能な `incomplete` は別に報告します。
+deployment では GitHub Pages job、live route、clean worktree、local・upstream・
+live remote の `0 0` parity がそろっていることを確認します。
 
-| Layer      | Evidence                                                      |
+| Layer      | 確認項目                                                      |
 | ---------- | ------------------------------------------------------------- |
 | Static     | type、lint、token/reference validation、production build      |
 | Component  | role、name、keyboard、focus、variant、state rendering         |
@@ -768,7 +777,7 @@ live remote の `0 0` parity で証明します。
 | Visual     | light/dark、320px、tablet、desktop、wide、zoom、long content  |
 | Device・AT | 実 touch behavior と代表的 screen reader output               |
 
-snapshot は対象 state を明記した場合だけ evidence になります。source と unit
+snapshot は対象 state を明記した場合だけ確認資料として扱います。source と unit
 test は未確認 browser、device、assistive-technology behavior の代替ではありません。
 
 ## Iteration Guide

@@ -1,91 +1,93 @@
 ---
 version: alpha
 name: Comfort DESIGN.md
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A shadcn/ui-first interface guide shaped with warm neutral color, restrained blue actions, Geist type, open spacing, and natural motion.
 
 colors:
   primary: "#0066CC"
   primary-strong: "#004F9E"
   on-primary: "#FFFFFF"
-  ink: "#17181A"
-  body: "#3F4650"
-  muted: "#6B7280"
-  canvas: "#F7F8FA"
+  ink: "#171714"
+  body: "#46463F"
+  muted: "#6F7068"
+  canvas: "#F7F7F2"
   surface: "#FFFFFF"
-  surface-soft: "#EEF1F5"
+  surface-soft: "#EFEFE9"
   surface-raised: "#FFFFFF"
-  hairline: "#D7DCE2"
+  hairline: "#D8D8D0"
   destructive: "#B42318"
   on-destructive: "#FFFFFF"
   success: "#137333"
   warning: "#8A4B00"
   info: "#005EA8"
-  dark-canvas: "#101317"
-  dark-surface: "#1A1D23"
-  dark-surface-raised: "#242832"
-  dark-ink: "#F4F6F8"
-  dark-body: "#BCC2CA"
-  dark-hairline: "#39404B"
+  dark-canvas: "#131209"
+  dark-surface: "#1C1B16"
+  dark-surface-soft: "#24231D"
+  dark-surface-raised: "#2B2922"
+  dark-ink: "#F4F4EF"
+  dark-body: "#B8B6AC"
+  dark-muted: "#8E8C82"
+  dark-hairline: "#3B3931"
   dark-primary: "#78B7FF"
   dark-on-primary: "#0A243D"
 
 typography:
   display:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 64px
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 72px
+    fontWeight: 700
+    lineHeight: 0.98
+    letterSpacing: -0.045em
+  headline-lg:
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 52px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
-  headline-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 48px
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
-    lineHeight: 1.15
+    lineHeight: 1.12
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-sm:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
@@ -113,7 +115,7 @@ spacing:
   lg: 24px
   xl: 32px
   xxl: 48px
-  section: 80px
+  section: 96px
   page-gutter: 24px
 
 components:
@@ -126,9 +128,9 @@ components:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.ink}"
     typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: 0 24px
-    height: 56px
+    rounded: "{rounded.full}"
+    padding: 8px 12px
+    height: 48px
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
@@ -240,6 +242,12 @@ components:
     typography: "{typography.body-md}"
     rounded: "{rounded.lg}"
     padding: 24px
+  dark-card-muted:
+    backgroundColor: "{colors.dark-surface-soft}"
+    textColor: "{colors.dark-muted}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
   dark-card-raised:
     backgroundColor: "{colors.dark-surface-raised}"
     textColor: "{colors.dark-ink}"
@@ -285,15 +293,14 @@ The key words **MUST**, **SHOULD**, and **MAY** express requirement strength.
 
 ## Overview
 
-Comfort DESIGN.md defines themes for focused product interfaces: dashboards, creation
-tools, settings, commerce, and operational workflows. It combines quiet neutral
-surfaces, one restrained blue action color, system-first typography, clear
-containment, and motion that explains where content came from and where it went.
+Comfort DESIGN.md covers product interfaces that require focus: dashboards,
+creation tools, settings, commerce, and operational workflows. Warm neutral
+color, restrained blue actions, Geist type, open spacing, and understandable
+motion give those interfaces a calm character of their own.
 
-Start with shadcn components. Define your theme in DESIGN.md. Use trusted
-shadcn/ui components as the baseline, then define semantic tokens, states,
-motion, content, and accessibility details in `DESIGN.md`. Inspect the result in
-real specimens and static artifacts.
+Start with shadcn/ui components. Keep their accessible, familiar behavior, then
+use `DESIGN.md` to shape color, type, spacing, states, motion, and content around
+the product. Review the result in real screens and generated static pages.
 
 The reference site covers 15 Foundations, 63 components across eight families,
 and 336 static routes. Every detail route follows the same sequence: real
@@ -302,7 +309,7 @@ accessibility, internationalization, and implementation guidance.
 
 The intended experience has three qualities:
 
-| Quality         | User perception                               | Visible evidence                                                                                           |
+| Quality         | User perception                               | How it appears in the interface                                                                            |
 | --------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **Comfort**     | “I can focus on the task.”                    | One clear primary action, restrained color, progressive disclosure, stable layout.                         |
 | **Direct**      | “The interface follows me.”                   | Feedback begins on press, drag tracks 1:1, motion is interruptible and reversible.                         |
@@ -334,21 +341,21 @@ does not reproduce any platform or company interface.
   states.
 - **Primary Strong** (`{colors.primary-strong}` — #004F9E): Pressed or emphasized
   primary state. It MUST NOT become a second accent family.
-- **Canvas** (`{colors.canvas}` — #F7F8FA): Default page floor.
+- **Canvas** (`{colors.canvas}` — #F7F7F2): Warm off-white page floor.
 - **Surface** (`{colors.surface}` — #FFFFFF): Cards, controls, and principal
   content regions.
-- **Surface Soft** (`{colors.surface-soft}` — #EEF1F5): Grouped controls, quiet
+- **Surface Soft** (`{colors.surface-soft}` — #EFEFE9): Grouped controls, quiet
   bands, skeletons, and secondary containment.
 - **Surface Raised** (`{colors.surface-raised}` — #FFFFFF): Floating content that
   also receives an elevation treatment.
 
 ### Content and structure
 
-- **Ink** (`{colors.ink}` — #17181A): Headlines and primary content.
-- **Body** (`{colors.body}` — #3F4650): Running copy and secondary content.
-- **Muted** (`{colors.muted}` — #6B7280): Captions and metadata; never the sole
+- **Ink** (`{colors.ink}` — #171714): Headlines and primary content.
+- **Body** (`{colors.body}` — #46463F): Running copy and secondary content.
+- **Muted** (`{colors.muted}` — #6F7068): Captions and metadata; never the sole
   carrier of essential information.
-- **Hairline** (`{colors.hairline}` — #D7DCE2): Dividers, field outlines, and
+- **Hairline** (`{colors.hairline}` — #D8D8D0): Dividers, field outlines, and
   quiet boundaries.
 
 ### Semantic roles
@@ -377,20 +384,20 @@ Never hardcode a light-theme color inside a component.
 
 ## Typography
 
-The system uses a system-first sans stack. Inter is the cross-platform preference;
-on Apple platforms the native system face may render through the fallback stack.
-A product MAY introduce a custom typeface only with a documented brand reason,
-licensed delivery, and metric-compatible fallback.
+Geist Variable is the primary face for headings, body text, and controls. Geist
+Mono is reserved for code, tokens, numbers, and short technical labels. If the
+web fonts do not load, each stack falls back to the platform's sans-serif or
+monospace face.
 
 | Token                      | Size | Weight | Line height | Tracking | Role                               |
 | -------------------------- | ---- | ------ | ----------- | -------- | ---------------------------------- |
-| `{typography.display}`     | 64px | 700    | 1.02        | -0.035em | Hero or singular product statement |
-| `{typography.headline-lg}` | 48px | 700    | 1.08        | -0.03em  | Page title                         |
-| `{typography.headline-md}` | 32px | 680    | 1.15        | -0.022em | Major section                      |
+| `{typography.display}`     | 72px | 700    | 0.98        | -0.045em | Hero or singular product statement |
+| `{typography.headline-lg}` | 52px | 700    | 1.02        | -0.035em | Page title                         |
+| `{typography.headline-md}` | 32px | 680    | 1.12        | -0.022em | Major section                      |
 | `{typography.title-lg}`    | 24px | 650    | 1.25        | -0.015em | Panel or feature title             |
 | `{typography.title-md}`    | 20px | 620    | 1.3         | -0.01em  | Card or dialog title               |
-| `{typography.body-lg}`     | 18px | 400    | 1.55        | 0        | Lead copy                          |
-| `{typography.body-md}`     | 16px | 400    | 1.55        | 0        | Default body and controls          |
+| `{typography.body-lg}`     | 18px | 400    | 1.6         | 0        | Lead copy                          |
+| `{typography.body-md}`     | 16px | 400    | 1.6         | 0        | Default body and controls          |
 | `{typography.body-sm}`     | 14px | 400    | 1.5         | 0.005em  | Secondary UI copy                  |
 | `{typography.label}`       | 14px | 600    | 1.3         | 0.005em  | Buttons, tabs, and field labels    |
 | `{typography.caption}`     | 12px | 500    | 1.4         | 0.01em   | Metadata and compact status        |
@@ -420,6 +427,7 @@ The base unit is 4px. Use the YAML scale rather than one-off values:
 - `{spacing.sm}` / `{spacing.md}`: control padding and related content.
 - `{spacing.lg}` / `{spacing.xl}`: cards, groups, and page regions.
 - `{spacing.xxl}` / `{spacing.section}`: major editorial separation.
+- Major page sections use about 96px of vertical separation on wide screens.
 - `{spacing.page-gutter}`: default page gutter; it may reduce to 16px on narrow
   screens and grow to 32px on wide screens.
 
@@ -532,12 +540,13 @@ and titles MUST remain aligned.
 
 ## Components
 
-YAML component entries define reusable visual atoms. Application components MAY
-compose them but MUST preserve their semantic role.
+The shadcn/ui components in `src/components/ui` are the only base UI layer.
+Pages compose them without changing their semantic roles or accessible behavior.
+`DESIGN.md` sets their color, type, spacing, shape, states, and motion.
 
-Use trusted shadcn/ui components as the baseline. Define semantic color,
-typography, spacing, shape, state, and motion details in `DESIGN.md`, then adapt
-the presentation while preserving accessible primitive behavior.
+For new interface work, first use an installed shadcn/ui component. Next, make a
+page-level composition from existing pieces. Promote it to a shared component
+only after the same composition serves more than one real screen.
 
 The 63 components are maintained in eight families:
 
@@ -692,6 +701,8 @@ interface feel “alive.”
 - Header language and theme utility dropdowns open in about 140–150ms and close
   in about 100ms. Travel stays at or below 4px and keyboard focus return is
   preserved.
+- Ordinary sections enter over about 480ms using opacity and no more than 16px
+  of vertical movement. Do not use blur.
 - Dragged objects track the pointer 1:1 after any documented threshold and
   preserve the grab offset.
 - Release behavior carries velocity into settling or target selection.
@@ -824,13 +835,13 @@ artifact, with English as `x-default`.
 Browser QA exercises representative specimens from every family at 390px and
 1440px, including search, empty/reset, overlay focus return, form input, table
 sorting, chart, carousel, message anchoring, Preview and View code, and copy
-feedback. Evidence also covers the scrolled header top gap, absence of page
+feedback. Checks also cover the scrolled header top gap, absence of page
 overflow and rail separators, light/dark themes, and reduced motion. Axe
 violations MUST be zero; untestable `incomplete` findings are reported separately.
-Deployment proof includes a successful GitHub Pages job, live-route checks, a
-clean worktree, and `0 0` local/upstream/live-remote parity.
+After deployment, confirm a successful GitHub Pages job, live routes, a clean
+worktree, and `0 0` local/upstream/live-remote alignment.
 
-| Layer                           | Evidence                                                           |
+| Layer                           | Check                                                              |
 | ------------------------------- | ------------------------------------------------------------------ |
 | Static                          | Types, lint, token/reference validation, production build          |
 | Component                       | Roles, names, keyboard, focus, variants, state rendering           |
@@ -838,9 +849,8 @@ clean worktree, and `0 0` local/upstream/live-remote parity.
 | Visual                          | Light/dark, 320px, tablet, desktop, wide, zoom, long content       |
 | Device and assistive technology | Physical touch behavior and representative screen-reader output    |
 
-Generated snapshots count only when the state they cover is named. Source and unit
-tests do not substitute for unavailable browser, device, or assistive-technology
-evidence.
+Use generated snapshots only when the state they cover is named. Source and unit
+tests do not substitute for browser, device, or assistive-technology checks.
 
 ## Iteration Guide
 

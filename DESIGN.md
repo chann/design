@@ -1,91 +1,93 @@
 ---
 version: alpha
 name: Comfort DESIGN.md
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A shadcn/ui-first interface guide shaped with warm neutral color, restrained blue actions, Geist type, open spacing, and natural motion.
 
 colors:
   primary: "#0066CC"
   primary-strong: "#004F9E"
   on-primary: "#FFFFFF"
-  ink: "#17181A"
-  body: "#3F4650"
-  muted: "#6B7280"
-  canvas: "#F7F8FA"
+  ink: "#171714"
+  body: "#46463F"
+  muted: "#6F7068"
+  canvas: "#F7F7F2"
   surface: "#FFFFFF"
-  surface-soft: "#EEF1F5"
+  surface-soft: "#EFEFE9"
   surface-raised: "#FFFFFF"
-  hairline: "#D7DCE2"
+  hairline: "#D8D8D0"
   destructive: "#B42318"
   on-destructive: "#FFFFFF"
   success: "#137333"
   warning: "#8A4B00"
   info: "#005EA8"
-  dark-canvas: "#101317"
-  dark-surface: "#1A1D23"
-  dark-surface-raised: "#242832"
-  dark-ink: "#F4F6F8"
-  dark-body: "#BCC2CA"
-  dark-hairline: "#39404B"
+  dark-canvas: "#131209"
+  dark-surface: "#1C1B16"
+  dark-surface-soft: "#24231D"
+  dark-surface-raised: "#2B2922"
+  dark-ink: "#F4F4EF"
+  dark-body: "#B8B6AC"
+  dark-muted: "#8E8C82"
+  dark-hairline: "#3B3931"
   dark-primary: "#78B7FF"
   dark-on-primary: "#0A243D"
 
 typography:
   display:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 64px
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 72px
+    fontWeight: 700
+    lineHeight: 0.98
+    letterSpacing: -0.045em
+  headline-lg:
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 52px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
-  headline-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 48px
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
-    lineHeight: 1.15
+    lineHeight: 1.12
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-sm:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
@@ -113,7 +115,7 @@ spacing:
   lg: 24px
   xl: 32px
   xxl: 48px
-  section: 80px
+  section: 96px
   page-gutter: 24px
 
 components:
@@ -126,9 +128,9 @@ components:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.ink}"
     typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: 0 24px
-    height: 56px
+    rounded: "{rounded.full}"
+    padding: 8px 12px
+    height: 48px
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
@@ -240,6 +242,12 @@ components:
     typography: "{typography.body-md}"
     rounded: "{rounded.lg}"
     padding: 24px
+  dark-card-muted:
+    backgroundColor: "{colors.dark-surface-soft}"
+    textColor: "{colors.dark-muted}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
   dark-card-raised:
     backgroundColor: "{colors.dark-surface-raised}"
     textColor: "{colors.dark-ink}"
@@ -284,22 +292,21 @@ YAML front matter는 기계가 읽는 토큰 목록이고, 본문은 그 값을 
 
 ## Overview
 
-Comfort DESIGN.md는 대시보드, 제작 도구, 설정, 커머스, 운영 워크플로처럼 집중이
-필요한 제품 인터페이스의 테마를 정리합니다. 차가운 뉴트럴 표면, 절제된 단일
-블루 액션 컬러, 시스템 우선 타이포그래피, 명확한 컨테인먼트, 원인과 이동
-방향을 설명하는 모션이 핵심입니다.
+Comfort DESIGN.md는 대시보드, 제작 도구, 설정, 커머스, 운영 화면처럼 집중이
+필요한 제품 인터페이스를 다룹니다. 따뜻한 뉴트럴 색, 절제된 블루 액션,
+Geist 글꼴, 넉넉한 여백, 흐름을 이해하기 쉬운 움직임으로 차분하면서도
+제품다운 인상을 만듭니다.
 
-shadcn 컴포넌트로 시작하고 DESIGN.md로 테마를 정의하세요. 신뢰도 높은
-shadcn/ui를 베이스로 사용하고, `DESIGN.md`에서 시맨틱 token, 상태, 모션,
-콘텐츠, 접근성 기준 등 세부 디자인을 제품에 맞게 정리합니다. 마지막으로 실제
-specimen과 정적 artifact에서 결과를 확인합니다.
+shadcn/ui 컴포넌트에서 시작합니다. 접근성과 익숙한 동작은 그대로 두고,
+`DESIGN.md`에 색, 글꼴, 간격, 상태, 움직임, 문구를 제품에 맞게 정리합니다.
+마지막에는 실제 화면과 생성된 정적 페이지에서 결과를 살핍니다.
 
 현재 참조 사이트는 15개 Foundation, 8개 family의 63개 component, 336개 정적
 route를 제공합니다. 각 상세 route는 실제 specimen, Preview·View code
 segmented control, 사용법, anatomy, state, 접근성, 국제화, 구현 가이드를
 같은 순서로 보여 줍니다.
 
-| 품질            | 사용자가 느껴야 하는 것                    | 화면에서 확인되는 근거                                           |
+| 품질            | 사용자가 느껴야 하는 것                    | 화면에서 드러나는 방식                                           |
 | --------------- | ------------------------------------------ | ---------------------------------------------------------------- |
 | **Comfort**     | “할 일에 집중할 수 있다.”                  | 하나의 명확한 주 액션, 절제된 색, 점진적 공개, 안정된 레이아웃   |
 | **Direct**      | “인터페이스가 나를 따른다.”                | 누르는 순간의 반응, 1:1 드래그, 중단·역전 가능한 모션            |
@@ -330,10 +337,10 @@ UI를 복제하지 않습니다.
   액센트입니다. 주 액션, 링크, 포커스 링, 활성 내비게이션, 선택 상태에 씁니다.
 - **Primary Strong** (`{colors.primary-strong}` — #004F9E): 눌림 또는 강화된
   primary 상태입니다. 별도의 액센트 계열처럼 확장하지 않습니다.
-- **Canvas** (`{colors.canvas}` — #F7F8FA): 기본 페이지 바닥입니다.
+- **Canvas** (`{colors.canvas}` — #F7F7F2): 따뜻한 회백색의 기본 페이지 바닥입니다.
 - **Surface** (`{colors.surface}` — #FFFFFF): 카드, 컨트롤, 핵심 콘텐츠
   영역입니다.
-- **Surface Soft** (`{colors.surface-soft}` — #EEF1F5): 그룹 컨트롤, 조용한
+- **Surface Soft** (`{colors.surface-soft}` — #EFEFE9): 그룹 컨트롤, 조용한
   밴드, skeleton, 보조 컨테이너에 씁니다.
 - **Surface Raised** (`{colors.surface-raised}` — #FFFFFF): elevation과 함께
   쓰는 떠 있는 콘텐츠입니다.
@@ -367,20 +374,20 @@ UI를 복제하지 않습니다.
 
 ## Typography
 
-기본은 시스템 우선 sans stack입니다. Inter를 크로스플랫폼 기본으로 삼되 Apple
-플랫폼에서는 fallback을 통해 시스템 글꼴이 렌더링될 수 있습니다. 커스텀
-글꼴은 브랜드 이유, 라이선스 배포, metric-compatible fallback이 있을 때만
-도입합니다.
+기본 글꼴은 Geist Variable입니다. 제목과 본문, 컨트롤에 같은 글꼴을 사용해
+화면의 인상을 일정하게 유지합니다. Geist Mono는 코드, token, 숫자처럼
+기계적인 정보를 보여 줄 때만 사용합니다. 두 글꼴을 불러오지 못하면 각 운영
+체제의 sans-serif와 monospace로 자연스럽게 이어집니다.
 
 | 토큰                       | 크기 | 굵기 | 행간 | 자간     | 용도               |
 | -------------------------- | ---- | ---- | ---- | -------- | ------------------ |
-| `{typography.display}`     | 64px | 700  | 1.02 | -0.035em | 단일 hero 문장     |
-| `{typography.headline-lg}` | 48px | 700  | 1.08 | -0.03em  | 페이지 제목        |
-| `{typography.headline-md}` | 32px | 680  | 1.15 | -0.022em | 주요 섹션          |
+| `{typography.display}`     | 72px | 700  | 0.98 | -0.045em | 단일 hero 문장     |
+| `{typography.headline-lg}` | 52px | 700  | 1.02 | -0.035em | 페이지 제목        |
+| `{typography.headline-md}` | 32px | 680  | 1.12 | -0.022em | 주요 섹션          |
 | `{typography.title-lg}`    | 24px | 650  | 1.25 | -0.015em | 패널·기능 제목     |
 | `{typography.title-md}`    | 20px | 620  | 1.3  | -0.01em  | 카드·대화상자 제목 |
-| `{typography.body-lg}`     | 18px | 400  | 1.55 | 0        | 리드 문장          |
-| `{typography.body-md}`     | 16px | 400  | 1.55 | 0        | 기본 본문과 컨트롤 |
+| `{typography.body-lg}`     | 18px | 400  | 1.6  | 0        | 리드 문장          |
+| `{typography.body-md}`     | 16px | 400  | 1.6  | 0        | 기본 본문과 컨트롤 |
 | `{typography.body-sm}`     | 14px | 400  | 1.5  | 0.005em  | 보조 UI 문구       |
 | `{typography.label}`       | 14px | 600  | 1.3  | 0.005em  | 버튼·탭·필드 라벨  |
 | `{typography.caption}`     | 12px | 500  | 1.4  | 0.01em   | 메타데이터·상태    |
@@ -402,7 +409,8 @@ UI를 복제하지 않습니다.
 
 기본 단위는 4px입니다. 임의 값을 만들지 말고 YAML scale을 사용합니다.
 `xxs/xs`는 아이콘과 라벨, `sm/md`는 컨트롤과 관련 콘텐츠, `lg/xl`은 카드와
-그룹, `xxl/section`은 큰 영역 구분에 사용합니다. 기본 page gutter는 24px이며
+그룹, `xxl/section`은 큰 영역 구분에 사용합니다. 영역 사이의 기본 간격은
+96px입니다. 기본 page gutter는 24px이며
 좁은 화면에서 16px, 넓은 화면에서 32px까지 조정할 수 있습니다.
 
 ### 그리드와 컨테이너
@@ -417,8 +425,8 @@ UI를 복제하지 않습니다.
 - 밀도 높은 workspace도 반복 액션과 내비게이션 위치는 안정적으로 유지합니다.
 
 여백은 판단 단위를 분리하고 위계를 세우는 도구입니다. 빈 공간을 gradient,
-badge, 장식 카드로 채우지 않습니다. 관련된 것은 가깝게, 관련 없는 영역은
-명확한 section gap으로 구분합니다.
+badge, 장식 카드로 채우지 않습니다. 내용에 테두리가 꼭 필요할 때만 Card를
+사용하고, 일반 영역은 제목, 여백, Separator로 나눕니다.
 
 문서 shell의 header는 첫 화면과 스크롤 상태 모두 viewport 상단에서 24px 떨어진
 floating surface로 유지합니다. 왼쪽·오른쪽 documentation rail과 본문 사이에는
@@ -495,12 +503,13 @@ Foundation을 선택하고 적용하는 기준을 설명합니다. 두 자료의
 
 ## Components
 
-YAML component entry는 재사용 가능한 시각 원자를 정의합니다. application
-component는 이를 조합하되 시맨틱 역할을 바꾸면 안 됩니다.
+`src/components/ui`의 shadcn/ui 컴포넌트가 유일한 기본 UI 계층입니다. 페이지는
+이 컴포넌트들을 조합하되 역할과 접근성 동작을 바꾸지 않습니다. 색, 글꼴,
+간격, 형태, 상태, 움직임은 `DESIGN.md`에 적힌 기준으로 다듬습니다.
 
-신뢰도 높은 shadcn/ui를 기본 컴포넌트로 사용합니다. `DESIGN.md`로 시맨틱 color,
-typography, spacing, shape, state, motion 등 세부 디자인을 정의하고, 접근 가능한
-primitive 동작을 유지한 채 제품에 맞게 표현을 다듬습니다.
+새 UI가 필요하면 저장소에 있는 shadcn/ui 컴포넌트를 먼저 찾습니다. 다음으로
+여러 컴포넌트를 페이지 수준에서 조합합니다. 같은 조합이 여러 화면에서 반복될
+때만 공용 컴포넌트로 올립니다.
 
 63개 component는 다음 8개 family로 관리합니다.
 
@@ -639,6 +648,8 @@ breakpoint는 기기 이름이 아니라 콘텐츠 압력을 뜻합니다.
   transition은 240–360ms 범위를 사용합니다.
 - header의 language·theme utility dropdown은 약 140–150ms에 열리고 약 100ms에
   닫힙니다. 이동 거리는 4px 이하로 제한하고 keyboard focus 복귀를 보존합니다.
+- 일반 영역은 약 480ms 동안 opacity와 `translateY`를 전환합니다. 이동 거리는
+  16px 이하로 제한하고 blur는 사용하지 않습니다.
 - drag는 threshold 이후 pointer를 1:1로 추적하고 grab offset을 보존합니다.
 - release velocity는 settling 또는 target 선택에 이어집니다.
 - entry와 exit는 관련된 origin과 destination을 공유합니다.
@@ -699,16 +710,16 @@ interaction은 component에 둡니다. shared store는 실제 cross-tree lifetim
 
 ## Content & Localization
 
-한국어 `DESIGN.md`를 먼저 업데이트하며 en·jp·cn 판본은 같은 heading 순서, token,
-inventory, MUST·SHOULD·MAY 강도를 유지합니다. 각 판본은 문장 의미를 보존하되 해당
-언어에서 자연스러운 어순과 구두점을 사용합니다.
+한국어 `DESIGN.md`를 먼저 고칩니다. en·jp·cn 판본은 같은 heading 순서, token,
+inventory, MUST·SHOULD·MAY 강도를 유지합니다. 단어를 그대로 옮기기보다 각
+언어에서 자연스럽게 읽히는 어순과 구두점을 사용합니다.
 
 - 홈페이지와 모든 상세 페이지는 영어 `/`를 기본으로 하며 한국어 `/ko/`, 일본어
   `/jp/`, 중국어 `/cn/`을 지원합니다. URL path를 locale 선택에 먼저 사용하며 저장된
   preference보다 우선합니다.
-- 각 언어의 전체 homepage copy와 metadata는 `src/content/home/ko.ts`, `en.ts`,
-  `jp.ts`, `cn.ts`의 typed content module에 분리합니다. presentation component에
-  문구를 직접 넣지 않으며 copy-only 변경은 해당 content file만 수정합니다.
+- 홈페이지 문구와 metadata는 `src/content/home/ko.ts`, `en.ts`, `jp.ts`,
+  `cn.ts`에 나눠 둡니다. 화면 컴포넌트에 문구를 직접 넣지 않으므로 문장만
+  다듬을 때는 해당 언어 파일만 고치면 됩니다.
 - 사이트 설명 문구에는 내부 문서 운영 용어를 노출하지 않습니다. 언어 선택기는
   `KO`, `EN`, `JP`, `CN`처럼 현재 판본과 이동 가능한 판본만 명확히 표시합니다.
 - 자연어는 `word-break: keep-all`을 기본으로 해 낱말 중간 단절을 피합니다. code,
@@ -722,19 +733,18 @@ inventory, MUST·SHOULD·MAY 강도를 유지합니다. 각 판본은 문장 의
 
 ## Implementation Guide
 
-현재 참조 구현은 Vite 8.2, React 19.2, TypeScript 6 strict mode, Tailwind CSS
-4.3, Radix UI와 Base UI primitive, Lucide, TanStack Table, Recharts, Embla를
-사용합니다. shadcn/ui를 기본 컴포넌트 소스로 삼고 `DESIGN.md`를 제품별 디자인
-가이드로 적용합니다. 라이브러리를 바꾸더라도 시각·인터랙션·접근성·검증 수준은
-낮추지 않습니다.
+현재 사이트는 Vite 8.2, React 19.2, TypeScript 6 strict mode, Tailwind CSS
+4.3, shadcn/ui, Radix UI와 Base UI primitive, Lucide, TanStack Table,
+Recharts, Embla를 사용합니다. 라이브러리를 바꾸더라도 화면의 의미와 동작,
+접근성, 출시 전 확인 수준은 낮추지 않습니다.
 
 - Vite는 `/design/` base 아래 정적 site를 만들고 catalog manifest에서 336개 route
   artifact를 생성합니다.
 - YAML role을 CSS variable 또는 theme token에 한 번 매핑하고 component는
   raw value를 중복하지 않습니다.
-- application primitive에는 domain logic을 넣지 않습니다.
-- overlay, menu, tab, form, composite widget은 검증된 semantic primitive에서
-  시작합니다.
+- `src/components/ui`에 있는 컴포넌트로 해결할 수 있는지 먼저 확인합니다.
+- 여러 shadcn/ui 컴포넌트를 묶은 페이지 조합으로 해결합니다.
+- 같은 조합이 실제로 반복될 때만 공용 컴포넌트로 옮깁니다.
 - 의미 있는 component 변경은 해당하는 default, hover, active, focus-visible,
   disabled, loading, empty, error, light, dark, reduced-motion, contrast,
   long-content, localized state를 다룹니다.
@@ -753,12 +763,12 @@ artifact의 `lang`, canonical, `hreflang` 묶음과 영어 `x-default`를 검증
 browser QA는 390px와 1440px에서 모든 family의 대표 specimen을 실행하고 search,
 empty/reset, overlay focus 복귀, form input, table sort, chart, carousel, message
 anchor, Preview·View code, copy feedback을 확인합니다. 스크롤 뒤 header top gap,
-page overflow 부재, rail 구분선 부재, light/dark, reduced motion도 증거에 포함합니다.
+page overflow 부재, rail 구분선 부재, light/dark, reduced motion도 함께 확인합니다.
 Axe violation은 0이어야 하며 판정 불가 `incomplete`는 violation과 분리해 기록합니다.
-배포 완료는 GitHub Pages 성공과 live route 확인, clean worktree, local·upstream·
-live remote `0 0` 정합성으로 증명합니다.
+배포 후에는 GitHub Pages 성공, live route, clean worktree, local·upstream·
+live remote `0 0` 일치를 확인합니다.
 
-| 계층      | 필요한 증거                                                     |
+| 계층      | 확인 항목                                                        |
 | --------- | --------------------------------------------------------------- |
 | Static    | type, lint, token/reference validation, production build        |
 | Component | role, name, keyboard, focus, variant, state rendering           |
@@ -766,8 +776,9 @@ live remote `0 0` 정합성으로 증명합니다.
 | Visual    | light/dark, 320px, tablet, desktop, wide, zoom, long content    |
 | Device·AT | 실제 touch 동작과 대표 screen reader 출력                       |
 
-snapshot은 어떤 상태를 다루는지 명시할 때만 증거가 됩니다. source와 unit test는
-확인하지 못한 browser, device, assistive-technology 동작의 대체 증거가 아닙니다.
+snapshot은 어떤 상태를 다루는지 명시할 때만 확인 자료로 사용합니다. source와
+unit test는 확인하지 못한 browser, device, assistive-technology 동작을 대신하지
+않습니다.
 
 ## Iteration Guide
 

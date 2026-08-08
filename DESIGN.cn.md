@@ -1,91 +1,93 @@
 ---
 version: alpha
 name: Comfort DESIGN.md
-description: A comfortable, clear, and trustworthy product interface built from cool neutral surfaces, a restrained blue action color, system-first typography, generous breathing room, and motion that preserves spatial continuity. The visual language is polished without becoming ornamental. It borrows the discipline of high-quality native interfaces while remaining distinctly web-native, accessible, responsive, and suitable for production applications.
+description: A shadcn/ui-first interface guide shaped with warm neutral color, restrained blue actions, Geist type, open spacing, and natural motion.
 
 colors:
   primary: "#0066CC"
   primary-strong: "#004F9E"
   on-primary: "#FFFFFF"
-  ink: "#17181A"
-  body: "#3F4650"
-  muted: "#6B7280"
-  canvas: "#F7F8FA"
+  ink: "#171714"
+  body: "#46463F"
+  muted: "#6F7068"
+  canvas: "#F7F7F2"
   surface: "#FFFFFF"
-  surface-soft: "#EEF1F5"
+  surface-soft: "#EFEFE9"
   surface-raised: "#FFFFFF"
-  hairline: "#D7DCE2"
+  hairline: "#D8D8D0"
   destructive: "#B42318"
   on-destructive: "#FFFFFF"
   success: "#137333"
   warning: "#8A4B00"
   info: "#005EA8"
-  dark-canvas: "#101317"
-  dark-surface: "#1A1D23"
-  dark-surface-raised: "#242832"
-  dark-ink: "#F4F6F8"
-  dark-body: "#BCC2CA"
-  dark-hairline: "#39404B"
+  dark-canvas: "#131209"
+  dark-surface: "#1C1B16"
+  dark-surface-soft: "#24231D"
+  dark-surface-raised: "#2B2922"
+  dark-ink: "#F4F4EF"
+  dark-body: "#B8B6AC"
+  dark-muted: "#8E8C82"
+  dark-hairline: "#3B3931"
   dark-primary: "#78B7FF"
   dark-on-primary: "#0A243D"
 
 typography:
   display:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 64px
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 72px
+    fontWeight: 700
+    lineHeight: 0.98
+    letterSpacing: -0.045em
+  headline-lg:
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 52px
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: -0.035em
-  headline-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 48px
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: -0.03em
   headline-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 32px
     fontWeight: 680
-    lineHeight: 1.15
+    lineHeight: 1.12
     letterSpacing: -0.022em
   title-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 24px
     fontWeight: 650
     lineHeight: 1.25
     letterSpacing: -0.015em
   title-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 20px
     fontWeight: 620
     lineHeight: 1.3
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 18px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-md:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
     letterSpacing: 0
   body-sm:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.005em
   label:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 14px
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: 0.005em
   caption:
-    fontFamily: "Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Geist Variable, Geist, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 12px
     fontWeight: 500
     lineHeight: 1.4
@@ -113,7 +115,7 @@ spacing:
   lg: 24px
   xl: 32px
   xxl: 48px
-  section: 80px
+  section: 96px
   page-gutter: 24px
 
 components:
@@ -126,9 +128,9 @@ components:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.ink}"
     typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: 0 24px
-    height: 56px
+    rounded: "{rounded.full}"
+    padding: 8px 12px
+    height: 48px
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
@@ -240,6 +242,12 @@ components:
     typography: "{typography.body-md}"
     rounded: "{rounded.lg}"
     padding: 24px
+  dark-card-muted:
+    backgroundColor: "{colors.dark-surface-soft}"
+    textColor: "{colors.dark-muted}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
   dark-card-raised:
     backgroundColor: "{colors.dark-surface-raised}"
     textColor: "{colors.dark-ink}"
@@ -283,20 +291,19 @@ YAML front matter 是机器可读的 token 列表，正文说明如何应用这�
 
 ## Overview
 
-Comfort DESIGN.md 为需要高度专注的产品界面定义主题，例如 dashboard、创作工具、设置、
-电商与运营流程。它以冷静的中性色 surface、单一且克制的蓝色 action、系统优先
-排版、清晰的容器关系，以及能解释来源与去向的 motion 为核心。
+Comfort DESIGN.md 面向需要专注完成任务的 dashboard、创作工具、设置、电商与
+运营流程。温暖的中性色、克制的蓝色操作、Geist、充足留白与清晰动效，共同构成
+安静但有辨识度的产品界面。
 
-从shadcn组件开始，用DESIGN.md定义主题。以可靠的shadcn/ui组件为基础，在
-`DESIGN.md`中整理semantic token、state、motion、content与accessibility等设计
-细节，并通过真实specimen检查结果。
+从 shadcn/ui 组件开始。保留成熟的可访问性与交互习惯，再通过`DESIGN.md`调整颜色、
+字体、间距、状态、动效与文案，最后在真实界面和生成的静态页面中检查结果。
 
 参考站点覆盖 15 个 Foundation、8 个 family 中的 63 个 component，以及 336 条
 static route。每个 detail route 都按相同顺序提供真实 specimen、Preview 与
 View code segmented control、usage、anatomy、state、accessibility、
 internationalization 与实现指南。
 
-| 品质            | 用户应当感受到                       | 可观察的产品证据                             |
+| 品质            | 用户应当感受到                       | 界面中的表现                                 |
 | --------------- | ------------------------------------ | -------------------------------------------- |
 | **Comfort**     | “我可以专注完成任务。”               | 一个明确主操作、克制用色、渐进披露、稳定布局 |
 | **Direct**      | “界面会跟随我的操作。”               | 按下即反馈、1:1 拖动、可中断与反向的动画     |
@@ -324,9 +331,9 @@ internationalization 与实现指南。
   主操作、link、focus ring、激活 navigation 与选中状态。
 - **Primary Strong** (`{colors.primary-strong}` — #004F9E)：按下或强化的
   primary 状态，不得扩展成第二套强调色。
-- **Canvas** (`{colors.canvas}` — #F7F8FA)：默认页面底色。
+- **Canvas** (`{colors.canvas}` — #F7F7F2)：默认页面底色。
 - **Surface** (`{colors.surface}` — #FFFFFF)：card、control 和主要内容区。
-- **Surface Soft** (`{colors.surface-soft}` — #EEF1F5)：分组 control、安静的
+- **Surface Soft** (`{colors.surface-soft}` — #EFEFE9)：分组 control、安静的
   band、skeleton 与次级容器。
 - **Surface Raised** (`{colors.surface-raised}` — #FFFFFF)：与 elevation
   配合的浮层内容。
@@ -358,19 +365,18 @@ internationalization 与实现指南。
 
 ## Typography
 
-默认使用 system-first sans stack。Inter 是跨平台优先字体，在 Apple 平台可通过
-fallback 使用系统字体。只有在具备品牌理由、合法授权分发方式与
-metric-compatible fallback 时才能引入自定义字体。
+默认使用 Geist Variable。中英文混排时以合适的 system sans 作为 fallback，保证
+字形与换行自然。code、command、token 与数值使用 Geist Mono。
 
 | Token                      | 字号 | 字重 | 行高 | 字距     | 用途                     |
 | -------------------------- | ---- | ---- | ---- | -------- | ------------------------ |
-| `{typography.display}`     | 64px | 700  | 1.02 | -0.035em | 单一 hero 陈述           |
-| `{typography.headline-lg}` | 48px | 700  | 1.08 | -0.03em  | 页面标题                 |
-| `{typography.headline-md}` | 32px | 680  | 1.15 | -0.022em | 主要 section             |
+| `{typography.display}`     | 72px | 700  | 0.98 | -0.045em | 单一 hero 陈述           |
+| `{typography.headline-lg}` | 52px | 700  | 1.02 | -0.035em | 页面标题                 |
+| `{typography.headline-md}` | 32px | 680  | 1.12 | -0.025em | 主要 section             |
 | `{typography.title-lg}`    | 24px | 650  | 1.25 | -0.015em | panel 或 feature 标题    |
 | `{typography.title-md}`    | 20px | 620  | 1.3  | -0.01em  | card 或 dialog 标题      |
 | `{typography.body-lg}`     | 18px | 400  | 1.55 | 0        | 引导正文                 |
-| `{typography.body-md}`     | 16px | 400  | 1.55 | 0        | 默认正文与 control       |
+| `{typography.body-md}`     | 16px | 400  | 1.6  | 0        | 默认正文与 control       |
 | `{typography.body-sm}`     | 14px | 400  | 1.5  | 0.005em  | 次级 UI 文案             |
 | `{typography.label}`       | 14px | 600  | 1.3  | 0.005em  | button、tab、field label |
 | `{typography.caption}`     | 12px | 500  | 1.4  | 0.01em   | metadata 与紧凑状态      |
@@ -390,7 +396,8 @@ metric-compatible fallback 时才能引入自定义字体。
 
 基础单位为 4px。使用 YAML scale，不创建无名的临时值。`xxs/xs` 用于 icon 与
 label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group，
-`xxl/section` 用于主要区域分隔。默认 page gutter 为 24px，可在窄屏降至 16px，
+`xxl/section` 用于主要区域分隔。默认 section 间距为 96px，page gutter 为 24px，
+可在窄屏降至 16px，
 在宽屏增至 32px。
 
 ### Grid 与容器
@@ -402,8 +409,8 @@ label，`sm/md` 用于 control 和相关内容，`lg/xl` 用于 card 与 group�
 - 可复用 component 优先用 container query，shell 用 viewport breakpoint。
 - 高密度 workspace 可以利用全宽，但重复 action 与 navigation 保持稳定位置。
 
-留白用于分隔决策和建立层级，不应被 gradient、badge 或装饰 card 填满。相关内容
-靠近，无关区域使用清晰的 section gap。
+留白用于分隔决策和建立层级，不应被 gradient、badge 或装饰 card 填满。Card 只用于
+确实需要成组或操作边界的内容；普通 section 通过标题、留白与 Separator 区分。
 
 文档 shell 的 header 在初始状态与滚动后都保持为距 viewport 顶部 24px 的
 floating surface。左右 documentation rail 与正文之间不设置 vertical separator，
@@ -474,12 +481,11 @@ Layout、Motion、Radius、Spacing、State、Voice and Tone、Writing**。
 
 ## Components
 
-YAML component entry 定义可复用视觉原子。application component 可以组合它们，
-但必须保持语义角色。
+以`src/components/ui`中的 shadcn/ui 组件作为唯一基础 UI 层。application component
+可以组合它们，但必须保持语义角色。
 
-以可靠的shadcn/ui组件为基础。用`DESIGN.md`定义semantic color、typography、
-spacing、shape、state和motion等设计细节，在保留可访问primitive行为的同时，
-将界面调整为符合产品的表达。
+实现时先选择合适的 shadcn/ui primitive，再映射 semantic token，最后只添加必要的
+composition。不要仅为视觉效果另建一套 primitive。
 
 63 个 component 按以下 8 个 family 维护：
 
@@ -614,6 +620,8 @@ motion 用来解释因果与连续性。
 - gesture-critical path 优先动画 `transform` 与 `opacity`。
 - `prefers-reduced-motion` 去除 travel、parallax 与 decorative loop，但保留
   即时状态反馈和逻辑连续性。
+- landing section 只使用 opacity 与不超过 16px 的 translate，并在 480ms 内完成。
+  不使用 blur，也不添加纯装饰位移。
 
 spring 适合 direct manipulation 与 spatial settling；timed easing 适合
 opacity、color 与小型非空间过渡。
@@ -708,12 +716,13 @@ static output 必须包含英文 `dist/index.html`、韩文 `dist/ko/index.html`
 
 browser QA 在 390px 与 1440px 执行每个 family 的代表 specimen，覆盖 search、
 empty/reset、overlay focus 恢复、form input、table sort、chart、carousel、message
-anchor、Preview 与 View code、copy feedback。证据还包括滚动后的 header top gap、
-无 page overflow、无 rail separator、light/dark 与 reduced motion。Axe violation
-必须为 0；无法判定的 `incomplete` 单独记录。deployment 以 GitHub Pages job 成功、
-live route、clean worktree，以及 local、upstream、live remote `0 0` parity 证明。
+anchor、Preview 与 View code、copy feedback，并检查滚动后的 header top gap、
+page overflow 与 rail separator 是否消失，以及 light/dark 和 reduced motion。
+Axe violation 必须为 0；无法判定的 `incomplete` 单独记录。deployment 需确认
+GitHub Pages job、live route、clean worktree，以及 local、upstream、live remote
+的 `0 0` parity 均正常。
 
-| 层级         | 证据                                                            |
+| 层级         | 检查项                                                          |
 | ------------ | --------------------------------------------------------------- |
 | Static       | type、lint、token/reference validation、production build        |
 | Component    | role、name、keyboard、focus、variant、state rendering           |
@@ -721,7 +730,7 @@ live route、clean worktree，以及 local、upstream、live remote `0 0` parity
 | Visual       | light/dark、320px、tablet、desktop、wide、zoom、long content    |
 | Device 与 AT | 真实 touch 行为和代表性 screen reader 输出                      |
 
-snapshot 只有在明确覆盖状态时才算证据。source 与 unit test 不能替代未验证的
+snapshot 只有在明确覆盖状态时才作为检查资料。source 与 unit test 不能替代尚未检查的
 browser、device 或 assistive-technology 行为。
 
 ## Iteration Guide
