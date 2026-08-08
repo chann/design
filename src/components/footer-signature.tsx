@@ -10,11 +10,14 @@ export function FooterSignature({
   accessibleLabel?: string;
 }) {
   const signatureRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(
+    () => typeof IntersectionObserver === "undefined",
+  );
 
   useEffect(() => {
     const signature = signatureRef.current;
     if (!signature) return;
+    if (typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

@@ -355,6 +355,41 @@ assert(
     cssSource.includes(".theme-token-swatch"),
   "Theme Workbench layout styles must be present",
 );
+
+for (const marker of [
+  "summary-row",
+  "principles-list",
+  "workflow-list",
+  "system-preview",
+  "<ComponentPreview",
+  "<Accordion",
+  "<AccordionItem",
+  "<Separator",
+]) {
+  assert(homePageSource.includes(marker), `Homepage is missing ${marker}`);
+}
+for (const retired of [
+  "proof-strip",
+  "benefit-grid",
+  "benefit-item-featured",
+  "implementation-proof",
+]) {
+  assert(!homePageSource.includes(retired), `Homepage still uses ${retired}`);
+}
+assert(
+  homePageSource.includes('typeof IntersectionObserver === "undefined"'),
+  "Landing sections need a no-observer fallback",
+);
+assert(
+  footerSignatureSource.includes(
+    'typeof IntersectionObserver === "undefined"',
+  ),
+  "Footer signature needs a no-observer fallback",
+);
+assert(
+  cssSource.includes("480ms") && !cssSource.includes("filter: blur"),
+  "Landing motion must use the short no-blur behavior",
+);
 assert(
   footerSignatureSource.includes("--footer-signature-index") &&
     footerSignatureSource.includes("footer-signature-letter"),
